@@ -1,0 +1,4 @@
+seed1 | f=0.00: LSA hand2 +0.073, fold test detects 0% | f=0.05: LSA hand2 +0.072, fold test detects 0% | f=0.10: LSA hand2 +0.075, fold test detects 0% | f=0.20: LSA hand2 +0.072, fold test detects 0% | f=0.30: LSA hand2 +0.073, fold test detects 0% | f=0.50: LSA hand2 +0.068, fold test detects 25%
+seed2 | f=0.00: LSA hand2 +0.019, fold test detects 0% | f=0.05: LSA hand2 +0.020, fold test detects 0% | f=0.10: LSA hand2 +0.009, fold test detects 0% | f=0.20: LSA hand2 +0.000, fold test detects 25% | f=0.30: LSA hand2 -0.000, fold test detects 75% | f=0.50: LSA hand2 +0.004, fold test detects 100%
+seed3 | f=0.00: LSA hand2 +0.058, fold test detects 0% | f=0.05: LSA hand2 +0.057, fold test detects 0% | f=0.10: LSA hand2 +0.056, fold test detects 0% | f=0.20: LSA hand2 +0.054, fold test detects 0% | f=0.30: LSA hand2 +0.058, fold test detects 75% | f=0.50: LSA hand2 +0.054, fold test detects 100%
+real text, LSA hand 2: +0.186

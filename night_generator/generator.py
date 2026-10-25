@@ -3,7 +3,7 @@ from collections import Counter, defaultdict
 from scipy.stats import spearmanr
 SP='nit_2026-09-27_outputs/'
 random.seed(0); np.random.seed(0)
-# ===================== dades reals =====================
+# ===================== real data =====================
 Z=pd.read_csv('df_lines_ZL3b_strokes.csv'); Z=Z[(Z.is_label==0)&(Z.locus_generic=='P')].copy()
 def clean_eva(t):
     t=re.sub(r'<[^>]*>','',t); t=re.sub(r'\[([^:\]]*):[^\]]*\]',r'\1',t); t=re.sub(r'\{[^}]*\}','',t); return t
@@ -19,7 +19,7 @@ def lev(a,b):
         p,d[0]=d[0],i
         for j,cb in enumerate(b,1): p,d[j]=d[j],min(d[j]+1,d[j-1]+1,p+(ca!=cb))
     return d[-1]
-# ===================== model de glifs (ordre 2, lletres + espai) =====================
+# ===================== glyph model (order 2, letters + space) =====================
 ORDER=2
 ctx=defaultdict(Counter)
 for l in REAL:
@@ -31,7 +31,7 @@ for l in REAL:
         for a,b in zip('^'+w,w+'$'): BIG.add((a,b))
 def wellformed(w): return len(w)>0 and all((a,b) in BIG for a,b in zip('^'+w,w+'$'))
 def gen_word(hist):
-    """genera un mot a partir de l'historial (2 símbols); retorna mot"""
+    """generates a word from the history (2 symbols); returns the word"""
     h=list(hist); out=''
     for _ in range(20):
         c=ctx.get(tuple(h[-ORDER:]))
@@ -42,7 +42,7 @@ def gen_word(hist):
             else: continue
         out+=nx; h.append(nx)
     return out if out else 'o'
-# ===================== estadístiques d'edició empíriques =====================
+# ===================== empirical edit statistics =====================
 sub=Counter(); ins=Counter(); dele=Counter(); nsub=nins=ndel=0
 for l in REAL:
     for a,b in zip(l['ws'],l['ws'][1:]):
@@ -75,7 +75,7 @@ def modify(w):
         w2=''.join(g2)
         if w2!=w and wellformed(w2): return w2
     return w
-# ===================== generador =====================
+# ===================== generator =====================
 def generate(r_copy=0.15,r_mod=0.5,vertical=True,recency=(1.0,0.5,0.25),m_rule=True,seed=0):
     random.seed(seed)
     out=[]; prev_lines=[]; prev_page=None; above_first=None
@@ -104,7 +104,7 @@ def generate(r_copy=0.15,r_mod=0.5,vertical=True,recency=(1.0,0.5,0.25),m_rule=T
         above_first=gl(ws[0])[0]
         out.append(dict(page=l['page'],ps=l['ps'],pe=l['pe'],ws=ws)); prev_lines.append(ws)
     return out
-# ===================== bateria d'avaluació =====================
+# ===================== evaluation battery =====================
 def H(c):
     n=sum(c.values()); return -sum(v/n*math.log2(v/n) for v in c.values()) if n else 0
 def MI(pairs):
@@ -127,32 +127,32 @@ def evaluate(LINES,full=True):
     R={}
     toks=[w for l in LINES for w in l['ws']]; N=len(toks); c=Counter(toks)
     adj=[(a,b) for l in LINES for a,b in zip(l['ws'],l['ws'][1:])]
-    R['AA %']=100*np.mean([a==b for a,b in adj]); R['AA / atzar']=R['AA %']/100/sum((v/N)**2 for v in c.values())
+    R['Adjacent identical words (%)']=100*np.mean([a==b for a,b in adj]); R['Adjacent identical words / chance']=R['Adjacent identical words (%)']/100/sum((v/N)**2 for v in c.values())
     ip=interior_pairs(LINES,1,lambda w:w,lambda w:w); ips=interior_pairs(LINES,1,lambda w:w,lambda w:w,True)
-    R['quasi(ed=1) / base']=np.mean([lev(a,b)==1 for a,b in ip])/np.mean([lev(a,b)==1 for a,b in ips])
+    R['Consecutive words at edit distance 1 / shuffled']=np.mean([lev(a,b)==1 for a,b in ip])/np.mean([lev(a,b)==1 for a,b in ips])
     if not full: return R
     for k in [2,3,5]:
         r=np.mean([a==b for a,b in interior_pairs(LINES,k,lambda w:w,lambda w:w)]); s=np.mean([a==b for a,b in interior_pairs(LINES,k,lambda w:w,lambda w:w,True)])
-        R[f'repetició k={k} / base']=r/s
-    # especificitat de mot
+        R[f'Same word at distance {k} / shuffled']=r/s
+    # word specificity
     cnt=Counter(); nx=Counter()
     for a,b in adj: cnt[a]+=1; nx[a]+=(a==b)
     freq=[w for w in cnt if cnt[w]>=80]
     ratios=[(nx[w]/cnt[w])/(c[w]/N) for w in freq]
-    R['mots freq. amb rep >3x atzar (%)']=100*np.mean([r>3 for r in ratios]); R['mots freq. amb rep <0.3x (%)']=100*np.mean([r<0.3 for r in ratios])
-    # MI frontera
+    R['Frequent words repeated >3x chance (%)']=100*np.mean([r>3 for r in ratios]); R['Frequent words repeated <0.3x chance (%)']=100*np.mean([r<0.3 for r in ratios])
+    # boundary MI
     for k in [1,2,3]:
-        r=MI(interior_pairs(LINES,k,lambda w:w[-1],lambda w:w[0])); s=MI(interior_pairs(LINES,k,lambda w:w[-1],lambda w:w[0],True)); R[f'MI frontera k={k}']=r-s
+        r=MI(interior_pairs(LINES,k,lambda w:w[-1],lambda w:w[0])); s=MI(interior_pairs(LINES,k,lambda w:w[-1],lambda w:w[0],True)); R['Boundary MI, distance 1 (last glyph to next first glyph)' if k==1 else f'Boundary MI, distance {k}']=r-s
     n=len(adj); xy=Counter((a[-1],b[0]) for a,b in adj); x=Counter(a[-1] for a,_ in adj); y=Counter(b[0] for _,b in adj)
     lift=lambda a,b:(xy[(a,b)]/x[a])/(y[b]/n) if x[a] and y[b] else float('nan')
-    R['lift y|q']=lift('y','q'); R['lift r|a']=lift('r','a'); R['lift y|a']=lift('y','a'); R['lift n|q']=lift('n','q')
-    # posició
+    R['Lift -y | q-']=lift('y','q'); R['Lift -r | a-']=lift('r','a'); R['Lift -y | a-']=lift('y','a'); R['Lift -n | q-']=lift('n','q')
+    # position
     fw=[l['ws'][0] for l in LINES if len(l['ws'])>=4]; lw=[l['ws'][-1] for l in LINES if len(l['ws'])>=4]
-    R['1r mot comença ch/sh (%)']=100*np.mean([w[0] in 'cs' and w[:2] in ('ch','sh') for w in fw]); R['1r mot comença y (%)']=100*np.mean([w[0]=='y' for w in fw])
-    R['últim mot -m (%)']=100*np.mean([w.endswith('m') for w in lw])
+    R['First word of line starts ch/sh (%)']=100*np.mean([w[0] in 'cs' and w[:2] in ('ch','sh') for w in fw]); R['First word of line starts y (%)']=100*np.mean([w[0]=='y' for w in fw])
+    R['Last word of line ends -m (%)']=100*np.mean([w.endswith('m') for w in lw])
     long_=[l['ws'][-1] for l in LINES if len(l['ws'])>=10]; short=[l['ws'][-1] for l in LINES if 1<=len(l['ws'])<=4]
-    R['-m final: línies 10+ / 1-4 mots']=np.mean([w.endswith('m') for w in long_])/max(1e-9,np.mean([w.endswith('m') for w in short]))
-    # dissimilació vertical
+    R['Line-end -m: lines of 10+ words / 1-4 words']=np.mean([w.endswith('m') for w in long_])/max(1e-9,np.mean([w.endswith('m') for w in short]))
+    # vertical dissimilation
     G=[]; cur=[]; prev=None
     for l in LINES:
         if prev is None or l['page']!=prev['page'] or l['ps']==1:
@@ -164,14 +164,14 @@ def evaluate(LINES,full=True):
     def same(G,d):
         P=[(a==b) for g in G for a,b in zip(g,g[d:])]; return np.mean(P)
     for d in [1,2,3]:
-        r=same(G,d); s=np.mean([same([random.sample(g,len(g)) for g in G],d) for _ in range(10)]); R[f'1r glif línia n-{d}=n / nul']=r/s
-    R['glifs inicials distints/paràgraf (4+ línies)']=np.mean([len(set(g)) for g in G if len(g)>=4])
-    # primera línia de paràgraf: AA
+        r=same(G,d); s=np.mean([same([random.sample(g,len(g)) for g in G],d) for _ in range(10)]); R[f'Same first glyph as line n-{d} / null']=r/s
+    R['Distinct initial glyphs per paragraph (4+ lines)']=np.mean([len(set(g)) for g in G if len(g)>=4])
+    # first line of paragraph: AA
     aa1=[a==b for l in LINES if l['ps']==1 for a,b in zip(l['ws'],l['ws'][1:])]; aa0=[a==b for l in LINES if l['ps']==0 for a,b in zip(l['ws'],l['ws'][1:])]
-    R['AA 1a línia paràgraf / resta']=np.mean(aa1)/np.mean(aa0)
-    # longitud veïns
-    R['Spearman longitud veïns']=spearmanr(*zip(*[(len(a),len(b)) for a,b in ip])).correlation
-    # jerarquia: idèntics mateixa línia vs mateixa pàgina altra línia
+    R['Adjacent repeats: first line of paragraph / rest']=np.mean(aa1)/np.mean(aa0)
+    # neighbour lengths
+    R['Spearman correlation of neighbour word lengths']=spearmanr(*zip(*[(len(a),len(b)) for a,b in ip])).correlation
+    # hierarchy: identical words in the same line vs the same page, another line
     allw=[(w,l['page'],i) for i,l in enumerate(LINES) for w in l['ws']]
     def samp(cond,n=40000):
         k=0;s=0;t=0
@@ -180,31 +180,31 @@ def evaluate(LINES,full=True):
             if a is b or not cond(a,b): continue
             k+=1; s+=(a[0]==b[0])
         return s/k
-    R['idèntics mateixa línia / mateixa pàgina']=samp(lambda a,b:a[2]==b[2])/samp(lambda a,b:a[1]==b[1] and a[2]!=b[2])
-    R['tipus']=len(c); R['hàpax (%)']=100*sum(1 for v in c.values() if v==1)/len(c)
+    R['identical: same line / same page']=samp(lambda a,b:a[2]==b[2])/samp(lambda a,b:a[1]==b[1] and a[2]!=b[2])
+    R['Word types']=len(c); R['Hapax (% of types)']=100*sum(1 for v in c.values() if v==1)/len(c)
     return R
 if __name__=='__main__':
-    print('avaluant el text real...'); Rr=evaluate(REAL)
+    print('evaluating the real text...'); Rr=evaluate(REAL)
     json.dump(Rr,open(SP+'gen_real.json','w'))
-    # ---- graella per ajustar r_copy, r_mod sobre AA i quasi ----
-    print('\n### graella (només AA/atzar i quasi/base):  objectiu real AA/atzar=%.2f  quasi/base=%.2f'%(Rr['AA / atzar'],Rr['quasi(ed=1) / base']))
+    # ---- grid to tune r_copy, r_mod on AA and near-twins ----
+    print('\n### grid (only AA/chance and near/base):  real target AA/chance=%.2f  near/base=%.2f'%(Rr['Adjacent identical words / chance'],Rr['Consecutive words at edit distance 1 / shuffled']))
     best=None
     for rc in [0.05,0.10,0.15,0.20,0.30]:
         for rm in [0.3,0.5,0.7,0.85]:
             Rg=evaluate(generate(rc,rm,seed=1),full=False)
-            err=abs(math.log(Rg['AA / atzar']/Rr['AA / atzar']))+abs(math.log(Rg['quasi(ed=1) / base']/Rr['quasi(ed=1) / base']))
-            print(f'  r_copy={rc:.2f} r_mod={rm:.2f}: AA/atzar {Rg["AA / atzar"]:.2f}  quasi/base {Rg["quasi(ed=1) / base"]:.2f}  err {err:.2f}')
+            err=abs(math.log(Rg['Adjacent identical words / chance']/Rr['Adjacent identical words / chance']))+abs(math.log(Rg['Consecutive words at edit distance 1 / shuffled']/Rr['Consecutive words at edit distance 1 / shuffled']))
+            print(f'  r_copy={rc:.2f} r_mod={rm:.2f}: AA/chance {Rg["Adjacent identical words / chance"]:.2f}  near/base {Rg["Consecutive words at edit distance 1 / shuffled"]:.2f}  err {err:.2f}')
             if best is None or err<best[0]: best=(err,rc,rm)
-    print('millor:',best)
+    print('best:',best)
     rc,rm=best[1],best[2]
-    print('\n### avaluació completa: real vs generador (mitjana de 3 llavors) vs ablacions')
-    variants={'generador':dict(r_copy=rc,r_mod=rm),'sense còpia':dict(r_copy=0.0,r_mod=rm),'sense regla vertical':dict(r_copy=rc,r_mod=rm,vertical=False),'sense regla m':dict(r_copy=rc,r_mod=rm,m_rule=False)}
+    print('\n### full evaluation: real vs generator (mean of 3 seeds) vs ablations')
+    variants={'generator':dict(r_copy=rc,r_mod=rm),'no copying':dict(r_copy=0.0,r_mod=rm),'no vertical rule':dict(r_copy=rc,r_mod=rm,vertical=False),'no m rule':dict(r_copy=rc,r_mod=rm,m_rule=False)}
     res={}
     for nm,kw in variants.items():
         rs=[evaluate(generate(seed=s,**kw)) for s in (1,2,3)]
         res[nm]={k:np.mean([r[k] for r in rs]) for k in rs[0]}
     json.dump(res,open(SP+'gen_results.json','w'))
     keys=list(Rr.keys())
-    print(f"{'mesura':46}{'REAL':>9}"+''.join(f'{nm:>20}' for nm in variants))
+    print(f"{'measure':46}{'REAL':>9}"+''.join(f'{nm:>20}' for nm in variants))
     for k in keys:
         print(f'{k:46}{Rr[k]:9.3f}'+''.join(f'{res[nm][k]:20.3f}' for nm in variants))

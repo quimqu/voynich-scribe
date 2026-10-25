@@ -1,0 +1,40 @@
+Within the bifolium (LSA k=75, quires A B C D E F G M T); assumed writing order a-r, a-v, b-r, b-v
+
+pair (distance) | real [95% CI] | scribe mean of 5 seeds ± SD
+a-r|a-v (1) | 0.234 [0.183, 0.288] n=38 | 0.160 ± 0.006
+a-v|b-r (1) | 0.284 [0.226, 0.346] n=38 | 0.145 ± 0.012
+b-r|b-v (1) | 0.221 [0.168, 0.273] n=37 | 0.135 ± 0.018
+a-r|b-r (2) | 0.207 [0.156, 0.256] n=38 | 0.151 ± 0.012
+a-v|b-v (2) | 0.208 [0.162, 0.255] n=37 | 0.153 ± 0.014
+b-v|a-r (3) | 0.183 [0.136, 0.231] n=37 | 0.143 ± 0.018
+
+distance | real [95% CI] | scribe
+1 | 0.246 [0.213, 0.277] n=113 | 0.147 ± 0.006
+2 | 0.208 [0.175, 0.243] n=75 | 0.152 ± 0.011
+3 | 0.183 [0.136, 0.230] n=37 | 0.143 ± 0.018
+
+bifolium position | n | real conjoint / outer / confoliate(a) | scribe conjoint / outer / confoliate(a)
+exterior | 9 | 0.280 / 0.170 / 0.246 | 0.153 / 0.108 / 0.142
+middle | 20 | 0.258 / 0.191 / 0.269 | 0.154 / 0.168 / 0.172
+central | 9 | 0.346 / 0.177 / 0.142 | 0.117 / 0.116 / 0.151
+
+paired per bifolium | real: mean, Wilcoxon p, fraction > 0 | scribe (5 seeds): mean, min and max p
+conjoint-outer | +0.096, p=0.019, 68% (n=37) | +0.001, p 0.41-0.82
+conjoint-confoliate | +0.056, p=0.101, 62% (n=37) | -0.003, p 0.23-0.89
+
+Reordering in the Davis-Layfield manner (current = facing of the nested order; best = junctions between bifolia, maximum over permutations):
+source | quire | current | junctions of the nested order | best | gain % | median of permutations | best sequence
+real | M | 0.228 | 0.229 | 0.304 | 33.4 | 0.128 | 79|80, 75|84, 76|83, 77|82, 78|81
+real | T | 0.189 | 0.186 | 0.284 | 50.1 | 0.135 | 108|111, 103|116, 104|115, 106|113, 107|112, 105|114
+scribe_seed1 | M | 0.167 | 0.100 | 0.269 | 60.6 | 0.169 | 75|84, 79|80, 78|81, 76|83, 77|82
+scribe_seed1 | T | 0.174 | 0.134 | 0.298 | 71.4 | 0.159 | 108|111, 103|116, 106|113, 107|112, 104|115, 105|114
+scribe_seed2 | M | 0.263 | 0.128 | 0.339 | 29.1 | 0.208 | 76|83, 77|82, 79|80, 75|84, 78|81
+scribe_seed2 | T | 0.187 | 0.268 | 0.303 | 62.0 | 0.200 | 103|116, 107|112, 106|113, 105|114, 104|115, 108|111
+scribe_seed3 | M | 0.180 | 0.171 | 0.317 | 75.7 | 0.212 | 77|82, 75|84, 79|80, 78|81, 76|83
+scribe_seed3 | T | 0.177 | 0.199 | 0.282 | 59.1 | 0.188 | 104|115, 106|113, 103|116, 107|112, 108|111, 105|114
+scribe_seed4 | M | 0.208 | 0.228 | 0.285 | 37.3 | 0.146 | 76|83, 77|82, 78|81, 79|80, 75|84
+scribe_seed4 | T | 0.125 | 0.189 | 0.261 | 108.7 | 0.151 | 108|111, 107|112, 106|113, 103|116, 105|114, 104|115
+scribe_seed5 | M | 0.179 | 0.131 | 0.362 | 102.2 | 0.174 | 76|83, 78|81, 75|84, 79|80, 77|82
+scribe_seed5 | T | 0.186 | 0.175 | 0.356 | 90.7 | 0.217 | 107|112, 106|113, 103|116, 104|115, 108|111, 105|114
+  M: real gain 33.4% · scribe 61.0 ± 26.4% (Davis-Layfield: M 12.1%, T 20%)
+  T: real gain 50.1% · scribe 78.4 ± 18.8% (Davis-Layfield: M 12.1%, T 20%)

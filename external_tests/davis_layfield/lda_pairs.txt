@@ -1,0 +1,77 @@
+Within-bifolium pairs with LDA (exploratory). 37 bifolia; 40-word documents, word counts; page = topic proportions.
+Each cell: mean over three random starts of LDA; one-sided Wilcoxon p (median of the three starts). Similarity: cosine | 1 - Hellinger.
+
+== LDA k=5
+six pairs (real, cosine | Hellinger; scribe mean of 5 seeds, cosine):
+  leaf A a-r|a-v   0.894 | 0.746   scribe 0.882
+  inner a-v|b-r    0.918 | 0.759   scribe 0.875
+  leaf B b-r|b-v   0.888 | 0.734   scribe 0.887
+  diag a-r|b-r     0.883 | 0.735   scribe 0.891
+  diag a-v|b-v     0.884 | 0.740   scribe 0.879
+  outer b-v|a-r    0.907 | 0.754   scribe 0.890
+  cosine    all    inner_outer +0.011 (p 0.417) / scribe -0.015 (p 0.10-0.99) | P1 -0.007 (p 0.934) / scribe -0.008 (p 0.04-1.00) | P2 +0.027 (p 0.101) / scribe -0.010 (p 0.02-0.97)
+  cosine    hand 2 inner_outer +0.015 (p 0.500) / scribe +0.004 (p 0.02-0.96) | P1 +0.008 (p 0.784) / scribe +0.003 (p 0.02-1.00) | P2 +0.010 (p 0.246) / scribe +0.002 (p 0.14-0.90)
+  cosine    hand 1 inner_outer +0.010 (p 0.554) / scribe -0.020 (p 0.05-0.97) | P1 -0.014 (p 0.813) / scribe -0.014 (p 0.04-1.00) | P2 +0.035 (p 0.144) / scribe -0.009 (p 0.02-0.96)
+  Hellinger all    inner_outer +0.004 (p 0.524) / scribe -0.009 (p 0.10-1.00) | P1 -0.008 (p 0.781) / scribe -0.003 (p 0.02-1.00) | P2 +0.019 (p 0.193) / scribe -0.008 (p 0.12-0.99)
+  Hellinger hand 2 inner_outer +0.006 (p 0.688) / scribe +0.012 (p 0.02-0.99) | P1 -0.000 (p 0.754) / scribe +0.007 (p 0.03-1.00) | P2 +0.009 (p 0.423) / scribe +0.009 (p 0.05-0.88)
+  Hellinger hand 1 inner_outer -0.001 (p 0.719) / scribe -0.016 (p 0.08-0.99) | P1 -0.013 (p 0.486) / scribe -0.008 (p 0.11-0.98) | P2 +0.019 (p 0.305) / scribe -0.012 (p 0.06-0.98)
+
+== LDA k=9
+six pairs (real, cosine | Hellinger; scribe mean of 5 seeds, cosine):
+  leaf A a-r|a-v   0.821 | 0.624   scribe 0.759
+  inner a-v|b-r    0.853 | 0.634   scribe 0.773
+  leaf B b-r|b-v   0.807 | 0.616   scribe 0.784
+  diag a-r|b-r     0.800 | 0.595   scribe 0.770
+  diag a-v|b-v     0.815 | 0.619   scribe 0.775
+  outer b-v|a-r    0.813 | 0.620   scribe 0.770
+  cosine    all    inner_outer +0.040 (p 0.322) / scribe +0.004 (p 0.02-0.98) | P1 +0.014 (p 0.678) / scribe +0.002 (p 0.02-1.00) | P2 +0.039 (p 0.162) / scribe +0.002 (p 0.07-0.99)
+  cosine    hand 2 inner_outer +0.031 (p 0.539) / scribe +0.055 (p 0.02-0.86) | P1 +0.017 (p 0.577) / scribe +0.032 (p 0.04-0.98) | P2 +0.021 (p 0.348) / scribe +0.035 (p 0.03-0.88)
+  cosine    hand 1 inner_outer +0.050 (p 0.187) / scribe -0.008 (p 0.04-0.98) | P1 +0.024 (p 0.554) / scribe -0.006 (p 0.03-0.99) | P2 +0.040 (p 0.129) / scribe -0.003 (p 0.06-0.95)
+  Hellinger all    inner_outer +0.014 (p 0.423) / scribe +0.002 (p 0.01-0.98) | P1 +0.005 (p 0.470) / scribe -0.001 (p 0.01-0.99) | P2 +0.014 (p 0.518) / scribe +0.004 (p 0.03-0.99)
+  Hellinger hand 2 inner_outer +0.018 (p 0.423) / scribe +0.031 (p 0.03-0.98) | P1 +0.016 (p 0.500) / scribe +0.015 (p 0.04-0.98) | P2 +0.003 (p 0.577) / scribe +0.024 (p 0.04-0.98)
+  Hellinger hand 1 inner_outer +0.026 (p 0.317) / scribe -0.003 (p 0.01-0.98) | P1 +0.014 (p 0.317) / scribe -0.004 (p 0.01-0.98) | P2 +0.017 (p 0.486) / scribe +0.001 (p 0.03-0.92)
+
+== LDA k=20
+six pairs (real, cosine | Hellinger; scribe mean of 5 seeds, cosine):
+  leaf A a-r|a-v   0.721 | 0.483   scribe 0.594
+  inner a-v|b-r    0.709 | 0.483   scribe 0.609
+  leaf B b-r|b-v   0.704 | 0.475   scribe 0.613
+  diag a-r|b-r     0.700 | 0.474   scribe 0.608
+  diag a-v|b-v     0.743 | 0.503   scribe 0.599
+  outer b-v|a-r    0.736 | 0.491   scribe 0.597
+  cosine    all    inner_outer -0.027 (p 0.571) / scribe +0.012 (p 0.00-0.99) | P1 -0.024 (p 0.763) / scribe +0.009 (p 0.01-0.99) | P2 -0.003 (p 0.127) / scribe +0.005 (p 0.01-0.80)
+  cosine    hand 2 inner_outer +0.008 (p 0.423) / scribe +0.042 (p 0.01-0.93) | P1 -0.019 (p 0.812) / scribe +0.036 (p 0.01-0.90) | P2 +0.039 (p 0.053) / scribe +0.010 (p 0.02-0.90)
+  cosine    hand 1 inner_outer -0.046 (p 0.646) / scribe +0.001 (p 0.07-0.97) | P1 -0.024 (p 0.541) / scribe -0.003 (p 0.05-0.99) | P2 -0.034 (p 0.753) / scribe +0.006 (p 0.08-0.89)
+  Hellinger all    inner_outer -0.008 (p 0.600) / scribe +0.004 (p 0.01-1.00) | P1 -0.011 (p 0.634) / scribe -0.001 (p 0.01-1.00) | P2 +0.004 (p 0.197) / scribe +0.008 (p 0.02-0.80)
+  Hellinger hand 2 inner_outer +0.007 (p 0.423) / scribe +0.019 (p 0.02-0.99) | P1 -0.016 (p 0.688) / scribe +0.017 (p 0.01-0.98) | P2 +0.034 (p 0.053) / scribe +0.003 (p 0.07-0.84)
+  Hellinger hand 1 inner_outer -0.016 (p 0.633) / scribe +0.000 (p 0.01-0.97) | P1 -0.003 (p 0.419) / scribe -0.008 (p 0.02-0.99) | P2 -0.019 (p 0.813) / scribe +0.013 (p 0.09-0.96)
+
+== LDA k=50
+six pairs (real, cosine | Hellinger; scribe mean of 5 seeds, cosine):
+  leaf A a-r|a-v   0.469 | 0.312   scribe 0.390
+  inner a-v|b-r    0.436 | 0.282   scribe 0.390
+  leaf B b-r|b-v   0.452 | 0.293   scribe 0.383
+  diag a-r|b-r     0.411 | 0.272   scribe 0.390
+  diag a-v|b-v     0.434 | 0.283   scribe 0.370
+  outer b-v|a-r    0.434 | 0.282   scribe 0.376
+  cosine    all    inner_outer +0.002 (p 0.542) / scribe +0.014 (p 0.12-0.93) | P1 +0.019 (p 0.223) / scribe +0.012 (p 0.07-0.93) | P2 -0.024 (p 0.781) / scribe +0.003 (p 0.13-0.91)
+  cosine    hand 2 inner_outer +0.044 (p 0.385) / scribe +0.017 (p 0.16-0.90) | P1 +0.062 (p 0.138) / scribe +0.002 (p 0.19-0.93) | P2 -0.026 (p 0.754) / scribe +0.023 (p 0.01-0.93)
+  cosine    hand 1 inner_outer -0.013 (p 0.620) / scribe +0.007 (p 0.09-0.96) | P1 +0.006 (p 0.432) / scribe +0.008 (p 0.04-0.92) | P2 -0.029 (p 0.763) / scribe -0.002 (p 0.06-0.99)
+  Hellinger all    inner_outer -0.000 (p 0.383) / scribe +0.007 (p 0.06-0.96) | P1 +0.013 (p 0.177) / scribe +0.004 (p 0.11-0.95) | P2 -0.020 (p 0.912) / scribe +0.004 (p 0.09-0.90)
+  Hellinger hand 2 inner_outer +0.034 (p 0.278) / scribe +0.005 (p 0.07-0.95) | P1 +0.043 (p 0.080) / scribe -0.003 (p 0.16-0.86) | P2 -0.014 (p 0.652) / scribe +0.012 (p 0.05-0.97)
+  Hellinger hand 1 inner_outer -0.010 (p 0.695) / scribe +0.004 (p 0.10-0.99) | P1 +0.007 (p 0.329) / scribe +0.003 (p 0.04-0.98) | P2 -0.025 (p 0.813) / scribe +0.002 (p 0.00-0.99)
+
+== LDA k=9 without the 15 frequent words (2025 list)
+six pairs (real, cosine | Hellinger; scribe mean of 5 seeds, cosine):
+  leaf A a-r|a-v   0.806 | 0.595   scribe 0.668
+  inner a-v|b-r    0.766 | 0.571   scribe 0.667
+  leaf B b-r|b-v   0.760 | 0.562   scribe 0.677
+  diag a-r|b-r     0.799 | 0.589   scribe 0.666
+  diag a-v|b-v     0.788 | 0.580   scribe 0.680
+  outer b-v|a-r    0.818 | 0.601   scribe 0.666
+  cosine    all    inner_outer -0.051 (p 0.786) / scribe +0.001 (p 0.10-0.94) | P1 -0.040 (p 0.923) / scribe +0.005 (p 0.04-0.90) | P2 -0.017 (p 0.662) / scribe -0.006 (p 0.11-0.89)
+  cosine    hand 2 inner_outer +0.005 (p 0.577) / scribe +0.040 (p 0.03-0.99) | P1 -0.009 (p 0.812) / scribe +0.025 (p 0.02-0.99) | P2 +0.020 (p 0.385) / scribe +0.021 (p 0.03-0.92)
+  cosine    hand 1 inner_outer -0.086 (p 0.905) / scribe -0.016 (p 0.02-0.96) | P1 -0.054 (p 0.931) / scribe -0.008 (p 0.04-0.98) | P2 -0.049 (p 0.879) / scribe -0.012 (p 0.07-0.95)
+  Hellinger all    inner_outer -0.030 (p 0.694) / scribe +0.002 (p 0.02-0.87) | P1 -0.025 (p 0.744) / scribe +0.005 (p 0.03-0.89) | P2 -0.008 (p 0.417) / scribe -0.004 (p 0.11-0.97)
+  Hellinger hand 2 inner_outer -0.021 (p 0.722) / scribe +0.031 (p 0.01-0.99) | P1 -0.023 (p 0.652) / scribe +0.023 (p 0.01-0.99) | P2 +0.003 (p 0.577) / scribe +0.013 (p 0.02-0.95)
+  Hellinger hand 1 inner_outer -0.044 (p 0.763) / scribe -0.011 (p 0.03-0.97) | P1 -0.030 (p 0.763) / scribe -0.004 (p 0.08-0.94) | P2 -0.021 (p 0.581) / scribe -0.010 (p 0.03-0.99)

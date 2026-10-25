@@ -1,0 +1,97 @@
+
+######################################################################
+#  VOYNICH GENERATOR VERIFICATION
+#  Language: Currier B
+#  MI shuffles: 10
+#  CI chunks: 10  (bilateral: full corpus)
+#  Thresholds: adaptive (calibrated per dialect)
+######################################################################
+
+  Calibration...
+  Loading cached calibration from vms_calibration.json
+
+  VMS Currier B reference:
+    E->S:      64.3%
+    MI:        0.4980
+    Bilateral: YES (Se=3, Ee=7)
+    Shape:     Intermediate (R²=0.805, CV=1.53)
+    Words:     19640
+
+  Loading: C:\dev\voynich-scribe\external_tests\parisel\words_scribe_seed5_B.txt
+    Words: 21385
+    Unique: 4999
+    Sample: tchdy okaiin qokam dald qosheees shol ytoaiin okeeey or chdy chedy oky chdy chdy cheey chedy yckhedy kaiin qokar chkar
+    Sentences (from lines): 2463
+
+  Checking attestation...
+
+  Running CI evaluation (10 chunks)...
+    Chunk  0/10: E->S=55.7%  MI=0.4614  Shape=Intermediate
+    Chunk  2/10: E->S=69.6%  MI=0.5030  Shape=Zipfian
+    Chunk  4/10: E->S=60.6%  MI=0.5283  Shape=Intermediate
+    Chunk  6/10: E->S=65.3%  MI=0.4294  Shape=Intermediate
+    Chunk  8/10: E->S=70.1%  MI=0.4356  Shape=Intermediate
+    Chunk  9/10: E->S=71.0%  MI=0.4211  Shape=Intermediate
+
+  Running full-corpus bilateral evaluation...
+    Se=4, Ee=9  → Bilateral=YES
+
+======================================================================
+  GENERATOR VERIFICATION — words_scribe_seed5_B.txt
+  Language: Currier B
+  10 CI chunks, 21370 words, 2463 sentences
+======================================================================
+
+  WORD ATTESTATION
+  ───────────────────────────────────────────────────────
+
+  Against chclass.txt:
+    Dialect tokens: 16859/21385 (78.8%)
+    Dialect types:  1693/4999 (33.9%)
+    All-MS tokens:  17303/21385 (80.9%)
+    All-MS types:   1976/4999 (39.5%)
+    Unattested:     $F=N1>, $H=4, $L=B, $Q=N, $S=cosmological, <!, aedy, aiiraiin, aily, airaiin, airain, airoldy, airor, akaig, akam
+
+  FOUR-SIGNATURE EVALUATION
+  ───────────────────────────────────────────────────────
+
+  Sig1  E->S:      64.9%  [61.9, 67.9]
+        VMS ref:   64.3%  [59.3, 68.8]
+        Criterion: range [50, 79]%
+
+  Sig2  Bilateral (full corpus):
+        Generator: Se=4, Ee=9  → YES
+        VMS ref:   Se=3, Ee=7  → YES
+        Criterion: must have bilateral (ref has it)
+        (chunks:   gen=100%  ref=90%)
+
+  Sig3  MI:        0.4537  [0.4359, 0.4755]
+        VMS ref:   0.4980  [0.4758, 0.5243]
+        Criterion: range [0.249, 0.996]
+        Quality:   excellent match (0.91x reference)
+
+  Sig4  Shape:     Intermediate  R²=0.824  CV=1.63
+        VMS ref:   Intermediate  R²=0.805  CV=1.53
+        Criterion: non-Plateau (ref=Intermediate)
+
+  ───────────────────────────────────────────────────────
+  VERDICT (calibrated to Currier B):
+  ───────────────────────────────────────────────────────
+    E->S        : ✓ PASS      [range [50, 79]%]
+    Bilat       : ✓ PASS      [must have bilateral (ref has it)]
+    MI          : ✓ PASS      [range [0.249, 0.996]]
+    Shape       : ✓ PASS      [non-Plateau (ref=Intermediate)]
+  ───────────────────────────────────────────────────────
+    Joint (adaptive):   4/4
+
+  Reference values:
+    VMS Currier B: E->S=64.3%  MI=0.4980  Bilateral=YES  Intermediate
+
+  ★★★ ALL 4 SIGNATURES PASSED (Currier B) ★★★
+
+  ───────────────────────────────────────────────────────
+  DIAGNOSTIC SUMMARY
+  ───────────────────────────────────────────────────────
+  All signatures match VMS Currier B reference.
+======================================================================
+

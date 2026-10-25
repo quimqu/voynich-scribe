@@ -1,0 +1,18 @@
+words written 32284; strange at the end 4.14%  (real 4.59%)
+
+by origin (at the moment of producing it):
+  new                      106442 produced,  2564 strange (2.4%)
+  modified copy              3838 produced,    67 strange (1.7%)
+  new (end of line)         14600 produced,   765 strange (5.2%)
+  closure                    1111 produced,   104 strange (9.4%)  ← new words made by the transformation
+  modified copies whose model was already strange: 151
+
+where the rare trigram is in the new words: {('new', 'middle'): 2618, ('new', 'end'): 282, ('new (end of line)', 'middle'): 799, ('new (end of line)', 'end'): 89, ('new', 'start'): 263, ('new (end of line)', 'start'): 93}
+
+examples (new): qcthhy×18, tsh×11, chcthhy×11, qkhy×10, shr×10, qckhy×10, chckh×10, cthiar×9, an×9, shcthdy×9, dchchy×8, dshdy×8, yckhy×7, peshy×7, oas×7, ikhy×7, yoiin×7, lshcthy×7, cthls×7, schdy×7, che×7, qedy×7, qckhey×7, yshckhy×6, siin×6
+
+examples (new (end of line)): n×15, ray×9, diin×9, dcthy×8, apy×8, cthoy×7, cthoiin×6, liin×6, day×5, chors×5, ikhy×4, iin×4, og×4, sa×3, oeckhy×3, shany×3, chcfhhy×3, otacphy×3, chcth×3, at×3, cfhor×3, daiins×3, rapy×3, dai×3, okay×3
+
+examples (modified copy): chey→che×5, chedy→cheshy×5, cho→che×3, chd→che×2, cheo→che×2, cheor→cheer×2, shckhy→shchy×2, qotchey→qotche×1, shos→shsos×1, okchor→akchor×1, dshey→dshdy×1, qockhey→qckhey×1, okcheeody→akcheeody×1, qockheokchy→qckheokchy×1, shocthy→shochy×1, qokchey→qokche×1, dchy→dche×1, chololchy→chololche×1, okeechy→okeeche×1, chchy→shchy×1, qokeel→qokeer×1, qodchd→qodche×1, shcthy→shchy×1, olkeedan→olkeeean×1, shey→shchy×1
+
+final strange words: 1213 first appearance on the page, 125 repetitions of a strange word already written on the page

@@ -1,0 +1,80 @@
+measure                                                            REAL   scribe 19/10 without sectio without hand/s without length   scribe 14/10
+Adjacent identical words (%)                                      0.902        0.964 ✓        0.903 ✓        0.797 ✓        1.010 ✓        1.171 ·
+Adjacent identical words / chance                                 3.087        2.797 ✓        2.752 ✓        2.295 ·        2.692 ✓        3.312 ✓
+Consecutive words at edit distance 1 / shuffled                   2.213        1.640 ·        1.592 ·        1.548 ·        1.755 ✓        1.675 ✓
+Same word at distance 2 / shuffled                                3.270        3.177 ✓        3.458 ✓        2.895 ✓        2.920 ✓        3.617 ✓
+Same word at distance 3 / shuffled                                3.447        3.078 ✓        3.117 ✓        2.716 ✓        2.938 ✓        3.446 ✓
+Same word at distance 5 / shuffled                                2.850        3.446 ✓        3.046 ✓        2.362 ✓        2.842 ✓        3.809 ·
+Frequent words repeated >3x chance (%)                           51.786       38.333 ·       36.284 ·       31.403 ·       37.694 ·       41.223 ✓
+Frequent words repeated <0.3x chance (%)                         16.071       23.240 ·       25.875 ·       30.320 ·       30.515 ·       20.797 ·
+Boundary MI, distance 1 (last glyph to next first glyph)          0.155        0.153 ✓        0.150 ✓        0.156 ✓        0.153 ✓        0.146 ✓
+Boundary MI, distance 2                                           0.009        0.003 ✓        0.004 ✓        0.004 ✓        0.004 ✓        0.004 ✓
+Boundary MI, distance 3                                           0.003        0.003 ✓        0.002 ✓        0.003 ✓        0.004 ✓        0.003 ✓
+Lift -y | q-                                                      1.693        1.651 ✓        1.676 ✓        1.657 ✓        1.690 ✓        1.682 ✓
+Lift -r | a-                                                      3.116        3.306 ✓        3.108 ✓        3.254 ✓        3.085 ✓        3.103 ✓
+Lift -y | a-                                                      0.194        0.204 ✓        0.195 ✓        0.214 ✓        0.221 ✓        0.198 ✓
+Lift -n | q-                                                      0.472        0.547 ✓        0.542 ✓        0.532 ✓        0.554 ✓        0.550 ✓
+First word of line starts ch/sh (%)                               8.146        8.078 ✓        7.916 ✓        8.214 ✓        8.815 ✓        9.253 ✓
+First word of line starts y (%)                                  14.334       15.347 ✓       15.211 ✓       14.846 ✓       14.198 ✓       13.159 ✓
+Last word of line ends -m (%)                                    15.875       19.326 ✓       19.316 ✓       18.653 ✓       17.138 ✓       16.731 ✓
+Line-end -m: lines of 10+ words / 1-4 words                       3.405        2.338 ·        2.278 ·        2.018 ·        2.136 ·        1.943 ·
+Same first glyph as line n-1 / null                               0.583        0.603 ✓        0.569 ✓        0.557 ✓        0.615 ✓        0.585 ✓
+Same first glyph as line n-2 / null                               1.300        1.227 ✓        1.242 ✓        1.235 ✓        1.203 ✓        1.223 ✓
+Same first glyph as line n-3 / null                               1.162        1.109 ✓        1.118 ✓        1.085 ✓        1.154 ✓        1.112 ✓
+Distinct initial glyphs per paragraph (4+ lines)                  4.360        4.530 ✓        4.502 ✓        4.611 ✓        4.561 ✓        4.619 ✓
+Adjacent repeats: first line of paragraph / rest                  0.385        0.356 ✓        0.373 ✓        0.384 ✓        0.452 ✓        0.344 ✓
+Spearman correlation of neighbour word lengths                    0.160        0.189 ✓        0.192 ✓        0.186 ✓        0.214 ·        0.181 ✓
+Word types                                                     7915.000     7245.000 ✓     7350.200 ✓     7266.200 ✓     7237.800 ✓     7130.600 ✓
+Hapax (% of types)                                               71.320       66.247 ✓       66.286 ✓       66.096 ✓       67.150 ✓       63.990 ✓
+[R2.1] Words fitting the slot grammar (%)                        97.700       99.917 ✓       99.893 ✓       99.920 ✓       99.900 ✓       99.883 ✓
+[R2.2] Words with 2+ gallows (%)                                  1.800        1.793 ✓        1.748 ✓        1.732 ✓        2.013 ✓        1.425 ✓
+[R2.6] Mean word length (glyphs)                                  4.797        4.759 ✓        4.758 ✓        4.773 ✓        4.650 ✓        4.654 ✓
+[R2.6] SD of word length                                          1.713        1.755 ✓        1.760 ✓        1.763 ✓        1.943 ✓        1.915 ✓
+[R13.7] e and i in the same word / expected                       0.244        0.227 ✓        0.232 ✓        0.231 ✓        0.321 ·        0.252 ✓
+[R3.3] H(prefix), marginal                                        1.543        1.527 ✓        1.523 ✓        1.533 ✓        1.508 ✓        1.491 ✓
+[R3.3] H(prefix | previous glyph, core)                           0.918        0.925 ✓        0.922 ✓        0.924 ✓        0.913 ✓        0.920 ✓
+[R3.3] q- before o- after -y (%)                                 57.263       58.763 ✓       58.268 ✓       59.207 ✓       57.665 ✓       58.469 ✓
+[R3.4] q- on first word of paragraph (%)                          4.189        5.892 ·        6.108 ·        6.378 ·        5.027 ✓        6.243 ·
+[R3.4] q- on first word of line (%)                              14.872       16.760 ✓       16.495 ✓       17.256 ✓       14.736 ✓       15.143 ✓
+[R3.4] q- inside the line (%)                                    17.938       19.798 ✓       19.431 ✓       20.084 ✓       18.806 ✓       19.794 ✓
+[R4.2] a- at line start (%)                                       0.354        0.401 ✓        0.384 ✓        0.342 ✓        0.537 ·        0.407 ✓
+[R4.2] d-/s-/y- at line start (%)                                47.979       48.345 ✓       48.050 ✓       47.896 ✓       47.577 ✓       46.250 ✓
+[R14.1] Bare gallows at line start (%)                            8.970        8.392 ✓        9.112 ✓        8.864 ✓        9.708 ✓       10.210 ✓
+[R4.3] Closed last word, non-final lines (%)                     27.106       30.059 ✓       29.644 ✓       29.253 ✓       28.167 ✓       27.331 ✓
+[R4.3] Closed forms inside the line (%)                           2.345        2.227 ✓        2.180 ✓        2.181 ✓        2.193 ✓        2.109 ✓
+[R14.2] Closed last word of paragraph (%)                        17.308       17.912 ✓       19.478 ✓       16.786 ✓       17.115 ✓       21.566 ✓
+[R14.3] Length of 2nd word / 1st word                             0.877        0.913 ✓        0.912 ✓        0.910 ✓        0.961 ✓        0.966 ✓
+[R5.1] Gallows on first word of paragraph (%)                    93.243       92.324 ✓       93.000 ✓       94.324 ✓       91.919 ✓       91.757 ✓
+[R1.3] p/f among gallows, first line of paragraph (%)            31.027       31.341 ✓       31.784 ✓       31.435 ✓       31.555 ✓       31.031 ✓
+[R1.3] p/f among gallows, other lines (%)                         2.726        2.742 ✓        2.796 ✓        2.815 ✓        2.819 ✓        2.529 ✓
+[R5.2] Word length, first line / rest                             1.076        0.990 ✓        0.989 ✓        0.989 ✓        1.001 ✓        0.993 ✓
+[R6.1] Closed word before a drawing gap (%)                      10.165        9.451 ✓       10.082 ✓       10.769 ✓       10.055 ✓       12.170 ✓
+[R6.1] d-/s-/y- after a drawing gap (%)                          41.329       41.815 ✓       41.621 ✓       41.232 ✓       38.509 ✓       38.541 ✓
+[R6.1] q- after a drawing gap (%)                                 3.566        4.473 ·        4.473 ·        4.538 ·        4.635 ·        4.117 ✓
+[H8] Same first glyph after a gallows-initial line / null         0.612        0.682 ✓        0.517 ✓        0.577 ✓        0.599 ✓        0.601 ✓
+[A1] Words with an edit-distance-1 twin earlier on the page (%   64.468       66.963 ✓       66.375 ✓       65.608 ✓       67.355 ✓       68.265 ✓
+[A1] Lines back to the nearest twin (median)                      2.000        2.000 ✓        2.000 ✓        2.000 ✓        2.000 ✓        2.000 ✓
+[H2] Page overdispersion of q- (after -y)                         6.315        5.132 ✓        5.380 ✓        3.767 ·        4.950 ✓        5.721 ✓
+[G6] Vocabulary cosine: same sheet / neighbouring pages of oth    1.303        1.263 ✓        1.249 ✓        1.181 ✓        1.256 ✓        1.202 ✓
+[eye] Strange words (rare trigram in the real text) (%)           4.591        4.290 ✓        4.372 ✓        4.275 ✓        4.227 ✓        4.082 ✓
+[eye] Strange words per line                                      0.359        0.335 ✓        0.342 ✓        0.334 ✓        0.331 ✓        0.319 ✓
+[page] Page overdispersion of e-words                            24.569       25.564 ✓       18.121 ·       20.233 ✓       24.525 ✓       20.265 ✓
+[section] e-words: biological / herbal                            2.038        2.336 ✓        1.747 ✓        1.761 ✓        2.389 ✓        1.839 ✓
+[section] -edy words in biological (%)                           27.484       34.669 ·       27.043 ✓       24.303 ✓       32.464 ✓       22.664 ✓
+[page] Share of the page's most frequent word (median, %)         4.714        4.909 ✓        4.721 ✓        4.660 ✓        4.884 ✓        4.829 ✓
+[eye] Words of 8+ glyphs (%)                                      5.250        5.802 ✓        5.919 ✓        5.998 ✓        7.800 ·        7.430 ·
+[text] Character entropy h1                                       3.907        3.895 ✓        3.900 ✓        3.895 ✓        3.889 ✓        3.887 ✓
+[text] Conditional entropy h2                                     2.137        2.088 ✓        2.096 ✓        2.081 ✓        2.099 ✓        2.106 ✓
+[text] Conditional entropy h3                                     1.860        1.806 ✓        1.815 ✓        1.800 ✓        1.827 ✓        1.842 ✓
+[text] Zipf slope (first 1,000 types)                             1.005        1.004 ✓        1.002 ✓        1.003 ✓        1.024 ✓        1.001 ✓
+[length] Words of 2-3 glyphs (%)                                 21.611       23.098 ✓       23.347 ✓       23.081 ✓       29.311 ·       28.830 ·
+[length] Words of 5-6 glyphs (%)                                 41.005       39.437 ✓       38.882 ✓       38.952 ✓       32.614 ✓       33.194 ✓
+[range] Shared vocabulary, neighbouring pages (cosine)            0.330        0.322 ✓        0.307 ✓        0.292 ✓        0.329 ✓        0.267 ✓
+[range] Shared vocabulary, 10 pages apart                         0.253        0.253 ✓        0.245 ✓        0.246 ✓        0.265 ✓        0.223 ✓
+[range] Shared vocabulary, 100 pages apart                        0.155        0.165 ✓        0.167 ✓        0.177 ✓        0.180 ✓        0.163 ✓
+[range] Neighbouring / 100 pages apart                            2.129        1.946 ✓        1.835 ✓        1.645 ✓        1.826 ✓        1.647 ✓
+[range] Bursts of the 50 most frequent words (CV of gaps)         1.755        1.649 ✓        1.584 ✓        1.410 ✓        1.639 ✓        1.509 ✓
+[range] Page overdispersion of the 50 most frequent words         2.063        1.947 ✓        1.789 ✓        1.584 ✓        1.998 ✓        1.868 ✓
+REPRODUCED (±25%)                                                                 69/76           69/76           68/76           67/76           69/76
+MEDIAN ERROR |log(gen/real)| (excluding measures ~0)                             0.059          0.049          0.062          0.068          0.098
+  of the 27 night measures                                                        23/27           23/27           22/27           23/27           23/27

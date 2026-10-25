@@ -1,0 +1,38 @@
+== 1 · excess against deficit, and page length
+real all +0.0636 (p 0.018) | excess +0.0746 (p 0.007) | deficit -0.0025 (p 0.547)
+   DEV inner-outer vs dlen: Spearman +0.19 (p 0.289); mean dlen +9.2
+   DEV inner-outer vs dmin: Spearman +0.30 (p 0.080); mean dmin +1.7
+   deficit part vs dmin: Spearman +0.00 (p 0.987)
+scribe_seed1 all +0.0220 (p 0.244) | excess +0.0123 (p 0.336) | deficit -0.0036 (p 0.849)
+scribe_seed2 all +0.0063 (p 0.639) | excess +0.0056 (p 0.473) | deficit -0.0078 (p 0.857)
+scribe_seed3 all +0.0358 (p 0.381) | excess +0.0294 (p 0.394) | deficit +0.0148 (p 0.072)
+
+== 2 · words and bifolia of the shared excess (real)
+top words (contribution per bifolium; bifolia where BOTH inner pages are > 1 sd above their hand+section norm):
+  lkeedy     +0.0116  both well above: 1
+  chdy       +0.0068  both well above: 2
+  oky        +0.0066  both well above: 2
+  qokedy     +0.0054  both well above: 1
+  shody      +0.0047  both well above: 1
+  dar        +0.0042  both well above: 3
+  chody      +0.0042  both well above: 2
+  chokchy    +0.0036  both well above: 1
+  tchor      +0.0033  both well above: 1
+  sho        +0.0032  both well above: 1
+  otar       +0.0028  both well above: 1
+  choly      +0.0028  both well above: 1
+  cheor      +0.0028  both well above: 4
+  ckhol      +0.0027  both well above: 1
+  chcthy     +0.0027  both well above: 4
+words for half the positive mass: 22
+bifolia, largest inner-outer shared excess:
+  f108|f111  hand 3 stars        +0.485  lkeedy, qokeedy, qoteedy, keedy
+  f33|f40    hand 2 herbal       +0.375  oky, okar, dal, chdy
+  f50|f55    hand 2 herbal       +0.353  chody, otar, ykar, okal
+  f4|f5      hand 1 herbal       +0.292  shody, sho, shodaiin, cthey
+  f104|f115  hand 3 stars        +0.216  qokchedy, cheos, cheedy, cheey
+  f36|f37    hand 1 herbal       +0.212  ckhor, yky, qotor, chory
+  f17|f24    hand 1 herbal       +0.208  odaiin, sar, okol, ol
+  f28|f29    hand 1 herbal       +0.199  choly, qoty, shor, cheor
+  f26|f31    hand 2 herbal       +0.198  qokedy, dar, qotedy, otedy
+  f34|f39    hand 2 herbal       +0.180  chdy, okam, kchdy, shedy

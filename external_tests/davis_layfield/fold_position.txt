@@ -1,0 +1,51 @@
+Fold position test (pre-registered, FOLD_POSITION_PREREG.md). Fold proximity: 1 = at the fold (end of line on the verso, start of line on the recto).
+Linked token: word used on <= 40 pages with a one-glyph variant (not the same word) on the facing page. d = mean proximity of linked minus unlinked tokens.
+
+PRIMARY · hand 2, inner minus outer, paired, one-sided Wilcoxon (inner greater)
+  real          n 10 | inner d -0.010 | outer d -0.006 | inner-outer -0.004, p (one-sided) 0.577, 50% > 0 | inner > 0: p (one-sided) 0.688
+  scribe_seed1  n 10 | inner d -0.021 | outer d +0.016 | inner-outer -0.037, p (one-sided) 0.935, 30% > 0 | inner > 0: p (one-sided) 0.652
+  scribe_seed2  n 10 | inner d +0.014 | outer d +0.008 | inner-outer +0.006, p (one-sided) 0.385, 60% > 0 | inner > 0: p (one-sided) 0.188
+  scribe_seed3  n 10 | inner d -0.021 | outer d -0.023 | inner-outer +0.003, p (one-sided) 0.577, 50% > 0 | inner > 0: p (one-sided) 0.812
+  scribe_seed4  n 10 | inner d +0.056 | outer d -0.000 | inner-outer +0.056, p (one-sided) 0.024, 80% > 0 | inner > 0: p (one-sided) 0.032
+  scribe_seed5  n 10 | inner d +0.010 | outer d -0.028 | inner-outer +0.038, p (one-sided) 0.097, 80% > 0 | inner > 0: p (one-sided) 0.216
+
+SECONDARY · by group: inner d, outer d, inner-outer (two-sided p); mean linked tokens per face
+  all real          n 37 | inner +0.009 (p 0.44) | outer +0.003 (p 0.86) | inner-outer +0.006 (p 0.98) | linked 100.2 / 89.8
+  all scribe_seed1  n 37 | inner +0.002 (p 0.70) | outer -0.006 (p 0.70) | inner-outer +0.008 (p 0.78) | linked 84.1 / 77.7
+  all scribe, 5 seeds  | inner +0.005 | outer -0.000 | inner-outer p 0.51-0.83
+  1   real          n 21 | inner +0.016 (p 0.34) | outer +0.011 (p 0.68) | inner-outer +0.005 (p 0.84) | linked 26.7 / 28.2
+  1   scribe_seed1  n 21 | inner +0.012 (p 0.54) | outer -0.017 (p 0.49) | inner-outer +0.029 (p 0.34) | linked 23.4 / 20.9
+  1   scribe, 5 seeds  | inner +0.005 | outer -0.000 | inner-outer p 0.22-0.86
+  2   real          n 10 | inner -0.010 (p 0.70) | outer -0.006 (p 0.92) | inner-outer -0.004 (p 0.92) | linked 124.0 / 116.7
+  2   scribe_seed1  n 10 | inner -0.021 (p 0.77) | outer +0.016 (p 0.62) | inner-outer -0.037 (p 0.16) | linked 108.5 / 99.9
+  2   scribe, 5 seeds  | inner +0.008 | outer -0.006 | inner-outer p 0.05-0.92
+  3   real          n  5 | inner +0.002 (p 1.00) | outer +0.000 (p 0.81) | inner-outer +0.002 (p 0.62) | linked 371.8 / 303.8
+  3   scribe_seed1  n  5 | inner -0.001 (p 0.62) | outer -0.010 (p 0.62) | inner-outer +0.009 (p 1.00) | linked 304.8 / 280.8
+  3   scribe, 5 seeds  | inner -0.002 | outer +0.004 | inner-outer p 0.06-1.00
+
+SECONDARY · vertical alignment of linked pairs: mean |difference in line fraction| of linked pairs / of all cross-page pairs (1 = no alignment, < 1 = same height)
+  real          inner 0.977 | outer 0.964 | hand 2 inner 0.999
+  scribe_seed1  inner 1.014 | outer 0.990 | hand 2 inner 0.939
+  scribe_seed2  inner 1.022 | outer 0.998 | hand 2 inner 0.965
+  scribe_seed3  inner 1.051 | outer 0.993 | hand 2 inner 0.950
+  scribe_seed4  inner 1.005 | outer 1.050 | hand 2 inner 1.010
+  scribe_seed5  inner 0.992 | outer 0.999 | hand 2 inner 0.965
+
+Per bifolium, real, hand 2: inner d / outer d (linked tokens inner / outer)
+  f26|f31    D | -0.005 / +0.109 (29 / 30)
+  f33|f40    E | -0.068 / -0.019 (38 / 12)
+  f34|f39    E | +0.045 / +0.025 (59 / 63)
+  f43|f46    F | -0.039 / -0.000 (76 / 45)
+  f50|f55    G | +0.016 / -0.176 (42 / 32)
+  f75|f84    M | +0.009 / -0.060 (185 / 206)
+  f76|f83    M | +0.030 / +0.072 (253 / 204)
+  f77|f82    M | +0.001 / -0.053 (176 / 185)
+  f78|f81    M | -0.078 / +0.052 (144 / 139)
+  f79|f80    M | -0.011 / -0.012 (238 / 251)
+
+POSITIVE CONTROL (power, not pre-registered): copies injected into the real text, hand 2 inner faces; fraction of right-page lines whose first word is an existing one-glyph variant of a line-final word of the left page
+  f = 0.05: detected (one-sided p < 0.05) in 0% of 20 runs, mean inner-outer +0.006
+  f = 0.10: detected (one-sided p < 0.05) in 0% of 20 runs, mean inner-outer +0.016
+  f = 0.20: detected (one-sided p < 0.05) in 5% of 20 runs, mean inner-outer +0.032
+  f = 0.30: detected (one-sided p < 0.05) in 20% of 20 runs, mean inner-outer +0.044
+  f = 0.50: detected (one-sided p < 0.05) in 95% of 20 runs, mean inner-outer +0.074

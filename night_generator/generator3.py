@@ -33,23 +33,23 @@ def generate3(r_copy=0.3,r_mod=0.85,q_vert=0.45,m_strength=0.12,first_line_facto
         out.append(dict(page=l['page'],ps=l['ps'],pe=l['pe'],ws=ws)); prev_lines.append(ws)
     return out
 Rr=json.load(open(SP+'gen_real.json'))
-variants={'final':dict(first_line_factor=0.35,reset_par=True),'sense regla 1a línia':dict()}
+variants={'final':dict(first_line_factor=0.35,reset_par=True),'no first-line rule':dict()}
 res={}
 for nm,kw in variants.items():
     rs=[evaluate(generate3(seed=s,**kw)) for s in (1,2,3)]
     res[nm]={k:np.mean([r[k] for r in rs]) for k in rs[0]}
 json.dump(res,open(SP+'gen_results3.json','w'))
-keys=[k for k in Rr if k not in ('idèntics mateixa línia / mateixa pàgina',)]
-print(f"{'mesura':46}{'REAL':>9}{'final':>12}{'sense 1a línia':>16}{'  final/real':>12}")
+keys=[k for k in Rr if k not in ('identical: same line / same page',)]
+print(f"{'measure':46}{'REAL':>9}{'final':>12}{'no 1st-line rule':>16}{'  final/real':>12}")
 for k in keys:
     fr=res['final'][k]/Rr[k] if Rr[k] not in (0,) else float('nan')
-    print(f'{k:46}{Rr[k]:9.3f}{res["final"][k]:12.3f}{res["sense regla 1a línia"][k]:16.3f}{fr:12.2f}')
-# mostra de text generat
+    print(f'{k:46}{Rr[k]:9.3f}{res["final"][k]:12.3f}{res["no first-line rule"][k]:16.3f}{fr:12.2f}')
+# sample of generated text
 random.seed(7); G=generate3(seed=11,first_line_factor=0.35,reset_par=True)
-print('\nmostra generada (una pàgina):')
+print('\ngenerated sample (one page):')
 pg=G[40]['page']
 for l in G:
     if l['page']==pg: print(('  ¶ ' if l['ps']==1 else '    ')+' '.join(l['ws']))
-print('la mateixa pàgina real:')
+print('the same real page:')
 for l in REAL:
     if l['page']==pg: print(('  ¶ ' if l['ps']==1 else '    ')+' '.join(l['ws']))

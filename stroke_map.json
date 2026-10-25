@@ -1,0 +1,264 @@
+{
+ "primitives": {
+  "C": "curve",
+  "I": "minim",
+  "L": "leg/tall stem",
+  "O": "loop",
+  "B": "bar/bench",
+  "U": "tail up",
+  "J": "tail down",
+  "Q": "tail-loop",
+  "F": "tall flourish",
+  "P": "plume",
+  "X": "cross",
+  "V": "vertex",
+  "G": "foot hook",
+  "T": "platform",
+  "M": "short high bar",
+  "R": "mirror curve",
+  "D": "small ring",
+  "`": "allograph/capital mark",
+  "?": "GAP",
+  "W": "weirdo+id"
+ },
+ "glyphs": {
+  "e": {
+   "strokes": "C",
+   "status": "ok"
+  },
+  "i": {
+   "strokes": "I",
+   "status": "ok"
+  },
+  "o": {
+   "strokes": "O",
+   "status": "ok"
+  },
+  "a": {
+   "strokes": "CI",
+   "status": "ok"
+  },
+  "c": {
+   "strokes": "CB",
+   "status": "ok"
+  },
+  "h": {
+   "strokes": "BC",
+   "status": "ok"
+  },
+  "ch": {
+   "strokes": "CBC",
+   "status": "ok"
+  },
+  "sh": {
+   "strokes": "CBCP",
+   "status": "ok"
+  },
+  "n": {
+   "strokes": "IU",
+   "status": "ok"
+  },
+  "b": {
+   "strokes": "CU",
+   "status": "ok"
+  },
+  "r": {
+   "strokes": "IF",
+   "status": "ok"
+  },
+  "s": {
+   "strokes": "CF",
+   "status": "ok"
+  },
+  "d": {
+   "strokes": "OO",
+   "status": "ok"
+  },
+  "y": {
+   "strokes": "OJ",
+   "status": "ok"
+  },
+  "l": {
+   "strokes": "OU",
+   "status": "review"
+  },
+  "g": {
+   "strokes": "CQ",
+   "status": "review"
+  },
+  "m": {
+   "strokes": "IQ",
+   "status": "ok"
+  },
+  "q": {
+   "strokes": "LB",
+   "status": "review"
+  },
+  "f": {
+   "strokes": "LBO",
+   "status": "ok"
+  },
+  "k": {
+   "strokes": "LLBO",
+   "status": "ok"
+  },
+  "p": {
+   "strokes": "LBOO",
+   "status": "ok"
+  },
+  "t": {
+   "strokes": "LLBOO",
+   "status": "ok"
+  },
+  "ckh": {
+   "strokes": "CBLLBOBC",
+   "status": "ok"
+  },
+  "cth": {
+   "strokes": "CBLLBOOBC",
+   "status": "ok"
+  },
+  "cfh": {
+   "strokes": "CBLBOBC",
+   "status": "ok"
+  },
+  "cph": {
+   "strokes": "CBLBOOBC",
+   "status": "ok"
+  },
+  "x": {
+   "strokes": "X",
+   "status": "ok"
+  },
+  "v": {
+   "strokes": "V",
+   "status": "review"
+  },
+  "j": {
+   "strokes": "OOJ",
+   "status": "review"
+  },
+  "u": {
+   "strokes": "CC",
+   "status": "review"
+  },
+  "z": {
+   "strokes": "IJ",
+   "status": "review"
+  },
+  "'": {
+   "strokes": "P",
+   "status": "ok"
+  },
+  "?": {
+   "strokes": "?",
+   "status": "ok"
+  }
+ },
+ "extended": {
+  "130": {
+   "strokes": "LLBOGG",
+   "status": "review"
+  },
+  "131": {
+   "strokes": "LM",
+   "status": "review"
+  },
+  "132": {
+   "strokes": "LBB",
+   "status": "review"
+  },
+  "133": {
+   "strokes": "LBG",
+   "status": "review"
+  },
+  "134": {
+   "strokes": "LLBB",
+   "status": "review"
+  },
+  "136": {
+   "strokes": "D",
+   "status": "review"
+  },
+  "148": {
+   "strokes": "OLLBOO",
+   "status": "review"
+  },
+  "165": {
+   "strokes": "LG",
+   "status": "review"
+  },
+  "169": {
+   "strokes": "LOD",
+   "status": "review"
+  },
+  "171": {
+   "strokes": "LLBOP",
+   "status": "review"
+  },
+  "175": {
+   "strokes": "LOB",
+   "status": "review"
+  },
+  "172": {
+   "strokes": "IF`",
+   "status": "review"
+  },
+  "177": {
+   "strokes": "LLBOT",
+   "status": "review"
+  },
+  "182": {
+   "strokes": "LT",
+   "status": "review"
+  },
+  "183": {
+   "strokes": "GL",
+   "status": "review"
+  },
+  "185": {
+   "strokes": "LLM",
+   "status": "review"
+  },
+  "196": {
+   "strokes": "LTO",
+   "status": "review"
+  },
+  "199": {
+   "strokes": "LLBOOP",
+   "status": "review"
+  },
+  "202": {
+   "strokes": "LBLBOO",
+   "status": "review"
+  },
+  "204": {
+   "strokes": "MJ",
+   "status": "review"
+  },
+  "215": {
+   "strokes": "LLB",
+   "status": "review"
+  },
+  "221": {
+   "strokes": "O^",
+   "status": "review"
+  },
+  "222": {
+   "strokes": "OJ^",
+   "status": "review"
+  },
+  "223": {
+   "strokes": "L",
+   "status": "review"
+  },
+  "240": {
+   "strokes": "OM",
+   "status": "review"
+  },
+  "246": {
+   "strokes": "T",
+   "status": "review"
+  }
+ }
+}

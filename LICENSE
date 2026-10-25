@@ -24,8 +24,8 @@ SOFTWARE.
 
 Licensing of the other material in this repository:
 
-- The documents (README.md, REGLES_DEL_SISTEMA.md, writeup/, escriba/ESCRIBA.md,
-  proves_externes/PROVES_EXTERNES.md and the other .md and .txt write-ups) are
+- The documents (README.md, RULES.md, DATASET.md, writeup/, scribe/SCRIBE.md,
+  external_tests/EXTERNAL_TESTS.md and the other .md and .txt write-ups) are
   licensed under Creative Commons Attribution 4.0 International (CC BY 4.0),
   https://creativecommons.org/licenses/by/4.0/. Attribute to Quim Quadrada and
   link to this repository.
@@ -33,5 +33,5 @@ Licensing of the other material in this repository:
   version 3b (13 May 2025), made available at https://www.voynich.nu/transcr.html
   under the Creative Commons CC0 licence. df_lines_ZL3b_strokes.csv is derived
   from it by build_df.py. Please acknowledge voynich.nu when you use them.
-- The generated texts (escriba/manuscrit_out/, escriba/quadern_M/) are output of
+- The generated texts (scribe/manuscript_out/, scribe/quire_M/) are output of
   this software and are CC0: do what you want with them.

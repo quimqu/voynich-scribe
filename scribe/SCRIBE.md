@@ -1,0 +1,294 @@
+# The scribe: how the Voynich is written, as a procedure
+
+> **19/10/2026:** battery of 76 measures (12 new ones: entropies, Zipf, lengths, long range between pages, bursts). The scribe now has glyph tables per hand and per hand × section and length weights per position, and copies 22% of the words (before: 35%): **69/76, median error 0.05–0.07** (the scribe of 14/10: 69/76, 0.098). See §9.
+>
+> **14/10/2026:** the battery had a loading error (words with a ligature were lost); the scribe now has form memory in the modified copies (§6) and a word-family habit per sheet and section (§7). Current figures: **58/64 measures, 4.1% strange words (real 4.6%)**. The figures in §1–§5 are those of 28/09.
+
+*28/09/2026. Acid test of the rules (`../RULES.md`): if the rules are good, a scribe who follows them must write a text that cannot be told apart from the Voynich in everything we know how to measure. The scribe writes a whole manuscript with the same layout as the real one (pages, sheets, paragraphs, lines, words per line, drawing gaps, Currier language A/B, hands) and is compared with the real one on 57 measures.*
+
+Files: `scribe.py` (the scribe), `measures.py` (the battery), `compare.py` (comparison and ablations), `holdout.py` (generalisation), `tune_copy.py` and `calibrate_families.py` (calibration), `results_holdout_table.txt`, `results_table.txt`, `results_ablations_table.txt`, `results*.json`, `sample_pages.txt` (pages written by the scribe next to the real ones).
+
+```bash
+cd voynich-scribe/scribe
+PYTHONIOENCODING=utf-8 py -3 measures.py          # measures of the real text → measures_real.json
+PYTHONIOENCODING=utf-8 py -3 compare.py          # real, night generator and scribe (5 seeds)
+PYTHONIOENCODING=utf-8 py -3 compare.py ablacions
+PYTHONIOENCODING=utf-8 py -3 holdout.py         # learned from the odd folios, writes the even ones
+```
+
+---
+
+## 1 · The procedure (what the scribe does, in the order in which it does it)
+
+For each sheet, and within the sheet for each page, each paragraph and each line:
+
+1. **Choose the habit of the sheet.** Each sheet has its own rate for four free choices: `t` or `k`, `sh` or `ch`, writing `q-` or not, `-dy` or `-y`. Each page of the sheet resembles it, with a small variation of its own. Within the paragraph, the rate drifts a little from line to line (R7.2, H2, H4, H11).
+2. **Choose the language.** A and B use the same glyph contact table with different weights (R7.3).
+3. **Choose the tone of the line**: this line will have words a little longer or a little shorter than the average (R14.5).
+4. **For each word**, decide whether to **copy** or **write anew**:
+   - **Copy** 35% of the time (only 3.5% on the first line of the paragraph). Choose the model among all the words already written on the page, with a preference for the nearby ones (the weight halves every three lines or so), a bonus for the word just above, and a preference for the words that fit the boundary. The immediately preceding word is repeated according to its family: a lot for bench + `o` + `l`/`r` (`chol`), fairly often for gallows + `e` + `(d)y` (`qokedy`), little for `-aiin` and for bench + `e` + `y` (A1, R2.8, R7.1, R9.2).
+     - 45% of the copies (always, on the first line) **change one glyph**: substitution, insertion or deletion, with the frequencies of the real pairs of neighbouring words.
+     - If the copy has changed, **choose the prefix again** according to the boundary (R3.3).
+     - If the model was closed and goes to the interior of the line, open it in half of the cases (R4.3). If it has `p`/`f` and is not on the first line, turn them into `k`/`t` (R1.3). If it comes just after a drawing gap, remove its `q-` (R6.1).
+   - **Write anew**, glyph by glyph, with the contact table: each glyph depends on the two previous ones, and the first two of the word also depend on the last glyph of the previous word (R13, R3.3). The table has four start contexts: start of line, start of paragraph, after a drawing gap, and after another word (R4.2, R5.1, R6.1). The habit of the sheet shifts the four free choices. The word is accepted only if:
+     - it fits the slot template (R2.1);
+     - it does not have two gallows (55% of these are rejected, R2.2);
+     - it does not have `e` and `i` at the same time (45% of these are rejected, R13.7).
+     
+     Five candidates are made and one is chosen according to the length tone of the line. **The last word of the line** is written with a table of its own, learned from the real last words with the closure undone (A4).
+5. **First word of each interior line**: if it starts with the same glyph as the line above, it is written again with a probability that depends on the glyph. Always with `ch`, two times out of three with `o` or `q`, half of the time with a gallows, almost never with `s` (R4.5, H8).
+6. **First line of a paragraph**: hardly ever copies, avoids repeating the previous word, and changes `k`/`t` into `p`/`f` in 30% of the words (R1.3, R5.2).
+7. **Close the last word** of the line with the strength of its hand and according to how many words the line has: `-iin` → `-m`, `-in` → `-m`, `-l` → `-ly`, `-r` → `-ry`, `-s` → `-sy`, `-y` → `-g`. The last word of a paragraph is closed less. **The word before a drawing gap** is closed with a lower strength (R4.3, R14.2, R6.1).
+
+### The strengths, estimated from the real text
+
+| rule | values |
+|---|---|
+| closure, non-final line | `iin`→`m` 0.60 · `in`→`m` 0.52 · `l`→`ly` 0.21 · `r`→`ry` 0.26 · `s`→`sy` 0.14 · `y`→`g` 0.06 |
+| closure, end of paragraph | `iin`→`m` 0.32 · `l`→`ly` 0.25 · `r`→`ry` 0.22 · `s`→`sy` 0.18 |
+| closure, before the drawing gap | `iin`→`m` 0.15 · `l`→`ly` 0.16 · `r`→`ry` 0.17 · `s`→`sy` 0.20 |
+| closure per hand (`iin`→`m`) | hand 1 0.29 · hand 2 0.64 · hand 3 0.88 |
+| avoidance of the first glyph of the line above | `ch` 1.0 · `o` 0.67 · `q` 0.65 · gallows 0.52 · `l` 0.40 · `sh` 0.38 · `d` 0.37 · `y` 0.28 · `s` 0 |
+| repetition of the previous word by family | bench+`o`+`l`/`r` ×3.2 · gallows+`e`+`(d)y` ×1.5 · others ×0.8 · `-aiin` ×0.8 · bench+`e`+`y` ×0.55 |
+| copying | 35% of the words; 45% with one glyph changed; range ~4 lines; 3.5% on the first line |
+| habit of the sheet and the page | deviation 0.45 in log-odds per sheet and 0.45 per page; line drift 0.25 with memory 0.6 |
+
+Everything that is not in the table (the contact table, the line-end table, the edits, the boundary) is learned from the real text. They are large tables. **It is not a ten-line rulebook**: it is a seven-step procedure with a learned local grammar.
+
+## 2 · What it reproduces
+
+57 measures: the 27 of the night generator's battery (`../night_generator/generator.py`) and 30 new ones, one per rule of the rulebook. A measure is considered reproduced if it stays within 25% of the real value (mean of 5 seeds).
+
+| | night generator | **scribe** |
+|---|---|---|
+| measures reproduced | 32 / 57 | **53 / 57** |
+| of the night generator's battery | 18 / 27 | **25 / 27** |
+| median error \|log(gen/real)\| | 0.193 (≈ 21%) | **0.074 (≈ 8%)** |
+
+Key measures (real / night / scribe): adjacent repetition over chance 3.09 / 2.91 / 3.33 · repetition at distance 2 3.66 / 2.52 / 3.07 · frequent words repeated more than ×3: 52% / 32% / 41% · `-m` on the last word 15.9% / 9.1% / 16.9% · closed forms on the last word 27.1% / 11.5% / 27.7% · gallows on the first word of a paragraph 93% / 54% / 92% · `p`/`f` on the first line 30.7% / 9.5% / 31.9% · `d/s/y-` after the drawing gap 42% / 13% / 38% · page overdispersion of `q-` 6.3 / 1.3 / 5.6 · word types 7,697 / 10,284 / 7,784 · words with a twin on the page 65% / 61% / 67%.
+
+`sample_pages.txt` has three pages written by the scribe next to the real ones.
+
+## 3 · Which rules are needed (ablations)
+
+Removing each rule one at a time (5 seeds; the measures of `q-` after the drawing gap and on the first word of a paragraph are at the threshold and change by chance, and are not taken into account):
+
+| rule removed | reproduced | what is lost |
+|---|---|---|
+| — | 53 | |
+| copying from the visible field | 43 | all the repetition measures |
+| boundary rule | 47 | mutual information at the boundary and the four *lifts*; the median error goes from 0.074 to 0.110 |
+| start contexts | 47 | line-start and paragraph-start forms, `a-` at the start, form after the drawing gap |
+| first line | 48 | `p`/`f`, fewer repetitions on the first line |
+| line length tone | 49 | length correlation between neighbours |
+| word rules / slot template | 49 | two gallows, `e`/`i`, length dispersion |
+| dissimilation | 49 | first glyph of the line above |
+| habit of the sheet / A/B weights | 50 | page overdispersion |
+| line-end repertoire / closure | 50–52 | `-m` and closed forms on the last word |
+| repetition by family | 52 | adjacent repetition |
+
+## 4 · What it does not reproduce, and the rules that must be missing
+
+1. **Half of the frequent words repeat a lot, and 16% avoid it**: the scribe does 41% and 23%. The propensity by family explains it in part (G7). The rest is word-specific: in the real text, `dal`, `shey`, `saiin`, `cheey` or `qokar` never repeat adjacently, and `okaiin` does so ×5. **Missing rule**: a propensity to repetition per word, finer than the family.
+2. **The `-m` according to the length of the line**: in the real text, lines of ten words or more end in `-m` 3.5 times more often than those of one to four; in the scribe, 2.0. The strength of the closure already depends on the number of words, but it is not enough. Besides, **on some pages `-m` is a page habit, also in the interior of the line**: the real f3r has `cham`, `chom`, `cthom`, `shom` in mid-text. **Missing rule**: the closure as a fifth page habit.
+3. **End of paragraph and word before the drawing gap** are closed 25–30% too much. These are strength adjustments, not new rules.
+
+## 5 · What it means
+
+- **The Voynich can be written with a seven-step procedure**, without any level of meaning: glyphs with a memory of two and a boundary between words, copying of what is already on the page, position forms (start, end, first line, drawing gap), and a sheet habit that keeps changing. With this, 53 of the 57 measures are reproduced, almost all of those the programme had used to say that the text is *not* language nor cipher.
+- **All the rules are needed**: removing any of them loses between 1 and 10 measures.
+- **It generalises (`holdout.py`)**: learned only from the odd folios, the scribe writes the layout of the even folios and is compared with the real even ones. 48 of 56 measures come out reproduced, with a median error of 7.7%. As a reference, the two real halves resemble each other in 51 of 56 measures, with 6.6% (the sheet measure is not counted, because with half a manuscript the conjugate folio often falls in the other half). Four of the eight failures of the scribe also appear between the two real halves: they are unstable measures. The scribe's own ones are adjacent repetition, repetition at distance 3, the `-m` according to the length of the line and the closure before the drawing gap. **The rules do not memorise the text: they describe how it is made.**
+- **Honest limit**: the scribe uses tables learned from the text: the glyph contact table, the line-end table, the boundary table and the edits. The procedure says how the pieces are combined, not where the contact table comes from. That table is the "glyph grammar" of the manuscript (R13), and reducing it to a few rules is the job of the rulebook (§13), not of the scribe.
+
+---
+
+## 6 · Form memory (14/10/2026)
+
+*Point 2 of ESTAT_DEL_PROGRAMA.md §6. Scripts: `form_memory.py` (exploration), `strange_words_diagnosis.py` (where the strange words come from). Outputs: `results_form_memory.json`, `strange_words_diagnosis_out.txt`, and the tables `results_table.txt`, `results_ablations_table.txt` and `results_holdout_table.txt` redone with the new default value.*
+
+### 6.1 · First of all: an error in the loading of the real text
+
+`measures.clean()` was supposed to keep the content of the ligatures `{…}`, but the substitution had a byte `\x01` instead of `\1`. Words with a ligature were lost whole: 394 groups in 359 lines. Fixed. `measures_real.json` now has 59 measures (the 57 plus the two `[eye]` ones). What changes most are the noisy measures of repetition at a distance (k=2: 3.66 → 3.27; k=3: 2.80 → 3.45). **The eye figures given before (7.9% real, 11.2% scribe) came from a different loading and cannot be compared.** With the corrected loading: **real 4.6%, previous scribe 8.7%**. The previous scribe, measured again, reproduces 51 of 59.
+
+### 6.2 · Where the strange words come from
+
+A word is strange if it has some glyph trigram (with start and end of word) that appears 3 times or fewer in the real text. Previous scribe, seed 1:
+
+| origin | words produced | strange |
+|---|---|---|
+| new word, glyph by glyph (each candidate) | 107,038 | 2.4% |
+| new line-end word (each candidate) | 14,755 | 4.9% |
+| **copy with one glyph changed** | 3,642 | **36%** |
+| line-end closure (new strange words it creates) | 1,078 | 8.6% |
+
+The main source is the edit of the copy: it changes, inserts or removes a glyph **without looking at the neighbours** (`daiin→daain`, `chedy→chddy`, `ol→oo`). The new words, which the scribe already writes with a memory of two glyphs (R17.3), hardly produce any. With form memory, the strange modified copies go from 36% to 1.7%.
+
+### 6.3 · What was tried (2–3 seeds for the exploration, 5 for the result)
+
+| variant | reproduced | strange words | word types |
+|---|---|---|---|
+| previous scribe | 53/59 | 8.5% | 7,775 |
+| the modified copy goes to a neighbour in the repertoire (known word, one glyph away) | 50–52/59 | 4.2–4.3% | 6,350–6,490 |
+| + redo the unknown new words (50% / 80%) | 45 / 43 | 2.9 / 2.2% | 4,710 / 3,350 |
+| **the edit must be writable: each glyph possible (≥3 times) after the two previous ones** | **54–55/59** | **4.0–4.1%** | 7,120–7,190 |
+| writable with ≥1 time | 48/59 | 5.9% | 7,380 |
+| writable + propensity to repetition per word | 50–52/59 | 3.9–4.1% | 7,000–7,130 |
+| writable + repertoire in half of the copies | 49–51/59 | 4.0% | 6,860 |
+
+- **The repertoire of whole words is not the answer.** It fixes the eye, but the scribe loses variety (word types −18%) and repetition measures. In the real text, a one-glyph variant of a word on the page is often a new word (hapax), not a known one. Redoing the new words that are not known is even worse (43–45/59).
+- **The answer is that the edit is also written by the hand.** The scribe copies the word and changes one glyph, but the change must be writable with the same two-glyph memory with which it writes the new words. It is rule R17.3 applied to the copies as well; no new rule is needed. If no writable edit comes out in 30 attempts, the copy stays intact.
+- **The propensity to repetition per word** (observed over expected on the page, shrunk towards that of the family) does not improve `Frequent words repeated <0.3x chance`: 22–30% with this piece, against 16% real and 22–25% without it. Negative result. It stays off (`use_wordrep`).
+- **End-of-paragraph closure per hand** (`par_by_hand`, for J1): no measurable effect. Off.
+
+### 6.4 · Result (5 seeds, new default value: `mod_contact=3`, `mod_tries=30`)
+
+| | before (corrected loading) | **with form memory** | real |
+|---|---|---|---|
+| measures reproduced | 51/59 | **54/59** | |
+| of the 57 original ones | 51/57 | **52/57** | |
+| median error | 0.061 | 0.064 | |
+| strange words | 8.7% | **4.1%** | 4.6% |
+| strange words per line | 0.68 | **0.32** | 0.36 |
+| word types | 7,859 | 7,150 | 7,915 |
+
+- **Ablation** (`compare.py ablacions`): without form memory, 51/59 and 8.7% strange words. All the pieces are still needed: removing any of them costs 1 to 9 measures.
+- **Generalisation** (`holdout.py`): the contact table that decides what is writable is learned only from the odd folios, and on the even ones the result is 0.31 strange words per line against 0.35 real. Form memory is not memory of the test text. In total, 47/59 (median error 0.101) against 50/59 (0.066) between the two real halves.
+- **What it still does not reproduce**: `Consecutive words at edit distance 1 / shuffled` (1.59 against 2.21: the neighbours one glyph apart), `Frequent words repeated <0.3x chance` (24% against 16%), `Line-end -m: lines of 10+ words / 1-4 words` (1.94 against 3.41) and `q-` on the first word of a paragraph and closure of the last word of a paragraph (at the threshold). For the `-m`, the cause is now located: on short **non-final** lines, the scribe closes in `-m` 11% of the time and the real text 6%. According to J1 (the strength of the closure is a matter of hand and section), the section is missing.
+
+**Reading.** The eye did not ask for a dictionary. It asked for the hand to be the same when it copies and when it writes anew: everything that comes out of the pen, including the variant of a copied word, goes through the two-glyph memory. With this, the scribe makes as many strange words as the real text or fewer. The "form memory" of R16.3 (which words exist as units for the hand) **is not needed for the eye**. If it exists, it has to be looked for in what still fails: repetition per word and the neighbours one glyph apart.
+
+---
+
+## 7 · Page vocabulary: the "e" habit and the section "dy" (14/10/2026, afternoon)
+
+*Scripts: `page_vocabulary.py` (exploration), `calibrate_section_e.py` (shifts per section → `sec_e.json`, `sec_dy.json`, and `*_odd.json` for `holdout.py`), `sample_form_memory.py` (samples of four versions → `sample_form_memory.txt`).*
+
+### 7.1 · What could be seen by eye and the battery did not measure
+
+In the samples, the real f78r is monotonous in `-edy` (`qokedy` ×15) and the scribe's was monotonous in `qokaiin` (×15). The battery now has five new measures (64 in total):
+
+| measure | real | scribe §6 | **current** |
+|---|---|---|---|
+| page overdispersion of the words with `e` | 24.6 | 9.0 | **20.3** |
+| words with `e`, biological / herbal | 2.04 | 1.51 | **1.84** |
+| `-edy` words in the biological section | 27.5% | 17.9% | **22.7%** |
+| share of the page's most frequent word (median) | 4.7% | 4.7% | 4.9% |
+| words of 8 glyphs or more | 5.3% | 7.3% | 7.4% |
+
+- **Page monotony was already good** (the share of the most frequent word matches): what failed was *which* word family dominates each page and each section.
+- **Long words have the same structure as the real ones** (gallows 0/1/2+: 20/69/12% against 20/62/18%; `qokeeedy`, `cheodaiin`, `qokeeody`), but there are a third too many of them. It comes from the choice of the "length tone" (the best of 5 candidates), which inflates the tails: the candidates have 5% of them. The edits have nothing to do with it (295 out of 2,295).
+
+### 7.2 · What was added
+
+1. **`e` habit** (`use_ehabit`): a fifth free choice, the `e` after the core (bench or gallows), that is, the word block with `e` (`-y/-dy`) or without (`-aiin/-ar/-ol`) of R2.4. It varies per sheet, page and line like the other four (σ 0.45; its own random generator, so that the rest of the scribe does not change).
+2. **Shift per section** of the `e` habit and of the `dy` habit (`-dy` or `-y`), calibrated so that the proportion of each section matches the real one. Values (whole text / odd folios only): `e` herbal −0.41/−0.40, biological +0.36/+0.44, stars +0.37/+0.37, pharmaceutical +1.55/+1.23; `dy` pharmaceutical +2.3/+2.1, biological +0.47/+0.45, stars −0.38/−0.46. **They are stable between halves**: it is a section habit, not noise. Where the scribe was most wrong was the pharmaceutical section: 26% of words with `e` against 47%.
+
+They are parameters fitted to the text (11 in total), like the strengths of §1. What they say is that **the sections are distinguished by the word family that dominates in them**, besides the language and the hand (H2, H4).
+
+### 7.3 · Result (5 seeds)
+
+| | scribe §6 | **current** |
+|---|---|---|
+| measures reproduced | 55/64 | **58/64** |
+| generalisation (learned from the odd folios, on the even ones; real halves 55/64) | 47/59 (with 59 measures) | **51/64** |
+| strange words | 4.1% | 4.1% |
+
+- **Ablation**: without the `e` habit, 52/64 and overdispersion 8.9. Without the section `dy`, also 58/64: the `-edy` of the biological section and the closure before a drawing are lost, and two measures that were already unstable are gained (`repetition k=5`, `q-` on the first word of a paragraph). It is kept.
+- **Generalisation**: the five new page and section measures are reproduced on the even folios with parameters learned from the odd ones. Only the long-words one fails there.
+- The median error (0.07–0.09 depending on the calibration) is not a stable figure: some twenty measures have errors between 0.07 and 0.10 and the median jumps around there.
+
+### 7.4 · What remains
+
+- **Long words** (7.4% against 5.3%). Softening the length tone (4 candidates, σ 0.45) brings them down to 6.3%, but the scribe loses variety (−13% word types) and the length correlation between neighbours. Not applied. A length tone that does not inflate the tails is needed.
+- **Words that look ugly to the eye** and that no measure catches: `shedytedy`, `qokaiinsh`, `doraiiny`, `keeyl`. They are concatenations of two word blocks, each one normal. A possible measure: "words that contain two endings".
+- The failures from before: `quasi(ed=1)`, `rep <0.3x`, the `-m` of short non-final lines.
+
+---
+
+## 8 · Forum questions (19/10/2026)
+
+### 8.1 · A whole quire (`quire.py`)
+
+```bash
+PYTHONIOENCODING=utf-8 py -3 quire.py M 1                         # learned from the whole manuscript
+SCRIBE_TRAIN=without_M PYTHONIOENCODING=utf-8 py -3 quire.py M 1   # without having seen quire M (before: calibrate_section_e.py with the same variable)
+```
+
+It writes the whole manuscript and extracts the quire from it, so that the sheet habits and the copying work as usual. Format similar to IVTFF, with the ZL3b line identifiers, `<->` at the drawing gaps (copied from the real layout; the scribe does not look at the images) and `<%>`/`<$>` at the paragraphs. It also saves the real text normalised the same way. Done for quire 13 (`quire_M/`, with `README.txt` in English); findings log L1.
+
+`SCRIBE_TRAIN=without_<Q>` (for example `without_M`, or `without_M+N`) removes the quires from the learning. `measures.load_real()` now carries `quire` and `locus` on each line.
+
+### 8.2 · Standard measures (`standard_measures.py`, `standard_measures_out.txt`)
+
+| | real | scribe |
+|---|---|---|
+| h1 / h2 / h3 (bits per character, space included) | 3.88 / 2.12 / 1.85 | 3.86 / 2.09 / 1.84 |
+| Zipf slope (ranks 1–1000) | 1.00 | 1.00 |
+| MATTR (window of 500 words) | 0.64 | 0.60 |
+| bursts of the 50 most frequent words (coefficient of variation of the gaps) | 1.76 | 1.51 |
+| vocabulary similarity between pages at distance 1 / 10 / 100 | 0.35 / 0.26 / 0.17 | 0.29 / 0.24 / 0.19 |
+
+The entropies and Zipf match. The long range does not: in the manuscript there is a vocabulary drift between neighbouring pages that the scribe does not produce (findings log L2).
+
+### 8.3 · Control with known meaning (`controls/`)
+
+See `controls/CONTROLS.md`. The generic scribe applied to the Latin of Cusanus fails where a language fails (7/16 against a ceiling of 13/16), and the battery detects it. To do it with another text:
+
+```bash
+PYTHONIOENCODING=utf-8 py -3 controls/control.py prepara <text.txt> <name>
+PYTHONIOENCODING=utf-8 py -3 controls/control.py corre <name>
+PYTHONIOENCODING=utf-8 py -3 controls/control.py informe voynich <name>
+```
+
+`SCRIBE_CORPUS=<file.json>` makes the scribe learn from that text instead of the Voynich. With `measures.set_reference(L)`, the measures that look at the whole real text (the rare trigrams) look at the control text instead.
+
+
+---
+
+## 9 · Long range, lengths and the vocabulary of each hand (19/10/2026)
+
+*Continuation of §8.2 (findings log L2 → L5): the vocabulary drift between pages that the scribe did not produce. The 12 new measures have been put inside the battery (`measures.py`), with their own definitions; the values differ a little from those of `standard_measures.py`. Scripts: `measures.py` (part 5, 12 new measures), `scribe.py` (tables per hand and per hand × section, length weights), `calibrate_length.py` (→ `len_w.json`, `len_w_odd.json`), `holdout.py` (now accepts `key=value`). Tables: `results_table.txt`, `results_holdout_table.txt`, `results_ablations_19_10_table.txt`.*
+
+### 9.1 · The new measures (battery of 76)
+
+| measure | real | scribe 14/10 |
+|---|---|---|
+| character entropy h1 / h2 / h3 (line text, with spaces) | 3.91 / 2.14 / 1.86 | 3.89 / 2.11 / 1.84 |
+| Zipf slope (first 1,000) | 1.00 | 1.00 |
+| words of 2–3 glyphs / of 5–6 glyphs | 21.6% / 41.0% | 28.8% / 33.2% |
+| shared vocabulary (cosine): neighbouring pages, 10 apart, 100 apart | 0.33 / 0.25 / 0.155 | 0.27 / 0.22 / 0.163 |
+| neighbouring / 100 pages apart | 2.13 | 1.65 |
+| bursts of the 50 most frequent words (CV of the gaps) | 1.76 | 1.51 |
+| page overdispersion of the 50 most frequent words | 2.06 | 1.87 |
+
+The entropies and Zipf already matched. What failed were the lengths (too many short words: the two-glyph memory makes lengths that are too dispersed; `ol` 2.4 times too many) and the long range: neighbouring pages resemble each other less than in the real text and distant ones more.
+
+### 9.2 · Where the similarity between pages comes from
+
+Decomposition (vocabulary cosine, real / scribe 14/10): same hand and section at 2–10 pages 0.336 / 0.293; different hands at 50–150 pages 0.159 / 0.187; same hand at 50–150 pages 0.231 / 0.221. **It is not the continuity between pages: it is the vocabulary of each hand** (and of each section within the hand), which the scribe did not have because it learned the glyph table per Currier language A/B. It agrees with Schwartz 2026 (the word cores are hardly shared between hands).
+
+Mechanisms tried and discarded (2–3 seeds): copying from the previous pages of the book (it flattens the whole curve, also at 100 pages, and lowers the bursts; 51–53/64); copying from the pages already written on the same sheet (the same); reusing words from the repertoire of the last pages instead of inventing them (it improves the neighbouring page a little and loses measures). They stay in the code, switched off (`r_prev`, `r_sheet`, `r_stock`).
+
+### 9.3 · What was changed
+
+1. **Glyph tables per hand and per hand × section** (`use_hand_tab`, `use_sec_tab`): counts of the hand (or of the hand within the section, if there are ≥40 lines) plus 3 pseudocounts distributed according to the table of the language (or of the hand). With this, the section tone is already there, and the section shifts of 14/10 (`use_sec_e`, `use_sec_dy`) were being counted twice (`-edy` in the biological section 34.7% against 27.5%): they are switched off.
+2. **Length of the new word by position in the line** (`use_len_w`): the choice among the five candidates is weighted by length, with weights for the first word, the interior and the last one, calibrated in three passes so that the distribution of the whole text (copies included) matches the real one.
+3. **Readjusted strengths**: copy 35% → **22%**, repetition of the previous word by family 0.8 → 0.5, sheet habit σ 0.45 → 0.3, rejection of two gallows 0.55 → 0.35 and of `e`+`i` 0.45 → 0.25, closure before the drawing gap ×0.75 and at the end of a paragraph ×0.75 (`par_scale`, new).
+
+**Reading of the 22%.** With a vocabulary of its own for each hand, the words already repeat more by themselves (repetition at 2 and at 5 words: 4.6 and 5.0 times chance with copying at 35%, against 3.3 and 2.9 in the real text). Part of what looked like copying was the vocabulary of the hand. It is the same thing Schwartz finds: a lot of reuse of one's own repertoire and little recent copying.
+
+### 9.4 · Result (5 seeds, 76 measures)
+
+| version | reproduced | median error | learned from the odd folios, on the even ones (real halves 67/76) |
+|---|---|---|---|
+| scribe of 14/10 | 69/76 | 0.098 | 62/76 (0.080) |
+| **scribe of 19/10** | **69/76** | **0.049–0.067** (two runs) | 61/76 (0.080) |
+| without tables per hand and section | 68/76 | 0.062 | |
+| without length weights | 67/76 | 0.068 | |
+
+*The two ablations, and the first row of the file `results_ablations_19_10_table.txt`, were made with the section shifts of 14/10 still switched on; the row "without section shifts" of that file is the final configuration.*
+
+- **The count does not improve** (the ±25% criterion is already saturated and has noise between seeds), but **the median error halves** and the new measures pass: words of 2–3 glyphs 23.3% (real 21.6%), neighbouring / 100 pages apart 1.84 (2.13), bursts 1.58 (1.76). The scribe of 14/10 failed the words of 2–3 glyphs and the repetition at 5 words.
+- **Generalisation**: the same as before (61–62/76). The 8 new length and long-range measures are all reproduced on the even folios with tables learned from the odd ones.
+- **Still fails**: `quasi(ed=1)` (the neighbours one glyph apart: with less copying there are fewer of them), the repetition at 3 words (2.5 against 3.4), the frequent words that repeat a lot or not at all (word-specific, not family-specific), the `-m` of long lines, the `q-` on the first word of a paragraph (at the threshold) and, without the section shift, the page overdispersion of the words with `e` (18.4 against 24.6).
+- **Honest limit**: the tables per hand and section are more parameters learned from the text (one contact table for each combination with enough lines). What they say is that **each hand, and each hand in each section, has its own glyph grammar**, not only its own tone; they do not say why.

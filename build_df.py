@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-build_df.py — ZL3b (IVTFF 2.0, Eva-) -> dataframe de línies amb transliteració de traços.
-Fonts: voynich.nu (IVTFF_format.pdf 2.0.1, IVTT_manual 2.4, transcr.html); fitxer ZL3b-n.txt.
-Política d'espais (decisió quimqu, fase X): coma (espai incert) -> s'elimina i s'uneixen
-els glyphs; la posició de cada unió queda registrada a comma_join_positions.
+build_df.py: ZL3b (IVTFF 2.0, Eva-) -> dataframe of lines with a stroke transliteration.
+Sources: voynich.nu (IVTFF_format.pdf 2.0.1, IVTT_manual 2.4, transcr.html); file ZL3b-n.txt.
+Space policy (quimqu's decision, phase X): comma (uncertain space) -> removed, and the
+glyphs are joined; the position of each join is recorded in comma_join_positions.
 """
 import re, json, collections, sys
 import pandas as pd
@@ -12,12 +12,12 @@ import pandas as pd
 SRC = 'ZL3b-n.txt'
 
 # ---------------------------------------------------------------- stroke maps
-# Primitives (majúscules, disjuntes de l'EVA minúscula):
-#  C corba · I minim · L pota/pal alt · O llaç · B barra/banc · U cua amunt
-#  J cua avall · Q cua-llaç · F floritura alta · P ploma · X aspa · V vèrtex
-#  G ganxo de peu · T plataforma · M barra alta curta · R corba mirall · D anelleta
-#  ' (dins codi: `) marca d'al·lògraf/capital · W+id residu · ? GAP (il·legible)
-STROKES = {  # glyph EVA -> (primitives, status)  status: ok | review
+# Primitives (upper case, disjoint from lower-case EVA):
+#  C curve · I minim · L leg/tall stem · O loop · B bar/bench · U tail up
+#  J tail down · Q tail-loop · F tall flourish · P plume · X cross · V vertex
+#  G foot hook · T platform · M short high bar · R mirror curve · D small ring
+#  ' (in code: `) allograph/capital mark · W+id weirdo · ? GAP (illegible)
+STROKES = {  # EVA glyph -> (primitives, status)  status: ok | review
     'e':('C','ok'), 'i':('I','ok'), 'o':('O','ok'), 'a':('CI','ok'),
     'c':('CB','ok'), 'h':('BC','ok'), 'ch':('CBC','ok'), 'sh':('CBCP','ok'),
     'n':('IU','ok'), 'b':('CU','ok'), 'r':('IF','ok'), 's':('CF','ok'),
@@ -28,10 +28,10 @@ STROKES = {  # glyph EVA -> (primitives, status)  status: ok | review
     'cfh':('CBLBOBC','ok'), 'cph':('CBLBOOBC','ok'),
     'x':('X','ok'), 'v':('V','review'), 'j':('OOJ','review'),
     'u':('CC','review'), 'z':('IJ','review'),
-    "'":('P','ok'),      # ploma solta (unofficial EVA): modificador del glyph anterior
-    '?':('?','ok'),      # GAP: caràcter il·legible de la transcripció
+    "'":('P','ok'),      # detached plume (unofficial EVA): modifier of the previous glyph
+    '?':('?','ok'),      # GAP: illegible character in the transcription
 }
-# Extended EVA (@nnn;) — famílies proposades fase X; tot 'review' fins a validació quimqu.
+# Extended EVA (@nnn;): families proposed in phase X; all 'review' until validated by quimqu.
 EXT_STROKES = {
     130:'LLBOGG', 131:'LM', 132:'LBB', 133:'LBG', 134:'LLBB', 136:'D',
     148:'OLLBOO', 165:'LG', 169:'LOD', 171:'LLBOP', 175:'LOB', 172:'IF`',
@@ -50,7 +50,7 @@ def glyph_tokens(word):
         g = m.group(0); i = m.end()
         if g.startswith('@'):
             out.append((g, int(g[1:-1])))
-        elif g.isupper():                       # EVA capitalitzada -> base + `
+        elif g.isupper():                       # capitalised EVA -> base + `
             out.append((g.lower()+'`', None))
         else:
             out.append((g, None))
@@ -76,11 +76,11 @@ SECTION = {'A':'astro','B':'biological','C':'cosmological','H':'herbal',
 rows, cur = [], {}
 page_seq = 0
 raw_lines = open(SRC, encoding='utf-8').read().split('\n')
-# unir continuacions '/'
+# join '/' continuations
 merged, buf = [], None
 for ln in raw_lines:
     if buf is not None:
-        assert ln.startswith('/'), 'continuació sense /'
+        assert ln.startswith('/'), 'continuation without /'
         buf = buf[:-1] + ln[1:]
         if not buf.endswith('/'): merged.append(buf); buf = None
         continue
@@ -100,10 +100,10 @@ for ln in merged:
         continue
     m = locus_re.match(ln)
     if not m:
-        if ln.startswith('<'): print('AVIS línia no reconeguda:', ln[:60])
+        if ln.startswith('<'): print('WARNING unrecognised line:', ln[:60])
         continue
     page, num, code, transcriber, txt = m.groups()
-    assert page == cur.get('page_tag'), 'locus fora de pàgina: %s' % ln[:40]
+    assert page == cur.get('page_tag'), 'locus outside its page: %s' % ln[:40]
 
     rec = dict(
         page_tag=page, page_seq=cur['page_seq'], locus_num=num,
@@ -119,7 +119,7 @@ for ln in merged:
         text_eva_raw=txt,
     )
     t = txt
-    # paràgrafs
+    # paragraphs
     rec['paragraph_start'] = int('<%>' in t)
     rec['paragraph_end']   = int('<$>' in t)
     if rec['paragraph_start']: par_idx += 1; line_in_par = 0
@@ -127,28 +127,28 @@ for ln in merged:
     rec['par_index_in_page'] = par_idx if code[1] == 'P' else None
     rec['line_in_par'] = line_in_par if code[1] == 'P' else None
     t = t.replace('<%>', '').replace('<$>', '')
-    # comentaris lliures <!...>
+    # free comments <!...>
     rec['inline_comments'] = '; '.join(re.findall(r'<!([^>]*)>', t)) or None
     t = re.sub(r'<![^>]*>', '', t)
-    # intrusió de dibuix <-> = espai (registrat); altres tags curts, registrats i fora
+    # drawing intrusion <-> = space (recorded); other short tags, recorded and removed
     rec['n_drawing_gaps'] = t.count('<->')
     t = t.replace('<->', '.')
     other = re.findall(r'<[^>]{1,4}>', t)
     rec['inline_other_tags'] = '; '.join(other) or None
     for o in other: t = t.replace(o, '')
-    # lectures alternatives [a:b] -> primera (opció IVTT -u1)
+    # alternative readings [a:b] -> the first one (IVTT option -u1)
     alts = re.findall(r'\[([^\]]*)\]', t)
     rec['alt_readings'] = '; '.join(alts) or None
     rec['n_alt'] = len(alts)
     t = re.sub(r'\[([^:\]]*)(?::[^\]]*)?\]', r'\1', t)
-    # lligadures {xyz}: contingut conservat, span registrat
+    # ligatures {xyz}: content kept, span recorded
     ligs = re.findall(r'\{([^}]*)\}', t)
     rec['ligature_groups'] = '; '.join(ligs) or None
     rec['n_ligatures'] = len(ligs)
     t = re.sub(r'\{([^}]*)\}', r'\1', t)
     t = t.strip('.').strip()
-    rec['text_eva'] = t                       # canònic, amb comes
-    # política de comes: unió de glyphs, posicions registrades
+    rec['text_eva'] = t                       # canonical, with commas
+    # comma policy: glyphs joined, positions recorded
     joins, out, widx, cpos = [], [], 0, 0
     for w in t.split('.'):
         if not w: continue
@@ -158,7 +158,7 @@ for ln in merged:
     rec['text'] = '.'.join(out)
     rec['comma_join_positions'] = '; '.join('%d:%d' % j for j in joins) or None
     rec['n_comma_joins'] = len(joins)
-    # glyphs i traços
+    # glyphs and strokes
     words = rec['text'].split('.') if rec['text'] else []
     seg_words, flat_words, n_g, n_w, n_gap = [], [], 0, 0, 0
     ext_used = []
@@ -182,11 +182,11 @@ for ln in merged:
 
 df = pd.DataFrame(rows)
 
-# ------------------------------------------------------- assert d'invertibilitat
+# ------------------------------------------------------- invertibility assert
 REV = {v[0]: k for k, v in STROKES.items()}
-assert len(REV) == len(STROKES), 'col·lisió de codis de traç entre glyphs!'
+assert len(REV) == len(STROKES), 'stroke code collision between glyphs!'
 _all = list(REV.keys()) + list(EXT_STROKES.values())
-assert len(_all) == len(set(_all)), 'col·lisió glyphs<->extended al mapa de traços!'
+assert len(_all) == len(set(_all)), 'glyph<->extended collision in the stroke map!'
 REV_EXT = {v: k for k, v in EXT_STROKES.items()}
 bad = 0
 for _, r in df.iterrows():
@@ -200,38 +200,38 @@ for _, r in df.iterrows():
             elif s in REV: back.append(REV[s])
             else: back.append('<?>')
         if ''.join(back) != w_eva: bad += 1
-print('ROUNDTRIP seg->EVA: paraules no invertibles =', bad, 'de', int(df.n_words.sum()))
-assert bad == 0, 'la columna seg ha de ser invertible'
+print('ROUNDTRIP seg->EVA: non-invertible words =', bad, 'of', int(df.n_words.sum()))
+assert bad == 0, 'the seg column must be invertible'
 
-# ------------------------------------------------------------------ resums
+# ------------------------------------------------------------------ summaries
 tok = int(df.n_words.sum())
 run = int(df[df.locus_generic == 'P'].n_words.sum())
 lab = int(df[df.is_label == 1].n_words.sum())
 circ = int(df[df.locus_generic.isin(['C', 'R'])].n_words.sum())
 gly = int(df.n_glyphs.sum())
 cov = 1 - (df.n_weirdo.sum() + df.n_gap.sum()) / gly
-print(f'loci={len(df)}  pàgines={df.page_seq.nunique()}  tokens={tok} '
+print(f'loci={len(df)}  pages={df.page_seq.nunique()}  tokens={tok} '
       f'(P={run}, labels={lab}, C/R={circ})')
-print(f'glyphs={gly}  cobertura de traç (sense W ni GAP) = {cov:.4%}')
-print('comes unides =', int(df.n_comma_joins.sum()),
-      '| lligadures =', int(df.n_ligatures.sum()),
+print(f'glyphs={gly}  stroke coverage (without W or GAP) = {cov:.4%}')
+print('commas joined =', int(df.n_comma_joins.sum()),
+      '| ligatures =', int(df.n_ligatures.sum()),
       '| alternatives =', int(df.n_alt.sum()),
       '| gaps <-> =', int(df.n_drawing_gaps.sum()))
 print('\nlocators:', dict(df.locus_locator.value_counts()))
-print('llengua:', dict(df.currier_language.value_counts(dropna=False)))
-print('mans Davis:', dict(df.davis_hand.value_counts(dropna=False)))
+print('language:', dict(df.currier_language.value_counts(dropna=False)))
+print('Davis hands:', dict(df.davis_hand.value_counts(dropna=False)))
 
 df.to_csv('df_lines_ZL3b_strokes.csv', index=False)
 json.dump({'primitives': {
-    'C':'corba','I':'minim','L':'pota/pal alt','O':'llaç','B':'barra/banc',
-    'U':'cua amunt','J':'cua avall','Q':'cua-llaç','F':'floritura alta','P':'ploma',
-    'X':'aspa','V':'vèrtex','G':'ganxo de peu','T':'plataforma','M':'barra alta curta',
-    'R':'corba mirall','D':'anelleta','`':'marca al·lògraf/capital','?':'GAP','W':'weirdo+id'},
+    'C':'curve','I':'minim','L':'leg/tall stem','O':'loop','B':'bar/bench',
+    'U':'tail up','J':'tail down','Q':'tail-loop','F':'tall flourish','P':'plume',
+    'X':'cross','V':'vertex','G':'foot hook','T':'platform','M':'short high bar',
+    'R':'mirror curve','D':'small ring','`':'allograph/capital mark','?':'GAP','W':'weirdo+id'},
     'glyphs': {k: {'strokes': v[0], 'status': v[1]} for k, v in STROKES.items()},
     'extended': {str(k): {'strokes': v, 'status': 'review'} for k, v in EXT_STROKES.items()}},
     open('stroke_map.json', 'w'), ensure_ascii=False, indent=1)
 
-# CSV de revisió dels extended per freqüència real
+# review CSV of the extended glyphs by actual frequency
 ec = collections.Counter()
 for s in df.extended_used.dropna():
     for e in s.split(';'): ec[int(e)] += 1
@@ -240,4 +240,4 @@ pd.DataFrame([{'code': c, 'count': n,
                'status': 'review' if c in EXT_STROKES else 'UNMAPPED->W'}
               for c, n in ec.most_common()]
              ).to_csv('extended_review.csv', index=False)
-print('\nfitxers: df_lines_ZL3b_strokes.csv, stroke_map.json, extended_review.csv')
+print('\nfiles: df_lines_ZL3b_strokes.csv, stroke_map.json, extended_review.csv')
