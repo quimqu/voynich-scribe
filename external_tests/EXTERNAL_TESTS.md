@@ -36,9 +36,9 @@ Reservations: the scribe's tables are learned from the text (like all the scribe
 
 ---
 
-## 2 · Davis and Layfield (2026): page similarity and the "singulion" structure
+## 2 · Layfield and Davis (2026): page similarity and the "singulion" structure
 
-**The paper.** L. Fagin Davis and C. Layfield, *Singulion Structure and the Voynich Manuscript*, Digital Medievalist 19 (19 October 2026, doi 10.4000/16k0a). They hold that the manuscript was made with loose bifolia ("singulions") that were never meant to be nested in quires, and that the current binding is wrong. The textual evidence: latent semantic analysis (LSA: documents of 40 words per page, TF-IDF, SVD with k = 75, cosine between pages folded into the space) and the mean similarity between pages according to their physical relation:
+**The paper.** C. Layfield and L. Fagin Davis, *Singulion Structure and the Voynich Manuscript*, Digital Medievalist 19 (10 July 2026, doi 10.4000/16k0a). They hold that the manuscript was made with loose bifolia ("singulions") that were never meant to be nested in quires, and that the current binding is wrong. The textual evidence: latent semantic analysis (LSA: documents of 40 words per page, TF-IDF, SVD with k = 75, cosine between pages folded into the space) and the mean similarity between pages according to their physical relation:
 
 - **confoliate**: recto and verso of the same folio;
 - **conjoint**: the two pages of the inner face of the bifolium (a-v | b-r), physically continuous across the fold;
@@ -54,7 +54,7 @@ In two Latin control manuscripts (the Aberdeen Bestiary, *Speculum*) facing ≈ 
 
 | text | confoliate | conjoint | outer | diag | facing | p conf/fac | p conf/conj | p fac/conj | p conj/outer |
 |---|---|---|---|---|---|---|---|---|---|
-| Davis-Layfield (real, ZL 2a) | 0.383 | 0.433 | n/a | n/a | 0.298 | 0.005 | 0.168 | 0.000 | n/a |
+| Layfield-Davis (real, ZL 2a) | 0.383 | 0.433 | n/a | n/a | 0.298 | 0.005 | 0.168 | 0.000 | n/a |
 | **real (ZL3b, here)** | 0.225 | 0.284 | 0.183 | 0.208 | 0.154 | 0.008 | 0.100 | 0.000 | 0.015 |
 | **scribe (5 seeds)** | 0.147 ± 0.009 | 0.145 ± 0.012 | 0.143 ± 0.018 | 0.152 ± 0.011 | 0.091 ± 0.017 | 0.001–0.43 (4/5 < 0.07) | 0.48–0.97 | 0.03–0.18 | 0.60–0.95 |
 
@@ -65,7 +65,7 @@ In two Latin control manuscripts (the Aberdeen Bestiary, *Speculum*) facing ≈ 
 3. **The reordering is not informative.** Doing as they do (mean facing of the nested order against the maximum over all permutations of the bifolia at the junctions), the real text gains 33 % at M and 50 % at T; the scribe, which has no right order to recover, gains 61 ± 26 % and 78 ± 19 % (`bifolium_asymmetry.py`). The maximum of 120 or 720 permutations of a noisy measure always goes up.
 4. **A within-bifolium asymmetry that is not confirmed** (§3): with the LSA, the inner face of the real text (0.284) is more similar than the outer one (0.183), and the scribe does not do this; but no other measure reproduces it.
 
-**Reading.** Davis and Layfield may be right about the binding for codicological reasons (stains, drawings that jump across pages, alternating hands), but the textual part of their argument is a production effect that the programme had already measured, that others had pointed out, and that a meaningless text reproduces.
+**Reading.** Layfield and Davis may be right about the binding for codicological reasons (stains, drawings that jump across pages, alternating hands), but the textual part of their argument is a production effect that the programme had already measured, that others had pointed out, and that a meaningless text reproduces.
 
 ---
 
@@ -95,7 +95,7 @@ The slope by writing distance is negative only with the LSA (p 0.048) and the TF
 
 **The question** (voynich.ninja, thread 6219): the current binding is easy to beat, because it is known to be disturbed; the real test is whether a singulion structure beats the best alternative *nesting*.
 
-**What we did (`davis_layfield/singulion_vs_nesting.py`, output `singulion_vs_nesting.txt`).** Nine quires with at least three complete bifolia (1–7, 13 and 20; in 20 only its five complete bifolia). For each, all n! orders of the bifolia, scored nested (outer → central) and as singulions (each bifolium read a-r a-v b-r b-v). Both structures have 2n−1 facing pairs, so mean facing similarity is directly comparable. Best singulion (S\*) against best nesting (N\*), with three representations: Davis and Layfield's LSA (k = 75), TF-IDF without SVD, and shared word types (cosine of presence vectors, no weights). Controls: structures with the singulion's combinatorics but another same-sheet pair facing (outer face, the two rectos, the two versos, the two sides of a leaf).
+**What we did (`davis_layfield/singulion_vs_nesting.py`, output `singulion_vs_nesting.txt`).** Nine quires with at least three complete bifolia (1–7, 13 and 20; in 20 only its five complete bifolia). For each, all n! orders of the bifolia, scored nested (outer → central) and as singulions (each bifolium read a-r a-v b-r b-v). Both structures have 2n−1 facing pairs, so mean facing similarity is directly comparable. Best singulion (S\*) against best nesting (N\*), with three representations: Layfield and Davis's LSA (k = 75), TF-IDF without SVD, and shared word types (cosine of presence vectors, no weights). Controls: structures with the singulion's combinatorics but another same-sheet pair facing (outer face, the two rectos, the two versos, the two sides of a leaf).
 
 | measure | best nesting vs current, real (scribe) | S\* beats N\*: real | scribe (5 seeds) | S\*/N\* real | scribe | sham same-sheet pairs, real |
 |---|---|---|---|---|---|---|
@@ -181,7 +181,7 @@ The slope by writing distance is negative only with the LSA (p 0.048) and the TF
 
 (cosine; Hellinger gives the same. The scribe, five seeds × three starts: single runs reach p 0.00–0.05 everywhere, as expected from 15 runs per cell.)
 
-**Reading.** LDA does not see the inner-face asymmetry, nor the ordering of the six pairs, at any number of topics, with or without the frequent words, in all bifolia or in hand 2. The real text behaves like the scribe. Of the latent models, the signal is in LSA (strongly) and NMF (only P1, p 0.036), and not in LDA. What LSA has that LDA does not: topics with negative weights (contrasts such as "more of these words, fewer of those") and, in the Davis-Layfield folding, the same weight for weak topics as for strong ones (§5: without the division by S two thirds remain, with the standard scaling a quarter). LDA, like the standard scaling, is dominated by the main styles of hand and section, which the four pages of a sheet share. The inner-face asymmetry is therefore a property of how the Davis-Layfield LSA weighs small contrasts, not something topic models see in general.
+**Reading.** LDA does not see the inner-face asymmetry, nor the ordering of the six pairs, at any number of topics, with or without the frequent words, in all bifolia or in hand 2. The real text behaves like the scribe. Of the latent models, the signal is in LSA (strongly) and NMF (only P1, p 0.036), and not in LDA. What LSA has that LDA does not: topics with negative weights (contrasts such as "more of these words, fewer of those") and, in the Layfield-Davis folding, the same weight for weak topics as for strong ones (§5: without the division by S two thirds remain, with the standard scaling a quarter). LDA, like the standard scaling, is dominated by the main styles of hand and section, which the four pages of a sheet share. The inner-face asymmetry is therefore a property of how the Layfield-Davis LSA weighs small contrasts, not something topic models see in general.
 
 ---
 
@@ -196,14 +196,14 @@ The slope by writing distance is negative only with the LSA (p 0.048) and the TF
 | ridge-whitened, full rank | +0.021, p 0.017 | p 0.014 | p 0.07–0.85 |
 | cosine without the top 5 directions | +0.031, p 0.007 | p 0.002 | p 0.05–0.84 |
 | cosine without the top 25 directions | +0.014, p 0.066 | p 0.12 | p 0.13–0.65 |
-| LSA (Davis-Layfield) | +0.096, p 0.009 | p 0.002 | p 0.02–0.73 |
+| LSA (Layfield-Davis) | +0.096, p 0.009 | p 0.002 | p 0.02–0.73 |
 
 1. **The primary test is not met** (hand norm: p 0.15; hand 2 p 0.080). Same direction.
 2. **Against the norm of hand *and* section, a transparent measure sees it** (+0.064, p 0.018; scribe flat), as do the full-rank whitening and a plain cosine once the 5–10 largest directions are removed. The signal is not in the SVD truncation; it is in what is left after the dominant styles are taken away, and it fades when the next 15 directions are removed too.
 3. **It is shared excess, not shared absence** (exploratory): both inner pages use the same words *more* than their hand and section normally do (+0.075, p 0.007); shared deficit contributes nothing (p 0.55); page length does not explain it (p 0.29).
 4. **Each bifolium has its own family** (exploratory): f108|f111 the *-eedy* family (`lkeedy qokeedy qoteedy keedy`), f33|f40 `oky okar dal chdy`, f50|f55 `chody otar ykar okal`, f4|f5 the *sho-* family (`shody sho shodaiin`), f104|f115 `qokchedy cheos cheedy cheey`. These are the bifolia at the top of the LSA list (§5). Because the family changes from sheet to sheet, no test of one word, one band or one fixed rate can see it; any measure that adds up deviations across the vocabulary can.
 
-**Reading.** What the Davis-Layfield LSA measures, beyond the shared sheet habit, is a **burst of a word family that runs across the inner face**: the two pages of the open sheet both lean towards the same family, more than their hand and section do and more than the two outer pages. That fits the bursts of frequent words that the real text has and the scribe lacks (L2, "long range": frequent words cluster more in the real text). The evidence is a secondary measure (p 0.018) and an exploratory split, so it is a lead, not a result. What would test it: a pre-registered burst measure (one family per sheet, fixed rule) on hand 2 and 3 alone, and whether the burst runs across the page turn at the bottom of a-v and top of b-r.
+**Reading.** What the Layfield-Davis LSA measures, beyond the shared sheet habit, is a **burst of a word family that runs across the inner face**: the two pages of the open sheet both lean towards the same family, more than their hand and section do and more than the two outer pages. That fits the bursts of frequent words that the real text has and the scribe lacks (L2, "long range": frequent words cluster more in the real text). The evidence is a secondary measure (p 0.018) and an exploratory split, so it is a lead, not a result. What would test it: a pre-registered burst measure (one family per sheet, fixed rule) on hand 2 and 3 alone, and whether the burst runs across the page turn at the bottom of a-v and top of b-r.
 
 ---
 
@@ -229,4 +229,4 @@ PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/lsa_whitening.py     
 PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/shared_excess.py > external_tests/davis_layfield/shared_excess.txt   # exploratory follow-up
 ```
 
-Known differences from the originals: Parisel calibrates on RF1b-e and we score normalised text from ZL3b (the real text passes all the same, 4/4). Davis and Layfield use ZL 2a with uncertain readings removed and separate the radial and circular text; here only paragraph text, which is the only text the scribe writes. Their stop-word heuristic is not described in enough detail to repeat it; without removing any, or removing the 20 most frequent, the result does not change.
+Known differences from the originals: Parisel calibrates on RF1b-e and we score normalised text from ZL3b (the real text passes all the same, 4/4). Layfield and Davis use ZL 2a with uncertain readings removed and separate the radial and circular text; here only paragraph text, which is the only text the scribe writes. Their stop-word heuristic is not described in enough detail to repeat it; without removing any, or removing the 20 most frequent, the result does not change.

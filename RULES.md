@@ -10,7 +10,7 @@
 
 ## 0 · The three background rules
 
-**R0.1 · It is a writing system, not a written language.** Words carry 12.5 bits against 19.5 for Latin; word order carries nothing (0.018 bits per bigram); there is no class of function words ("cement words": articles, prepositions); no cipher of a tested language reproduces its statistics. [A9, A11, B1, B2]
+**R0.1 · It is a writing system, not a written language.** The glyphs inside a word are very predictable (h2 2.3 bits against 3.4 for Latin, in EVA), but the vocabulary is as varied as a language's (word entropy 10.6 bits against 9.8 for Latin); word order carries 0.08 bits per pair of consecutive words above chance, below 19 texts in 12 languages (0.2–1.5 bits, including a Latin text with a larger vocabulary: 0.23) and close to the scribe (0.04), and what it carries is the glyph contact, not the word (amended 25/10/2026); there is no class of function words ("cement words": articles, prepositions); no cipher of a tested language reproduces its statistics. [A9, A11, B1, B2]
 
 **R0.2 · The rules are at three levels: glyph, word and place.** Everything that is regular is decided by looking, at most, at three glyphs on either side of a space, and at where the word is within the line, the page and the sheet. No rule looks beyond the neighbouring word. [G2, H1, §3]
 
