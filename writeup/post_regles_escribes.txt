@@ -1,0 +1,37 @@
+I will try now to explai in plain words what are the rules that the scribas follow.
+
+What all the scribes do
+
+The glyphs. About twenty signs. Some pairs seem to be the same sign used in different places: k and t, ch and sh, p and f. Wich one you get depends on the place and on the habit of the moment, not on the word. q always goes before o and only at the start of a word. e, i, n and m never start a word, and e, a, i, ch and q never end one.
+
+The word. Always built with the same template: maybe a start (qo, o, d, s or y), then a core that is a gallows (k t p f) or a bench (ch sh), sometimes one or two e, and an ending. There are two families of words and they don't mix: words with e end in y or dy (qokedy, chedy), words without e end in aiin, ar or ol (qokaiin, dar, chol). Never more than one gallows. Most words have 4 to 6 glyphs. To write the next glyph you only need to remember the two before, and the endings work more like a way of closing the word than like real letters.
+
+Between words. How a word ends decides how the next one starts. After a word in y, a word that would start with o usually gets a q in front (shedy okedy becomes shedy qokedy), and a word that would start with a gets a d (aiin becomes daiin), and after r or s you put nothing. What matters is the last stroke of the pen, not the word. Apart from that contact no word tells you anything about the next one, so there are no sentences. Even where the spaces go can be guessed from the glyphs around them.
+
+The line. The line is the unit of work. The first word starts with d, s or y, or directly with a gallows, and never with a. Its first glyph avoids the first glyph of the line above (but not the one two lines above). The second word is the shortest. The last word gets "closed": aiin becomes am, ol becomes oly, ar becomes ary, y becomes g. This happens because it's the last position, not because the space runs out, it closes the same if it reaches the margin or not. The last line of a paragraph closes less.
+
+The paragraph. It starts with a word with a gallows, almost never with q. The first line is special: it uses p and f instead of k and t (even more if there is free space above), the words are longer and newer, and nothing is copied.
+
+Drawings. The text seems to be written after the drawings. When a line runs into a drawing the scribe treats it like a margin: he half closes before it and starts again after it like it was a new line.
+
+Page and sheet. The scribe copies words he can see on the same page, mostly from a few lines up, often changing one glyph. Now I know this is at most one word in five, the rest of the repeats come from each hand's own vocabulary. Sometimes a word is repeated right after itself, mostly chol and qokedy, never daiin. Every sheet (the folded piece of vellum, four pages) has its own preferences, shared by the recto, the verso and the other half of the sheet: k or t, ch or sh, q or not, dy or y, more words with e or without, and even the size of the glyphs. It looks like a writing session.
+
+Labels. The labels next to the drawings have their own form: they start with o, have no q, and end in y, ly or ry (otaly instead of otal).
+
+None of these rules is about meaning. They are all about shape, place and process.
+
+How each scribe is different
+
+The five hands follow the same rules. What changes is how strongly they apply them, and also the vocabulary: each hand has its own set of words, and it shifts a bit from one section to another.
+
+Hand 1, herbal A (112 pages, f1r to f102v, also the pharmaceutical, about 9,700 words). Short lines (7 words) and short words (4.4 glyphs). Mostly the family without e, only one word in four has an e: daiin, chol, chor, shol, dain, dar. When it does an e word it prefers y over dy. Much more ch than sh, and less q than the others. It likes the gallows with a bench: cthor, cthy, cthol, otchol, kchor. It closes the last word only a little (aiin becomes am about a third of the time) and it's the one that avoids most strongly the first glyph of the line above. The link between one word and the next is the weakest (0.12 bits against 0.22 for hand 2).
+
+Hand 2, biological (46 pages, f26r to f86v, also part of herbal B and some text only pages, about 10,000 words). Lines of 8 or 9 words, words of 4.8 glyphs. Half of the words have e and they end more in dy than in y: shedy, chedy, qokedy, qokeedy, plus qokain and qokal. Lots of q and more sh than hand 1. Its own tic is starting with ol before a gallows: olkedy, olkain, olky, olkar, qol. It closes more than hand 1, and it has the strongest link between words.
+
+Hand 3, the stars, the recipes section (31 pages, f58r to f116r, about 10,800 words). The longest lines (10 words) and the longest words (5.1 glyphs). Mixes both families: chedy, qokeey, qokeedy, qokaiin, okaiin, aiin. Its tic is l before k: lkeey, lkaiin, lkeedy, lkain, and also qokair and otair. It's the one that closes most, at the end of a line aiin becomes am almost always. It's also the one that repeats a word right after itself the most, and it uses less p and f in the first line.
+
+Hand 4, astronomical, zodiac and rosettes (10 pages but only about 500 words of running text). Almost everything it writes are labels. From the little text there is: short lines, words like daiin, ar, aiin, dal, dam, shey, and little q. Not enough text to say much more.
+
+Hand 5, a few pages of herbal B and text only (7 pages, f41r to f66v, about 800 words). The one with most e words (55%), mostly in dy. The one that changes k and t to p and f most in the first line. It closes a lot too, and at the same time it avoids the gliph of the line above the least. The only one that sometimes starts a line with a. Also little text.
+
+One caveat. The five hands are Lisa Fagin Davis attribution, and Torsten Timm thinks its one scribe whose hand changed over time. With the text alone I can't decide that. Hands 1, 2 and 3 have enough text for the profiles to be solid, 4 and 5 not so much. And each hand almost matches one section, so part of what I call "a scribe" could also be "a section".

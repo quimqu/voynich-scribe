@@ -1,0 +1,36 @@
+Two outside tests of the scribe, and what came out
+
+I wanted to check the scribe against tests I didn't design myself, so I took two papers from this year and ran their own methods on the scribe's text. Same generator as in my first post (the 19 October version with the per hand vocabulary), 5 runs, whole manuscript, nothing tuned for this.
+
+[b]1. Parisel's four boundary signatures[/b]
+
+Christophe Parisel has a paper on arXiv (2604.19762) about what happens at the boundary between two words. He defines four signatures, calibrated seperately for Currier A and B on the RF1b transliteration: how often a word boundary goes from an "end" glyph to a "start" glyph (71% in A, 64% in B), whether there are glyphs that almost only start or almost only end words, on both sides (he calls this bilateral), the mutual information between the last glyph of a word and the first of the next (0.59 in A, 0.50 in B), and the shape of the frequency curve of the boundary glyphs (a power law, not a plateau). Then he tries a slot based generator (more than 2000 runs) and a Cardan grille, and none of them passes all four at once. His point is that the first and third signature pull in opposite directions if one single knob (frequency concentration) has to produce both. He asks for generators where these things come from independent mechanisms.
+
+His verifier is on GitHub, so I ran it as is. I only had to fix one import. I fed it the scribe's text split by dialect with his own folio list, and the real ZL3b text the same way as a control.
+
+Real text: 4 of 4 in A, 4 of 4 in B (as it should).
+Scribe, 5 runs: 4 of 4 in A and 4 of 4 in B, every run. The numbers are close to his reference, not just inside the margins: end to start 68 to 70% in A (ref 71), 63 to 66% in B (ref 64), mutual information 0.53 to 0.54 in A (ref 0.59) and 0.45 to 0.47 in B (ref 0.50), Zipfian shape in A and intermediate in B, same as the real text.
+
+I think the reason it passes is the one he guessed. In the scribe the four things come from different rules: the end to start rate and the mutual information come from the boundary habit (how a word starts depends on how the previous one ended) and from the endings being closing marks, the shape comes from the word template and the two glyph memory, and the bilateral thing comes from the glyphs that only open or only close a word. Nothing is tuned to the boundary distribution itself. One caveat his verifier reports: 21 to 28% of the scribe's words don't exist in the dialect's word list. Those are the new words, the scribe makes them on purpose, the real text has them too (hapaxes), but it's worth knowing.
+
+[b]2. Davis and Layfield's singulions[/b]
+
+You all saw the paper (and the Guardian piece). The textual part of their argument is this: with LSA, pages of the same bifolium are more similar to each other than pages that face each other in the current binding. In their numbers: inside of the bifolium (a verso with its conjoint recto) 0.43, recto and verso of the same leaf 0.38, facing pages 0.30. In two Latin manuscripts it's the other way round. So they conclude the bifolia were loose sheets, later bound in the wrong order, and they reorder quires 13 and 20 by maximising the similarity between facing pages.
+
+Torsten already wrote a review saying that the similarity could be proximity of production rather than continuity of meaning, and that the reordering lacks a permutation null. dashstofsk and oshfdk said similar things in the forum last winter. I can add a number to that, because the scribe is exactly a text with proximity of production and no meaning: it has sheet habits and hand vocabulary, and no idea of reading order.
+
+I rebuilt their LSA (40 word documents, TF-IDF, 75 dimensions, cosine between pages) on the ZL3b paragraph text and ran it on the real text and on the scribe, same quires as them (1 to 7, 13, 20).
+
+Real text: inside of bifolium 0.28, same leaf 0.23, facing 0.15. Same order as theirs and the same p values (facing is lower than both at p < 0.01, inside vs same leaf not significant). The absolute numbers are lower because the space is different, the order is what matters.
+
+Scribe, 5 runs: inside of bifolium 0.15, same leaf 0.15, facing 0.09. Facing is significantly lower in 4 of the 5 runs.
+
+So a text with no meaning and no reading order gives the same "evidence against the quire structure". The pages of a sheet look alike because they were written in the same session, and that's what the LSA sees. It can't tell you if the binding order is right or wrong.
+
+The reordering: I did it their way, current facing average against the best of all permutations of the bifolia. Real text gains 33% in quire 13 and 50% in quire 20 (their numbers are 12 and 20%, different space again). The scribe, wich has no correct order to recover, gains 61% and 78%. The best of 120 or 720 permutations of a noisy number always goes up. This doesn't say their binding argument is wrong, the codicological part (stains, drawings crossing the gutter, hands) is untouched. It says the text can't vote on it.
+
+[b]One thing I checked and didn't hold[/b]
+
+In the LSA numbers the inside of the sheet (a verso with its conjoint recto) looked more similar than the outside (the other verso with the other recto), 0.28 against 0.18, wich would fit Torsten's idea that the inside pages were visible together while writing. The scribe doesn't do that, so I thought I had found a missing rule. But it only shows up in LSA. With plain vocabulary overlap, with the copies at one glyph of distance, and with the free choices (k or t, ch or sh, q, dy, e words), the inside and the outside of the same sheets come out equal, paired sheet by sheet. So I'm not reading anything into it.
+
+Code was written with Claude Code, the numbers and the claims are mine and I checked them. Scripts and outputs available if anyone wants them.

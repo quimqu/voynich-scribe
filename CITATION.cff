@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this code or these results, please cite it as below. A preprint is in preparation; this file will be updated with its reference."
+title: "The scribe: a rule-based, meaningless generator that reproduces the statistics of the Voynich manuscript text"
+type: software
+authors:
+  - family-names: Quadrada
+    given-names: Quim
+repository-code: "https://github.com/quimqu/voynich-scribe"
+license: MIT
+version: 0.1.0
+date-released: 2026-10-26
+keywords:
+  - Voynich manuscript
+  - text generation
+  - self-citation
+  - statistical analysis
+abstract: >-
+  A seven-step writing procedure with no meaning anywhere (sheet habits, copying from the
+  visible page, a two-glyph memory, a boundary rule between words, line start and end forms,
+  paragraph rules) writes a complete fake Voynich manuscript on the real layout. Measured
+  against the Zandbergen-Landini transliteration (ZL3b) with a battery of 76 statistics, it
+  reproduces 69; learned from the odd folios only, it writes the even ones at 61 of 76 (the
+  real halves agree on 67). It also passes the four boundary signatures of Parisel (2026) for
+  both Currier dialects, and reproduces the page-similarity pattern that Layfield and Davis
+  (2026) read as evidence of misbinding.

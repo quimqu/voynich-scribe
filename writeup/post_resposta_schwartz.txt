@@ -1,0 +1,17 @@
+Hi all,
+
+I read the paper (well, most of it, its long) and there is one point where I think I can add something, so here it goes.
+
+For some months I've been looking at how the text was written, not at what it says. I ended up with a list of rules the writer seems to follow. Words are built more or less always the same way: maybe a start like q, o, d, s or y, then a gallows or a bench, sometimes some e's, and an ending. The words with e end in y or dy (qokedy, chedy) and the ones without e end in aiin, ar, ol (qokaiin, dar), they almost never mix. You can predict the next letter quite well just knowing the two before. The line works as a unit, the first word likes d, s or y and tries not to start with the same letter as the line above, and the last word gets "closed", aiin turns into am, r into ry. A good part of the words, around one in three, are copies of something a few lines up, many times with one letter changed. And every sheet has its own little preferences (k or t, ch or sh...) wich to me looks more like the day it was written than the topic of the page.
+
+I put all this in a small program that writes fake pages with no meaning at all. It gets 58 of the 64 things I measure close to the real ones.
+
+Now the paper says no generator could reproduce untill now the link between the end of a word and the start of the next one. In my rules that is just a habit of the hand. How a word starts depends on how the one before ended and on nothing else of it, not even the whole word. If I give the program this habit the link comes out almost as strong as in the manuscript, if I remove it, it dissapears.
+
+To be clear, this doesnt prove there is no meaning. Only that a procedure without meaning is enough for most of what we can measure, this included.
+
+Some numbers if someone wants them. With the last EVA letter of a word against the first of the next, inside the line, on ZL3b, I get 0.115 bits for hand 1 and 0.224 for hand 2, the paper says 0.12 and 0.21 so I think we measure the same. The choice of q, d, s or nothing at the start is explained by the last glyph before plus the first two glyphs of the core, about 35% of its entropy (cross validated by page), and anything else from the previous word adds less than 0.02 bits. Even the last pen stroke alone keeps 91% of it. In the generator, substracting a shuffled baseline and averaging 5 runs, I get 0.097 for hand 1 (real 0.089) and 0.171 for hand 2 (real 0.205), without the rule it goes down to 0.002 or 0.008. Learning only from odd folios and writing the even ones it gives 0.149, real is 0.151.
+
+Two things to keep in mind. The table behind the rule is learned from the text itself, so it shows a local rule is enough but not where it comes from. And these are just mutual information on generated text from seperate runs, not the held out evidence they use.
+
+Code was written with Claude Code, but numbers and claims are mine and I checked them.

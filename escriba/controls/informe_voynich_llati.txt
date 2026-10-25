@@ -1,0 +1,60 @@
+
+### voynich: parells reals contra ... (✓ = dins del ±25%)
+mesura                                          parells          senars       còpia 35%       còpia 10%
+mot repetit just després / atzar                  3.154        2.943 ✓        4.608 ·        2.074 ·
+veïns a un glif de distància / barreja            2.257        1.849 ✓        1.806 ✓        1.311 ·
+mateix mot a distància 2 / barreja                3.500        3.483 ✓        3.891 ✓        1.878 ·
+mots amb bessó abans a la pàgina (%)             64.381       64.560 ✓       66.523 ✓       62.320 ✓
+acord de frontera (bits)                          0.153        0.155 ✓        0.144 ✓        0.170 ✓
+tipus de mot                                   4850.000     4782.000 ✓     4411.667 ✓     4592.000 ✓
+hàpax (% dels tipus)                             71.340       72.627 ✓       63.959 ✓       71.697 ✓
+llargada mitjana (glifs)                          4.808        4.787 ✓        4.898 ✓        4.865 ✓
+desviació de la llargada                          1.717        1.709 ✓        2.299 ·        2.307 ·
+correlació de llargada entre veïns                0.165        0.154 ✓        0.203 ✓        0.270 ·
+mateix 1r glif que la línia de sobre / nul        0.616        0.577 ✓        0.563 ✓        0.591 ✓
+mots estranys (%)                                 4.456        4.731 ✓        3.151 ·        3.442 ✓
+entropia de caràcter h1                           3.884        3.883 ✓        3.828 ✓        3.836 ✓
+entropia condicional h2                           2.116        2.120 ✓        2.078 ✓        2.047 ✓
+pendent de Zipf                                   0.996        0.993 ✓        0.962 ✓        1.048 ✓
+ORDRE DELS MOTS: informació (bits)                0.082        0.081 ✓        0.021 ·        0.034 ·
+REPRODUÏDES                                                        16/16            12/16            10/16
+mostra real:
+   kydainy ypchol daiin otchal ypchaiin ckholsy
+   dorchory chkar s shor cthy cto
+   qotaiin cthey y chor chy ydy chaiin
+   chtoddy cphy dals chokaiin d
+mostra escriba (còpia 35%):
+   fchek kchek qol oto shy oto
+   sor ol or or okar ol
+   yshedy o lolchotaiin os shedy rshedy oto
+   ydaiin os os qkalchedy sho
+
+### llati: parells reals contra ... (✓ = dins del ±25%)
+mesura                                          parells          senars       còpia 35%       còpia 10%
+mot repetit just després / atzar                  0.037        0.103 ·        4.633 ·        1.984 ·
+veïns a un glif de distància / barreja            0.590        0.602 ✓        1.908 ·        1.482 ·
+mateix mot a distància 2 / barreja                0.923        1.417 ·        4.270 ·        2.145 ·
+mots amb bessó abans a la pàgina (%)             44.391       43.627 ✓       47.912 ✓       37.089 ✓
+acord de frontera (bits)                          0.023        0.031 ·        0.035 ·        0.038 ·
+tipus de mot                                   3897.000     4006.000 ✓     8450.667 ·     9553.667 ·
+hàpax (% dels tipus)                             58.737       59.910 ✓       76.369 ·       85.262 ·
+llargada mitjana (glifs)                          5.730        5.668 ✓        5.772 ✓        5.867 ✓
+desviació de la llargada                          3.067        3.019 ✓        3.675 ✓        3.686 ✓
+correlació de llargada entre veïns               -0.083       -0.085 ✓        0.226 ·        0.367 ·
+mateix 1r glif que la línia de sobre / nul        1.069        0.948 ✓        0.996 ✓        0.937 ✓
+mots estranys (%)                                 1.627        1.926 ✓        3.729 ·        4.061 ·
+entropia de caràcter h1                           3.961        3.967 ✓        3.961 ✓        3.973 ✓
+entropia condicional h2                           3.251        3.267 ✓        3.283 ✓        3.290 ✓
+pendent de Zipf                                   0.933        0.945 ✓        0.858 ✓        0.927 ✓
+ORDRE DELS MOTS: informació (bits)                0.274        0.252 ✓       -0.000 ·        0.007 ·
+REPRODUÏDES                                                        13/16             7/16             7/16
+mostra real:
+   praevenire ut intellectus cuius intelligere
+   est esse studio veritatis perficiatur rara
+   quidem etsi monstra sint nos movere solent
+   quamobrem praeceptorum unice pro tua
+mostra escriba (còpia 35%):
+   st sa se it mum
+   mine ie ine st num ine
+   singulus naresunt mum hoconubsolibi nobonit alicate quaducipsundu
+   de mem vol a ab

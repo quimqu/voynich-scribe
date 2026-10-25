@@ -1,0 +1,97 @@
+
+######################################################################
+#  VOYNICH GENERATOR VERIFICATION
+#  Language: Currier A
+#  MI shuffles: 10
+#  CI chunks: 10  (bilateral: full corpus)
+#  Thresholds: adaptive (calibrated per dialect)
+######################################################################
+
+  Calibration...
+  Loading cached calibration from vms_calibration.json
+
+  VMS Currier A reference:
+    E->S:      71.0%
+    MI:        0.5856
+    Bilateral: YES (Se=3, Ee=3)
+    Shape:     Zipfian (R²=0.863, CV=1.45)
+    Words:     9892
+
+  Loading: C:\dev\voynich-scribe\proves_externes\parisel\words_scribe_seed5_A.txt
+    Words: 10378
+    Unique: 3239
+    Sample: torchom okol cthey qoksho dal dol chair chaiin ydy s ykchy cthey shkchy daiin cthey otchy keey chckhol chaim do
+    Sentences (from lines): 1548
+
+  Checking attestation...
+
+  Running CI evaluation (10 chunks)...
+    Chunk  0/10: E->S=71.8%  MI=0.5030  Shape=Zipfian
+    Chunk  2/10: E->S=68.5%  MI=0.6555  Shape=Intermediate
+    Chunk  4/10: E->S=70.8%  MI=0.4842  Shape=Intermediate
+    Chunk  6/10: E->S=74.4%  MI=0.6033  Shape=Zipfian
+    Chunk  8/10: E->S=58.9%  MI=0.4345  Shape=Zipfian
+    Chunk  9/10: E->S=64.0%  MI=0.4677  Shape=Zipfian
+
+  Running full-corpus bilateral evaluation...
+    Se=4, Ee=4  → Bilateral=YES
+
+======================================================================
+  GENERATOR VERIFICATION — words_scribe_seed5_A.txt
+  Language: Currier A
+  10 CI chunks, 10369 words, 1548 sentences
+======================================================================
+
+  WORD ATTESTATION
+  ───────────────────────────────────────────────────────
+
+  Against chclass.txt:
+    Dialect tokens: 7504/10378 (72.3%)
+    Dialect types:  1085/3239 (33.5%)
+    All-MS tokens:  8030/10378 (77.4%)
+    All-MS types:   1418/3239 (43.8%)
+    Unattested:     a, aiihal, aiindaim, aipam, airin, alcheeolsho, alchos, alkeechedy, alsaiin, alsheody, alytchy, arag, arair, ardy, arodaiin
+
+  FOUR-SIGNATURE EVALUATION
+  ───────────────────────────────────────────────────────
+
+  Sig1  E->S:      70.1%  [66.6, 72.9]
+        VMS ref:   71.0%  [67.2, 74.9]
+        Criterion: range [56, 86]%
+
+  Sig2  Bilateral (full corpus):
+        Generator: Se=4, Ee=4  → YES
+        VMS ref:   Se=3, Ee=3  → YES
+        Criterion: must have bilateral (ref has it)
+        (chunks:   gen=10%  ref=10%)
+
+  Sig3  MI:        0.5380  [0.4935, 0.5850]
+        VMS ref:   0.5856  [0.5407, 0.6354]
+        Criterion: range [0.293, 1.171]
+        Quality:   excellent match (0.92x reference)
+
+  Sig4  Shape:     Zipfian  R²=0.875  CV=1.57
+        VMS ref:   Zipfian  R²=0.863  CV=1.45
+        Criterion: non-Plateau (ref=Zipfian)
+
+  ───────────────────────────────────────────────────────
+  VERDICT (calibrated to Currier A):
+  ───────────────────────────────────────────────────────
+    E->S        : ✓ PASS      [range [56, 86]%]
+    Bilat       : ✓ PASS      [must have bilateral (ref has it)]
+    MI          : ✓ PASS      [range [0.293, 1.171]]
+    Shape       : ✓ PASS      [non-Plateau (ref=Zipfian)]
+  ───────────────────────────────────────────────────────
+    Joint (adaptive):   4/4
+
+  Reference values:
+    VMS Currier A: E->S=71.0%  MI=0.5856  Bilateral=YES  Zipfian
+
+  ★★★ ALL 4 SIGNATURES PASSED (Currier A) ★★★
+
+  ───────────────────────────────────────────────────────
+  DIAGNOSTIC SUMMARY
+  ───────────────────────────────────────────────────────
+  All signatures match VMS Currier A reference.
+======================================================================
+

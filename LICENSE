@@ -1,0 +1,37 @@
+MIT License
+
+Copyright (c) 2026 Quim Quadrada
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+Licensing of the other material in this repository:
+
+- The documents (README.md, REGLES_DEL_SISTEMA.md, writeup/, escriba/ESCRIBA.md,
+  proves_externes/PROVES_EXTERNES.md and the other .md and .txt write-ups) are
+  licensed under Creative Commons Attribution 4.0 International (CC BY 4.0),
+  https://creativecommons.org/licenses/by/4.0/. Attribute to Quim Quadrada and
+  link to this repository.
+- ZL3b-n.txt is the Zandbergen-Landini transliteration of the Voynich manuscript,
+  version 3b (13 May 2025), made available at https://www.voynich.nu/transcr.html
+  under the Creative Commons CC0 licence. df_lines_ZL3b_strokes.csv is derived
+  from it by build_df.py. Please acknowledge voynich.nu when you use them.
+- The generated texts (escriba/manuscrit_out/, escriba/quadern_M/) are output of
+  this software and are CC0: do what you want with them.

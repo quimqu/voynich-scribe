@@ -1,0 +1,202 @@
+Asimetria dins del bifoli, estudi crític (quaderns A B C D E F G M T, 38 bifolis; escriba = mitjana de 5 llavors)
+
+=== lsa
+parell | real | escriba
+  a-r|a-v | 0.2335 | 0.1598
+  a-v|b-r | 0.2841 | 0.1451
+  b-r|b-v | 0.2207 | 0.1345
+  a-r|b-r | 0.2072 | 0.1513
+  a-v|b-v | 0.2083 | 0.1532
+  b-v|a-r | 0.1833 | 0.1426
+contrast aparellat | real: mitjana [IC], p Wilcoxon, p signe, % > 0 | escriba: mitjana, p signe (mín–màx)
+  interior-exterior | +0.0955 [+0.0185, +0.1747], pW=0.019, pS=0.024, 68% (n=37) | +0.0007, p 0.27–0.74
+  confoliate-diagonals | +0.0156 [-0.0278, +0.0602], pW=0.644, pS=0.509, 57% (n=37) | -0.0054, p 0.26–0.85
+  diagonals-exterior | +0.0235 [-0.0238, +0.0687], pW=0.153, pS=0.336, 68% (n=37) | +0.0086, p 0.08–0.78
+  interior-confoliate | +0.0564 [-0.0120, +0.1267], pW=0.101, pS=0.133, 62% (n=37) | -0.0025, p 0.16–0.99
+  pendent_per_distancia | -0.0300, p=0.048, 62% negatius (n=37) | +0.0003, p 0.16–0.78
+interior − exterior per grup / mà / sense central (real): n, interior, exterior, mitjana, % > 0, p signe
+  herbari | n=27 | 0.2434 / 0.1766 | +0.0668 | 63% | p=0.183
+  M | n=5 | 0.4053 / 0.2329 | +0.1724 | 100% | p=nan
+  T | n=5 | 0.3436 / 0.1698 | +0.1739 | 60% | p=nan
+  mà 1 | n=21 | 0.2208 / 0.1945 | +0.0264 | 57% | p=0.652
+  mà 2 | n=10 | 0.3597 / 0.1739 | +0.1858 | 90% | p=0.004
+  mà 3 | n=5 | 0.3436 / 0.1698 | +0.1739 | 60% | p=nan
+  mà 5 | n=1 | 0.3635 / 0.1106 | +0.2528 | 100% | p=nan
+  sense central | n=28 | 0.2573 / 0.1854 | +0.0719 | 68% | p=0.088
+correlació de (interior − exterior) amb la diferència de mots entre els dos parells: +0.18
+
+=== tfidf
+parell | real | escriba
+  a-r|a-v | 0.2138 | 0.1614
+  a-v|b-r | 0.2214 | 0.1559
+  b-r|b-v | 0.2050 | 0.1485
+  a-r|b-r | 0.1973 | 0.1581
+  a-v|b-v | 0.1976 | 0.1516
+  b-v|a-r | 0.1880 | 0.1487
+contrast aparellat | real: mitjana [IC], p Wilcoxon, p signe, % > 0 | escriba: mitjana, p signe (mín–màx)
+  interior-exterior | +0.0263 [-0.0014, +0.0551], pW=0.086, pS=0.073, 59% (n=37) | +0.0032, p 0.08–1.00
+  confoliate-diagonals | +0.0118 [-0.0021, +0.0254], pW=0.117, pS=0.113, 57% (n=37) | +0.0002, p 0.51–0.93
+  diagonals-exterior | +0.0056 [-0.0109, +0.0218], pW=0.571, pS=0.508, 54% (n=37) | +0.0041, p 0.24–0.79
+  interior-confoliate | +0.0089 [-0.0131, +0.0299], pW=0.483, pS=0.430, 54% (n=37) | -0.0010, p 0.27–0.55
+  pendent_per_distancia | -0.0111, p=0.031, 70% negatius (n=37) | -0.0015, p 0.12–0.94
+interior − exterior per grup / mà / sense central (real): n, interior, exterior, mitjana, % > 0, p signe
+  herbari | n=27 | 0.1533 / 0.1400 | +0.0132 | 56% | p=0.385
+  M | n=5 | 0.4246 / 0.3864 | +0.0382 | 80% | p=nan
+  T | n=5 | 0.3331 / 0.2484 | +0.0847 | 60% | p=nan
+  mà 1 | n=21 | 0.1458 / 0.1420 | +0.0038 | 52% | p=0.830
+  mà 2 | n=10 | 0.3072 / 0.2588 | +0.0485 | 80% | p=0.019
+  mà 3 | n=5 | 0.3331 / 0.2484 | +0.0847 | 60% | p=nan
+  mà 5 | n=1 | 0.1265 / 0.1425 | -0.0160 | 0% | p=nan
+  sense central | n=28 | 0.2083 / 0.1949 | +0.0134 | 54% | p=0.340
+correlació de (interior − exterior) amb la diferència de mots entre els dos parells: +0.52
+
+=== jaccard
+parell | real | escriba
+  a-r|a-v | 0.1090 | 0.0999
+  a-v|b-r | 0.1077 | 0.0990
+  b-r|b-v | 0.1096 | 0.0964
+  a-r|b-r | 0.1008 | 0.0993
+  a-v|b-v | 0.1057 | 0.0969
+  b-v|a-r | 0.1034 | 0.0974
+contrast aparellat | real: mitjana [IC], p Wilcoxon, p signe, % > 0 | escriba: mitjana, p signe (mín–màx)
+  interior-exterior | +0.0024 [-0.0065, +0.0115], pW=0.743, pS=0.610, 49% (n=37) | -0.0001, p 0.21–0.86
+  confoliate-diagonals | +0.0060 [+0.0001, +0.0120], pW=0.086, pS=0.059, 62% (n=37) | +0.0001, p 0.04–0.97
+  diagonals-exterior | -0.0011 [-0.0067, +0.0048], pW=0.835, pS=0.702, 57% (n=37) | -0.0003, p 0.28–0.95
+  interior-confoliate | -0.0025 [-0.0105, +0.0055], pW=0.354, pS=0.543, 38% (n=37) | +0.0000, p 0.46–0.89
+  pendent_per_distancia | -0.0026, p=0.150, 62% negatius (n=37) | +0.0000, p 0.12–0.94
+interior − exterior per grup / mà / sense central (real): n, interior, exterior, mitjana, % > 0, p signe
+  herbari | n=27 | 0.0873 / 0.0852 | +0.0021 | 52% | p=0.718
+  M | n=5 | 0.1671 / 0.1792 | -0.0121 | 0% | p=nan
+  T | n=5 | 0.1445 / 0.1260 | +0.0185 | 80% | p=nan
+  mà 1 | n=21 | 0.0820 / 0.0812 | +0.0008 | 52% | p=0.907
+  mà 2 | n=10 | 0.1407 / 0.1399 | +0.0008 | 30% | p=0.925
+  mà 3 | n=5 | 0.1445 / 0.1260 | +0.0185 | 80% | p=nan
+  mà 5 | n=1 | 0.0630 / 0.0926 | -0.0296 | 0% | p=nan
+  sense central | n=28 | 0.1069 / 0.1075 | -0.0005 | 46% | p=0.912
+correlació de (interior − exterior) amb la diferència de mots entre els dos parells: +0.52
+
+=== habits_dist
+parell | real | escriba
+  a-r|a-v | -0.5424 | -0.5553
+  a-v|b-r | -0.5339 | -0.5485
+  b-r|b-v | -0.5468 | -0.5424
+  a-r|b-r | -0.5975 | -0.5307
+  a-v|b-v | -0.5451 | -0.5593
+  b-v|a-r | -0.5572 | -0.5574
+contrast aparellat | real: mitjana [IC], p Wilcoxon, p signe, % > 0 | escriba: mitjana, p signe (mín–màx)
+  interior-exterior | +0.0196 [-0.0783, +0.1209], pW=0.988, pS=0.701, 43% (n=37) | +0.0038, p 0.45–0.83
+  confoliate-diagonals | +0.0226 [-0.0321, +0.0754], pW=0.396, pS=0.416, 57% (n=37) | -0.0055, p 0.18–0.95
+  diagonals-exterior | -0.0142 [-0.0823, +0.0531], pW=0.743, pS=0.680, 49% (n=37) | +0.0114, p 0.40–0.87
+  interior-confoliate | +0.0112 [-0.0683, +0.0909], pW=0.905, pS=0.792, 51% (n=37) | -0.0020, p 0.48–0.90
+  pendent_per_distancia | -0.0101, p=0.591, 49% negatius (n=37) | -0.0008, p 0.31–0.95
+interior − exterior per grup / mà / sense central (real): n, interior, exterior, mitjana, % > 0, p signe
+  herbari | n=27 | -0.5655 / -0.6025 | +0.0370 | 48% | p=0.576
+  M | n=5 | -0.5103 / -0.4196 | -0.0906 | 20% | p=nan
+  T | n=5 | -0.4141 / -0.4498 | +0.0357 | 40% | p=nan
+  mà 1 | n=21 | -0.5270 / -0.5571 | +0.0301 | 48% | p=0.678
+  mà 2 | n=10 | -0.5961 / -0.5709 | -0.0252 | 30% | p=0.797
+  mà 3 | n=5 | -0.4141 / -0.4498 | +0.0357 | 40% | p=nan
+  mà 5 | n=1 | -0.7912 / -0.9567 | +0.1656 | 100% | p=nan
+  sense central | n=28 | -0.5295 / -0.5394 | +0.0099 | 43% | p=0.854
+correlació de (interior − exterior) amb la diferència de mots entre els dos parells: -0.14
+
+=== twins_ed1
+parell | real | escriba
+  a-r|a-v | 0.6425 | 0.6244
+  a-v|b-r | 0.6581 | 0.6161
+  b-r|b-v | 0.6560 | 0.6115
+  a-r|b-r | 0.6395 | 0.6232
+  a-v|b-v | 0.6564 | 0.6154
+  b-v|a-r | 0.6477 | 0.6163
+contrast aparellat | real: mitjana [IC], p Wilcoxon, p signe, % > 0 | escriba: mitjana, p signe (mín–màx)
+  interior-exterior | +0.0054 [-0.0225, +0.0347], pW=0.952, pS=0.718, 54% (n=37) | -0.0051, p 0.13–0.72
+  confoliate-diagonals | +0.0014 [-0.0098, +0.0125], pW=0.929, pS=0.803, 51% (n=37) | -0.0014, p 0.35–0.70
+  diagonals-exterior | -0.0022 [-0.0193, +0.0137], pW=0.905, pS=0.793, 54% (n=37) | +0.0006, p 0.19–0.83
+  interior-confoliate | +0.0062 [-0.0146, +0.0278], pW=0.531, pS=0.579, 51% (n=37) | -0.0042, p 0.14–0.97
+  pendent_per_distancia | -0.0012, p=0.804, 54% negatius (n=37) | +0.0015, p 0.12–0.72
+interior − exterior per grup / mà / sense central (real): n, interior, exterior, mitjana, % > 0, p signe
+  herbari | n=27 | 0.5956 / 0.5953 | +0.0003 | 41% | p=0.989
+  M | n=5 | 0.8341 / 0.8369 | -0.0028 | 80% | p=nan
+  T | n=5 | 0.7827 / 0.7413 | +0.0414 | 100% | p=nan
+  mà 1 | n=21 | 0.5767 / 0.5831 | -0.0064 | 38% | p=0.793
+  mà 2 | n=10 | 0.7566 / 0.7391 | +0.0174 | 70% | p=0.529
+  mà 3 | n=5 | 0.7827 / 0.7413 | +0.0414 | 100% | p=nan
+  mà 5 | n=1 | 0.5745 / 0.6211 | -0.0466 | 0% | p=nan
+  sense central | n=28 | 0.6608 / 0.6589 | +0.0019 | 54% | p=0.915
+correlació de (interior − exterior) amb la diferència de mots entre els dos parells: +0.45
+
+=== twins_exact
+parell | real | escriba
+  a-r|a-v | 0.3065 | 0.2786
+  a-v|b-r | 0.3074 | 0.2738
+  b-r|b-v | 0.3032 | 0.2659
+  a-r|b-r | 0.2912 | 0.2747
+  a-v|b-v | 0.2986 | 0.2677
+  b-v|a-r | 0.2964 | 0.2687
+contrast aparellat | real: mitjana [IC], p Wilcoxon, p signe, % > 0 | escriba: mitjana, p signe (mín–màx)
+  interior-exterior | +0.0042 [-0.0197, +0.0275], pW=0.846, pS=0.741, 46% (n=37) | +0.0003, p 0.20–0.87
+  confoliate-diagonals | +0.0100 [-0.0005, +0.0206], pW=0.117, pS=0.083, 54% (n=37) | +0.0013, p 0.12–0.97
+  diagonals-exterior | -0.0049 [-0.0193, +0.0084], pW=0.612, pS=0.479, 51% (n=37) | -0.0001, p 0.61–0.88
+  interior-confoliate | -0.0009 [-0.0193, +0.0177], pW=0.754, pS=0.926, 46% (n=37) | -0.0009, p 0.21–0.85
+  pendent_per_distancia | -0.0039, p=0.369, 49% negatius (n=37) | -0.0005, p 0.29–0.96
+interior − exterior per grup / mà / sense central (real): n, interior, exterior, mitjana, % > 0, p signe
+  herbari | n=27 | 0.2412 / 0.2422 | -0.0010 | 44% | p=0.951
+  M | n=5 | 0.5082 / 0.5186 | -0.0104 | 20% | p=nan
+  T | n=5 | 0.4133 / 0.3668 | +0.0465 | 80% | p=nan
+  mà 1 | n=21 | 0.2323 / 0.2407 | -0.0084 | 43% | p=0.660
+  mà 2 | n=10 | 0.4024 / 0.3870 | +0.0154 | 40% | p=0.415
+  mà 3 | n=5 | 0.4133 / 0.3668 | +0.0465 | 80% | p=nan
+  mà 5 | n=1 | 0.1517 / 0.2061 | -0.0545 | 0% | p=nan
+  sense central | n=28 | 0.3040 / 0.3067 | -0.0028 | 36% | p=0.844
+correlació de (interior − exterior) amb la diferència de mots entre els dos parells: +0.48
+
+=== jaccard_eqlen
+parell | real | escriba
+  a-r|a-v | 0.1036 | 0.0953
+  a-v|b-r | 0.1027 | 0.0937
+  b-r|b-v | 0.1032 | 0.0910
+  a-r|b-r | 0.0968 | 0.0932
+  a-v|b-v | 0.1011 | 0.0925
+  b-v|a-r | 0.0985 | 0.0919
+contrast aparellat | real: mitjana [IC], p Wilcoxon, p signe, % > 0 | escriba: mitjana, p signe (mín–màx)
+  interior-exterior | +0.0020 [-0.0055, +0.0097], pW=0.732, pS=0.608, 49% (n=37) | +0.0001, p 0.30–0.99
+  confoliate-diagonals | +0.0044 [-0.0004, +0.0092], pW=0.088, pS=0.086, 59% (n=37) | +0.0003, p 0.05–0.99
+  diagonals-exterior | -0.0006 [-0.0057, +0.0047], pW=0.777, pS=0.808, 49% (n=37) | +0.0000, p 0.37–0.99
+  interior-confoliate | -0.0017 [-0.0084, +0.0052], pW=0.420, pS=0.624, 38% (n=37) | -0.0003, p 0.50–0.85
+  pendent_per_distancia | -0.0020, p=0.166, 59% negatius (n=37) | -0.0001, p 0.17–0.94
+interior − exterior per grup / mà / sense central (real): n, interior, exterior, mitjana, % > 0, p signe
+  herbari | n=27 | 0.0816 / 0.0794 | +0.0022 | 48% | p=0.654
+  M | n=5 | 0.1641 / 0.1765 | -0.0123 | 20% | p=nan
+  T | n=5 | 0.1395 / 0.1240 | +0.0155 | 80% | p=nan
+  mà 1 | n=21 | 0.0764 / 0.0762 | +0.0002 | 48% | p=0.971
+  mà 2 | n=10 | 0.1365 / 0.1364 | +0.0000 | 40% | p=0.998
+  mà 3 | n=5 | 0.1395 / 0.1240 | +0.0155 | 80% | p=nan
+  mà 5 | n=1 | 0.0552 / 0.0622 | -0.0070 | 0% | p=nan
+  sense central | n=28 | 0.1024 / 0.1024 | +0.0001 | 46% | p=0.987
+correlació de (interior − exterior) amb la diferència de mots entre els dos parells: +0.40
+
+=== twin_align
+parell | real | escriba
+  a-r|a-v | 0.9576 | 1.0121
+  a-v|b-r | 0.9693 | 1.0080
+  b-r|b-v | 1.0054 | nan
+  a-r|b-r | 0.9763 | nan
+  a-v|b-v | 0.9632 | nan
+  b-v|a-r | 1.0055 | 1.0052
+contrast aparellat | real: mitjana [IC], p Wilcoxon, p signe, % > 0 | escriba: mitjana, p signe (mín–màx)
+  interior-exterior | +nan [+nan, +nan], pW=nan, pS=0.000, 38% (n=37) | +nan, p 0.00–0.70
+  confoliate-diagonals | +0.0108 [-0.0281, +0.0498], pW=0.720, pS=0.600, 57% (n=37)
+  diagonals-exterior | -0.0359 [-0.0730, -0.0011], pW=0.086, pS=0.069, 41% (n=37)
+  interior-confoliate | +nan [+nan, +nan], pW=nan, pS=0.000, 43% (n=37)
+  pendent_per_distancia | +nan, p=0.000, 46% negatius (n=37) | +nan, p 0.00–0.00
+interior − exterior per grup / mà / sense central (real): n, interior, exterior, mitjana, % > 0, p signe
+  herbari | n=27 | nan / 1.0104 | +nan | 37% | p=0.000
+  M | n=5 | 0.9801 / 0.9985 | -0.0184 | 20% | p=nan
+  T | n=5 | 1.0169 / 0.9858 | +0.0311 | 60% | p=nan
+  mà 1 | n=21 | nan / 1.0000 | +nan | 33% | p=0.000
+  mà 2 | n=10 | 0.9915 / 1.0378 | -0.0463 | 30% | p=0.227
+  mà 3 | n=5 | 1.0169 / 0.9858 | +0.0311 | 60% | p=nan
+  mà 5 | n=1 | 0.9258 / 0.8955 | +0.0302 | 100% | p=nan
+  sense central | n=28 | nan / 0.9918 | +nan | 43% | p=0.000
+correlació de (interior − exterior) amb la diferència de mots entre els dos parells: +nan
+

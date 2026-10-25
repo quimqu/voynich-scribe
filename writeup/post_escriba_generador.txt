@@ -1,0 +1,115 @@
+Some people asked me to explain the generator I mentioned, so here it is. Sorry, it got a bit long.
+
+[b]What it is[/b]
+
+I call it "the scribe". It's a small program that writes a complete fake Voynich: same pages, same sheets, same paragraphs, same number of lines and words per line, same gaps for the drawings, Currier A and B, the five Davis hands. There is no meaning anywhere in it. It only follows writing rules that I measured first on the real text (ZL3b).
+
+[b]Why I did it[/b]
+
+For months I collected rules about how the text is written. At some point you have to check if they are right, and the best way I found is this: if the rules are good, someone who follows them blindly should write a text you can't tell apart from the real one, at least in everything we know how to measure. If the fake text fails somewhere, a rule is missing or wrong.
+
+[b]How it writes[/b]
+
+First it picks the habits of the sheet. Every sheet (the folded piece of vellum, four pages) has its own taste for some free choices: k or t, ch or sh, putting q in front or not, ending in dy or in y, and using words with e or without. The pages of the same sheet look alike in this, and inside a page it drifts a little from line to line.
+
+Then, word by word, it decides to copy or to write something new.
+
+About a third of the time (35%) it copies a word that is already on the page. It prefers the words close by, the chance halves every three lines or so, and it likes the word just above. In almost half of the copies it changes one letter, so qokedy can come back as qokeedy or okedy. One thing I learned the hard way: that change has to be something the hand would write anyway. More on that below.
+
+The rest of the time it writes a new word letter by letter, and to choose the next letter it only looks at the two before. That is enough to keep the words in shape. They follow a sort of template: maybe a start (q, o, d, s or y), then a gallows or a bench, sometimes some e, and an ending. Words with e end in y or dy (qokedy, chedy) and words without e end in aiin, ar, ol (qokaiin, dar). It never puts two gallows in one word and never mixes e and i.
+
+How a word starts depends on how the previous one ended. After a word in y, a word whose core starts with o usually gets q (shedy qokedy). A core starting with a gets d (daiin).
+
+Then the line. The first word of a line likes to start with d, s or y, and avoids the same first letter as the line above (with ch it always avoids it, with s almost never). The last word gets "closed": daiin becomes dam, chol becomes choly, chor becomes chory. It does this more or less strongly depending on the hand.
+
+And the paragraph. It starts with a gallows, the first line uses p and f instead of k and t, and the first line almost never copies.
+
+That's it. It's seven steps, but some of the tables behind them are big, and they are learned from the text, so it's not a ten line rulebook.
+
+[b]How it looks[/b]
+
+Real f78r, first lines:
+
+[code]
+tshedor shedy qopchedy qokedy dyqokol oky
+qokeedy qokedy shedy tchedy otar olkedy dam
+qckhedy cheky dol chedy qokedy qokain olkedy
+yteedy qotal dolshedy qokedar chcthey otor dor or
+[/code]
+
+The scribe, same layout:
+
+[code]
+qokod chol qokeey chedy qopar otom
+o ral ydain shedy qody chody chals
+qokedy qotedy qokedy qokeey qolal shedytedy ytam
+tchdy shor qokeey qokaiinsh qokedy shedy qokaiin qoted
+[/code]
+
+You can still spot some bad words in it, like shedytedy or qokaiinsh (two word endings glued together). I'll come back to that.
+
+[b]The measures[/b]
+
+To compare the fake text with the real one I use 64 measures. Each one is a number you can compute on both texts the same way. Some examples, real value first and the scribe second:
+
+How often a word is repeated right after itself, compared with what chance would give: 3.1 times chance in the real text, 3.3 in the scribe.
+
+How many words have a "twin" earlier on the same page, the same word or one letter different: 64% real, 68% scribe. The nearest twin is usually two lines up in both.
+
+How often the last word of a line ends in m: 15.9% real, 16.7% scribe. Closed endings in general at the end of a line: 27.1% and 27.3%, against about 2% inside the line.
+
+How often a paragraph starts with a gallows: 93% and 92%. How many gallows in the first line are p or f: 31% and 31%, against less than 3% in the other lines.
+
+How much the pages differ from each other in their habits, for example in putting q after y. If every page was the same this number would be about 1. Real 6.3, scribe 5.7.
+
+The link between the end of a word and the start of the next (more below).
+
+And an "eye test": how many words have a piece of three letters that appears 3 times or less in the whole real text. Those are the words that look wrong when you read them. Real 4.6%, scribe 4.1%.
+
+A measure counts as reproduced if the scribe is within 25% of the real value, average of 5 runs.
+
+[b]What comes out[/b]
+
+The scribe reproduces 58 of the 64 measures.
+
+For comparison, a simple generator with three rules that I made before gets 33 of 64. So the rules definately make the difference, it's not that any generator gets there.
+
+The test I like most: I let the scribe learn its tables only from the odd folios, and then write the even folios, wich it has never seen, and compare with the real even folios. It gets 51 of 64. That number alone doesn't say much untill you see this: the real odd folios against the real even folios match on only 55 of 64, because some measures change a lot from one part of the book to another. So 51 should be read against 55, not against 64. It means the rules describe how the text is made, they don't just memorize it.
+
+And if I take out any single rule, measures go wrong. Without the copying, all the repetition measures fail. Without the habit of the first line, p and f dissapear from the first lines. Every piece is needed.
+
+[b]The 6 tests it fails[/b]
+
+Exact repeats. A word written twice in a row is 0.9% of the word pairs in the real text and 1.2% in the scribe. Compared with chance it's fine (3.1 against 3.3 times chance), but in raw numbers it repeats a little too much.
+
+Repeats at distance 5, the same word coming back five words later: 2.9 times chance in the real text, 3.8 in the scribe.
+
+Words that avoid repeating. In the real text 16% of the common words almost never come right after themselves (dal, shey, saiin), while okaiin does it five times more than chance. The scribe has 21%. It only knows families of words, not single words.
+
+The m at the end of long lines. Real lines of 10 words or more end in m 3.4 times more often than lines of 1 to 4 words. The scribe only gets 1.9 times.
+
+q at the start of a paragraph: 4.2% real, 6.2% scribe. The numbers are small here, it's just over the limit.
+
+Long words, 8 letters or more: 5.3% real, 7.4% scribe. Some of them are the two endings glued together you saw in the example (shedytedy, qokaiinsh).
+
+[b]Why I think it's interesting[/b]
+
+The recent Harvard paper (Schwartz) says that no generator so far, theirs included, reproduces one thing: the link between the end of one word and the start of the next. They leave it as one of the few things unexplained.
+
+In the scribe that link is just the habit I described above: the start of a word depends on how the previous one ended, and on nothing else from it. Not the whole word, not the word before, not the position in the line. Even the last pen stroke alone carries most of it, so it looks like a thing of the hand and not of grammar. Measured roughly the way the paper does, the real text gives 0.115 bits for hand 1 and 0.224 for hand 2 (the paper says 0.12 and 0.21). With the habit, the scribe gives about the same strength (after removing what a shuffled text would give: 0.097 against 0.089 for hand 1, and 0.171 against 0.205 for hand 2). Without the habit it falls to almost zero.
+
+[b]Two things I didn't expect[/b]
+
+No dictionary needed. An earlier version made too many wrong looking words. Almost all came from the copies with a changed letter, because the change was random (daiin became daain, chedy became chddy). Giving it a list of real words fixed the look but killed the variety. What worked was making the change follow the same two letter rule as new words. Wrong looking words went from 8.7% to 4.1%, real is 4.6%.
+
+The kind of word follows the sheet, not the plant. Words with e (qokedy, shedy) against words without (qokaiin, dar, ol): their share is shared by the pages of the same sheet, even with the other half of the sheet that sits far away in the book, and not with the next page if it belongs to another sheet. In the herbal, where every page has a different plant, the other half of the sheet matches at z = -7.0 and the next page at -0.7. So it behaves like the habit of the day it was written, not like the subject.
+
+[b]What it doesn't show[/b]
+
+It doesn't prove the Voynich has no meaning. It shows that a procedure with no meaning is enough for most of what we can measure.
+
+And the tables are learned from the text, so it says how the pieces combine, not where the letter rules come from.
+
+It's very close to Torsten Timm's self-citation idea, reached by another road.
+
+I used Claude Code to write the code. The rules, the numbers and the claims are mine and I checked them. Happy to answer questions or share the code.

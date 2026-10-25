@@ -1,0 +1,18 @@
+Quick update on the long range thing you asked about, Mauro.
+
+I looked at where the similarity between nearby pages comes from, and it's not a drift in time. If I make the scribe copy from the previous pages it gets worse, the whole curve goes flat. What realy matters is the hand, and the section inside the hand. In the real text, pages of the same hand and section are more alike than in my scribe, and pages of different hands are less alike.
+
+So I changed one thing: the scribe now learns its letter habits seperately for each hand, and for each section within a hand, instead of one table for language A and one for B. With that the curve comes out almost right:
+
+page similarity at distance 1 / 10 / 100
+real: 0.35 / 0.26 / 0.17
+before: 0.29 / 0.24 / 0.19
+now: 0.33 / 0.26 / 0.19
+
+Bursts of frequent words go from 1.51 to 1.59 (real 1.76) and MATTR from 0.60 to 0.62 (real 0.64). It also holds when the scribe learns only from the odd folios and writes the even ones.
+
+Two side effects I didn't expect. Once every hand has its own vocabulary, the scribe needs much less copying from the same page (22% instead of 35%), so part of what looked like copying was just the hand's own words. And I also fixed the word lengths, it was making too many short words, now it follows the real distribution by position in the line.
+
+What is still missing: pages far apart are still a bit too similar (0.19 against 0.17), so there is some diference between parts of the book that hands and sections don't explain. Could be a slow drift, or just that the Davis hands and the sections are too coarse as labels.
+
+Thanks for pushing on this, it was a good question.
