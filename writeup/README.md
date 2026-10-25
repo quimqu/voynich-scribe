@@ -10,7 +10,6 @@ English material about the scribe, written for the Voynich community.
 | `post_reply_schwartz.txt` | Reply in the thread on Schwartz (2026): the edge-glyph coupling is a habit of the hand, and the scribe reproduces it. |
 | `post_reply_mauro_long_range.txt` | Reply on long-range similarity between pages: it is hand and section vocabulary, not drift. |
 | `post_external_tests.txt` | Forum post on the two external tests (Parisel 2026; Layfield and Davis 2026), 25 October 2026. |
-| `post_short_unpublished.txt` | A shorter, unpublished version of the first post. |
 | `table_measures.py` | Regenerates the appendix table of `THE_SCRIBE.md` from `scribe/measures_real.json` and `scribe/results.json` (run from the repository root). |
 
 The posts are deliberately written in plain, informal English.
