@@ -1,0 +1,27 @@
+npcompl33t's seriation, rebuilt. Pages with >= 300 glyphs; weighted JS of P(next glyph | glyph), rows with >= 3 transitions on both pages; classical MDS.
+Horseshoe: R^2 of MDS2 as a parabola of MDS1. S / W: R^2 of MDS3 as a cubic / quartic of MDS1. Bifolio agreement: mean |MDS1 difference| as a share of the MDS1 range.
+
+text           pages     var MDS1/2/3 horseshoe R2 S (cubic) W (quartic) same sheet same section any two pages
+real             163   0.26/0.07/0.05         0.16      0.52        0.52       5.6%        28.7%         37.9%
+scribe_seed1     165   0.29/0.06/0.04         0.06      0.59        0.61       5.3%        26.0%         35.9%
+scribe_seed2     162   0.30/0.06/0.04         0.38      0.35        0.42       6.1%        29.4%         37.9%
+scribe_seed3     167   0.28/0.05/0.05         0.20      0.45        0.45       5.5%        28.0%         37.5%
+scribe_seed4     164   0.29/0.06/0.04         0.15      0.36        0.36       5.6%        27.9%         37.1%
+scribe_seed5     167   0.30/0.07/0.04         0.18      0.36        0.36       6.0%        27.4%         36.3%
+
+Order of the sections along MDS1 (mean of their pages):
+  real           astro < herbal < pharmaceutical < cosmological < text_only < stars < biological
+  scribe_seed1   herbal < pharmaceutical < astro < cosmological < text_only < stars < biological
+  scribe_seed2   herbal < pharmaceutical < astro < cosmological < text_only < stars < biological
+  scribe_seed3   herbal < pharmaceutical < astro < cosmological < text_only < stars < biological
+  scribe_seed4   herbal < pharmaceutical < astro < cosmological < text_only < stars < biological
+  scribe_seed5   herbal < pharmaceutical < astro < cosmological < text_only < stars < biological
+
+Within a section (and hand), does the position on MDS1 follow the folio number? Spearman rho (p) per group with >= 12 pages.
+text           herbal hand 1 | herbal hand 2 | stars hand 3 | biological hand 2 | pharmaceutical hand 1
+real           +0.39 (0.002, n 62) | -0.30 (0.196, n 20) | +0.23 (0.289, n 24) | -0.37 (0.116, n 19) | +0.07 (0.808, n 16)
+scribe_seed1   +0.01 (0.953, n 64) | -0.24 (0.318, n 20) | -0.14 (0.513, n 24) | +0.01 (0.974, n 19) | -0.45 (0.079, n 16)
+scribe_seed2   +0.09 (0.481, n 61) | -0.21 (0.378, n 20) | +0.27 (0.196, n 24) | -0.01 (0.980, n 19) | -0.22 (0.409, n 16)
+scribe_seed3   -0.01 (0.954, n 68) | -0.12 (0.638, n 19) | +0.11 (0.622, n 24) | +0.27 (0.273, n 19) | +0.62 (0.010, n 16)
+scribe_seed4   +0.14 (0.278, n 63) | -0.01 (0.970, n 20) | -0.23 (0.279, n 24) | -0.01 (0.966, n 19) | +0.25 (0.341, n 16)
+scribe_seed5   -0.30 (0.013, n 67) | -0.08 (0.752, n 20) | -0.09 (0.663, n 24) | -0.02 (0.920, n 19) | -0.65 (0.006, n 16)

@@ -1,8 +1,10 @@
 # Writes a whole quire with the scribe on the real layout, in an IVTFF-like format (ZL3b line identifiers),
 # and the real text of the same quire normalised the same way. Request from a voynich.ninja reader (quire 13, 19/10/2026).
 #   PYTHONIOENCODING=utf-8 py -3 quire.py M 1                         → scribe trained on the whole manuscript, seed 1
-#   SCRIBE_TRAIN=without_M PYTHONIOENCODING=utf-8 py -3 quire.py M 1   → scribe that has not seen quire M (run calibrate_section_e.py first)
-# Outputs in scribe/quire_<Q>/: real_<Q>.txt, scribe_<Q>_all.txt or scribe_<Q>_blind.txt
+#   SCRIBE_TRAIN=without_M PYTHONIOENCODING=utf-8 py -3 quire.py M 1   → scribe that has not seen quire M
+#   SCRIBE_TRAIN=with_M (or lang_B, sec_biological...) ... quire.py M 1  → scribe trained only on that part (see scribe.py)
+#   With any SCRIBE_TRAIN, run calibrate_section_e.py and calibrate_length.py with the same value first.
+# Outputs in scribe/quire_<Q>/: real_<Q>.txt, scribe_<Q>_all.txt, scribe_<Q>_blind.txt or scribe_<Q>_train_<SCRIBE_TRAIN>.txt
 import os, sys
 Q=sys.argv[1] if len(sys.argv)>1 else 'M'; SEED=int(sys.argv[2]) if len(sys.argv)>2 else 1
 from scribe import Escriba, L_ALL, L_REAL, _TR
@@ -29,10 +31,12 @@ if not os.path.exists(f'{OUT}/real_{Q}.txt'):
     write(f'{OUT}/real_{Q}.txt',L_ALL,f'Quire {Q}: REAL text, normalised the same way as the generated files',COMMON)
 blind=_TR==f'without_{Q}'
 G=Escriba().write(seed=SEED)
-name=f'scribe_{Q}_'+('blind' if blind else 'all')+(f'_seed{SEED}' if SEED!=1 else '')+'.txt'
+kind='blind' if blind else ('all' if not _TR else f'train_{_TR}')   # any other SCRIBE_TRAIN gets its own file
+name=f'scribe_{Q}_{kind}'+(f'_seed{SEED}' if SEED!=1 else '')+'.txt'
 write(f'{OUT}/{name}',G,f'Quire {Q}: text written by "the scribe" (seed {SEED})',
       ["Trained on the whole manuscript EXCEPT this quire: it has never seen these pages (nor the biological section's habits)." if blind
-       else "Trained on the whole manuscript, this quire included."]+
+       else "Trained on the whole manuscript, this quire included." if not _TR
+       else f"Trained only on SCRIBE_TRAIN={_TR} ({len(L_REAL)} of {len(L_ALL)} lines)."]+
       ['Same layout as the real quire: same lines, words per line, drawing gaps, paragraph starts and ends. Only the words are generated.',
        'The whole manuscript is generated and this quire is extracted, so sheet habits and copying work as in a normal run.']+COMMON)
 print('done:',f'{OUT}/{name}',len(G),'lines in the manuscript; quire',len(idx),'lines')

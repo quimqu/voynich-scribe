@@ -10,12 +10,22 @@ import os
 L_ALL=M.load_corpus(os.environ['SCRIBE_CORPUS']) if os.environ.get('SCRIBE_CORPUS') else M.load_real()   # SCRIBE_CORPUS: another text (controls, 19/10)
 def folio_num(pg):
     m=re.search(r'(\d+)',pg); return int(m.group(1)) if m else 0
-# SCRIBE_TRAIN=odd|even: the scribe learns all the tables only from these folios (generalisation test, holdout.py)
+# SCRIBE_TRAIN restricts the text the scribe learns all its tables from:
+#   odd | even          only these folios (generalisation test, holdout.py)
+#   without_M[+T...]    everything except these quires (blind quire, quire.py)
+#   with_M[+T...]       only these quires
+#   lang_A | lang_B     only this Currier language
+#   sec_herbal[+stars]  only these sections (herbal, biological, stars, pharmaceutical, cosmological, astro, text_only)
+# Run calibrate_section_e.py and calibrate_length.py with the same SCRIBE_TRAIN first, or the section offsets and length weights are left out.
 _TR=os.environ.get('SCRIBE_TRAIN','')
 def _train_ok(l):
     if not _TR: return True
-    if _TR.startswith('without_'): return l['quire'] not in _TR[6:].split('+')   # SCRIBE_TRAIN=without_M: everything except quire M (13)
-    return folio_num(l['page'])%2==(1 if _TR=='odd' else 0)
+    if _TR.startswith('without_'): return l['quire'] not in _TR[len('without_'):].split('+')   # was [6:], left from the Catalan prefix 'sense_': it excluded nothing (fixed 27/10, reported by nablator)
+    if _TR.startswith('with_'): return l['quire'] in _TR[len('with_'):].split('+')
+    if _TR.startswith('lang_'): return l['lang'] == _TR[len('lang_'):]
+    if _TR.startswith('sec_'): return l['section'] in _TR[len('sec_'):].split('+')
+    if _TR in ('odd', 'even'): return folio_num(l['page'])%2==(1 if _TR=='odd' else 0)
+    raise SystemExit(f'SCRIBE_TRAIN={_TR!r} not understood (odd, even, without_Q, with_Q, lang_A, lang_B, sec_S)')
 L_REAL=[l for l in L_ALL if _train_ok(l)]
 # ================= rulebook tables, estimated from the real text =================
 def seq_ctx(A,g,j):

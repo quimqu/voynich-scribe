@@ -207,6 +207,19 @@ The slope by writing distance is negative only with the LSA (p 0.048) and the TF
 
 ---
 
+## 10 · npcompl33t's seriation: horseshoe or no horseshoe? (27/10/2026)
+
+**Question** (Mauro, voynich.ninja thread 6219). npcompl33t (threads 6182, 6215, 6223) builds for each page the glyph transition counts (within words, and along the line without spaces), measures how different two pages are with a weighted Jensen-Shannon divergence of P(next glyph | glyph), and maps the pages with MDS. The first two dimensions draw a Guttman "horseshoe", the third an S or W, and the pages of a bifolium sit very close on the first dimension; he reads this as a production gradient. Rebuilt from his descriptions, not from his code (`npcompl33t/seriation.py`, figures `npcompl33t/figures.py`); paragraph text only, our glyph units, no curve fitting.
+
+| | pages | arch on MDS1 × MDS2 | order of the sections along MDS1 | same-bifolium pages, |ΔMDS1| / range |
+|---|---|---|---|---|
+| real | 163 | yes, pharmaceutical at the top | herbal < pharmaceutical < … < stars < biological | 5.6% |
+| skribe, 5 seeds | 162–167 | yes, the same shape | the same in all five | 5.3–6.1% |
+
+**Reading.** The skribe, which has no chronology (hand and section habits, one taste per sheet, pages within a section interchangeable), draws the same horseshoe, the same S/W on MDS3 and the same bifolium closeness. Neither is evidence of a production order on its own. Within herbal A the real pages seem to drift with the folio number (Spearman +0.39, p 0.002), but it is the herbal pages bound in the pharmaceutical quires (f87–f96), which lean towards the pharmaceutical style; without them +0.23 (p 0.09), inside the skribe's range (−0.24 to +0.18). The skribe writes those pages like any other herbal page.
+
+---
+
 ## How to repeat it
 
 ```bash
@@ -227,6 +240,7 @@ PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/sheet_order.py       
 PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/lda_pairs.py             # lda_pairs.txt (the same pairs with LDA, ~30 min)
 PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/lsa_whitening.py         # lsa_whitening.txt (pre-registered: what the LSA measures, ~20 min)
 PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/shared_excess.py > external_tests/davis_layfield/shared_excess.txt   # exploratory follow-up
+PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/figures.py              # seriation.txt, fig_horseshoe.png, fig_herbalA.png (~5 min)
 ```
 
 Known differences from the originals: Parisel calibrates on RF1b-e and we score normalised text from ZL3b (the real text passes all the same, 4/4). Layfield and Davis use ZL 2a with uncertain readings removed and separate the radial and circular text; here only paragraph text, which is the only text the skribe writes. Their stop-word heuristic is not described in enough detail to repeat it; without removing any, or removing the 20 most frequent, the result does not change.

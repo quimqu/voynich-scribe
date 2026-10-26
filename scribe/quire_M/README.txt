@@ -15,3 +15,10 @@ and the register of the first line of the paragraph (R5.2: sh over ch, t over k,
 The clustering of words starting with a gallows cannot be judged on one quire: the real quire has only 10 pairs of
 consecutive such words, and the skribe 0 to 9 depending on the seed (clustering x0 to x2 per seed). It is measured on
 the whole manuscript instead (scribe/SCRIBE.md, section 10).
+
+Correction, 27 October 2026 (reported by nablator on voynich.ninja). scribe_M_blind.txt as regenerated on 26 October was not
+blind: when the code was translated from Catalan, the option SCRIBE_TRAIN=without_M kept cutting 6 characters (the length of
+the old Catalan prefix "sense_") instead of 8, so it excluded nothing, and the "blind" skribe had in fact learned from quire M.
+It is fixed and the file regenerated with the section offsets and length weights calibrated without quire M. Words with e:
+real 50.6%, skribe trained on everything 49.8%, blind skribe 35.9% (before the fix 47.2%); words in -edy: 27.1%, 24.6%, 11.9%
+(before the fix 23.4%). The blind version of 19 October (Catalan code) was correct.
