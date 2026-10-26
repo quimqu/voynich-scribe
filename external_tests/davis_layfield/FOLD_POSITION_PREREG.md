@@ -8,7 +8,7 @@
 
 **Primary test.** Hand 2 (10 bifolia): paired per bifolium, inner minus outer, one-sided Wilcoxon (inner greater), alpha 0.05.
 **Prediction if copying across the open sheet:** inner > outer in hand 2, and inner > 0.
-**Secondary (reported, not decisive):** all bifolia, hand 1; the same on the five scribe seeds (no cross-page copying, so ≈ 0); the vertical alignment of linked pairs (|difference in line fraction|) against all cross-page pairs.
+**Secondary (reported, not decisive):** all bifolia, hand 1; the same on the five skribe seeds (no cross-page copying, so ≈ 0); the vertical alignment of linked pairs (|difference in line fraction|) against all cross-page pairs.
 
 Any other cut of these data is exploratory and will be labelled as such.
 
@@ -17,8 +17,8 @@ Any other cut of these data is exploratory and will be labelled as such.
 
 ## Outcome (added after running, 25/10/2026)
 
-**Primary test: not met.** Hand 2, inner minus outer: −0.004, one-sided p 0.58, 5 of 10 bifolia positive; inner alone −0.010 (p 0.69). The scribe seeds give −0.037 to +0.056 (one seed p 0.024). Secondary: all bifolia +0.006 (p 0.98); hand 1 +0.005 (p 0.84); linked pairs are not at the same height (0.98 inner, 0.96 outer, 1.00 hand 2).
+**Primary test: not met.** Hand 2, inner minus outer: −0.004, one-sided p 0.58, 5 of 10 bifolia positive; inner alone −0.010 (p 0.69). The skribe seeds give −0.037 to +0.056 (one seed p 0.024). Secondary: all bifolia +0.006 (p 0.98); hand 1 +0.005 (p 0.84); linked pairs are not at the same height (0.98 inner, 0.96 outer, 1.00 hand 2).
 
 **Power (added afterwards, not pre-registered).** Injecting into the real hand-2 inner faces copies that are existing one-glyph variants of a line-final word of the left page, placed as the first word of lines of the right page: detected in 0–5% of runs with 5–20% of lines, 20% with 30%, 95% with 50%. The test only excludes heavy copying at the fold.
 
-**Link with the LSA (`fold_position_lsa_link.py`, exploratory).** The same injection into the scribe does not raise the hand-2 LSA inner-outer difference at any rate, up to half the lines (seed 1: +0.073 → +0.068; seed 2: +0.019 → +0.004; seed 3: +0.058 → +0.054; real +0.186). Copying words at the fold, even in the amounts the fold test would see, is not what makes the LSA signal.
+**Link with the LSA (`fold_position_lsa_link.py`, exploratory).** The same injection into the skribe does not raise the hand-2 LSA inner-outer difference at any rate, up to half the lines (seed 1: +0.073 → +0.068; seed 2: +0.019 → +0.004; seed 3: +0.058 → +0.054; real +0.186). Copying words at the fold, even in the amounts the fold test would see, is not what makes the LSA signal.

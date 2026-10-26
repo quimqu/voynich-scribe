@@ -1,28 +1,28 @@
-# The Scribe: a rule-based procedure that writes a Voynich-like text
+# The Skribe: a rule-based procedure that writes a Voynich-like text
 
 *What it reproduces, what it doesn't, and what it suggests about how the Voynich Manuscript was written.*
-*Written on 14 October 2026. Revised on 25 October 2026 for the scribe of 19 October, the battery of 76 measures, the controls and the external tests.*
+*Written on 14 October 2026. Revised on 25 October 2026 for the skribe of 19 October, the battery of 76 measures, the controls and the external tests.*
 
-*26 October 2026: the figures below are those of the scribe of 19 October. Since then the scribe has one more habit (words that start with a gallows come in lines, rule R14.7) and the battery two more measures: 70/78 on the whole text, 64/78 on the even folios. See `scribe/SCRIBE.md` §10.*
+*26 October 2026: the figures below are those of the skribe of 19 October. Since then the skribe has one more habit (words that start with a gallows come in lines, rule R14.7) and the battery two more measures: 70/78 on the whole text, 64/78 on the even folios. See `scribe/SCRIBE.md` §10.*
 
 ---
 
 ## Summary
 
-- **The scribe** is a generator that writes a whole synthetic manuscript on the **same layout** as the real one: the same pages, sheets, paragraphs, lines, words per line, drawing gaps, Currier language and Davis hand. Only the words are new. There is no layer of meaning anywhere in it.
+- **The skribe** is a generator that writes a whole synthetic manuscript on the **same layout** as the real one: the same pages, sheets, paragraphs, lines, words per line, drawing gaps, Currier language and Davis hand. Only the words are new. There is no layer of meaning anywhere in it.
 - It is compared with the real text on **76 measures**: repetition, near-duplicates, word-boundary agreement, line-start and line-end forms, first-line effects, vertical dissimilation, page and sheet habits, word shape, what the eye sees, and, since 19 October, character entropies, the Zipf slope, word lengths, long-range similarity between pages and bursts of frequent words. It reproduces **69/76** within ±25% (mean of 5 seeds), with a median error of 0.067. A simpler three-rule generator reproduces 39/76 (median error 0.26); its three rules are (1) new words glyph by glyph from a single two-glyph table for the whole manuscript, (2) copying of words from the same line or the two lines above, mostly changed by one glyph, and (3) a memory that is emptied at each page and paragraph (details in §3).
 - Learnt **only from odd folios** and asked to write the even ones, it reproduces **61/76**. The two real halves reproduce each other at 67/76.
 - Two results I did not expect (14 October):
-  1. **The eye did not need a dictionary.** To stop producing impossible-looking words, the scribe did not need a lexicon of known words. It needed its edits to copied words to obey the same 2-glyph memory it already uses to write new words.
+  1. **The eye did not need a dictionary.** To stop producing impossible-looking words, the skribe did not need a lexicon of known words. It needed its edits to copied words to obey the same 2-glyph memory it already uses to write new words.
   2. **The word family is a habit of the sheet.** The choice between words with *e* (*-edy*, *-ey*) and words without (*-aiin*, *-ar*, *-ol*) is shared by the pages of a sheet, including the conjugate folio far away in reading order, and not by neighbouring pages. In the herbal section, where every page shows a different plant: z = −7.0 for the conjugate folio, −0.7 for the neighbouring page of another sheet.
-- One correction since then (19 October). The scribe used to copy 35% of its words from the page. Once each hand, and each section within a hand, got its own glyph tables, the right amount of copying fell to **22%**: part of what looked like copying was the hand's own vocabulary. The same change explains the long-range similarity between pages: it is hand and section vocabulary, not a drift along the book.
-- Controls and external tests (19 and 25 October). The same generic procedure applied to a Latin text fails where a language should fail (7/16 against a ceiling of 13/16; on the Voynich, 12/16 against 16/16). The scribe passes Parisel's four boundary signatures in Currier A and in Currier B, in all five seeds, and it reproduces the LSA pattern that Layfield and Davis read as evidence against the quire structure.
+- One correction since then (19 October). The skribe used to copy 35% of its words from the page. Once each hand, and each section within a hand, got its own glyph tables, the right amount of copying fell to **22%**: part of what looked like copying was the hand's own vocabulary. The same change explains the long-range similarity between pages: it is hand and section vocabulary, not a drift along the book.
+- Controls and external tests (19 and 25 October). The same generic procedure applied to a Latin text fails where a language should fail (7/16 against a ceiling of 13/16; on the Voynich, 12/16 against 16/16). The skribe passes Parisel's four boundary signatures in Currier A and in Currier B, in all five seeds, and it reproduces the LSA pattern that Layfield and Davis read as evidence against the quire structure.
 
 This does **not** show that the manuscript is meaningless. It shows that a concrete, meaningless writing procedure is *sufficient* to produce almost everything we currently know how to measure.
 
 ## The rules, in short
 
-These are the regularities measured on the real text before building the scribe. "System" means all five Davis hands follow the rule; "habit" means its form is shared, but its strength varies by hand, page or sheet. The identifiers in square brackets are those of the rulebook (`RULES.md`).
+These are the regularities measured on the real text before building the skribe. "System" means all five Davis hands follow the rule; "habit" means its form is shared, but its strength varies by hand, page or sheet. The identifiers in square brackets are those of the rulebook (`RULES.md`).
 
 ### Glyphs and words
 
@@ -66,7 +66,7 @@ These are the regularities measured on the real text before building the scribe.
 
 ### Page and sheet
 
-- **Copying from the page.** About one word in five (22% in the scribe; 35% before each hand had its own tables) is a copy of a word written a few lines above, often with one glyph changed. The rest of the repetition comes from the vocabulary of the hand. [R2.8, R16.5, R16.6]
+- **Copying from the page.** About one word in five (22% in the skribe; 35% before each hand had its own tables) is a copy of a word written a few lines above, often with one glyph changed. The rest of the repetition comes from the vocabulary of the hand. [R2.8, R16.5, R16.6]
 - **Each hand has its own glyph grammar**, and each section within a hand. The similarity of vocabulary between pages (0.35 for neighbouring pages, 0.26 at ten pages, 0.17 at a hundred) is explained by hand and section, not by a drift from page to page: copying from previous pages flattens the whole curve. Found on 19 October; this is the same picture as Schwartz (2026), who finds that word cores are hardly shared between hands.
 - **Page rates.** Each page has its own rate for every free choice (*k/t, ch/sh, q-, -y/-dy*, word family): overdispersion z +10 to +58 beyond language, section and hand. The rate drifts over a few lines. Habit. [R7.2, R16.7]
 - **The sheet is the session.** The pages of a sheet, including the conjugate folio, share vocabulary, free-choice rates, word family, letter size and line spacing. The neighbouring folio of another sheet does not. Habit. [R7.4]
@@ -94,7 +94,7 @@ The same rules, spoken as the person who ran the workshop might have spoken them
 >
 > **Never.** Never begin a line with *a*, never two gallows in a word, never *e* with *i*, never *q* away from the start or without its *o*. [R4.2, R2.2, R13.7, R1.4]
 
-What this shows, and what it does not. The sheet is enough: a scribe who follows it with the tables of his hand writes a text that passes 69 of our 76 measures; the three-rule generator that does not follow it passes 39. Nothing on it refers to meaning: every instruction is about shape, place or process, and none tells the scribe what to say. Whether anyone ever gave such instructions, the statistics cannot tell: the same numbers would come out if the habits grew in one hand without a word spoken, or if a meaningful procedure left this surface. What the text does say is that the five hands follow the same sheet with different strength: the forms are the same in all five (where a line may begin, where *p* and *f* go) and the strengths differ (how often *q* follows *y*, how firmly the last word is closed).
+What this shows, and what it does not. The sheet is enough: a skribe who follows it with the tables of his hand writes a text that passes 69 of our 76 measures; the three-rule generator that does not follow it passes 39. Nothing on it refers to meaning: every instruction is about shape, place or process, and none tells the skribe what to say. Whether anyone ever gave such instructions, the statistics cannot tell: the same numbers would come out if the habits grew in one hand without a word spoken, or if a meaningful procedure left this surface. What the text does say is that the five hands follow the same sheet with different strength: the forms are the same in all five (where a line may begin, where *p* and *f* go) and the strengths differ (how often *q* follows *y*, how firmly the last word is closed).
 
 ---
 
@@ -102,7 +102,7 @@ What this shows, and what it does not. The sheet is enough: a scribe who follows
 
 - **Text**: ZL3b transliteration (Zandbergen–Landini, IVTFF 2.0), paragraph text only (no labels, no circular or radial text), in EVA. Benches and gallows (*ch, sh, cth, ckh, cph, cfh*) count as single glyphs. Ligature braces `{…}` keep their content.
 - **Metadata**: Currier language A/B, Lisa Fagin Davis' scribal hands, quires and sheets (bifolios) from the standard codicological reconstruction.
-- **Comparison**: every scribe figure is the mean of 5 random seeds. A measure is *reproduced* if it lies within ±25% of the real value (within 0.01 absolute for values near zero). The median error is the median of |log(scribe / real)| over the measures that are not near zero. The full list of 76 measures is in the appendix: the 64 of 14 October plus character entropies h1, h2 and h3, the Zipf slope, the share of words of 2–3 and of 5–6 glyphs, the vocabulary shared by pages 1, 10 and 100 pages apart and their ratio, the bursts of the 50 most frequent words and their page overdispersion.
+- **Comparison**: every skribe figure is the mean of 5 random seeds. A measure is *reproduced* if it lies within ±25% of the real value (within 0.01 absolute for values near zero). The median error is the median of |log(skribe / real)| over the measures that are not near zero. The full list of 76 measures is in the appendix: the 64 of 14 October plus character entropies h1, h2 and h3, the Zipf slope, the share of words of 2–3 and of 5–6 glyphs, the vocabulary shared by pages 1, 10 and 100 pages apart and their ratio, the bursts of the 50 most frequent words and their page overdispersion.
 - **Controls**:
   - **Ablation**: remove each rule in turn and count the measures lost.
   - **Hold-out**: learn every table and fitted parameter from odd folios only, then write the layout of the even folios and compare with the real even folios. The real odd folios against the real even folios give the natural difference between halves.
@@ -132,7 +132,7 @@ For every sheet, page, paragraph and line, in this order:
 7. **First line of a paragraph.** Almost no copying, no immediate repeats, and *p/f* instead of *k/t* in about 30% of words.
 8. **Line end.** The last word is closed (*-iin→-m, -in→-m, -l→-ly, -r→-ry, -s→-sy, -y→-g*) with a strength that depends on the hand and on the number of words in the line. Paragraph-final lines, and the word before a drawing gap, close at three quarters of that strength.
 
-The glyph-contact tables, the line-end table, the edit frequencies, the boundary table and the length weights are **learnt from the text**. The scribe says how the pieces combine; it does not explain where the glyph grammar itself comes from. The hand and section tables are more parameters learnt from the text (one contact table for every combination with enough lines); what they say is that each hand, and each hand in each section, has its own glyph grammar, not only its own tone.
+The glyph-contact tables, the line-end table, the edit frequencies, the boundary table and the length weights are **learnt from the text**. The skribe says how the pieces combine; it does not explain where the glyph grammar itself comes from. The hand and section tables are more parameters learnt from the text (one contact table for every combination with enough lines); what they say is that each hand, and each hand in each section, has its own glyph grammar, not only its own tone.
 
 ---
 
@@ -140,9 +140,9 @@ The glyph-contact tables, the line-end table, the edit frequencies, the boundary
 
 A selection of measures (`scribe/results_table.txt`). All 76 are in the appendix.
 
-**The baseline, "3-rule generator".** To know how much of the score the full rulebook earns, the scribe is always shown next to a simpler generator written on the night of 27 September (`night_generator/generator3.py`), on the same layout. It has three rules: (1) **new words glyph by glyph**, with a single table for the whole manuscript in which each glyph depends on the previous two, and the first glyph of a word on the last glyph of the word before; (2) **copying from the visible field**: about a third of the words are taken from the same line or the two lines above (weight 1, ½, ¼), preferring words whose first glyph fits the end of the previous word, and most of them (85%) changed by one glyph; (3) **a page layer**: the copying memory is emptied at each new page and paragraph, and the first line of a paragraph copies a third as much. On top of that it has two small touches from the first measurements: the first glyph of a line avoids the first glyph of the line above about half the time, and *-iin* becomes *-m* on the last word, more often in long lines. It has no hands, no sections, no sheet habits, no free choices, no line-start or paragraph forms and no drawing gaps. It passes 39 of the 76 measures; the scribe passes 69.
+**The baseline, "3-rule generator".** To know how much of the score the full rulebook earns, the skribe is always shown next to a simpler generator written on the night of 27 September (`night_generator/generator3.py`), on the same layout. It has three rules: (1) **new words glyph by glyph**, with a single table for the whole manuscript in which each glyph depends on the previous two, and the first glyph of a word on the last glyph of the word before; (2) **copying from the visible field**: about a third of the words are taken from the same line or the two lines above (weight 1, ½, ¼), preferring words whose first glyph fits the end of the previous word, and most of them (85%) changed by one glyph; (3) **a page layer**: the copying memory is emptied at each new page and paragraph, and the first line of a paragraph copies a third as much. On top of that it has two small touches from the first measurements: the first glyph of a line avoids the first glyph of the line above about half the time, and *-iin* becomes *-m* on the last word, more often in long lines. It has no hands, no sections, no sheet habits, no free choices, no line-start or paragraph forms and no drawing gaps. It passes 39 of the 76 measures; the skribe passes 69.
 
-| Measure | Real | 3-rule generator | Scribe |
+| Measure | Real | 3-rule generator | Skribe |
 |---|---|---|---|
 | Adjacent identical words / chance | 3.09 | 2.91 | 2.52 |
 | Same word at distance 2 / shuffled | 3.27 | 2.52 | 3.40 |
@@ -172,13 +172,13 @@ A selection of measures (`scribe/results_table.txt`). All 76 are in the appendix
 | **Reproduced (±25%)** | | **39/76** | **69/76** |
 | **Median error** | | 0.261 | 0.067 |
 
-**Hold-out**: learnt on odd folios, written on even folios: 61/76 (median error 0.080); the real halves against each other: 67/76 (0.049). The eight new length and long-range measures are all reproduced in the hold-out with tables learnt from the odd folios. Of the 15 measures the hold-out scribe misses, six are also missed between the two real halves, or cannot be computed on half a manuscript (the sheet measure: the conjugate folio often falls in the other half). Its own misses are adjacent repeats against chance, near twins, which words repeat, *-m* by line length, *q-* at line start, closures inside the line and before a gap, repeats in the first line, and the page overdispersion of *e*-words.
+**Hold-out**: learnt on odd folios, written on even folios: 61/76 (median error 0.080); the real halves against each other: 67/76 (0.049). The eight new length and long-range measures are all reproduced in the hold-out with tables learnt from the odd folios. Of the 15 measures the hold-out skribe misses, six are also missed between the two real halves, or cannot be computed on half a manuscript (the sheet measure: the conjugate folio often falls in the other half). Its own misses are adjacent repeats against chance, near twins, which words repeat, *-m* by line length, *q-* at line start, closures inside the line and before a gap, repeats in the first line, and the page overdispersion of *e*-words.
 
-**The scribe of 14 October against the scribe of 19 October.** Both score 69/76. What changed is the median error, from 0.098 to 0.049–0.067 depending on the run, and which measures pass: the old scribe made too many short words (2–3 glyphs 28.8% against 21.6%) and a long-range curve that was too flat (neighbouring over 100 pages apart 1.65 against 2.13); the new one passes those and loses the page overdispersion of *e*-words.
+**The skribe of 14 October against the skribe of 19 October.** Both score 69/76. What changed is the median error, from 0.098 to 0.049–0.067 depending on the run, and which measures pass: the old skribe made too many short words (2–3 glyphs 28.8% against 21.6%) and a long-range curve that was too flat (neighbouring over 100 pages apart 1.65 against 2.13); the new one passes those and loses the page overdispersion of *e*-words.
 
-**Standard measures** (`scribe/standard_measures_out.txt`, with their own definitions): h1 / h2 / h3 3.88 / 2.12 / 1.85 real against 3.88 / 2.08 / 1.81; Zipf slope 1.005 against 0.996; MATTR (window of 500 words) 0.64 against 0.62; bursts 1.76 against 1.59; vocabulary similarity between pages at distance 1 / 10 / 100: real 0.35 / 0.26 / 0.17, scribe 0.33 / 0.26 / 0.19 (0.29 / 0.24 / 0.19 before the hand tables). Pages far apart are still a little too similar: there is some difference between parts of the book that hands and sections do not explain.
+**Standard measures** (`scribe/standard_measures_out.txt`, with their own definitions): h1 / h2 / h3 3.88 / 2.12 / 1.85 real against 3.88 / 2.08 / 1.81; Zipf slope 1.005 against 0.996; MATTR (window of 500 words) 0.64 against 0.62; bursts 1.76 against 1.59; vocabulary similarity between pages at distance 1 / 10 / 100: real 0.35 / 0.26 / 0.17, skribe 0.33 / 0.26 / 0.19 (0.29 / 0.24 / 0.19 before the hand tables). Pages far apart are still a little too similar: there is some difference between parts of the book that hands and sections do not explain.
 
-**The boundary coupling per hand** (`scribe/boundary_per_hand_out.txt`). Schwartz (2026) reports that no generator reproduces the mutual information between the last glyph of a word and the first of the next, which differs by hand. Measured the same way on the real text and corrected for a shuffled text, hand 1 gives 0.089 bits and hand 2 0.205. The scribe gives 0.097 ± 0.006 and 0.171 ± 0.009; without the boundary rule, 0.002 and 0.008.
+**The boundary coupling per hand** (`scribe/boundary_per_hand_out.txt`). Schwartz (2026) reports that no generator reproduces the mutual information between the last glyph of a word and the first of the next, which differs by hand. Measured the same way on the real text and corrected for a shuffled text, hand 1 gives 0.089 bits and hand 2 0.205. The skribe gives 0.097 ± 0.006 and 0.171 ± 0.009; without the boundary rule, 0.002 and 0.008.
 
 ---
 
@@ -208,7 +208,7 @@ I tried four fixes, each with 2–3 seeds for exploration and 5 seeds for the ch
 | Real | | 4.6% | 7,915 |
 
 - **A lexicon fixes the eye but kills variety.** In the real text, the one-glyph variant of a word on the page is very often a word that occurs nowhere else, not a known word. Rejecting unknown new words is worse still.
-- **What works is making the edit obey the same 2-glyph memory** the scribe already uses for new words. Everything that comes out of the pen, including a variation of a copied word, goes through the same short-memory process. Strange modified copies drop from 36% to 1.7%.
+- **What works is making the edit obey the same 2-glyph memory** the skribe already uses for new words. Everything that comes out of the pen, including a variation of a copied word, goes through the same short-memory process. Strange modified copies drop from 36% to 1.7%.
 - **Ablation** (battery of 64): without this rule, 53/64 and 8.7% strange.
 - **Hold-out**: with the contact table learnt from odd folios, the even folios get 0.31 strange words per line against 0.36 real.
 - **Still true on 19 October**: strange words 4.2% against 4.6%, 0.33 per line against 0.36, with the copying down to 22%.
@@ -221,11 +221,11 @@ I tried four fixes, each with 2–3 seeds for exploration and 5 seeds for the ch
 
 *(14 October; the counts are on the battery of 64 measures of that date.)*
 
-Reading generated pages side by side with real ones, f78r (biological) is monotonous in *-edy* (*qokedy* ×15), while the scribe's f78r was monotonous in *qokaiin*. The *amount* of monotony was right: the most frequent word covers 4.7% of a page in both texts. The *family* was wrong.
+Reading generated pages side by side with real ones, f78r (biological) is monotonous in *-edy* (*qokedy* ×15), while the skribe's f78r was monotonous in *qokaiin*. The *amount* of monotony was right: the most frequent word covers 4.7% of a page in both texts. The *family* was wrong.
 
 Voynich words fall into two blocks: words with *e* end in *-y/-dy*; words without *e* end in *-aiin/-ar/-ol*; *e* and *i* avoid each other. I added the choice between the two blocks as a fifth free habit (per sheet, page and line) with a per-section offset, fitted so that each section's share matched the real one (11 numbers in total; fitted on all folios or on odd folios only, they came out almost the same: herbal −0.41 / −0.40, biological +0.36 / +0.44, stars +0.37 / +0.37, pharmaceutical +1.55 / +1.23 for the *e* habit). Result: 55 → 58/64. All three new page and section measures were reproduced, also in the hold-out; without the habit, 52/64.
 
-In the scribe of 19 October the per-section offsets are switched off: the glyph tables per hand and section carry the section preference by themselves (*-edy* in the biological section 26.7% against 27.5% real; *e*-words biological / herbal 1.73 against 2.04), and the sheet habit of the word family stays. The one measure that dropped out with the offsets is the page overdispersion of *e*-words (18.4 against 24.6, §9).
+In the skribe of 19 October the per-section offsets are switched off: the glyph tables per hand and section carry the section preference by themselves (*-edy* in the biological section 26.7% against 27.5% real; *e*-words biological / herbal 1.73 against 2.04), and the sheet habit of the word family stays. The one measure that dropped out with the offsets is the page overdispersion of *e*-words (18.4 against 24.6, §9).
 
 **Habit or topic?** In the herbal section every page shows a different plant. If the share of *e*-words depended on the page's content, the pages of one sheet would be no more alike than any neighbouring pages. If it is a habit of the writing session, the sheet should dominate. The two folios of a sheet are usually far apart in reading order, so "same sheet" and "close by" can be told apart.
 
@@ -250,7 +250,7 @@ Method: mean absolute difference of the share between pairs of pages (≥60 word
 
 ## 6. Samples
 
-The first four blocks of f78r and the two of f88r are from 14 October: the same layout and seed for every version, strange words in [brackets]. The last block is the scribe of 19 October, taken from the generated manuscript in `scribe/manuscript_out/` (seed 1); strange words are not marked there.
+The first four blocks of f78r and the two of f88r are from 14 October: the same layout and seed for every version, strange words in [brackets]. The last block is the skribe of 19 October, taken from the generated manuscript in `scribe/manuscript_out/` (seed 1); strange words are not marked there.
 
 **f78r, real**
 ```
@@ -261,7 +261,7 @@ yteedy qotal dolshedy qokedar chcthey otor dor or
 qokal otedy qokedy qokedy dal qokedy qokedy
 ```
 
-**f78r, scribe with blind edits (before)**
+**f78r, skribe with blind edits (before)**
 ```
 pshd qokeey [qyrchey] shey qokchedy dam
 par ol [edam] shey [qyrchdy] lchedy qokeey
@@ -270,7 +270,7 @@ ol qokeey qokeey qokar shedy okor sheey [qyrchey]
 ysheeky qor chekedy qokchedy qor okor [qokyr]
 ```
 
-**f78r, scribe with writable edits, no word-family habit**
+**f78r, skribe with writable edits, no word-family habit**
 ```
 pol qopal qokaiin shckhedy qol qopam
 qokeecheo or qokaiin qokal qol qokey oly
@@ -279,7 +279,7 @@ qokchey qokaiin she tshy oteey chedy qokchy qokchey
 scheo qolos sheckhdy qotaiin okeeey qokaiin shedal
 ```
 
-**f78r, scribe of 14 October**
+**f78r, skribe of 14 October**
 ```
 qokod chol qokeey chedy qopar otom
 o ral ydain shedy qody chody chals
@@ -296,7 +296,7 @@ oain or om otam okeom cheeor qokeody dar or om cheody
 qokeol cheol saiin cheos cheol doleeey or cheom [cheojam]
 ```
 
-**f88r, scribe of 14 October**
+**f88r, skribe of 14 October**
 ```
 kchey oky os sol dy s aiin dal
 dchey keodaiin okeeody okeoy qokshoy teey cheo chey dal
@@ -304,7 +304,7 @@ daiin chal aiisoiin daiiin okeey dchey qoteor chey qockheod qockheod sy
 ycheody okey keey kees ar okeey keedy chey chea
 ```
 
-**f78r, scribe of 19 October (seed 1)**
+**f78r, skribe of 19 October (seed 1)**
 ```
 pchey qoky lchedy qokaiin qokeedy qolcthdy
 qokain dar chedy dor olchdy qol okl
@@ -323,11 +323,11 @@ You can still tell them apart: some concatenations look wrong (*shedytedy*, *qok
 
 | Version | Reproduced /76 | Median error | What is lost |
 |---|---|---|---|
-| scribe of 19 October (final configuration, section offsets off) | 69 | 0.049 | |
+| skribe of 19 October (final configuration, section offsets off) | 69 | 0.049 | |
 | the same with the section offsets of 14 October still on | 69 | 0.059 | *-edy* in the biological section overshoots (34.7% against 27.5%) |
 | without the glyph tables per hand and section | 68 | 0.062 | adjacent repeats against chance (2.30 against 3.09), page overdispersion of *q-* (3.8 against 6.3) |
 | without the length weights by position | 67 | 0.068 | words of 2–3 glyphs (29.3% against 21.6%), words of 8+ glyphs (7.8% against 5.3%), *e* with *i* (0.32 against 0.24), *a-* at line start, the length correlation between neighbours |
-| scribe of 14 October | 69 | 0.098 | words of 2–3 glyphs (28.8%), words of 8+ glyphs (7.4%), repeats at distance 5 (3.81 against 2.85), raw adjacent repeats (1.17% against 0.90%) |
+| skribe of 14 October | 69 | 0.098 | words of 2–3 glyphs (28.8%), words of 8+ glyphs (7.4%), repeats at distance 5 (3.81 against 2.85), raw adjacent repeats (1.17% against 0.90%) |
 
 The run of `compare.py` behind `results_table.txt` gives the final configuration 69/76 with a median error of 0.067; the two figures differ because about twenty measures have errors between 0.05 and 0.10 and the median jumps among them.
 
@@ -335,7 +335,7 @@ The run of `compare.py` behind `results_table.txt` gives the final configuration
 
 | Rule removed | Reproduced /64 |
 |---|---|
-| none (full scribe of 14 October) | 58 |
+| none (full skribe of 14 October) | 58 |
 | copy from the visible page | 47 |
 | start contexts (line / paragraph / after gap) | 51 |
 | sheet and page habits | 51 |
@@ -359,22 +359,22 @@ The run of `compare.py` behind `results_table.txt` gives the final configuration
 
 ## 8. Controls and external tests
 
-### 8.1 A real language: the scribe applied to Latin
+### 8.1 A real language: the skribe applied to Latin
 
-A reader of voynich.ninja asked: applied to half of Moby-Dick, would the scribe not produce English-like text that passes the same checks? The control (`scribe/controls/CONTROLS.md`) answers with Latin, Nicholas of Cusa's *De docta ignorantia* (37,138 words), given an artificial layout of lines of about 45 characters, paragraphs of 10 lines, pages of 26 lines and sheets of 4 pages (226 pages). A **generic** version of the scribe, the same for both texts, keeps what is not specific to the Voynich: copying from the page with writable edits, the two-glyph memory, the boundary agreement, the line-start contexts, the length tone and the dissimilation. The *q-*, the gallows, the closures, *p/f* and the sheet habits are left out. It learns from the odd folios and writes the even ones, and it is scored on 16 generic measures, one of them new: the information carried by the order of the words (the mutual information between consecutive words of a line, 200 most frequent words, minus the same on the text shuffled within each line). The ceiling is the real odd half against the real even half. Three seeds.
+A reader of voynich.ninja asked: applied to half of Moby-Dick, would the skribe not produce English-like text that passes the same checks? The control (`scribe/controls/CONTROLS.md`) answers with Latin, Nicholas of Cusa's *De docta ignorantia* (37,138 words), given an artificial layout of lines of about 45 characters, paragraphs of 10 lines, pages of 26 lines and sheets of 4 pages (226 pages). A **generic** version of the skribe, the same for both texts, keeps what is not specific to the Voynich: copying from the page with writable edits, the two-glyph memory, the boundary agreement, the line-start contexts, the length tone and the dissimilation. The *q-*, the gallows, the closures, *p/f* and the sheet habits are left out. It learns from the odd folios and writes the even ones, and it is scored on 16 generic measures, one of them new: the information carried by the order of the words (the mutual information between consecutive words of a line, 200 most frequent words, minus the same on the text shuffled within each line). The ceiling is the real odd half against the real even half. Three seeds.
 
 | | Voynich | Latin |
 |---|---|---|
 | Real odd against real even (ceiling) | 16/16 | 13/16 |
-| Generic scribe, copying 35% | **12/16** | **7/16** |
-| Generic scribe, copying 10% | 10/16 | 7/16 |
-| Adjacent repeats / chance, real → scribe | 3.15 → 4.61 | 0.04 → 4.63 |
-| Word types, real → scribe | 4,850 → 4,412 | 3,897 → 8,451 |
-| Word order (bits), real → scribe | 0.082 → 0.021 | 0.274 → 0.000 |
+| Generic skribe, copying 35% | **12/16** | **7/16** |
+| Generic skribe, copying 10% | 10/16 | 7/16 |
+| Adjacent repeats / chance, real → skribe | 3.15 → 4.61 | 0.04 → 4.63 |
+| Word types, real → skribe | 4,850 → 4,412 | 3,897 → 8,451 |
+| Word order (bits), real → skribe | 0.082 → 0.021 | 0.274 → 0.000 |
 
-On both texts the scribe matches the character entropies, the Zipf slope and the mean word length: those measures distinguish nothing, any letter model passes them. The measures that separate the Voynich from a language are repetition, vocabulary size and word order, and on Latin the scribe fails all of them, and the battery sees it. **This is why the control matters**: the same procedure that passes on the Voynich fails on a real language exactly where a language should fail, so the battery tells syntax from its imitation, and what the Voynich and the scribe share (repetition 3.15 against 0.04 in Latin, near twins 2.26 against 0.59, and a link between consecutive words concentrated in the contact glyph) is what Latin does not have.
+On both texts the skribe matches the character entropies, the Zipf slope and the mean word length: those measures distinguish nothing, any letter model passes them. The measures that separate the Voynich from a language are repetition, vocabulary size and word order, and on Latin the skribe fails all of them, and the battery sees it. **This is why the control matters**: the same procedure that passes on the Voynich fails on a real language exactly where a language should fail, so the battery tells syntax from its imitation, and what the Voynich and the skribe share (repetition 3.15 against 0.04 in Latin, near twins 2.26 against 0.59, and a link between consecutive words concentrated in the contact glyph) is what Latin does not have.
 
-Where the link between consecutive words lives, measured as mutual information over the within-line shuffle: in Latin the whole previous word says 0.274 bits about the next one and its last letter 0.134, so the information is in the word, which is syntax. In the Voynich the whole word says 0.082 and the last glyph alone 0.106: all the dependence between consecutive words is in the contact glyph, and knowing the word adds nothing. The full scribe reaches 0.093 of the 0.106 in the contact glyph, but only 0.031 of the 0.082 per word: its frequent words do not concentrate the link as the real ones do. That measure is not yet in the battery of 76.
+Where the link between consecutive words lives, measured as mutual information over the within-line shuffle: in Latin the whole previous word says 0.274 bits about the next one and its last letter 0.134, so the information is in the word, which is syntax. In the Voynich the whole word says 0.082 and the last glyph alone 0.106: all the dependence between consecutive words is in the contact glyph, and knowing the word adds nothing. The full skribe reaches 0.093 of the 0.106 in the contact glyph, but only 0.031 of the 0.082 per word: its frequent words do not concentrate the link as the real ones do. That measure is not yet in the battery of 76.
 
 Limits: the Latin layout is artificial, so the line measures say nothing for Latin; Moby-Dick itself was not run.
 
@@ -382,42 +382,42 @@ Limits: the Latin layout is artificial, so the line measures say nothing for Lat
 
 C. Parisel (*Evidence of Layered Positional and Directional Constraints in the Voynich Manuscript*, arXiv 2604.19762, v2, June 2026) defines four signatures of the boundary between consecutive words, calibrated separately for Currier A and B on the RF1b-e transliteration: the rate of boundaries that go from an "end" glyph to a "start" glyph (reference 71.0% in A, 64.3% in B), the presence of glyphs that almost only start or almost only end a word, on both sides (bilateral), the mutual information between the last glyph of a word and the first of the next (0.586 in A, 0.498 in B), and the shape of the frequency curve of the boundary glyphs (a power law in A, intermediate in B). A parametric slot generator (more than 2,000 runs) and a Cardan grille (15 configurations) pass all four at once in neither dialect, because the end-to-start rate and the mutual information pull in opposite directions when one knob has to produce both. He asks for generators where these traits come from independent mechanisms.
 
-His verifier was run as published (one import fixed), on the scribe's text split by dialect with his own folio assignment, and on the real ZL3b text as a control (`external_tests/parisel/`).
+His verifier was run as published (one import fixed), on the skribe's text split by dialect with his own folio assignment, and on the real ZL3b text as a control (`external_tests/parisel/`).
 
 | Text | Dialect | End→start | MI | Bilateral | Shape | Verdict |
 |---|---|---|---|---|---|---|
 | real (ZL3b) | A | 66.4% | 0.584 | yes | Zipfian | **4/4** |
 | real (ZL3b) | B | 65.8% | 0.499 | yes | intermediate | **4/4** |
-| scribe, 5 seeds | A | 68.1–70.5% | 0.526–0.541 | yes | Zipfian | **4/4 × 5** |
-| scribe, 5 seeds | B | 63.3–65.6% | 0.454–0.470 | yes | intermediate | **4/4 × 5** |
+| skribe, 5 seeds | A | 68.1–70.5% | 0.526–0.541 | yes | Zipfian | **4/4 × 5** |
+| skribe, 5 seeds | B | 63.3–65.6% | 0.454–0.470 | yes | intermediate | **4/4 × 5** |
 
-The scribe passes the four signatures in both dialects and in all five seeds, with values close to the reference, not just inside the margins, and nothing in it is tuned to the boundary distribution. The mechanisms Parisel asks to be independent are independent in the scribe by construction: the end-to-start rate and the mutual information come from the boundary agreement [R3.3] and from the endings as closing marks [R2.7]; the shape from the word template [R2.1] and the two-glyph memory [R13]; the bilaterality from the glyphs that only open or only close a word [R1.5]. Reservations: the scribe's tables are learnt from the text, and 21–28% of the scribe's words are not in the dialect's word list (they are new words; the verifier reports it but does not penalise it).
+The skribe passes the four signatures in both dialects and in all five seeds, with values close to the reference, not just inside the margins, and nothing in it is tuned to the boundary distribution. The mechanisms Parisel asks to be independent are independent in the skribe by construction: the end-to-start rate and the mutual information come from the boundary agreement [R3.3] and from the endings as closing marks [R2.7]; the shape from the word template [R2.1] and the two-glyph memory [R13]; the bilaterality from the glyphs that only open or only close a word [R1.5]. Reservations: the skribe's tables are learnt from the text, and 21–28% of the skribe's words are not in the dialect's word list (they are new words; the verifier reports it but does not penalise it).
 
 ### 8.3 Layfield and Davis: the similarity between pages
 
 C. Layfield and L. Fagin Davis (*Singulion Structure and the Voynich Manuscript*, Digital Medievalist 19, 2026) hold that the manuscript was made of loose bifolia that were never meant to be nested in quires, and that the present binding is wrong. Their textual evidence is latent semantic analysis (documents of 40 words per page, TF-IDF, SVD with k = 75, cosine between pages): in the Voynich, pages on the inner face of a bifolium (conjoint) are more similar (0.433) than recto and verso of the same leaf (confoliate, 0.383), and both more than pages that face each other in the present order (facing, 0.298), while in two Latin control manuscripts facing pages are the most similar. They then reorder the bifolia of quires 13 and 20 to maximise the facing similarity (gains of 12% and 20%).
 
-Torsten Timm's review (*The Singulion and the Sequence*, July 2026) had already read the similarity within the bifolium as **proximity of production** rather than continuity of meaning, and had asked for a permutation null for the reordering. Forum members (Wladimir D, pfeaster, oshfdk, dashstofsk) had pointed in the same direction. What was missing was a meaningless control text with sheet habits, which is what the scribe is: it has sheet habits and hand vocabulary and no notion of reading order.
+Torsten Timm's review (*The Singulion and the Sequence*, July 2026) had already read the similarity within the bifolium as **proximity of production** rather than continuity of meaning, and had asked for a permutation null for the reordering. Forum members (Wladimir D, pfeaster, oshfdk, dashstofsk) had pointed in the same direction. What was missing was a meaningless control text with sheet habits, which is what the skribe is: it has sheet habits and hand vocabulary and no notion of reading order.
 
-The same LSA, rebuilt on the ZL3b paragraph text and run on the real text and on the scribe, in their quires (`external_tests/davis_layfield/`):
+The same LSA, rebuilt on the ZL3b paragraph text and run on the real text and on the skribe, in their quires (`external_tests/davis_layfield/`):
 
 | Text | Confoliate | Conjoint | Facing | p conf/fac | p fac/conj | p conf/conj |
 |---|---|---|---|---|---|---|
 | Layfield and Davis (ZL 2a) | 0.383 | 0.433 | 0.298 | 0.005 | 0.000 | 0.168 |
 | real (ZL3b, here) | 0.225 | 0.284 | 0.154 | 0.008 | 0.000 | 0.100 |
-| scribe (5 seeds) | 0.147 ± 0.009 | 0.145 ± 0.012 | 0.091 ± 0.017 | < 0.07 in 4 of 5 | 0.03–0.18 | 0.48–0.97 |
+| skribe (5 seeds) | 0.147 ± 0.009 | 0.145 ± 0.012 | 0.091 ± 0.017 | < 0.07 in 4 of 5 | 0.03–0.18 | 0.48–0.97 |
 
-The absolute values differ because the space is another; the order and the p values are what count. On the real text their pattern and their p values come out. On the scribe, a text with no meaning and no reading order, the pages of the same bifolium (0.145) are also far more similar than the facing pages of different bifolia (0.091). The similarity between pages measures the writing session, the production reading, and it cannot decide whether the binding order is right or wrong. Their reordering, done their way (mean facing similarity of the nested order against the maximum over all permutations of the bifolia), gains 33% on quire 13 and 50% on quire 20 for the real text, and 61 ± 26% and 78 ± 19% for the scribe, which has no correct order to recover: the maximum of 120 or 720 permutations of a noisy number always goes up. The codicological part of their argument (stains, drawings crossing the gutter, alternating hands) is untouched by this; the text cannot vote on it.
+The absolute values differ because the space is another; the order and the p values are what count. On the real text their pattern and their p values come out. On the skribe, a text with no meaning and no reading order, the pages of the same bifolium (0.145) are also far more similar than the facing pages of different bifolia (0.091). The similarity between pages measures the writing session, the production reading, and it cannot decide whether the binding order is right or wrong. Their reordering, done their way (mean facing similarity of the nested order against the maximum over all permutations of the bifolia), gains 33% on quire 13 and 50% on quire 20 for the real text, and 61 ± 26% and 78 ± 19% for the skribe, which has no correct order to recover: the maximum of 120 or 720 permutations of a noisy number always goes up. The codicological part of their argument (stains, drawings crossing the gutter, alternating hands) is untouched by this; the text cannot vote on it.
 
-**An asymmetry within the bifolium that did not survive.** In the LSA numbers the inner face of the real bifolium (0.284) is more similar than the outer face (0.183): +0.096 paired by bifolium, 68% of the 37 bifolia, and the scribe does not do it (+0.001), which looked like a missing rule and would fit Timm's suggestion that the inner pages were visible together while writing. On the same pages and bifolia, with the contrast paired so that hand, language, section and quire are identical on both sides, five other measures see nothing: TF-IDF without SVD +0.026 (p 0.07), Jaccard of word types +0.002 (p 0.61), Jaccard at equal length +0.002, exact twins +0.004 (p 0.74), near twins at edit distance 1 +0.005 (p 0.72), the five free choices +0.020 (p 0.70). Within the LSA the effect belongs to hands 2 and 3 (15 bifolia); hand 1 (21 bifolia) gives +0.026, p 0.65. One post-hoc representation against five negative replications on the same data: not confirmed.
+**An asymmetry within the bifolium that did not survive.** In the LSA numbers the inner face of the real bifolium (0.284) is more similar than the outer face (0.183): +0.096 paired by bifolium, 68% of the 37 bifolia, and the skribe does not do it (+0.001), which looked like a missing rule and would fit Timm's suggestion that the inner pages were visible together while writing. On the same pages and bifolia, with the contrast paired so that hand, language, section and quire are identical on both sides, five other measures see nothing: TF-IDF without SVD +0.026 (p 0.07), Jaccard of word types +0.002 (p 0.61), Jaccard at equal length +0.002, exact twins +0.004 (p 0.74), near twins at edit distance 1 +0.005 (p 0.72), the five free choices +0.020 (p 0.70). Within the LSA the effect belongs to hands 2 and 3 (15 bifolia); hand 1 (21 bifolia) gives +0.026, p 0.65. One post-hoc representation against five negative replications on the same data: not confirmed.
 
 ---
 
 ## 9. What it does not reproduce
 
-The seven measures the scribe of 19 October misses (`scribe/results_table.txt`):
+The seven measures the skribe of 19 October misses (`scribe/results_table.txt`):
 
-| Measure | Real | Scribe |
+| Measure | Real | Skribe |
 |---|---|---|
 | Consecutive words at edit distance 1 / shuffled | 2.21 | 1.64 |
 | Same word at distance 3 / shuffled | 3.45 | 2.51 |
@@ -428,8 +428,8 @@ The seven measures the scribe of 19 October misses (`scribe/results_table.txt`):
 | Page overdispersion of e-words | 24.6 | 18.4 |
 
 - **Near twins.** Consecutive words at edit distance 1 are now too few. With the copying down to 22% there are fewer of them; the hand vocabulary does not make them.
-- **Which words repeat.** The overall amount of repetition is right, but in the real text *dal*, *shey*, *saiin* never repeat adjacently and *okaiin* does ×5. Half of the frequent words repeat a lot and 16% avoid it; the scribe knows families of words, not single words. A per-word propensity estimated from the text did not help (§4). Repetition at distance 3 moves between runs (3.12 in another run of the same configuration) and is borderline.
-- **Line-end -m.** The real effect turns out to be a mix of hands: hand 1 writes short lines and closes little, hand 3 writes long lines and closes a lot. Within hand × section it is flat (observed minus expected per word-count bin between −0.03 and +0.05, all compatible with zero). The scribe's remaining error is in short non-final lines: 11% *-m* against 6%.
+- **Which words repeat.** The overall amount of repetition is right, but in the real text *dal*, *shey*, *saiin* never repeat adjacently and *okaiin* does ×5. Half of the frequent words repeat a lot and 16% avoid it; the skribe knows families of words, not single words. A per-word propensity estimated from the text did not help (§4). Repetition at distance 3 moves between runs (3.12 in another run of the same configuration) and is borderline.
+- **Line-end -m.** The real effect turns out to be a mix of hands: hand 1 writes short lines and closes little, hand 3 writes long lines and closes a lot. Within hand × section it is flat (observed minus expected per word-count bin between −0.03 and +0.05, all compatible with zero). The skribe's remaining error is in short non-final lines: 11% *-m* against 6%.
 - **Paragraph-initial q-** moves between seeds and is borderline.
 - **Page overdispersion of e-words.** It was reproduced with the per-section offsets of 14 October (20.3) and dropped out when they were switched off in favour of the hand and section tables (§5). The share of *e*-words by section is right; the spread between pages of the same section is a little too small.
 - **Long words**, the failure of 14 October (7.4% against 5.3%), are fixed by the length weights by position: 5.7%.
@@ -459,23 +459,23 @@ What it does **not** say:
 - **Line-end closure is position plus hand.** It depends neither on the physical distance to the margin (measured with line coordinates) nor on the number of words in the line once the hand is controlled.
 - **Drawing gaps almost never split a word.** The concatenation of the words on both sides of a `<->` is an attested word no more often than across a normal space, and far less often than across an uncertain space: at most ~4% of the 745 gaps. The excess of *-d/-s* before gaps is mostly a lone *s* (31 cases before gaps, 13 after) that does not behave like a detached prefix.
 - **Pieces on either side of a drawing are correctly paired.** On f1v the text to the right of the plant sits almost one line lower than the text on the left. No pairing of left and right pieces shows boundary agreement, neither as transcribed nor shifted by one line, while a positive control does. The gap really breaks the word boundary, as if each piece started a new line.
-- **Quire 13 written blind.** Asked by a reader, the scribe wrote quire 13 (f75r–f84v, biological, hand 2) twice: learnt from the whole manuscript, and without having seen the quire. *e*-words: real 50.6%, scribe 50.3%, blind scribe 41.2%; strange words 3.0%, 3.0% and 3.6%. The blind scribe does not know the habit of the biological section, because it lives only in those pages. The three texts are in `scribe/quire_M/`.
+- **Quire 13 written blind.** Asked by a reader, the skribe wrote quire 13 (f75r–f84v, biological, hand 2) twice: learnt from the whole manuscript, and without having seen the quire. *e*-words: real 50.6%, skribe 50.3%, blind skribe 41.2%; strange words 3.0%, 3.0% and 3.6%. The blind skribe does not know the habit of the biological section, because it lives only in those pages. The three texts are in `scribe/quire_M/`.
 
 ---
 
 ## A note on tools
 
-I used **Claude Code** (Anthropic) as a *code scribe*: it wrote most of the analysis and generator code. That saved me many hours of programming and let me concentrate on what matters, which is checking the results, questioning them and changing things quickly when something did not hold up. The questions, the decisions and the verification of every figure are mine.
+I used **Claude Code** (Anthropic) as a *code skribe*: it wrote most of the analysis and generator code. That saved me many hours of programming and let me concentrate on what matters, which is checking the results, questioning them and changing things quickly when something did not hold up. The questions, the decisions and the verification of every figure are mine.
 
 ## How to reproduce
 
-Python 3 with pandas, numpy and scipy. On Windows the author runs everything with `py -3`; elsewhere use `python3`. The scribe's scripts are run from inside `scribe/`; the appendix table from the repository root.
+Python 3 with pandas, numpy and scipy. On Windows the author runs everything with `py -3`; elsewhere use `python3`. The skribe's scripts are run from inside `scribe/`; the appendix table from the repository root.
 
 | Step | Command |
 |---|---|
-| Enter the folder | `cd scribe` |
+| Enter the folder | `cd skribe` |
 | Real measures | `py -3 measures.py` → `measures_real.json` |
-| Scribe vs real (5 seeds) | `py -3 compare.py` → `results.json`, `results_table.txt` |
+| Skribe vs real (5 seeds) | `py -3 compare.py` → `results.json`, `results_table.txt` |
 | Hold-out (odd → even) | `py -3 holdout.py` → `results_holdout_table.txt` |
 | The whole manuscript, five seeds | `py -3 manuscript.py 1 2 3 4 5` → `manuscript_out/` |
 | Ablations | `py -3 compare.py ablations` |
@@ -490,7 +490,7 @@ Other scripts in `scribe/`: `standard_measures.py` (entropies, Zipf, MATTR, burs
 ✓ = within ±25% of the real value (or within 0.01 absolute near zero); mean of 5 seeds.
 
 <!-- TABLE -->
-| # | Measure | Real | 3-rule generator | Scribe |
+| # | Measure | Real | 3-rule generator | Skribe |
 |---|---|---|---|---|
 | 1 | Adjacent identical words (%) | 0.902 | 0.793 ✓ | 0.824 ✓ |
 | 2 | Adjacent identical words / chance | 3.09 | 2.91 ✓ | 2.52 ✓ |
