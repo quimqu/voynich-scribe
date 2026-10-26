@@ -9,3 +9,7 @@ scribe_M_blind.txt   written by the scribe trained on the whole manuscript EXCEP
 All three files have the same lines, with the ZL3b line identifiers, the same number of words per line, the same
 drawing gaps and paragraph starts and ends, so they can be compared line by line. 791 lines, 6311 words, 20 pages.
 Labels are not included. Seed 1 for both generated files; other seeds on request.
+
+Regenerated on 26 October 2026 with the scribe that has the line habit for words starting with a gallows (rule R14.7).
+Words starting with t/k/p/f, not line-initial: real 3.0%, all 3.7%, blind 3.5%; clustering within the line: real x2.26,
+all x2.29, blind x1.43 (the version of 19 October gave x0.94).

@@ -66,7 +66,7 @@
  "[text] Character entropy h1": 3.9070939489987038,
  "[text] Conditional entropy h2": 2.1374599311301474,
  "[text] Conditional entropy h3": 1.8603733083079357,
- "[text] Zipf slope (first 1,000 types)": 1.004836905295016,
+ "[text] Zipf slope (first 1,000 types)": 1.0048369052950148,
  "[length] Words of 2-3 glyphs (%)": 21.611324495105936,
  "[length] Words of 5-6 glyphs (%)": 41.00483211497956,
  "[range] Shared vocabulary, neighbouring pages (cosine)": 0.3295946769791683,
@@ -74,5 +74,7 @@
  "[range] Shared vocabulary, 100 pages apart": 0.15484627034006446,
  "[range] Neighbouring / 100 pages apart": 2.128528354317682,
  "[range] Bursts of the 50 most frequent words (CV of gaps)": 1.7546348978272719,
- "[range] Page overdispersion of the 50 most frequent words": 2.0630322494587334
+ "[range] Page overdispersion of the 50 most frequent words": 2.0630322494587334,
+ "[gallows] Words starting with a gallows, not line-initial (%)": 5.0541644468122895,
+ "[gallows] Gallows-initial word after another / chance (in line)": 1.4541163888307642
 }

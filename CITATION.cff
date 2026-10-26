@@ -7,7 +7,7 @@ authors:
     given-names: Quim
 repository-code: "https://github.com/quimqu/voynich-scribe"
 license: MIT
-version: 0.1.0
+version: 0.2.0
 date-released: 2026-10-26
 keywords:
   - Voynich manuscript
@@ -18,8 +18,8 @@ abstract: >-
   A seven-step writing procedure with no meaning anywhere (sheet habits, copying from the
   visible page, a two-glyph memory, a boundary rule between words, line start and end forms,
   paragraph rules) writes a complete fake Voynich manuscript on the real layout. Measured
-  against the Zandbergen-Landini transliteration (ZL3b) with a battery of 76 statistics, it
-  reproduces 69; learned from the odd folios only, it writes the even ones at 61 of 76 (the
-  real halves agree on 67). It also passes the four boundary signatures of Parisel (2026) for
+  against the Zandbergen-Landini transliteration (ZL3b) with a battery of 78 statistics, it
+  reproduces 70; learned from the odd folios only, it writes the even ones at 64 of 78 (the
+  real halves agree on 69). It also passes the four boundary signatures of Parisel (2026) for
   both Currier dialects, and reproduces the page-similarity pattern that Layfield and Davis
   (2026) read as evidence of misbinding.

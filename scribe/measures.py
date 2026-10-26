@@ -261,6 +261,13 @@ def evaluate(LINES,seed=0):
     for w,_ in c.most_common(50):
         x=np.array([pv[pg][w] for pg in pages],float); e=npg*c[w]/N; od.append(((x-e)**2/e).sum()/(len(pages)-1))
     R['[range] Page overdispersion of the 50 most frequent words']=float(np.mean(od))
+    # ===== part 6 (20/10): words starting with a gallows (t k p f), remark by dashstofsk on voynich.ninja =====
+    # outside the first word of the line they cluster: after one, the next is one more often too (real x1.45). Shuffling the words
+    # within the line does not change it (x1.46): it is a line habit (and a little a page habit, x1.16), not a sequence
+    g0=lambda w: w[0] in 'tkpf'
+    R['[gallows] Words starting with a gallows, not line-initial (%)']=100*np.mean([g0(w) for l in LINES for w in l['ws'][1:]])
+    pr=[(a,b) for l in LINES for a,b in zip(l['ws'][1:],l['ws'][2:])]; base=np.mean([g0(b) for a,b in pr])
+    R['[gallows] Gallows-initial word after another / chance (in line)']=np.mean([g0(b) for a,b in pr if g0(a)])/base if base else np.nan
     return R
 _TRI=None
 _SEC=None

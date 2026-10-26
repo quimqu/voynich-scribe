@@ -237,7 +237,7 @@ DEFAULT=dict(r_copy=0.22,r_mod=0.45,tau=4.0,vert_bonus=2.0,first_copy=0.1,p_pf=0
              sigma_len=0.6,len_cands=5,rej_2gall=0.35,rej_ei=0.25,use_word_rules=True,first_norep=0.4,gap_scale=0.75,declose_p=0.55,gap_noq=0.9,use_famrep=True,adj_boost=0.5,avoid_scale=1.2,closure_by_nwords=True,closure_by_hand=True,use_reprefix=True,use_end_table=True,pf_back=0.75,
              use_lang=True,use_slots=True,use_contexts=True,use_style=True,use_copy=True,use_first_line=True,use_closure=True,
              use_dissim=True,use_len_mode=True,use_boundary=True,
-             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
+             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35)   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
 STYLE_DIMS=['t','sh','q','dy']
 # 'e' habit (14/10): word block with e (-y/-dy) or without (-aiin/-ar/-ol), R2.4, per sheet, page, line and section; its own random generator
 NUC={'ch','sh','k','t','p','f','cth','ckh','cph','cfh'}
@@ -273,6 +273,7 @@ class Escriba:
                 elif k=='q' and len(g)==0: ws[i]*=math.exp(style['q'])
                 elif k=='d' and g and g[-1]=='e': ws[i]*=math.exp(style['dy'])
                 elif k=='e' and g and g[-1] in NUC and 'e' in style: ws[i]*=math.exp(style['e'])
+                elif k in ('t','k','p','f') and len(g)==0 and style.get('g0'): ws[i]*=math.exp(style['g0'])
         return self.rng.choices(ks,weights=ws.tolist())[0]
     def gen_word(self,tab,A,style):
         for _ in range(15):
@@ -321,7 +322,7 @@ class Escriba:
         return w
     def write(self,seed=0,layout=None):
         p=self.p; self.rng=random.Random(seed); np_rng=np.random.default_rng(seed)
-        e_rng=np.random.default_rng(seed+7919); sheet_e={}; e_page=None; e_page_line=None; e_pg=0.0; e_line=0.0
+        e_rng=np.random.default_rng(seed+7919); sheet_e={}; e_page=None; e_page_line=None; e_pg=0.0; e_line=0.0; g0_page=None; g0_pg=0.0; g0_line=0.0
         sheet_style=defaultdict(lambda: {d:float(np_rng.normal(0,p['sigma_style'])) for d in STYLE_DIMS})
         out=[]; page=None; prev_pages=[]; sheet_words=defaultdict(list); cur_sheet=None   # memory across pages (19/10): the last pages of the book (prev_pages) and the pages already written on the same sheet (sheet_words)
         for l in (layout if layout is not None else L_ALL):
@@ -342,11 +343,18 @@ class Escriba:
                 e_line=p['rho_line']*e_line+float(e_rng.normal(0,p['sigma_line']))
                 style['e']=e_pg+e_line+(self.sec_e.get(l.get('section',''),0.0) if p['use_sec_e'] else 0.0)
             if style is not None and p['use_sec_dy']: style['dy']+=self.sec_dy.get(l.get('section',''),0.0)   # -dy or -y: also a section habit
+            if style is not None and p['use_g0']:
+                # gallows-initial habit (20/10): lines full of words starting with t/k/p/f and lines without; a page value plus a line value,
+                # independent for each line (shuffling within the line does not remove the real clustering; shuffling within the page partly does).
+                # Centred so that the mean frequency does not move, plus g0_mu. The first word of the line is left alone (already set by the boundary)
+                if l['page']!=g0_page: g0_page=l['page']; g0_pg=float(np_rng.normal(0,p['sigma_g0_pg']))
+                g0_line=g0_pg+float(np_rng.normal(0,p['sigma_g0_line']))-(p['sigma_g0_pg']**2+p['sigma_g0_line']**2)/2+p['g0_mu']
             tab=self.table(l['lang'],l.get('hand'),l.get('section')); lam=float(np_rng.normal(0,p['sigma_len'])) if p['use_len_mode'] else 0.0
             first_line=(l['ps']==1) and p['use_first_line']
             ws=[]; li=len(lines_on_page)
             for i in range(len(l['ws'])):
                 A=start_tag(l,i,ws[i-1] if i else None) if p['use_contexts'] else ('<'+gl(ws[i-1])[-1] if i else '^')
+                if style is not None and p['use_g0']: style['g0']=g0_line if i>0 else 0.0
                 rc=p['r_copy']*(p['first_copy'] if first_line else 1.0)
                 w=None
                 if p['use_copy'] and i>0 and page_words and self.rng.random()<rc:

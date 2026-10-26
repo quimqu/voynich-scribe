@@ -3,6 +3,8 @@
 *What it reproduces, what it doesn't, and what it suggests about how the Voynich Manuscript was written.*
 *Written on 14 October 2026. Revised on 25 October 2026 for the scribe of 19 October, the battery of 76 measures, the controls and the external tests.*
 
+*26 October 2026: the figures below are those of the scribe of 19 October. Since then the scribe has one more habit (words that start with a gallows come in lines, rule R14.7) and the battery two more measures: 70/78 on the whole text, 64/78 on the even folios. See `scribe/SCRIBE.md` §10.*
+
 ---
 
 ## Summary

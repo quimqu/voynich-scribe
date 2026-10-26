@@ -1,6 +1,6 @@
 # The scribe: a meaningless procedure that writes a Voynich-like text
 
-This repository contains "the scribe", a small program that writes a complete fake Voynich manuscript on the real manuscript's layout: same pages, same sheets, same paragraphs, same number of lines and words per line, same gaps for the drawings, Currier A and B, the five Davis hands. There is no meaning anywhere in it. It only follows writing rules that were first measured on the real text, and it is scored against the real text with a battery of 76 statistics.
+This repository contains "the scribe", a small program that writes a complete fake Voynich manuscript on the real manuscript's layout: same pages, same sheets, same paragraphs, same number of lines and words per line, same gaps for the drawings, Currier A and B, the five Davis hands. There is no meaning anywhere in it. It only follows writing rules that were first measured on the real text, and it is scored against the real text with a battery of 78 statistics.
 
 It also contains the battery, the rulebook the scribe implements, the generated text, and two tests designed by other people (Parisel 2026; Layfield and Davis 2026) run on the scribe's output.
 
@@ -8,24 +8,26 @@ Author: Quim Quadrada (quimqu on voynich.ninja). The work was presented in two f
 
 ## What it does
 
-For each word the scribe either copies a word already written nearby on the page (often changing one glyph, with the same two-glyph rule used for new words) or writes a new word glyph by glyph, with a memory of the two previous glyphs. On top of that it follows the rules of place: how a word starts depends on how the previous one ended; the first word of a line prefers d, s or y and avoids the first glyph of the line above; the last word of a line is "closed" (aiin becomes am, ol becomes oly); a paragraph starts with a gallows and its first line uses p and f; a drawing is treated as a margin; each sheet (the folded piece of vellum, four pages) has its own taste for the free choices (k or t, ch or sh, q or not, dy or y, words with e or without); each hand and each section has its own vocabulary of glyph habits. Everything is described in plain words in [writeup/THE_SCRIBE.md](writeup/THE_SCRIBE.md) and, rule by rule with its strength and source, in [RULES.md](RULES.md).
+For each word the scribe either copies a word already written nearby on the page (often changing one glyph, with the same two-glyph rule used for new words) or writes a new word glyph by glyph, with a memory of the two previous glyphs. On top of that it follows the rules of place: how a word starts depends on how the previous one ended; the first word of a line prefers d, s or y and avoids the first glyph of the line above; the last word of a line is "closed" (aiin becomes am, ol becomes oly); a paragraph starts with a gallows and its first line uses p and f; a drawing is treated as a margin; each sheet (the folded piece of vellum, four pages) has its own taste for the free choices (k or t, ch or sh, q or not, dy or y, words with e or without); each hand and each section has its own vocabulary of glyph habits; and each line is more or less inclined to start its words with a gallows. Everything is described in plain words in [writeup/THE_SCRIBE.md](writeup/THE_SCRIBE.md) and, rule by rule with its strength and source, in [RULES.md](RULES.md).
 
 ## Results
 
-The fake text is compared with the real one on 76 measures (repetition at several distances, twins on the same page, line start and end forms, paragraph forms, page and sheet habits, entropies, Zipf, word lengths, long-range similarity between pages, bursts). A measure counts as reproduced when the scribe's value is within 25% of the real one, averaged over five runs.
+The fake text is compared with the real one on 78 measures (repetition at several distances, twins on the same page, line start and end forms, paragraph forms, page and sheet habits, entropies, Zipf, word lengths, long-range similarity between pages, bursts, words that start with a gallows). A measure counts as reproduced when the scribe's value is within 25% of the real one, averaged over five runs.
 
 | comparison | reproduced | median error |
 |---|---|---|
-| a simple three-rule generator (baseline) vs the real text | 39 / 76 | 0.26 |
-| **the scribe vs the real text** | **69 / 76** | **0.067** |
-| the scribe learned from the odd folios only, writing the even folios, vs the real even folios | 61 / 76 | 0.080 |
-| the real odd folios vs the real even folios (the ceiling) | 67 / 76 | 0.049 |
+| a simple three-rule generator (baseline) vs the real text | 41 / 78 | 0.26 |
+| **the scribe vs the real text** | **70 / 78** | **0.065** |
+| the scribe learned from the odd folios only, writing the even folios, vs the real even folios | 64 / 78 | 0.083 |
+| the real odd folios vs the real even folios (the ceiling) | 69 / 78 | 0.052 |
+
+*26 October 2026: a line habit for words that start with a gallows (rule R14.7), after remarks by dashstofsk and nablator on voynich.ninja; calibrated on the odd folios only. Before it, the scribe scored 69 / 76 (0.067) and 61 / 76 on the even folios. It reproduces what it was made for (the clustering of these words by line) and changes no other rule; it does not improve the score as a whole. Details in `scribe/SCRIBE.md` §10.*
 
 The three-rule generator is the first generator of the project (`night_generator/generator3.py`): new words glyph by glyph with one two-glyph table for the whole manuscript, copying of nearby words (same line and the two lines above, mostly changed by one glyph), and a memory that is emptied at each page and paragraph, plus a crude line-start avoidance and *-iin* → *-m* at line end. It has no hands, sections, sheet habits or rules of place beyond those; it shows how much of the score the rest of the rulebook earns. Details in [writeup/THE_SCRIBE.md](writeup/THE_SCRIBE.md) §3.
 
-Removing any single rule costs measures (`scribe/results_ablations_19_10_table.txt`). What it still gets wrong: a few exact-repeat and distance-5 repeat rates, which words avoid repeating, the m at the end of long lines, and a third too many words of eight or more glyphs. Details in `scribe/SCRIBE.md` (the lab notebook of the scribe) and `writeup/THE_SCRIBE.md` (English).
+Removing any single rule costs measures, except two switches that are no longer in use (the A/B tables, replaced by the per-hand and per-section ones, and the section dy, off since 19 October) (`scribe/results_ablations_table.txt`; the same ablations without the newest habit in `results_ablations_without_g0_table.txt`). What it still gets wrong: neighbouring words one glyph apart, which frequent words repeat a lot and which avoid it, the m at the end of long lines, the q- on the first word of a paragraph (at the threshold), the page overdispersion of words with e, and the clustering of words that start with a bench gallows (cth-, ckh-) in herbal A. Two more measures (H8 and a- at line start) pass or fail depending on the seed. Details in `scribe/SCRIBE.md` (the lab notebook of the scribe) and `writeup/THE_SCRIBE.md` (English).
 
-**External tests** (25 October 2026, [external_tests/EXTERNAL_TESTS.md](external_tests/EXTERNAL_TESTS.md)):
+**External tests** (25 October 2026, run on the scribe of 19 October, [external_tests/EXTERNAL_TESTS.md](external_tests/EXTERNAL_TESTS.md)):
 
 - **Parisel (arXiv 2604.19762)** defines four signatures of the boundary between words, calibrated per Currier dialect, that no slot-based generator or Cardan grille passes at once. Run with his own verifier, the scribe passes all four in Currier A and in Currier B, in all five runs, with values close to his references (end-to-start rate 68 to 70% in A against 71, 63 to 66% in B against 64; boundary mutual information 0.53 to 0.54 in A against 0.59, 0.45 to 0.47 in B against 0.50).
 - **Layfield and Davis (Digital Medievalist 19, 2026)** read the LSA similarity between pages (pages of the same bifolium more similar than pages that face each other in the current binding) as evidence that the bifolia were loose sheets bound in the wrong order. The same LSA on the real text reproduces their pattern and their p values; on the scribe, which has sheet habits and no notion of reading order, it gives the same pattern. Their reordering by maximum similarity gains more on the scribe (61% and 78%) than on the real text (33% and 50%). The text similarity measures the writing session, not the reading order.
@@ -41,11 +43,11 @@ You need Python 3.11 or later with numpy, pandas and scipy (`pip install -r requ
 
 ```bash
 cd scribe
-python3 measures.py        # the 76 measures of the real text -> measures_real.json (about 1 min)
+python3 measures.py        # the 78 measures of the real text -> measures_real.json (about 1 min)
 python3 compare.py        # real text, three-rule baseline and the scribe, five seeds -> results.json and a table (about 10 min)
 python3 holdout.py        # learn from the odd folios, write the even ones (about 10 min)
 python3 manuscript.py 1 2 3 4 5   # write the whole manuscript five times -> manuscript_out/ (8 s per seed)
-python3 compare.py ablacions     # the scribe with each rule removed (about an hour)
+python3 compare.py ablations     # the scribe with each rule removed (about an hour)
 ```
 
 The external tests, from the repository root:
@@ -65,7 +67,7 @@ The dataset `df_lines_ZL3b_strokes.csv` is built from the ZL3b transliteration b
 | path | content |
 |---|---|
 | `scribe/scribe.py` | the scribe |
-| `scribe/measures.py` | the battery of 76 measures and the loader of the real text |
+| `scribe/measures.py` | the battery of 78 measures and the loader of the real text |
 | `scribe/compare.py`, `holdout.py` | comparison with the real text, ablations, odd/even hold-out |
 | `scribe/manuscript.py`, `quire.py` | write the whole manuscript, or one quire, in an IVTFF-like format with the ZL3b line identifiers |
 | `scribe/standard_measures.py`, `boundary_per_hand.py`, `controls/` | standard entropy and Zipf measures; the boundary coupling per hand; the control with a real language (Latin, Cusanus) |

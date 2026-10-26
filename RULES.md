@@ -2,7 +2,7 @@
 
 *A rulebook, not a report. It collects, as explicit rules, everything that the program (phases 1-4w, July 2026; sessions 27-28/09/2026) has measured with controls. Each rule carries: its **strength** (percentage of compliance or ratio against chance), whether it is **system** (the same in all five hands) or **habit** (varies by hand or by page), and its **source** (script or findings log entry). Data: ZL3b, 32,284 paragraph words, 7,915 word types. Numbers from 28/09/2026 (`sessio_2026-09-28/regles_compliment_out.txt`) unless stated otherwise.*
 
-*Sections 13 and 14: added on the afternoon of 28/09 (second mining pass). How to read it: "always" means ≥ 98%; "almost always" 90-98%; "by preference" a strong bias but with normal exceptions. There is no rule of meaning: all of them are rules of form, of place and of process.*
+*Sections 13 and 14: added on the afternoon of 28/09 (second mining pass); R14.7 added on 26/10/2026. How to read it: "always" means ≥ 98%; "almost always" 90-98%; "by preference" a strong bias but with normal exceptions. There is no rule of meaning: all of them are rules of form, of place and of process.*
 
 *Sources: identifiers in square brackets (A1, G6, H14, R7.4 ...) are entries of the findings log and of this rulebook; the script paths in the sources (`sessio_2026-09-28/`, `coordenades/`, `proves_seccio5/` ...) belong to the lab notebook of the project, which is not part of this repository. The rules that the scribe implements are reproduced by the code in `scribe/`.*
 
@@ -179,6 +179,7 @@ And within the core `o-` after `-y`: `ok-` takes `q-` 72% of the time, `ot-` 48%
 8. If you run into a drawing, close a little before it and start again after it as if it were a new line, but here you may start with `a-` (R6.1, R6.2).
 9. Take the words from those you have in sight on the page, changing one glyph (R2.8, R7.1); now and then repeat one in the middle of the line (R9.1).
 10. Write the four pages of the sheet in the same session, with the same vocabulary and the same letter size (R7.4). In the labels, drop the `q-` and close with `-y` (R8.1).
+11. At the start of each line, decide whether it will be a line of words that start with a gallows (`t`, `k`, `p`, `f`) or not, a little according to the page (R14.7).
 
 A generator that follows rules 3, 4, 5 and 9 reproduces 16 of 27 measures of the manuscript; what it lacks is above all the production layer (drift, sheet, first line) and the contagion between neighbours. [G11]
 
@@ -229,6 +230,8 @@ A generator that follows rules 3, 4, 5 and 9 reproduces 16 of 27 measures of the
 **R14.5 · Length belongs to the line.** If the first word is long (≥ 6), the second is 4.88; if it is short (≤ 4), 4.26. Habit.
 
 **R14.6 · Words per line by section** (intermediate lines): herbal 6.9, biological 8.1, stars 10.3, pharmaceutical 10.1, text-only pages 10.0. This is the width the drawings leave, not a writing rule.
+
+**R14.7 · Words that start with a gallows come in lines** (20/10/2026, after a remark by dashstofsk on voynich.ninja). Leaving out the first word of the line (R5.1, R14.1), 5.1% of the words start directly with `t`, `k`, `p` or `f`. After one of them, the next word is one too 1.45 times more often than chance. Shuffling the words within each line leaves it at 1.46; shuffling within the page brings it to 1.16; shuffling the whole text, to 1.0. So it is not one word calling the next: some lines are full of these words and others have almost none, a little more on some pages than on others. It holds in the first lines of paragraphs (×1.35) and in the other lines (×1.43). It does not appear if a "gallows word" is any word containing a gallows (×1.06, the same in the scribe), nor for gallows right after a prefix (`qok-`, `ot-`: ×1.05). The words that start with a bench gallows (`cth-`, `ckh-`) cluster much more (×3.3), but that is section, not line: 8.3% of the words in herbal A, 0.5% in the B sections, and ×1.5 within each language; it is a different habit (×1.08 between the two kinds) and the scribe does not reproduce it yet (×2.4). Habit (of line and page). [`scribe/SCRIBE.md` §10]
 
 ---
 

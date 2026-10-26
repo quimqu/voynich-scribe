@@ -1,5 +1,7 @@
 # The scribe: how the Voynich is written, as a procedure
 
+> **26/10/2026:** battery of 78 measures (2 new ones on words that start with a gallows). The scribe now has a line habit for these words, calibrated on the odd folios only: **70/78, median error 0.065**; on the even folios 64/78 (without the habit, 63/78). All the rules were removed one at a time with and without the new habit: none of them changed. See §10.
+>
 > **19/10/2026:** battery of 76 measures (12 new ones: entropies, Zipf, lengths, long range between pages, bursts). The scribe now has glyph tables per hand and per hand × section and length weights per position, and copies 22% of the words (before: 35%): **69/76, median error 0.05–0.07** (the scribe of 14/10: 69/76, 0.098). See §9.
 >
 > **14/10/2026:** the battery had a loading error (words with a ligature were lost); the scribe now has form memory in the modified copies (§6) and a word-family habit per sheet and section (§7). Current figures: **58/64 measures, 4.1% strange words (real 4.6%)**. The figures in §1–§5 are those of 28/09.
@@ -12,7 +14,7 @@ Files: `scribe.py` (the scribe), `measures.py` (the battery), `compare.py` (comp
 cd voynich-scribe/scribe
 PYTHONIOENCODING=utf-8 py -3 measures.py          # measures of the real text → measures_real.json
 PYTHONIOENCODING=utf-8 py -3 compare.py          # real, night generator and scribe (5 seeds)
-PYTHONIOENCODING=utf-8 py -3 compare.py ablacions
+PYTHONIOENCODING=utf-8 py -3 compare.py ablations
 PYTHONIOENCODING=utf-8 py -3 holdout.py         # learned from the odd folios, writes the even ones
 ```
 
@@ -151,7 +153,7 @@ The main source is the edit of the copy: it changes, inserts or removes a glyph 
 | strange words per line | 0.68 | **0.32** | 0.36 |
 | word types | 7,859 | 7,150 | 7,915 |
 
-- **Ablation** (`compare.py ablacions`): without form memory, 51/59 and 8.7% strange words. All the pieces are still needed: removing any of them costs 1 to 9 measures.
+- **Ablation** (`compare.py ablations`): without form memory, 51/59 and 8.7% strange words. All the pieces are still needed: removing any of them costs 1 to 9 measures.
 - **Generalisation** (`holdout.py`): the contact table that decides what is writable is learned only from the odd folios, and on the even ones the result is 0.31 strange words per line against 0.35 real. Form memory is not memory of the test text. In total, 47/59 (median error 0.101) against 50/59 (0.066) between the two real halves.
 - **What it still does not reproduce**: `Consecutive words at edit distance 1 / shuffled` (1.59 against 2.21: the neighbours one glyph apart), `Frequent words repeated <0.3x chance` (24% against 16%), `Line-end -m: lines of 10+ words / 1-4 words` (1.94 against 3.41) and `q-` on the first word of a paragraph and closure of the last word of a paragraph (at the threshold). For the `-m`, the cause is now located: on short **non-final** lines, the scribe closes in `-m` 11% of the time and the real text 6%. According to J1 (the strength of the closure is a matter of hand and section), the section is missing.
 
@@ -292,3 +294,73 @@ Mechanisms tried and discarded (2–3 seeds): copying from the previous pages of
 - **Generalisation**: the same as before (61–62/76). The 8 new length and long-range measures are all reproduced on the even folios with tables learned from the odd ones.
 - **Still fails**: `quasi(ed=1)` (the neighbours one glyph apart: with less copying there are fewer of them), the repetition at 3 words (2.5 against 3.4), the frequent words that repeat a lot or not at all (word-specific, not family-specific), the `-m` of long lines, the `q-` on the first word of a paragraph (at the threshold) and, without the section shift, the page overdispersion of the words with `e` (18.4 against 24.6).
 - **Honest limit**: the tables per hand and section are more parameters learned from the text (one contact table for each combination with enough lines). What they say is that **each hand, and each hand in each section, has its own glyph grammar**, not only its own tone; they do not say why.
+
+## 10 · Words that start with a gallows come in lines (20/10 and 26/10/2026)
+
+On voynich.ninja, dashstofsk remarked that the scribe's text has more "gallows words" than the manuscript, and that in the manuscript a gallows word follows another more often than if the words were shuffled, more than in the scribe. He did not say what he counted as a gallows word. Only one reading makes both remarks true in quire 13 (the quire published in `quire_M/`): **a word that starts directly with `t`, `k`, `p` or `f`**. There the scribe had more of them (5.8% against 4.6%) and no clustering (×0.94 against ×1.48). With "any word containing a gallows" the scribe has slightly fewer (50% against 53%) and they cluster the same (×1.09 against ×1.06); nablator's autocorrelation on that definition (consecutive word pairs within the line) gives 7.3% in the real ZL3b text and 7.3% in the scribe (7.6% with the habit below).
+
+### 10.1 · Where the clustering comes from
+
+Leaving out the first word of each line (93% of paragraph-initial words carry a gallows, R5.1, and the scribe already gets the line starts right, 82.6% against 82.2% of paragraph first lines and 8.8% against 8.6% of the other lines):
+
+| the real text, words after the first of the line | gallows-initial after another / chance |
+|---|---|
+| as written | ×1.45 |
+| words shuffled within each line | ×1.46 |
+| words shuffled within each page | ×1.16 |
+| words shuffled over the whole text | ×1.00 |
+
+The order inside the line does not matter: **the line does**. Some lines are full of these words and others have almost none, and some pages a little more than others. It is not the first line of the paragraph (×1.35 there, ×1.43 in the other lines). Rule R14.7.
+
+The words that start with a bench gallows (`cth-`, `ckh-`, `cph-`, `cfh-`) cluster much more (×3.31), but that is section, not line: they are 8.3% of the words in herbal A and 0.5% in the B sections, shuffling within the page does not change it (×3.32), and within each language they cluster like the others (×1.45 in A, ×1.55 in B). They do not go with the plain ones (×1.08). The scribe makes too few of them (2.1% against 2.7%) and does not concentrate them enough (×2.4): **open**, and probably a calibration of the hand × section tables rather than a missing rule.
+
+### 10.2 · What was added
+
+Two measures (`measures.py`, part 6): the share of words starting with a gallows, not line-initial, and their clustering within the line (pairs from the second word on, against the base rate). And one habit (`scribe.py`, `use_g0`): each page draws a value and each line adds its own, independent of the line before; the sum multiplies the weight of `t`/`k`/`p`/`f` as the **first glyph of a new word**, except the first word of the line. Centred, plus a mean shift `g0_mu` (the scribe already made too few of these words: 4.2% against 5.1%). Copied words are not touched: making the habit also choose what is copied was tried and did not do better (10 seeds, within the noise).
+
+The three parameters were calibrated **on the odd folios only** (27 combinations, 3 seeds each, the scribe trained on and writing the odd folios, against the real odd folios: 5.20%, ×1.59): page 0.4, line 0.7, mean shift 0.35. The real odd folios cluster more than the even ones (×1.30), so the habit overshoots on the even folios.
+
+### 10.3 · Result (5 seeds, 78 measures)
+
+| | real | without the habit | **with the habit** |
+|---|---|---|---|
+| words starting with a gallows, not line-initial | 5.05% | 4.21% | **4.85%** |
+| clustering within the line | ×1.45 | ×1.02 | **×1.55** |
+| whole text: reproduced / median error | | 70/78 · 0.069 | **70/78 · 0.065** |
+| learned from the odd folios, on the even ones | (real halves 69/78 · 0.052) | 63/78 · 0.082 | **64/78 · 0.083** |
+| even folios: share / clustering (real 4.91%, ×1.30) | | 4.03%, ×1.20 | 4.72%, ×1.50 |
+
+Files: `results_table.txt`, `results_holdout_table.txt`, `results_holdout_without_g0*.{json,txt}`.
+
+**What this does and does not show.** The habit reproduces what it was made for, and costs nothing that can be measured. It does not improve the battery as a whole: with 10 seeds (an earlier calibration on the whole text), the median error per seed went from 0.065 ± 0.008 to 0.059 ± 0.010 on the whole text and from 0.084 ± 0.008 to 0.091 ± 0.016 on the even folios, both inside the spread between seeds. The finding is the line habit itself, not the score.
+
+### 10.4 · All the rules again (ablations, 5 seeds)
+
+Every rule removed one at a time, **with** the new habit (`results_ablations_table.txt`) and **without** it (`results_ablations_without_g0_table.txt`). Measures lost relative to the full scribe of each column:
+
+| rule removed | without the habit | with the habit |
+|---|---|---|
+| boundary rule | −11 | −10 |
+| copying | −6 | −9 |
+| start contexts | −6 | −5 |
+| first line | −6 | −6 |
+| closure | −6 | −5 |
+| dissimilation | −5 | −5 |
+| length mode | −5 | −5 |
+| slot template | −4 | −5 |
+| word rules | −5 | −3 |
+| form memory | −4 | −3 |
+| sheet style, e habit, end table, reprefix, word family, closure by word count | −1 to −2 | −1 to −2 |
+| language tables, section dy | 0 | 0 |
+| gallows-initial line habit | | −2 |
+
+**No rule changed with the new habit** (differences of 1 to 3 measures are the usual noise of 5 seeds). Three things the ablations show that were already there before:
+
+- Two switches do nothing: `use_sec_dy` is off by default since 19/10, and the language tables (A/B) are only a fallback since every hand × section has its own table.
+- Six rules (length mode, form memory, word rules, word family, reprefix, closure by word count) fix their own measures but **lower** the median error when removed (−0.01 to −0.02, in both columns). They trade the general fit for a specific measure.
+- The count of reproduced measures moves by ±2 between runs; it is the median error and the specific measures that tell rules apart.
+
+### 10.5 · Two measures that are mostly noise
+
+- **The repetitions at distance k** (`Same word at distance k / shuffled`) rest on few events (64 repeats at distance 3 in the even folios) and on **one** shuffle for the denominator. Over 100 shuffles the real value at distance 3 ranges from 2.18 to 3.75 (whole text; median 2.98, the battery uses 3.45), and in the even folios from 2.29 to 4.57. Between seeds the scribe moves ±0.4 to ±1.2. A drop of these measures with a new rule is not evidence on its own. They should use the median of many shuffles (not changed yet, so that the battery stays comparable).
+- **H8** (same first glyph after a gallows-initial line) fails in this run (0.43 against 0.61), but over 10 seeds it is 0.54 ± 0.13 without the habit and 0.54 ± 0.20 with it (passing 6/10 and 4/10): the habit does not touch the first word of the line, it only shifts the random draws. The same for `a-` at line start (R4.2: about a dozen lines).
