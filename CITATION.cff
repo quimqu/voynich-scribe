@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or these results, please cite it as below. A preprint is in preparation; this file will be updated with its reference."
-title: "The scribe: a rule-based, meaningless generator that reproduces the statistics of the Voynich manuscript text"
+title: "The skribe: a rule-based, meaningless generator that reproduces the statistics of the Voynich manuscript text"
 type: software
 authors:
   - family-names: Quadrada
