@@ -1,60 +1,60 @@
 
 ### voynich: real even against ... (✓ = within ±25%)
-measure                                            even             odd        copy 35%        copy 10%
-word repeated right after / chance                3.154        2.943 ✓        4.608 ·        2.074 ·
-neighbours one glyph apart / shuffled             2.257        1.849 ✓        1.806 ✓        1.311 ·
-same word at distance 2 / shuffled                3.500        3.483 ✓        3.891 ✓        1.878 ·
-words with a twin earlier on the page (%)        64.381       64.560 ✓       66.523 ✓       62.320 ✓
-boundary rule (bits)                              0.153        0.155 ✓        0.144 ✓        0.170 ✓
-word types                                     4850.000     4782.000 ✓     4411.667 ✓     4592.000 ✓
-hapax (% of types)                               71.340       72.627 ✓       63.959 ✓       71.697 ✓
-mean length (glyphs)                              4.808        4.787 ✓        4.898 ✓        4.865 ✓
-SD of length                                      1.717        1.709 ✓        2.299 ·        2.307 ·
-length correlation between neighbours             0.165        0.154 ✓        0.203 ✓        0.270 ·
-same 1st glyph as the line above / null           0.616        0.577 ✓        0.563 ✓        0.591 ✓
-strange words (%)                                 4.456        4.731 ✓        3.151 ·        3.442 ✓
-character entropy h1                              3.884        3.883 ✓        3.828 ✓        3.836 ✓
-conditional entropy h2                            2.116        2.120 ✓        2.078 ✓        2.047 ✓
-Zipf slope                                        0.996        0.993 ✓        0.962 ✓        1.048 ✓
-WORD ORDER: information (bits)                    0.082        0.081 ✓        0.021 ·        0.034 ·
-REPRODUCED                                                         16/16            12/16            10/16
+measure                                            even             odd        copy 22%        copy 35%        copy 10%
+word repeated right after / chance                3.154        2.943 ✓        3.756 ✓        5.829 ·        2.763 ✓
+neighbours one glyph apart / shuffled             2.257        1.849 ✓        1.687 ·        1.939 ✓        1.521 ·
+same word at distance 2 / shuffled                3.500        3.483 ✓        3.101 ✓        5.858 ·        2.743 ✓
+words with a twin earlier on the page (%)        64.381       64.560 ✓       67.071 ✓       68.835 ✓       65.503 ✓
+boundary rule (bits)                              0.153        0.155 ✓        0.161 ✓        0.148 ✓        0.175 ✓
+word types                                     4850.000     4782.000 ✓     4329.667 ✓     4288.000 ✓     4395.000 ✓
+hapax (% of types)                               71.340       72.627 ✓       65.432 ✓       62.550 ✓       69.788 ✓
+mean length (glyphs)                              4.808        4.787 ✓        4.968 ✓        4.972 ✓        4.948 ✓
+SD of length                                      1.717        1.709 ✓        2.020 ✓        2.043 ✓        2.047 ✓
+length correlation between neighbours             0.165        0.154 ✓        0.209 ·        0.180 ✓        0.253 ·
+same 1st glyph as the line above / null           0.616        0.577 ✓        0.610 ✓        0.613 ✓        0.619 ✓
+strange words (%)                                 4.456        4.731 ✓        3.349 ✓        3.082 ·        3.357 ✓
+character entropy h1                              3.884        3.883 ✓        3.841 ✓        3.836 ✓        3.840 ✓
+conditional entropy h2                            2.116        2.120 ✓        2.030 ✓        2.050 ✓        2.018 ✓
+Zipf slope                                        0.996        0.993 ✓        1.000 ✓        0.947 ✓        1.039 ✓
+WORD ORDER: information (bits)                    0.082        0.081 ✓        0.036 ·        0.035 ·        0.051 ·
+REPRODUCED                                                         16/16            13/16            12/16            13/16
 real sample:
    kydainy ypchol daiin otchal ypchaiin ckholsy
    dorchory chkar s shor cthy cto
    qotaiin cthey y chor chy ydy chaiin
    chtoddy cphy dals chokaiin d
-scribe sample (copy 35%):
-   fchek kchek qol oto shy oto
-   sor ol or or okar ol
-   yshedy o lolchotaiin os shedy rshedy oto
-   ydaiin os os qkalchedy sho
+scribe sample (copy 22%):
+   pchody qokchy shoyky dar da qo
+   tarchod sal dol otody ckhosanchy qotol
+   ochy otodaiin ydair chor okoiin do dol
+   ychokchy daiiin cheol daiin cthain
 
 ### latin: real even against ... (✓ = within ±25%)
-measure                                            even             odd        copy 35%        copy 10%
-word repeated right after / chance                0.037        0.103 ·        4.633 ·        1.984 ·
-neighbours one glyph apart / shuffled             0.590        0.602 ✓        1.908 ·        1.482 ·
-same word at distance 2 / shuffled                0.923        1.417 ·        4.270 ·        2.145 ·
-words with a twin earlier on the page (%)        44.391       43.627 ✓       47.912 ✓       37.089 ✓
-boundary rule (bits)                              0.023        0.031 ·        0.035 ·        0.038 ·
-word types                                     3897.000     4006.000 ✓     8450.667 ·     9553.667 ·
-hapax (% of types)                               58.737       59.910 ✓       76.369 ·       85.262 ·
-mean length (glyphs)                              5.730        5.668 ✓        5.772 ✓        5.867 ✓
-SD of length                                      3.067        3.019 ✓        3.675 ✓        3.686 ✓
-length correlation between neighbours            -0.083       -0.085 ✓        0.226 ·        0.367 ·
-same 1st glyph as the line above / null           1.069        0.948 ✓        0.996 ✓        0.937 ✓
-strange words (%)                                 1.627        1.926 ✓        3.729 ·        4.061 ·
-character entropy h1                              3.961        3.967 ✓        3.961 ✓        3.973 ✓
-conditional entropy h2                            3.251        3.267 ✓        3.283 ✓        3.290 ✓
-Zipf slope                                        0.933        0.945 ✓        0.858 ✓        0.927 ✓
-WORD ORDER: information (bits)                    0.274        0.252 ✓       -0.000 ·        0.007 ·
-REPRODUCED                                                         13/16             7/16             7/16
+measure                                            even             odd        copy 22%        copy 35%        copy 10%
+word repeated right after / chance                0.037        0.103 ·        4.620 ·        6.470 ·        2.547 ·
+neighbours one glyph apart / shuffled             0.590        0.602 ✓        1.844 ·        2.307 ·        1.592 ·
+same word at distance 2 / shuffled                0.923        1.417 ·        5.743 ·        5.737 ·        2.540 ·
+words with a twin earlier on the page (%)        44.391       43.627 ✓       37.494 ✓       44.073 ✓       32.650 ·
+boundary rule (bits)                              0.023        0.031 ·        0.037 ·        0.038 ·        0.044 ·
+word types                                     3897.000     4006.000 ✓     9448.333 ·     8876.000 ·     9890.667 ·
+hapax (% of types)                               58.737       59.910 ✓       78.952 ·       75.100 ·       83.091 ·
+mean length (glyphs)                              5.730        5.668 ✓        5.859 ✓        5.837 ✓        5.890 ✓
+SD of length                                      3.067        3.019 ✓        3.438 ✓        3.455 ✓        3.436 ✓
+length correlation between neighbours            -0.083       -0.085 ✓        0.283 ·        0.230 ·        0.362 ·
+same 1st glyph as the line above / null           1.069        0.948 ✓        0.915 ✓        0.922 ✓        0.993 ✓
+strange words (%)                                 1.627        1.926 ✓        3.870 ·        3.524 ·        3.942 ·
+character entropy h1                              3.961        3.967 ✓        3.972 ✓        3.965 ✓        3.975 ✓
+conditional entropy h2                            3.251        3.267 ✓        3.283 ✓        3.277 ✓        3.283 ✓
+Zipf slope                                        0.933        0.945 ✓        0.824 ✓        0.777 ✓        0.864 ✓
+WORD ORDER: information (bits)                    0.274        0.252 ✓        0.016 ·        0.012 ·        0.019 ·
+REPRODUCED                                                         13/16             7/16             7/16             6/16
 real sample:
    praevenire ut intellectus cuius intelligere
    est esse studio veritatis perficiatur rara
    quidem etsi monstra sint nos movere solent
    quamobrem praeceptorum unice pro tua
-scribe sample (copy 35%):
-   st sa se it mum
-   mine ie ine st num ine
-   singulus naresunt mum hoconubsolibi nobonit alicate quaducipsundu
-   de mem vol a ab
+scribe sample (copy 22%):
+   st ita regat nes fut
+   fintellarbell ta ita incis quolum maxit
+   nituduc diciritatitan torae incis maxit mentelsare tesicircunorm
+   esto sus ita esse est

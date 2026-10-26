@@ -11,7 +11,7 @@ from collections import Counter
 HERE = os.path.dirname(os.path.abspath(__file__))
 GENERIC = dict(use_slots=False, use_word_rules=False, use_closure=False, use_end_table=False, use_first_line=False, use_style=False,
                use_ehabit=False, use_sec_dy=False, use_famrep=False, use_reprefix=False, use_lang=False)
-VARIANTS = {'copy 35%': dict(GENERIC), 'copy 10%': dict(GENERIC, r_copy=0.10)}
+VARIANTS = {'copy 22%': dict(GENERIC, r_copy=0.22), 'copy 35%': dict(GENERIC, r_copy=0.35), 'copy 10%': dict(GENERIC, r_copy=0.10)}   # 27/10: rates explicit (the default r_copy went from 0.35 to 0.22 on 19/10)
 SEEDS = (1, 2, 3)
 
 

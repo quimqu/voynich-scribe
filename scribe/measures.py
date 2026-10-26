@@ -273,10 +273,11 @@ def evaluate(LINES,seed=0):
     shr=lambda ws: sum(w.count('sh') for w in ws)/max(1,sum(w.count('sh')+w.count('ch') for w in ws))
     tkr=lambda ws: sum(w.count('t') for w in ws)/max(1,sum(w.count('t')+w.count('k') for w in ws))
     frq=lambda ws: np.mean([c[w]>=0.003*N for w in ws]); eer=lambda ws: np.mean(['ee' in w for w in ws])
-    R['[first line] sh share (sh/ch), first line / other lines']=shr(flw)/shr(olw)
-    R['[first line] t share (t/k), first line / other lines']=tkr(flw)/tkr(olw)
-    R['[first line] frequent words, first line / other lines']=frq(flw)/frq(olw)
-    R['[first line] words with ee, first line / other lines']=eer(flw)/eer(olw)
+    rt=lambda f: f(flw)/f(olw) if flw and olw and f(olw) else np.nan   # nan where a text has no sh, t or ee (controls in other languages)
+    R['[first line] sh share (sh/ch), first line / other lines']=rt(shr)
+    R['[first line] t share (t/k), first line / other lines']=rt(tkr)
+    R['[first line] frequent words, first line / other lines']=rt(frq)
+    R['[first line] words with ee, first line / other lines']=rt(eer)
     return R
 _TRI=None
 _SEC=None
