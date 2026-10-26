@@ -1,4 +1,4 @@
-# The skribe (as Stolfi suggested): a meaningless procedure that writes a Voynich-like text
+# The skribe (name as Stolfi suggested): a meaningless procedure that writes a Voynich-like text
 
 This repository contains "the skribe", a small program that writes a complete fake Voynich manuscript on the real manuscript's layout: same pages, same sheets, same paragraphs, same number of lines and words per line, same gaps for the drawings, Currier A and B, the five Davis hands. There is no meaning anywhere in it. It only follows writing rules that were first measured on the real text, and it is scored against the real text with a battery of 78 statistics.
 
