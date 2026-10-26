@@ -268,6 +268,15 @@ def evaluate(LINES,seed=0):
     R['[gallows] Words starting with a gallows, not line-initial (%)']=100*np.mean([g0(w) for l in LINES for w in l['ws'][1:]])
     pr=[(a,b) for l in LINES for a,b in zip(l['ws'][1:],l['ws'][2:])]; base=np.mean([g0(b) for a,b in pr])
     R['[gallows] Gallows-initial word after another / chance (in line)']=np.mean([g0(b) for a,b in pr if g0(a)])/base if base else np.nan
+    # ===== part 7 (26/10): the register of the first line of the paragraph (not the first word), against the other lines =====
+    flw=[w for l in LINES if l['ps'] for w in l['ws'][1:]]; olw=[w for l in LINES if not l['ps'] for w in l['ws'][1:]]
+    shr=lambda ws: sum(w.count('sh') for w in ws)/max(1,sum(w.count('sh')+w.count('ch') for w in ws))
+    tkr=lambda ws: sum(w.count('t') for w in ws)/max(1,sum(w.count('t')+w.count('k') for w in ws))
+    frq=lambda ws: np.mean([c[w]>=0.003*N for w in ws]); eer=lambda ws: np.mean(['ee' in w for w in ws])
+    R['[first line] sh share (sh/ch), first line / other lines']=shr(flw)/shr(olw)
+    R['[first line] t share (t/k), first line / other lines']=tkr(flw)/tkr(olw)
+    R['[first line] frequent words, first line / other lines']=frq(flw)/frq(olw)
+    R['[first line] words with ee, first line / other lines']=eer(flw)/eer(olw)
     return R
 _TRI=None
 _SEC=None

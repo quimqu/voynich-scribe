@@ -180,7 +180,7 @@ FAMREP={'banc+o+l/r':3.2,'gallows+e+dy/y':1.5,'altres':0.8,'banc+e+y/dy':0.55,'-
 # ---------- form memory (R16.3; 14/10/2026, form_memory.py) ----------
 # The repertoire: the words the hand knows (word types seen >= LEX_MIN times in the training text). A copy that changes one glyph
 # lands on a neighbour in the repertoire (one glyph away), not on a blind edit; a new word that is not in the repertoire can be redrawn.
-LEX=Counter(w for l in L_REAL for w in l['ws']); LEX_MIN=2
+LEX=Counter(w for l in L_REAL for w in l['ws']); LEX_MIN=2; LEXN=sum(LEX.values())
 def _dels(g): return [tuple(g[:i]+g[i+1:]) for i in range(len(g))]
 _BY_DEL=defaultdict(set)
 for _w,_c in LEX.items():
@@ -234,10 +234,10 @@ AVOID=avoid_table()
 for g_ in ('k','f','cth','ckh','cph','cfh'): AVOID.setdefault(g_,AVOID.get('t',0.5))   # gallows with little data: like t
 # ================= the scribe =================
 DEFAULT=dict(r_copy=0.22,r_mod=0.45,tau=4.0,vert_bonus=2.0,first_copy=0.1,p_pf=0.30,sigma_style=0.3,sigma_line=0.25,rho_line=0.6,
-             sigma_len=0.6,len_cands=5,rej_2gall=0.35,rej_ei=0.25,use_word_rules=True,first_norep=0.4,gap_scale=0.75,declose_p=0.55,gap_noq=0.9,use_famrep=True,adj_boost=0.5,avoid_scale=1.2,closure_by_nwords=True,closure_by_hand=True,use_reprefix=True,use_end_table=True,pf_back=0.75,
+             sigma_len=0.6,len_cands=5,rej_2gall=0.35,rej_ei=0.25,use_word_rules=True,first_norep=0.0,gap_scale=0.75,declose_p=0.55,gap_noq=0.9,use_famrep=True,adj_boost=0.5,avoid_scale=1.2,closure_by_nwords=True,closure_by_hand=True,use_reprefix=True,use_end_table=True,pf_back=0.75,
              use_lang=True,use_slots=True,use_contexts=True,use_style=True,use_copy=True,use_first_line=True,use_closure=True,
              use_dissim=True,use_len_mode=True,use_boundary=True,
-             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35)   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
+             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35,use_fl_style=True,fl_t=0.3,fl_sh=0.6,fl_rare=0.7,fl_rare_min=0.003,fl_e=-0.6)   # 26/10: first-line register calibrated on the odd folios only (t 0.3, sh 0.6, rare 0.7, e -0.6) — with it, first_norep (0.4 before) is no longer needed: the first line repeats less because its words are rarer   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
 STYLE_DIMS=['t','sh','q','dy']
 # 'e' habit (14/10): word block with e (-y/-dy) or without (-aiin/-ar/-ol), R2.4, per sheet, page, line and section; its own random generator
 NUC={'ch','sh','k','t','p','f','cth','ckh','cph','cfh'}
@@ -351,6 +351,11 @@ class Escriba:
                 g0_line=g0_pg+float(np_rng.normal(0,p['sigma_g0_line']))-(p['sigma_g0_pg']**2+p['sigma_g0_line']**2)/2+p['g0_mu']
             tab=self.table(l['lang'],l.get('hand'),l.get('section')); lam=float(np_rng.normal(0,p['sigma_len'])) if p['use_len_mode'] else 0.0
             first_line=(l['ps']==1) and p['use_first_line']
+            if style is not None and first_line and p['use_fl_style']:
+                # first-line register (26/10): the first line of the paragraph prefers the tall variants, sh over ch and t over k
+                # (sh 50% against 31% in the other lines, t 43% against 35%), on top of p/f (R1.3)
+                style['t']+=p['fl_t']; style['sh']+=p['fl_sh']
+                if 'e' in style: style['e']+=p['fl_e']   # and fewer words with e after the core (ee: 11.5% against 13.3%)
             ws=[]; li=len(lines_on_page)
             for i in range(len(l['ws'])):
                 A=start_tag(l,i,ws[i-1] if i else None) if p['use_contexts'] else ('<'+gl(ws[i-1])[-1] if i else '^')
@@ -413,6 +418,9 @@ class Escriba:
                             # the length of the new word according to its position in the line (19/10): the two-glyph memory makes words too short and too spread out
                             lw=(p['len_w'] or LEN_W).get('first' if i==0 else ('last' if i==len(l['ws'])-1 else 'mid'),{})
                             wt=wt*np.array([lw.get(str(min(len(gl(x)),10)),1.0) for x in cands])
+                        if first_line and i>0 and p['use_fl_style'] and p['fl_rare']>0:
+                            # and it prefers rarer words (R5.2): frequent words (>= fl_rare_min of the training text) are disfavoured among the candidates
+                            wt=wt*np.array([math.exp(-p['fl_rare']) if LEX[x]>=p['fl_rare_min']*LEXN else 1.0 for x in cands])
                         w=cands[int(self.rng.choices(range(len(cands)),weights=wt)[0])]
                     else: w=cands[0]
                     if i==0 and l['ps']==0 and p['use_dissim'] and above_first is not None and gl(w)[0]==above_first and self.rng.random()<min(1.0,p['avoid_scale']*AVOID.get(above_first,0.4)):

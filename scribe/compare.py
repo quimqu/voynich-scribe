@@ -37,7 +37,7 @@ def table(cols):
 if __name__=='__main__':
     args=sys.argv[1:]
     if args and args[0]=='ablations':
-        mods=['use_lang','use_slots','use_word_rules','use_contexts','use_style','use_copy','use_first_line','use_closure','use_dissim','use_len_mode','use_boundary','use_reprefix','use_end_table','use_famrep','closure_by_nwords','use_g0']
+        mods=['use_lang','use_slots','use_word_rules','use_contexts','use_style','use_copy','use_first_line','use_closure','use_dissim','use_len_mode','use_boundary','use_reprefix','use_end_table','use_famrep','closure_by_nwords','use_g0','use_fl_style']
         cols={'scribe':run({})}
         for m in mods: cols['without '+m[4:]]=run({m:False})
         cols['without form memory']=run({'mod_contact':0,'mod_tries':6})

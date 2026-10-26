@@ -10,6 +10,8 @@ All three files have the same lines, with the ZL3b line identifiers, the same nu
 drawing gaps and paragraph starts and ends, so they can be compared line by line. 791 lines, 6311 words, 20 pages.
 Labels are not included. Seed 1 for both generated files; other seeds on request.
 
-Regenerated on 26 October 2026 with the scribe that has the line habit for words starting with a gallows (rule R14.7).
-Words starting with t/k/p/f, not line-initial: real 3.0%, all 3.7%, blind 3.5%; clustering within the line: real x2.26,
-all x2.29, blind x1.43 (the version of 19 October gave x0.94).
+Regenerated on 26 October 2026 with the skribe that has the line habit for words starting with a gallows (rule R14.7)
+and the register of the first line of the paragraph (R5.2: sh over ch, t over k, rarer words, fewer ee).
+The clustering of words starting with a gallows cannot be judged on one quire: the real quire has only 10 pairs of
+consecutive such words, and the skribe 0 to 9 depending on the seed (clustering x0 to x2 per seed). It is measured on
+the whole manuscript instead (scribe/SCRIBE.md, section 10).

@@ -98,7 +98,7 @@ And within the core `o-` after `-y`: `ok-` takes `q-` 72% of the time, `ot-` 48%
 
 **R5.1 · The paragraph starts with a gallows.** The first word of the paragraph carries a gallows 93% of the time (first word of an interior line: 44%). And it does not start with `q-` (4%). System. [V5, G3]
 
-**R5.2 · The first line is a register of its own.** Besides `p`/`f` (R1.3): half the repetitions given its vocabulary (0.58), more hapaxes (18.8% against 13.2%), longer words (5.38 against 5.16), and the second line does not reuse its words (4.7% against 7.1%). System. [G8]
+**R5.2 · The first line is a register of its own.** Besides `p`/`f` (R1.3): half the repetitions given its vocabulary (0.58), more hapaxes (18.8% against 13.2%), longer words (5.38 against 5.16), and the second line does not reuse its words (4.7% against 7.1%). System. [G8] **Amended on 26/10/2026:** it is also written with the tall variants and with fewer frequent words. Leaving out the first word: `sh` is 35.5% of `sh`+`ch` against 26.6% in the other lines (×1.34; ×1.22 to ×1.82 in every hand), `t` is 43.0% of `t`+`k` against 34.9% (×1.23), words among the most frequent (≥ 0.3% of the text) are 23.4% against 35.3% (×0.66), and words with `ee` 11.5% against 13.3% (×0.87). The fewer repetitions follow from the rarer words: once the skribe writes the first line with rarer words, it no longer needs a separate rule against repeating there. System in the direction, habit in the strength. [`scribe/SCRIBE.md` §11]
 
 **R5.3 · The first word of a paragraph does not dissimilate** from that of the previous paragraph (ratio 1.00): rule R4.5 is a rule of line within paragraph. [G5]
 
@@ -170,7 +170,7 @@ And within the core `o-` after `-y`: `ok-` takes `q-` 72% of the time, `ot-` 48%
 ## 11 · How to write a page following the rulebook (the recipe)
 
 1. Start the paragraph with a word that has a gallows, by preference `p` or `f`, never with `q-`; if there is free space above, use `p`/`f` in the rest of the first line too (R5.1, R1.3).
-2. In the first line, choose longer and newer words, and do not repeat them in the second (R5.2).
+2. In the first line, choose longer and rarer words, prefer `sh` to `ch` and `t` to `k`, use fewer `ee`, and do not repeat its words in the second line (R5.2).
 3. Each word: prefix + core + `e` + suffix, one gallows at most, 4-6 glyphs, and decide the block: with `e` → `-y`/`-dy`; without → `-aiin`/`-ar`/`-ol` (R2.1-R2.6).
 4. If the previous word ends in `-y` and the next one starts with `o`, put `q-` (at this page's rate); if it ends in `-r` or `-s`, put nothing; if the next one starts with `a`, put `d-` (R3.3).
 5. To choose `k` or `t`, `ch` or `sh`: the page rate and the word next to it; nothing else (R7.2, R1.2).

@@ -76,5 +76,9 @@
  "[range] Bursts of the 50 most frequent words (CV of gaps)": 1.7546348978272719,
  "[range] Page overdispersion of the 50 most frequent words": 2.0630322494587334,
  "[gallows] Words starting with a gallows, not line-initial (%)": 5.0541644468122895,
- "[gallows] Gallows-initial word after another / chance (in line)": 1.4541163888307642
+ "[gallows] Gallows-initial word after another / chance (in line)": 1.4541163888307642,
+ "[first line] sh share (sh/ch), first line / other lines": 1.3356200344012055,
+ "[first line] t share (t/k), first line / other lines": 1.2305031462582365,
+ "[first line] frequent words, first line / other lines": 0.6644041179321688,
+ "[first line] words with ee, first line / other lines": 0.8696516754104365
 }

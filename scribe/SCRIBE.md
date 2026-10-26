@@ -1,5 +1,7 @@
 # The skribe: how the Voynich is written, as a procedure
 
+> **26/10/2026, afternoon:** battery of 82 measures (4 new ones on the first line of the paragraph). The skribe now writes the first line in its own register (sh over ch, t over k, rarer words, fewer ee), calibrated on the odd folios only, and no longer needs the rule against repeating on the first line: **78/82, median error 0.060**; on the even folios **69/82 (0.068)**, against 65/82 (0.089) without the register and 73/82 (0.049) between the real halves. No rule broke. See §11.
+>
 > **26/10/2026:** battery of 78 measures (2 new ones on words that start with a gallows). The skribe now has a line habit for these words, calibrated on the odd folios only: **70/78, median error 0.065**; on the even folios 64/78 (without the habit, 63/78). All the rules were removed one at a time with and without the new habit: none of them changed. See §10.
 >
 > **19/10/2026:** battery of 76 measures (12 new ones: entropies, Zipf, lengths, long range between pages, bursts). The skribe now has glyph tables per hand and per hand × section and length weights per position, and copies 22% of the words (before: 35%): **69/76, median error 0.05–0.07** (the skribe of 14/10: 69/76, 0.098). See §9.
@@ -297,7 +299,7 @@ Mechanisms tried and discarded (2–3 seeds): copying from the previous pages of
 
 ## 10 · Words that start with a gallows come in lines (20/10 and 26/10/2026)
 
-On voynich.ninja, dashstofsk remarked that the skribe's text has more "gallows words" than the manuscript, and that in the manuscript a gallows word follows another more often than if the words were shuffled, more than in the skribe. He did not say what he counted as a gallows word. Only one reading makes both remarks true in quire 13 (the quire published in `quire_M/`): **a word that starts directly with `t`, `k`, `p` or `f`**. There the skribe had more of them (5.8% against 4.6%) and no clustering (×0.94 against ×1.48). With "any word containing a gallows" the skribe has slightly fewer (50% against 53%) and they cluster the same (×1.09 against ×1.06); nablator's autocorrelation on that definition (consecutive word pairs within the line) gives 7.3% in the real ZL3b text and 7.3% in the skribe (7.6% with the habit below).
+On voynich.ninja, dashstofsk remarked that the skribe's text has more "gallows words" than the manuscript, and that in the manuscript a gallows word follows another more often than if the words were shuffled, more than in the skribe. He did not say what he counted as a gallows word. Only one reading makes both remarks true in quire 13 (small numbers on a single quire: see the note in `quire_M/README.txt`) (the quire published in `quire_M/`): **a word that starts directly with `t`, `k`, `p` or `f`**. There the skribe had more of them (5.8% against 4.6%) and no clustering (×0.94 against ×1.48). With "any word containing a gallows" the skribe has slightly fewer (50% against 53%) and they cluster the same (×1.09 against ×1.06); nablator's autocorrelation on that definition (consecutive word pairs within the line) gives 7.3% in the real ZL3b text and 7.3% in the skribe (7.6% with the habit below).
 
 ### 10.1 · Where the clustering comes from
 
@@ -364,3 +366,55 @@ Every rule removed one at a time, **with** the new habit (`results_ablations_tab
 
 - **The repetitions at distance k** (`Same word at distance k / shuffled`) rest on few events (64 repeats at distance 3 in the even folios) and on **one** shuffle for the denominator. Over 100 shuffles the real value at distance 3 ranges from 2.18 to 3.75 (whole text; median 2.98, the battery uses 3.45), and in the even folios from 2.29 to 4.57. Between seeds the skribe moves ±0.4 to ±1.2. A drop of these measures with a new rule is not evidence on its own. They should use the median of many shuffles (not changed yet, so that the battery stays comparable).
 - **H8** (same first glyph after a gallows-initial line) fails in this run (0.43 against 0.61), but over 10 seeds it is 0.54 ± 0.13 without the habit and 0.54 ± 0.20 with it (passing 6/10 and 4/10): the habit does not touch the first word of the line, it only shifts the random draws. The same for `a-` at line start (R4.2: about a dozen lines).
+
+## 11 · The register of the first line (26/10/2026)
+
+Looking for word-specific behaviour (does each word have habits of its own beyond its form, as words with a meaning would?), a token-level logistic model (form, gallows, bench, number of `e`, `p`/`f`, prefix, frequency, hand × section, and their pairwise combinations) left no word-specific preference for the first line, the line end, the line start or self-repetition that the skribe does not also produce (odd/even replication of the per-word residual: first line +0.05 real against −0.04 skribe; line end +0.32 against up to +0.30; line start and repetition the same). Negative for word identity. What it turned up instead is that **the first line of the paragraph is written differently, glyph by glyph**, and the skribe did not do it:
+
+| first line / other lines (without the first word) | real | skribe before |
+|---|---|---|
+| `sh` among `sh`+`ch` | 35.5% / 26.6% (×1.34; every hand ×1.22 to ×1.82) | ×1.04 |
+| `t` among `t`+`k` | 43.0% / 34.9% (×1.23) | ×1.00 |
+| words among the most frequent (≥ 0.3% of the text) | 23.4% / 35.3% (×0.66) | ×1.17 |
+| words with `ee` | 11.5% / 13.3% (×0.87) | ×1.00 |
+
+Rule R5.2 (amended). Four measures were added (`measures.py`, part 7, as first line / other lines ratios).
+
+### 11.1 · What was added
+
+On the first line of the paragraph (`scribe.py`, `use_fl_style`): the style offsets of `t` and `sh` are raised (`fl_t` 0.3, `fl_sh` 0.6) and that of the `e` after the core lowered (`fl_e` −0.6); among the candidate new words, those with a frequency ≥ 0.3% of the training text are disfavoured (`fl_rare` 0.7, weight × e^−0.7). All four calibrated **on the odd folios only** (27 combinations of the first three, then `fl_e`, 3 seeds each; odd folios real ×1.36 / ×1.19 / ×0.67 / ×0.88, skribe ×1.39 / ×1.16 / ×0.69 / ×0.84).
+
+With the register on, the old rule against repeating a word on the first line (`first_norep`, 0.4) made the first line repeat too little (adjacent repeats first line / rest 0.25 against 0.385). Set to 0 it gives 0.32 on the whole text and 0.37 on the even folios (real 0.37): **the low repetition of the first line follows from its rarer words**, and that rule is no longer needed. The measure is very noisy (0.18 to 0.67 between seeds on the odd folios).
+
+### 11.2 · Result (5 seeds, 82 measures)
+
+| | without the register | **with the register** |
+|---|---|---|
+| whole text: reproduced / median error | 73/82 · 0.066 | **78/82 · 0.060** |
+| learned from the odd folios, on the even ones (real halves 73/82 · 0.049) | 65/82 · 0.089 | **69/82 · 0.068** |
+
+The three-rule baseline: 44/82 (0.254). A first run with `first_norep` still at 0.4 gave 75/82 (0.052) and 69/82 (0.074): the median error moves by about ±0.008 between runs. Files: `results_table.txt`, `results_holdout_table.txt`, `results_holdout_without_fl*`.
+
+Still failing: which frequent words avoid repeating (word-specific: §4), the `-m` of long lines, the `q-` on the first word of a paragraph, and the page overdispersion of words with `e`.
+
+### 11.3 · All the rules again (ablations, 5 seeds)
+
+Measures lost when each rule is removed, with the register (`results_ablations_table.txt`) and without it (`results_ablations_without_fl_table.txt`, with `first_norep` at 0.4 as before):
+
+| rule removed | without the register | with the register |
+|---|---|---|
+| boundary rule | −10 | −13 |
+| first line | −8 | −9 |
+| copying | −11 | −8 |
+| closure | −6 | −7 |
+| start contexts | −6 | −6 |
+| first-line register (new) | | −6 |
+| sheet style | −1 | −5 |
+| word rules | −4 | −5 |
+| dissimilation, length mode, closure by word count | −3 to −6 | −5 |
+| slot template, form memory | −5 to −7 | −4 |
+| gallows-initial line habit | −2 | −3 |
+| reprefix, e habit, end table | −3 | −1 to −2 |
+| word family, language tables, section dy | 0 to −2 | 0 |
+
+**No rule broke.** As before, several rules cost specific measures but lower the median error when removed (closure −0.014, closure by word count −0.013, e habit −0.010, end table −0.008, form memory −0.008): they fix their own measures at the cost of the general fit. (In the first run with the register, with `first_norep` still at 0.4, some of these had turned positive; with the final configuration they did not.) The repetition by word family (`use_famrep`) now costs nothing (0 measures, error −0.010 without it): a candidate for removal, not removed yet.
