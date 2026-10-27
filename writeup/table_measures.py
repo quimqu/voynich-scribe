@@ -5,7 +5,7 @@ import json, re, sys
 sys.path.insert(0,'scribe'); import measures as M
 R=json.load(open('scribe/measures_real.json',encoding='utf-8')); C=json.load(open('scribe/results.json',encoding='utf-8'))
 G3=C['3-rule generator']; S=C['scribe']
-keys=list(R); N=len(keys); assert N==84, N
+keys=list(R); N=len(keys); assert N==88, N
 ok3=M.compare(R,G3); okS=M.compare(R,S)
 f=lambda v: f'{v:,.0f}' if abs(v)>=1000 else (f'{v:.3f}' if abs(v)<1 else f'{v:.2f}')
 rows=['| # | Measure | Real | 3-rule generator | Skribe |','|---|---|---|---|---|']

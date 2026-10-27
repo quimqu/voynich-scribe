@@ -1,17 +1,17 @@
 # The Skribe: a rule-based procedure that writes a Voynich-like text
 
 *What it reproduces, what it doesn't, and what it suggests about how the Voynich Manuscript was written.*
-*Written on 14 October 2026. Revised on 25 October 2026 for the skribe of 19 October, the controls and the external tests, and on 27 October 2026 for the skribes of 26 and 27 October and the battery of 84 measures.*
+*Written on 14 October 2026. Revised on 25 October 2026 for the skribe of 19 October, the controls and the external tests, on 27 October 2026 for the skribes of 26 and 27 October, and on 28 October 2026 for the skribe of 28 October and the battery of 88 measures.*
 
-*27 October 2026: since 19 October the skribe has three more habits (words that start with a gallows come in lines, rule R14.7; the first line of the paragraph has a register of its own, rule R5.2; a plain *p* or *f* is never followed by *e*, rule R1.3 amended) and the battery eight more measures. The figures are those of the skribe of 27 October on 84 measures, except where a section says it reports an earlier run: the ablations of 14 and 19 October (§4, §7), and the standard measures, the Latin control, quire 13 and the external tests (§3, §8, §11), which use the texts of the skribe of 26 October, before the *p*/*f* rule. Details in `scribe/SCRIBE.md` §10–12.*
+*28 October 2026: since 19 October the skribe has four more habits (words that start with a gallows come in lines, R14.7; the first line of the paragraph has a register of its own, R5.2; a plain *p* or *f* is never followed by *e*, R1.3; the last line of the paragraph has a register of its own, R14.8) and the line-end closure in its right form (R4.3), and the battery twelve more measures. The figures are those of the skribe of 28 October on 88 measures, except where a section says it reports an earlier run: the ablations of 14 and 19 October (§4, §7), and the standard measures, the Latin control, quire 13 and the external tests (§3, §8, §11), which use the texts of the skribe of 26 October. Details in `scribe/SCRIBE.md` §10–13.*
 
 ---
 
 ## Summary
 
 - **The skribe** is a generator that writes a whole synthetic manuscript on the **same layout** as the real one: the same pages, sheets, paragraphs, lines, words per line, drawing gaps, Currier language and Davis hand. Only the words are new. There is no layer of meaning anywhere in it.
-- It is compared with the real text on **84 measures**: repetition, near-duplicates, word-boundary agreement, line-start and line-end forms, first-line effects, vertical dissimilation, page and sheet habits, word shape, what the eye sees, and, since 19 October, character entropies, the Zipf slope, word lengths, long-range similarity between pages and bursts of frequent words, since 26 October the first-line register and the lines of gallows-initial words, and since 27 October what follows a plain *p* or *f*. It reproduces **77/84** within ±25% (mean of 5 seeds), with a median error of 0.047. A simpler three-rule generator reproduces 45/84 (median error 0.25); its three rules are (1) new words glyph by glyph from a single two-glyph table for the whole manuscript, (2) copying of words from the same line or the two lines above, mostly changed by one glyph, and (3) a memory that is emptied at each page and paragraph (details in §3).
-- Learnt **only from odd folios** and asked to write the even ones, it reproduces **72/84** (median error 0.080). The two real halves reproduce each other at 74/84.
+- It is compared with the real text on **88 measures**: repetition, near-duplicates, word-boundary agreement, line-start and line-end forms, first-line effects, vertical dissimilation, page and sheet habits, word shape, what the eye sees, and, since 19 October, character entropies, the Zipf slope, word lengths, long-range similarity between pages and bursts of frequent words, since 26 October the first-line register and the lines of gallows-initial words, since 27 October what follows a plain *p* or *f*, and since 28 October the form of the line-end closure, *p* against *f*, and the register of the last line. It reproduces **81/88** within ±25% (mean of 5 seeds), with a median error of 0.046. A simpler three-rule generator reproduces 49/88 (median error 0.25); its three rules are (1) new words glyph by glyph from a single two-glyph table for the whole manuscript, (2) copying of words from the same line or the two lines above, mostly changed by one glyph, and (3) a memory that is emptied at each page and paragraph (details in §3).
+- Learnt **only from odd folios** and asked to write the even ones, it reproduces **75/88** (median error 0.070). The two real halves reproduce each other at 78/88.
 - Two results I did not expect (14 October):
   1. **The eye did not need a dictionary.** To stop producing impossible-looking words, the skribe did not need a lexicon of known words. It needed its edits to copied words to obey the same 2-glyph memory it already uses to write new words.
   2. **The word family is a habit of the sheet.** The choice between words with *e* (*-edy*, *-ey*) and words without (*-aiin*, *-ar*, *-ol*) is shared by the pages of a sheet, including the conjugate folio far away in reading order, and not by neighbouring pages. In the herbal section, where every page shows a different plant: z = −7.0 for the conjugate folio, −0.7 for the neighbouring page of another sheet.
@@ -78,13 +78,13 @@ The same rules, spoken as the person who ran the workshop might have spoken them
 
 > The drawings are done. You write around them, afterwards. [R6.1]
 >
-> **To begin.** Start a paragraph with a word that carries a gallows, never with *q*. In that first line write the tall gallows, *p* and *f*, where you would otherwise write *k* and *t*, and more so when the space above is empty. After a *p* or an *f* never write *e*: write *ch* instead (*pchedy*, not *pedy*). [R5.1, R1.3] The first line is a line apart: more *sh* than *ch*, more *t* than *k*, fewer *ee*, longer and rarer words, nothing taken from the page and nothing used again in the second line. [R5.2]
+> **To begin.** Start a paragraph with a word that carries a gallows, never with *q*. In that first line write the tall gallows, *p* and *f*, where you would otherwise write *k* and *t*, and more so when the space above is empty. After a *p* or an *f* never write *e*: write *ch* instead (*pchedy*, not *pedy*). And *p* is the usual one: *f* only now and then. [R5.1, R1.3] The first line is a line apart: more *sh* than *ch*, more *t* than *k*, fewer *ee*, longer and rarer words, nothing taken from the page and nothing used again in the second line. [R5.2]
 >
 > **To make a word.** A word has four places: a start if it needs one (*qo, o, y, d, s, ch, l*), a core that is a gallows or a bench or nothing, one to three *e*, and an ending. No start before a bench, one gallows at most. [R2.1, R2.3, R2.2] Decide the family before you write: with *e* the word ends in *y* or *dy*; without *e*, in *aiin, ain, ar, al* or *ol*. Never put *e* and *i* together. [R2.4, R13.7] Four to six glyphs is the usual size. [R2.6] To choose the next glyph, remember only the two before it. [R17.3] *q* goes only before *o* and only at the start; *e, i, n, m* never begin a word and *e, a, i, ch, q* never end one. [R1.4, R1.5] Between *k* and *t*, *ch* and *sh*, *p* and *f*, choose by the place and by the taste of the day, not by the word. [R1.2, R7.2]
 >
 > **What to put in front.** If the last word ended in *y* and the next begins with *o*, put *q* in front; if it begins with *a*, put *d*. After *r* or *s*, nothing. It is the last stroke of the pen that decides, not the word. [R3.3, R17.4] *q* is for going on: not to begin a paragraph, little at the start of a line, never in a label. [R3.4, R8.1] The word itself tells you nothing about the next. [R3.5]
 >
-> **The line.** Begin with *d, s* or *y*, or with a bare gallows, never with *a*. [R4.2, R14.1] Do not begin with the glyph the line above begins with; the line two above does not matter. [R4.5, R4.6] Make the second word short. [R14.3] If the first word came out long, keep the others long; if short, short. [R14.5] When you start a line, decide whether it will be a line of words that start straight with a gallows (*tchy, kol, pol*) or not, and on some pages more than on others. [R14.7] Close the last word: *aiin* becomes *am*, *ol* becomes *oly*, *ar* becomes *ary*, *y* becomes *g*, *s* becomes *sy*. Keep it short, close it whether you reach the margin or not, and do not squeeze the letters to get there. [R4.3, R4.4, R15.1] Do not close a word in the middle of the line, and in the last line of a paragraph close less. [R4.3, R14.2]
+> **The line.** Begin with *d, s* or *y*, or with a bare gallows, never with *a*. [R4.2, R14.1] Do not begin with the glyph the line above begins with; the line two above does not matter. [R4.5, R4.6] Make the second word short. [R14.3] If the first word came out long, keep the others long; if short, short. [R14.5] When you start a line, decide whether it will be a line of words that start straight with a gallows (*tchy, kol, pol*) or not, and on some pages more than on others. [R14.7] Close the last word: *aiin* becomes *am*, *ol* becomes *oly*, *ar* becomes *ary*, *y* becomes *g*, *s* becomes *sy*. When *aiin* becomes *am*, the whole *aii* goes, not only the *n*; and make *y* into *g* after *o*, *e* or *l*, never after *d*, *k* or *t*. Keep it short, close it whether you reach the margin or not, and do not squeeze the letters to get there. [R4.3, R4.4, R15.1] Do not close a word in the middle of the line, and in the last line of a paragraph close less, put *q* in front less often, and begin more words with *ch*. [R4.3, R14.2, R14.8]
 >
 > **When the drawing is in the way.** Half close the word before it and start again after it as if it were a new line; there you may begin with *a*. Do not break a word across it. [R6.1, R6.2]
 >
@@ -96,7 +96,7 @@ The same rules, spoken as the person who ran the workshop might have spoken them
 >
 > **Never.** Never begin a line with *a*, never two gallows in a word, never *e* with *i*, never *q* away from the start or without its *o*, never *e* after a plain *p* or *f*. [R4.2, R2.2, R13.7, R1.4, R1.3]
 
-What this shows, and what it does not. The sheet is enough: a skribe who follows it with the tables of his hand writes a text that passes 77 of our 84 measures (median error 0.047); the three-rule generator that does not follow it passes 45. Nothing on it refers to meaning: every instruction is about shape, place or process, and none tells the skribe what to say. Whether anyone ever gave such instructions, the statistics cannot tell: the same numbers would come out if the habits grew in one hand without a word spoken, or if a meaningful procedure left this surface. What the text does say is that the five hands follow the same sheet with different strength: the forms are the same in all five (where a line may begin, where *p* and *f* go) and the strengths differ (how often *q* follows *y*, how firmly the last word is closed).
+What this shows, and what it does not. The sheet is enough: a skribe who follows it with the tables of his hand writes a text that passes 81 of our 88 measures (median error 0.046); the three-rule generator that does not follow it passes 49. Nothing on it refers to meaning: every instruction is about shape, place or process, and none tells the skribe what to say. Whether anyone ever gave such instructions, the statistics cannot tell: the same numbers would come out if the habits grew in one hand without a word spoken, or if a meaningful procedure left this surface. What the text does say is that the five hands follow the same sheet with different strength: the forms are the same in all five (where a line may begin, where *p* and *f* go) and the strengths differ (how often *q* follows *y*, how firmly the last word is closed).
 
 A sheet this long was probably never handed to anyone. More likely it is the visible trace of a few simpler instructions, such as: write the glyphs in one stream and break the word at certain final glyphs; make the next word by varying one you can see; take the pieces of a word from a fixed table; make the page look like a real book (a display first line, closed line ends, labels by the drawings); and each of you keep your own hand. Most of the rules above would follow from these without being spoken. These candidates are testable with the same battery, and they do not decide between meaning and no meaning: a verbose cipher with a syllable table would leave the same surface.
 
@@ -106,7 +106,7 @@ A sheet this long was probably never handed to anyone. More likely it is the vis
 
 - **Text**: ZL3b transliteration (Zandbergen–Landini, IVTFF 2.0), paragraph text only (no labels, no circular or radial text), in EVA. Benches and gallows (*ch, sh, cth, ckh, cph, cfh*) count as single glyphs. Ligature braces `{…}` keep their content.
 - **Metadata**: Currier language A/B, Lisa Fagin Davis' scribal hands, quires and sheets (bifolios) from the standard codicological reconstruction.
-- **Comparison**: every skribe figure is the mean of 5 random seeds. A measure is *reproduced* if it lies within ±25% of the real value (within 0.01 absolute for values near zero). The median error is the median of |log(skribe / real)| over the measures that are not near zero. The full list of 84 measures is in the appendix: the 64 of 14 October; since 19 October, character entropies h1, h2 and h3, the Zipf slope, the share of words of 2–3 and of 5–6 glyphs, the vocabulary shared by pages 1, 10 and 100 pages apart and their ratio, the bursts of the 50 most frequent words and their page overdispersion; and since 26 October, the share of words that start with a gallows and their clustering within the line, and four ratios of the first line of a paragraph against the other lines (*sh* among *sh*+*ch*, *t* among *t*+*k*, frequent words, words with *ee*); and since 27 October, the share of plain *p*/*f* followed by *e* and by *ch*/*sh*.
+- **Comparison**: every skribe figure is the mean of 5 random seeds. A measure is *reproduced* if it lies within ±25% of the real value (within 0.01 absolute for values near zero). The median error is the median of |log(skribe / real)| over the measures that are not near zero. The full list of 88 measures is in the appendix: the 64 of 14 October; since 19 October, character entropies h1, h2 and h3, the Zipf slope, the share of words of 2–3 and of 5–6 glyphs, the vocabulary shared by pages 1, 10 and 100 pages apart and their ratio, the bursts of the 50 most frequent words and their page overdispersion; and since 26 October, the share of words that start with a gallows and their clustering within the line, and four ratios of the first line of a paragraph against the other lines (*sh* among *sh*+*ch*, *t* among *t*+*k*, frequent words, words with *ee*); since 27 October, the share of plain *p*/*f* followed by *e* and by *ch*/*sh*; and since 28 October, *-am* among line-final *-am*+*-im*, *p* among plain *p*+*f* on the first line, and two ratios of the last line of a paragraph against the other lines (*q-* after *-y* before *o*, words starting with *ch*).
 - **Controls**:
   - **Ablation**: remove each rule in turn and count the measures lost.
   - **Hold-out**: learn every table and fitted parameter from odd folios only, then write the layout of the even folios and compare with the real even folios. The real odd folios against the real even folios give the natural difference between halves.
@@ -133,9 +133,10 @@ For every sheet, page, paragraph and line, in this order:
      In 45% of copies **one glyph is changed** (substitution, insertion or deletion, with the frequencies seen between neighbouring real words). The edit must be *writable* (see §4). After an edit, the prefix is chosen again by the boundary rule. Copies placed inside a line are "opened" if they carried a line-end form. Copies outside the first line lose *p/f*, and copies right after a drawing gap lose *q-*.
    - **New**, glyph by glyph, with the table of the hand and section. Each glyph depends on the previous two. The first two glyphs also depend on the last glyph of the previous word (boundary agreement). There are four start contexts: line start, paragraph start, after a drawing gap, and after a word. The word must fit the slot template prefix · core · *e*/*i* run · ending. Words with two gallows are rejected 35% of the time (55% before) and words with both *e* and *i* 25% (45% before): the hand tables already make fewer of them. Five candidates are made and one is chosen according to the line's length tone and the position weights. The last word of a line is written from its own table, learnt from real line-final words with their closure undone.
 6. **Line start.** If the first word starts with the same glyph as the line above, it is rewritten with a probability that depends on the glyph: always for *ch*, about two in three for *o* and *q*, about half for gallows, almost never for *s*.
-7. **First line of a paragraph.** Almost no copying, and *p/f* instead of *k/t* in about a third of the gallows; since 27 October an *e* right after a new *p*/*f* becomes *ch* (before *a* the swap is made only half the time), as in the real text, where a plain *p*/*f* is never followed by *e* (R1.3). Since 26 October it also has a register of its own (R5.2): more *t* and *sh*, fewer *e* after the core, and new words that are frequent in the text are disfavoured (weight ×e^−0.7). The old rule against immediate repeats on the first line was dropped: with rarer words the first line already repeats less.
-8. **Line end.** The last word is closed (*-iin→-m, -in→-m, -l→-ly, -r→-ry, -s→-sy, -y→-g*) with a strength that depends on the hand and on the number of words in the line. Paragraph-final lines, and the word before a drawing gap, close at three quarters of that strength.
+7. **First line of a paragraph.** Almost no copying, and *p/f* instead of *k/t* in about a third of the gallows; since 27 October an *e* right after a new *p*/*f* becomes *ch* (before *a* the swap is made only half the time), as in the real text, where a plain *p*/*f* is never followed by *e* (R1.3); since 28 October a *t* becomes *f* at 0.4 times the rate at which a *k* becomes *p* (the real first line writes *p* 79% of the time). Since 26 October it also has a register of its own (R5.2): more *t* and *sh*, fewer *e* after the core, and new words that are frequent in the text are disfavoured (weight ×e^−0.7). The old rule against immediate repeats on the first line was dropped: with rarer words the first line already repeats less.
+8. **Line end.** The last word is closed (*-iin→-m, -in→-m, -l→-ly, -r→-ry, -s→-sy, -y→-g*) with a strength that depends on the hand and on the number of words in the line. Paragraph-final lines, and the word before a drawing gap, close at three quarters of that strength. Since 28 October each word gets one closure, by its most specific ending (*-aiin* → *-am*, never *-aim*), and *-y* → *-g* is weighted by the glyph before the *y* (frequent after *o*, rare after *d* and *k*, never after *t*).
 9. **Lines of gallows-initial words** (since 26 October, R14.7). Each page draws a value and each line adds its own; the sum raises or lowers the weight of *t, k, p, f* as the first glyph of a new word, except the first word of the line. Its three parameters, like those of the first-line register, were calibrated on the odd folios only.
+10. **Last line of a paragraph** (since 28 October, R14.8). *q-* less often (style offset −0.5) and *ch* more often as the first glyph of a new word (+0.3), both calibrated on the odd folios.
 
 The glyph-contact tables, the line-end table, the edit frequencies, the boundary table and the length weights are **learnt from the text**. The skribe says how the pieces combine; it does not explain where the glyph grammar itself comes from. The hand and section tables are more parameters learnt from the text (one contact table for every combination with enough lines); what they say is that each hand, and each hand in each section, has its own glyph grammar, not only its own tone.
 
@@ -143,55 +144,61 @@ The glyph-contact tables, the line-end table, the edit frequencies, the boundary
 
 ## 3. Results
 
-A selection of measures (`scribe/results_table.txt`). All 84 are in the appendix.
+A selection of measures (`scribe/results_table.txt`). All 88 are in the appendix.
 
-**The baseline, "3-rule generator".** To know how much of the score the full rulebook earns, the skribe is always shown next to a simpler generator written on the night of 27 September (`night_generator/generator3.py`), on the same layout. It has three rules: (1) **new words glyph by glyph**, with a single table for the whole manuscript in which each glyph depends on the previous two, and the first glyph of a word on the last glyph of the word before; (2) **copying from the visible field**: about a third of the words are taken from the same line or the two lines above (weight 1, ½, ¼), preferring words whose first glyph fits the end of the previous word, and most of them (85%) changed by one glyph; (3) **a page layer**: the copying memory is emptied at each new page and paragraph, and the first line of a paragraph copies a third as much. On top of that it has two small touches from the first measurements: the first glyph of a line avoids the first glyph of the line above about half the time, and *-iin* becomes *-m* on the last word, more often in long lines. It has no hands, no sections, no sheet habits, no free choices, no line-start or paragraph forms and no drawing gaps. It passes 45 of the 84 measures; the skribe passes 77.
+**The baseline, "3-rule generator".** To know how much of the score the full rulebook earns, the skribe is always shown next to a simpler generator written on the night of 27 September (`night_generator/generator3.py`), on the same layout. It has three rules: (1) **new words glyph by glyph**, with a single table for the whole manuscript in which each glyph depends on the previous two, and the first glyph of a word on the last glyph of the word before; (2) **copying from the visible field**: about a third of the words are taken from the same line or the two lines above (weight 1, ½, ¼), preferring words whose first glyph fits the end of the previous word, and most of them (85%) changed by one glyph; (3) **a page layer**: the copying memory is emptied at each new page and paragraph, and the first line of a paragraph copies a third as much. On top of that it has two small touches from the first measurements: the first glyph of a line avoids the first glyph of the line above about half the time, and *-iin* becomes *-m* on the last word, more often in long lines. It has no hands, no sections, no sheet habits, no free choices, no line-start or paragraph forms and no drawing gaps. It passes 49 of the 88 measures; the skribe passes 81.
 
 | Measure | Real | 3-rule generator | Skribe |
 |---|---|---|---|
-| Adjacent identical words / chance | 3.09 | 2.91 | 3.03 |
-| Same word at distance 2 / shuffled | 3.27 | 2.52 | 3.13 |
-| Frequent words repeated >3× chance (%) | 51.8 | 31.7 | 41.0 |
-| Words with an edit-distance-1 twin earlier on the page (%) | 64.5 | 61.2 | 65.5 |
-| Boundary MI (last glyph → next word's first glyph) | 0.155 | 0.132 | 0.154 |
-| Last word of line closed (-m/-ly/-ry/-g/-sy), non-final lines (%) | 27.1 | 11.5 | 30.4 |
-| Gallows on first word of paragraph (%) | 93.2 | 53.9 | 92.7 |
-| p/f among gallows, first line of paragraph (%) | 31.0 | 9.5 | 28.7 |
-| Plain p/f followed by e (%) | 0.31 | 0.93 | 0.34 |
-| Plain p/f followed by ch/sh (%) | 59.2 | 56.8 | 58.7 |
-| d-/s-/y- right after a drawing gap (%) | 41.3 | 13.5 | 42.9 |
-| Same first glyph as the line above / null | 0.58 | 0.69 | 0.58 |
-| Page overdispersion of q- (after -y) | 6.3 | 1.3 | 5.4 |
+| Adjacent identical words / chance | 3.09 | 2.91 | 2.76 |
+| Same word at distance 2 / shuffled | 3.27 | 2.52 | 3.35 |
+| Frequent words repeated >3× chance (%) | 51.8 | 31.7 | 37.2 |
+| Words with an edit-distance-1 twin earlier on the page (%) | 64.5 | 61.2 | 65.7 |
+| Boundary MI (last glyph → next word's first glyph) | 0.155 | 0.132 | 0.150 |
+| Last word of line closed (-m/-ly/-ry/-g/-sy), non-final lines (%) | 27.1 | 11.5 | 29.4 |
+| Line-final -m written -am, not -im (%) | 94.5 | 94.5 | 96.6 |
+| Gallows on first word of paragraph (%) | 93.2 | 53.9 | 93.5 |
+| p/f among gallows, first line of paragraph (%) | 31.0 | 9.5 | 29.9 |
+| Plain p among plain p+f, first line (%) | 75.4 | 76.1 | 79.5 |
+| Plain p/f followed by e (%) | 0.31 | 0.93 | 0.45 |
+| Plain p/f followed by ch/sh (%) | 59.2 | 56.8 | 58.5 |
+| d-/s-/y- right after a drawing gap (%) | 41.3 | 13.5 | 41.7 |
+| Same first glyph as the line above / null | 0.58 | 0.69 | 0.60 |
+| Page overdispersion of q- (after -y) | 6.3 | 1.3 | 4.6 |
 | Vocabulary cosine: same sheet / neighbouring pages of other sheets | 1.30 | 0.99 | 1.20 |
-| Word types | 7,915 | 10,284 | 7,513 |
-| Strange words (%) | 4.6 | 13.7 | 3.7 |
+| Word types | 7,915 | 10,284 | 7,502 |
+| Strange words (%) | 4.6 | 13.7 | 3.6 |
 | Strange words per line | 0.36 | 1.07 | 0.29 |
-| Page overdispersion of e-words | 24.6 | 1.6 | 16.6 |
-| e-words: biological / herbal | 2.04 | 1.00 | 1.73 |
-| -edy words in the biological section (%) | 27.5 | 10.9 | 26.2 |
+| Page overdispersion of e-words | 24.6 | 1.6 | 17.0 |
+| e-words: biological / herbal | 2.04 | 1.00 | 1.71 |
+| -edy words in the biological section (%) | 27.5 | 10.9 | 25.5 |
 | Character entropy h1 / h2 / h3 (bits) | 3.91 / 2.14 / 1.86 | 3.90 / 2.28 / 2.02 | 3.90 / 2.11 / 1.83 |
-| Zipf slope (first 1,000 types) | 1.005 | 0.993 | 0.984 |
-| Words of 2–3 glyphs (%) | 21.6 | 28.5 | 22.7 |
-| Words of 8+ glyphs (%) | 5.3 | 9.9 | 5.9 |
-| Shared vocabulary: neighbouring pages / 10 apart / 100 apart | 0.330 / 0.253 / 0.155 | 0.241 / 0.232 / 0.224 | 0.286 / 0.229 / 0.156 |
-| Neighbouring / 100 pages apart | 2.13 | 1.08 | 1.83 |
-| Bursts of the 50 most frequent words (CV of intervals) | 1.76 | 1.03 | 1.58 |
-| Words starting with a gallows, not line-initial (%) | 5.05 | 4.58 | 5.07 |
-| Gallows-initial word after another / chance (within the line) | 1.45 | 1.26 | 1.57 |
-| First line / other lines: *sh* among *sh*+*ch* | 1.34 | 1.04 | 1.31 |
-| First line / other lines: *t* among *t*+*k* | 1.23 | 1.00 | 1.14 |
-| First line / other lines: frequent words | 0.66 | 1.17 | 0.68 |
-| First line / other lines: words with *ee* | 0.87 | 0.99 | 0.88 |
-| **Reproduced (±25%)** | | **45/84** | **77/84** |
-| **Median error** | | 0.254 | 0.047 |
+| Zipf slope (first 1,000 types) | 1.005 | 0.993 | 0.987 |
+| Words of 2–3 glyphs (%) | 21.6 | 28.5 | 23.4 |
+| Words of 8+ glyphs (%) | 5.3 | 9.9 | 5.8 |
+| Shared vocabulary: neighbouring pages / 10 apart / 100 apart | 0.330 / 0.253 / 0.155 | 0.241 / 0.232 / 0.224 | 0.289 / 0.230 / 0.156 |
+| Neighbouring / 100 pages apart | 2.13 | 1.08 | 1.85 |
+| Bursts of the 50 most frequent words (CV of intervals) | 1.76 | 1.03 | 1.55 |
+| Words starting with a gallows, not line-initial (%) | 5.05 | 4.58 | 5.03 |
+| Gallows-initial word after another / chance (within the line) | 1.45 | 1.26 | 1.40 |
+| First line / other lines: *sh* among *sh*+*ch* | 1.34 | 1.04 | 1.29 |
+| First line / other lines: *t* among *t*+*k* | 1.23 | 1.00 | 1.29 |
+| First line / other lines: frequent words | 0.66 | 1.17 | 0.67 |
+| First line / other lines: words with *ee* | 0.87 | 0.99 | 0.86 |
+| Last line / other lines: *q-* after *-y* before *o* | 0.81 | 0.98 | 0.83 |
+| Last line / other lines: words starting with *ch* | 1.25 | 1.04 | 1.20 |
+| **Reproduced (±25%)** | | **49/88** | **81/88** |
+| **Median error** | | 0.245 | 0.046 |
 
-**Hold-out**: learnt on odd folios, written on even folios: 72/84 (median error 0.080); the real halves against each other: 74/84 (0.049). The length and long-range measures, the four first-line ratios and the two *p*/*f* measures are all reproduced in the hold-out with tables learnt from the odd folios. Of the 12 measures the hold-out skribe misses, six are also missed between the two real halves, or cannot be computed on half a manuscript (the sheet measure: the conjugate folio often falls in the other half). Its own misses are near twins, *-m* by line length, *q-* at line start, closures inside the line and before a gap, and the page overdispersion of *e*-words.
+**Hold-out**: learnt on odd folios, written on even folios: 75/88 (median error 0.070); the real halves against each other: 78/88 (0.047). The length and long-range measures, the four first-line ratios, the two last-line ratios and the *p*/*f* and closure measures are all reproduced in the hold-out with tables learnt from the odd folios. Of the 13 measures the hold-out skribe misses, six are also missed between the two real halves, or cannot be computed on half a manuscript (the sheet measure: the conjugate folio often falls in the other half). Its own misses are near twins, repeats at distance 2, *-m* by line length, closures inside the line and before a gap, *q-* on the first word of the paragraph and the page overdispersion of *e*-words.
 
 **The skribe of 14 October against the skribe of 19 October** (battery of 76). Both score 69/76. What changed is the median error, from 0.098 to 0.049–0.067 depending on the run, and which measures pass: the old skribe made too many short words (2–3 glyphs 28.8% against 21.6%) and a long-range curve that was too flat (neighbouring over 100 pages apart 1.65 against 2.13); the new one passes those and loses the page overdispersion of *e*-words.
 
 **The skribe of 19 October against the skribe of 26 October** (battery of 82, `scribe/SCRIBE.md` §10–11). The habit of gallows-initial lines gains the two measures made for it and nothing else (70/78 with and without it on the battery of 78). The first-line register gains the four measures of the first line and two more: with the gallows-line habit but without the register, 73/82 (0.066) and 65/82 on the even folios (0.089); with both, 78/82 (0.060) and 69/82 (0.068). Between runs of the same configuration the median error moves by about ±0.008 and the count by ±2.
 
 **The *p*/*f* rule of 27 October** (`scribe/SCRIBE.md` §12). A plain *p*/*f* is followed by *e* in 0.31% of cases in the real text; the skribe, which turned *k* into *p* at random, wrote 18.5%. With the rule, 0.34%. On 84 measures, without the rule 79/84 (0.058) and 69/84 on the even folios (0.071); with it 77/84 (0.047) and 72/84 (0.080). The rule fixes a categorical feature and lowers the median error on the whole text; the two measures it loses on the whole text and the error it gains on the even folios are within the noise of the runs (0.079–0.088 on the even folios over four runs).
+
+**The glyph-pair scan of 28 October** (`scribe/pairs/`, `scribe/SCRIBE.md` §13). A scan of every glyph pair inside a word, against the skribe, by place in the line, line type, hand, section and language (pre-registered, with a positive control that finds the *pe* of 26 October) found no new forbidden pair and four things to fix: the line-end closure wrote *-aim* for *-am* (164 against 29 in the real text) and *-y* → *-g* after *d*, *k*, *t*; *t* became *f* too often on the first line; and the last line of the paragraph has a register of its own (R14.8). With the four fixes, calibrated on the odd folios: 81/88 (0.046) on the whole text and 75/88 (0.070) on the even folios; without them, 79/88 (0.048) and 75/88 (0.076).
 
 **Standard measures** (`scribe/standard_measures_out.txt`, with their own definitions; skribe of 26 October): h1 / h2 / h3 3.88 / 2.12 / 1.85 real against 3.88 / 2.10 / 1.83; Zipf slope 1.005 against 0.984; MATTR (window of 500 words) 0.64 against 0.63; bursts 1.76 against 1.58; vocabulary similarity between pages at distance 1 / 10 / 100: real 0.35 / 0.26 / 0.17, skribe 0.31 / 0.25 / 0.17 (skribe of 19 October 0.33 / 0.26 / 0.19; before the hand tables 0.29 / 0.24 / 0.19). Pages far apart are now as similar as in the real text; neighbouring pages are a little less similar than in the real text.
 
@@ -372,26 +379,27 @@ The run of `compare.py` of 19 October gave the final configuration 69/76 with a 
 | re-choosing the prefix of edited copies | 57 |
 | -dy section offset | 58 (loses -edy in biological, gains two unstable measures) |
 
-**Rule by rule again** (27 October, battery of 84, 5 seeds, `scribe/results_ablations_table.txt`; details in `scribe/SCRIBE.md` §12.2; the ablations of 26 October on 82 measures are in §11.3 there). Measures lost against the full skribe (77/84, median error 0.047), and the median error without the rule:
+**Rule by rule again** (28 October, battery of 88, 5 seeds, `scribe/results_ablations_table.txt`; details in `scribe/SCRIBE.md` §13.3; the ablations of 26 and 27 October are in §11.3 and §12.2 there). Measures lost against the full skribe (81/88, median error 0.046), and the median error without the rule:
 
-| Rule removed | Measures lost | Median error |
+| rule removed | measures | median error |
 |---|---|---|
-| boundary agreement | −8 | 0.075 |
-| first-line forms (p/f, little copying) | −7 | 0.071 |
-| first-line register | −7 | 0.065 |
-| copy from the visible page | −7 | 0.062 |
-| length weights | −7 | 0.060 |
-| line-end closure | −5 | 0.047 |
-| start contexts | −4 | 0.062 |
-| sheet and page habits, slot template, word rules, writable edits | −3 each | 0.054 to 0.065 |
-| vertical dissimilation | −2 | 0.063 |
-| line-end table | −1 | 0.050 |
-| language A/B tables, closure by words per line, -dy section offset | 0 | 0.047 to 0.052 |
-| lines of gallows-initial words, re-choosing the prefix | +1 | 0.048, 0.053 |
-| *e* after *p*/*f* becomes *ch* (new) | +2 | 0.058 |
-| word family, *e* habit | +2 | 0.052, 0.044 |
+| boundary rule | −9 | 0.058 |
+| first line | −8 | 0.074 |
+| copying | −6 | 0.063 |
+| first-line register | −6 | 0.052 |
+| word rules | −5 | 0.040 |
+| length mode | −5 | 0.058 |
+| sheet style | −3 | 0.068 |
+| closure | −3 | 0.048 |
+| *e* after *p*/*f* becomes *ch* | −3 | 0.051 |
+| start contexts, dissimilation | −2 | 0.057, 0.054 |
+| slot template, form memory, *e* habit | −1 | 0.046, 0.041, 0.052 |
+| one closure per word (new) | 0 | 0.053 |
+| reprefix, end table, closure by word count, section dy | 0 | 0.044 to 0.053 |
+| language tables, word family, last-line register (new) | +1 | 0.042, 0.046, 0.046 |
+| gallows-initial line habit | +3 | 0.049 |
 
-No rule broke. Removing the new rule loses its own two measures and gains four noisy ones, so the count goes up while the median error rises from 0.047 to 0.058. The counts move by ±2 between runs on the noisy measures (neighbours one glyph apart, frequent words repeated, H8, repeats on the first line); the median error is what tells rules apart. The *e* habit costs nothing and lowers the error when removed (0.044), the word family costs nothing: both are candidates for removal, not removed yet.
+No rule broke. The two new pieces do not show in the count: the one-closure rule fixes a form that no measure at ±25% separates (75% `-am` already passes against 94.5%) and lowers the median error from 0.053 to 0.046; the last-line register costs one noisy measure and leaves the error as it is, while its own two ratios pass loosely without it (×0.98 and ×0.97 against ×0.81 and ×1.25 are inside the band): the values, not the count, show it (`scribe/SCRIBE.md` §13.2). Removing the gallows-initial line habit gains three noisy measures and raises the error a little, as on 26/10. Word rules and form memory again lower the error when removed (0.040, 0.041): they fix their own measures at the cost of the general fit.
 
 ---
 
@@ -413,7 +421,7 @@ A reader of voynich.ninja asked: applied to half of Moby-Dick, would the skribe 
 
 On both texts the skribe matches the character entropies, the Zipf slope and the mean word length: those measures distinguish nothing, any letter model passes them. The measures that separate the Voynich from a language are repetition, vocabulary size and word order, and on Latin the skribe fails all of them, and the battery sees it. **This is why the control matters**: the same procedure that passes on the Voynich fails on a real language exactly where a language should fail, so the battery tells syntax from its imitation, and what the Voynich and the skribe share (repetition 3.15 against 0.04 in Latin, near twins 2.26 against 0.59, and a link between consecutive words concentrated in the contact glyph) is what Latin does not have.
 
-Where the link between consecutive words lives, measured as mutual information over the within-line shuffle: in Latin the whole previous word says 0.274 bits about the next one and its last letter 0.134, so the information is in the word, which is syntax. In the Voynich the whole word says 0.082 and the last glyph alone 0.106: all the dependence between consecutive words is in the contact glyph, and knowing the word adds nothing. The full skribe of 26 October (even folios, five seeds, `scribe/controls/contact_info.py`, which gives 0.083 and 0.109 on the real even folios) reaches 0.091 of the 0.109 in the contact glyph, but only 0.034 of the 0.083 per word: its frequent words do not concentrate the link as the real ones do. That measure is not yet in the battery of 84.
+Where the link between consecutive words lives, measured as mutual information over the within-line shuffle: in Latin the whole previous word says 0.274 bits about the next one and its last letter 0.134, so the information is in the word, which is syntax. In the Voynich the whole word says 0.082 and the last glyph alone 0.106: all the dependence between consecutive words is in the contact glyph, and knowing the word adds nothing. The full skribe of 26 October (even folios, five seeds, `scribe/controls/contact_info.py`, which gives 0.083 and 0.109 on the real even folios) reaches 0.091 of the 0.109 in the contact glyph, but only 0.034 of the 0.083 per word: its frequent words do not concentrate the link as the real ones do. That measure is not yet in the battery of 88.
 
 Limits: the Latin layout is artificial, so the line measures say nothing for Latin; Moby-Dick itself was not run.
 
@@ -454,19 +462,19 @@ The absolute values differ because the space is another; the order and the p val
 
 ## 9. What it does not reproduce
 
-The seven measures the skribe of 27 October misses (`scribe/results_table.txt`):
+The seven measures the skribe of 28 October misses (`scribe/results_table.txt`):
 
 | Measure | Real | Skribe |
 |---|---|---|
-| Consecutive words at edit distance 1 / shuffled | 2.21 | 1.66 |
-| Frequent words repeated <0.3× chance (%) | 16.1 | 23.3 |
-| Last word of line ends -m (%) | 15.9 | 20.0 |
-| Line-end -m: lines of 10+ words / lines of 1–4 words | 3.41 | 2.35 |
-| a- at line start (%) | 0.35 | 0.26 |
-| q- right after a drawing gap (%) | 3.6 | 4.7 |
-| Page overdispersion of e-words | 24.6 | 16.6 |
+| Consecutive words at edit distance 1 / shuffled | 2.21 | 1.62 |
+| Frequent words repeated >3× chance (%) | 51.8 | 37.2 |
+| Frequent words repeated <0.3× chance (%) | 16.1 | 25.1 |
+| Line-end -m: lines of 10+ words / lines of 1–4 words | 3.41 | 2.26 |
+| Plain p/f followed by e (%) | 0.31 | 0.45 |
+| Page overdispersion of q- (after -y) | 6.3 | 4.6 |
+| Page overdispersion of e-words | 24.6 | 17.0 |
 
-Several of these sit at the edge and change from run to run: the near twins (the edge is 1.66), the raw *-m* share (the edge is 19.8), *a-* at line start (about a dozen lines in the whole text) and *q-* after a gap (a few dozen cases). The *q-* on the first word of a paragraph, missed on 26 October, now passes (4.7 against 4.2).
+Several sit at the edge and change from run to run (`scribe/SCRIBE.md` §10.5): the near twins, frequent words repeated more than 3× chance (39.4 and 41.0 in the last runs, inside the band), the page overdispersion of *q-*, and *p*/*f* followed by *e*, which rests on about six cases per seed against five in the whole manuscript. The raw *-m* share, *a-* at line start and *q-* after a gap, missed on 27 October, now pass.
 
 - **Near twins.** Consecutive words at edit distance 1 are still too few, at the edge. With the copying down to 22% there are fewer of them; the hand vocabulary does not make them.
 - **Which words repeat.** The overall amount of repetition is right, and so is the share of words that repeat a lot (barely), but in the real text *dal*, *shey*, *saiin* never repeat adjacently and *okaiin* does ×5. Half of the frequent words repeat a lot and 16% avoid it; the skribe knows families of words, not single words. A per-word propensity estimated from the text did not help (§4), and a token-level model found no word-specific habit that the skribe lacks (`scribe/SCRIBE.md` §11).
@@ -527,96 +535,100 @@ Other scripts in `scribe/`: `standard_measures.py` (entropies, Zipf, MATTR, burs
 
 ---
 
-## Appendix: all 84 measures
+## Appendix: all 88 measures
 
 ✓ = within ±25% of the real value (or within 0.01 absolute near zero); mean of 5 seeds.
 
 <!-- TABLE -->
 | # | Measure | Real | 3-rule generator | Skribe |
 |---|---|---|---|---|
-| 1 | Adjacent identical words (%) | 0.902 | 0.793 ✓ | 0.884 ✓ |
-| 2 | Adjacent identical words / chance | 3.09 | 2.91 ✓ | 3.03 ✓ |
-| 3 | Consecutive words at edit distance 1 / shuffled | 2.21 | 2.38 ✓ | 1.65 ✗ |
-| 4 | Same word at distance 2 / shuffled | 3.27 | 2.52 ✓ | 3.13 ✓ |
-| 5 | Same word at distance 3 / shuffled | 3.45 | 2.46 ✗ | 2.83 ✓ |
-| 6 | Same word at distance 5 / shuffled | 2.85 | 2.20 ✓ | 3.10 ✓ |
-| 7 | Frequent words repeated >3x chance (%) | 51.79 | 31.70 ✗ | 41.03 ✓ |
-| 8 | Frequent words repeated <0.3x chance (%) | 16.07 | 24.39 ✗ | 23.32 ✗ |
-| 9 | Boundary MI, distance 1 (last glyph to next first glyph) | 0.155 | 0.132 ✓ | 0.154 ✓ |
+| 1 | Adjacent identical words (%) | 0.902 | 0.793 ✓ | 0.814 ✓ |
+| 2 | Adjacent identical words / chance | 3.09 | 2.91 ✓ | 2.76 ✓ |
+| 3 | Consecutive words at edit distance 1 / shuffled | 2.21 | 2.38 ✓ | 1.62 ✗ |
+| 4 | Same word at distance 2 / shuffled | 3.27 | 2.52 ✓ | 3.35 ✓ |
+| 5 | Same word at distance 3 / shuffled | 3.45 | 2.46 ✗ | 3.08 ✓ |
+| 6 | Same word at distance 5 / shuffled | 2.85 | 2.20 ✓ | 3.16 ✓ |
+| 7 | Frequent words repeated >3x chance (%) | 51.79 | 31.70 ✗ | 37.17 ✗ |
+| 8 | Frequent words repeated <0.3x chance (%) | 16.07 | 24.39 ✗ | 25.09 ✗ |
+| 9 | Boundary MI, distance 1 (last glyph to next first glyph) | 0.155 | 0.132 ✓ | 0.150 ✓ |
 | 10 | Boundary MI, distance 2 | 0.009 | 0.000 ✓ | 0.004 ✓ |
-| 11 | Boundary MI, distance 3 | 0.003 | -0.001 ✓ | 0.003 ✓ |
-| 12 | Lift -y \| q- | 1.69 | 1.71 ✓ | 1.67 ✓ |
-| 13 | Lift -r \| a- | 3.12 | 2.97 ✓ | 3.10 ✓ |
-| 14 | Lift -y \| a- | 0.194 | 0.276 ✗ | 0.207 ✓ |
-| 15 | Lift -n \| q- | 0.472 | 0.501 ✓ | 0.579 ✓ |
-| 16 | First word of line starts ch/sh (%) | 8.15 | 8.73 ✓ | 7.95 ✓ |
-| 17 | First word of line starts y (%) | 14.33 | 13.90 ✓ | 15.49 ✓ |
-| 18 | Last word of line ends -m (%) | 15.87 | 9.07 ✗ | 19.95 ✗ |
-| 19 | Line-end -m: lines of 10+ words / 1-4 words | 3.40 | 3.88 ✓ | 2.35 ✗ |
-| 20 | Same first glyph as line n-1 / null | 0.583 | 0.689 ✓ | 0.576 ✓ |
-| 21 | Same first glyph as line n-2 / null | 1.30 | 1.13 ✓ | 1.30 ✓ |
-| 22 | Same first glyph as line n-3 / null | 1.16 | 1.17 ✓ | 1.06 ✓ |
-| 23 | Distinct initial glyphs per paragraph (4+ lines) | 4.36 | 4.94 ✓ | 4.50 ✓ |
-| 24 | Adjacent repeats: first line of paragraph / rest | 0.385 | 1.24 ✗ | 0.390 ✓ |
-| 25 | Spearman correlation of neighbour word lengths | 0.160 | 0.051 ✗ | 0.185 ✓ |
-| 26 | Word types | 7,915 | 10,284 ✗ | 7,513 ✓ |
-| 27 | Hapax (% of types) | 71.32 | 76.11 ✓ | 65.81 ✓ |
-| 28 | [R2.1] Words fitting the slot grammar (%) | 97.70 | 94.65 ✓ | 99.88 ✓ |
-| 29 | [R2.2] Words with 2+ gallows (%) | 1.80 | 5.34 ✗ | 1.84 ✓ |
-| 30 | [R2.6] Mean word length (glyphs) | 4.80 | 4.78 ✓ | 4.77 ✓ |
+| 11 | Boundary MI, distance 3 | 0.003 | -0.001 ✓ | 0.002 ✓ |
+| 12 | Lift -y \| q- | 1.69 | 1.71 ✓ | 1.66 ✓ |
+| 13 | Lift -r \| a- | 3.12 | 2.97 ✓ | 3.20 ✓ |
+| 14 | Lift -y \| a- | 0.194 | 0.276 ✗ | 0.195 ✓ |
+| 15 | Lift -n \| q- | 0.472 | 0.501 ✓ | 0.566 ✓ |
+| 16 | First word of line starts ch/sh (%) | 8.15 | 8.73 ✓ | 8.54 ✓ |
+| 17 | First word of line starts y (%) | 14.33 | 13.90 ✓ | 15.69 ✓ |
+| 18 | Last word of line ends -m (%) | 15.87 | 9.07 ✗ | 19.22 ✓ |
+| 19 | Line-end -m: lines of 10+ words / 1-4 words | 3.40 | 3.88 ✓ | 2.26 ✗ |
+| 20 | Same first glyph as line n-1 / null | 0.583 | 0.689 ✓ | 0.598 ✓ |
+| 21 | Same first glyph as line n-2 / null | 1.30 | 1.13 ✓ | 1.26 ✓ |
+| 22 | Same first glyph as line n-3 / null | 1.16 | 1.17 ✓ | 1.08 ✓ |
+| 23 | Distinct initial glyphs per paragraph (4+ lines) | 4.36 | 4.94 ✓ | 4.47 ✓ |
+| 24 | Adjacent repeats: first line of paragraph / rest | 0.385 | 1.24 ✗ | 0.391 ✓ |
+| 25 | Spearman correlation of neighbour word lengths | 0.160 | 0.051 ✗ | 0.192 ✓ |
+| 26 | Word types | 7,915 | 10,284 ✗ | 7,502 ✓ |
+| 27 | Hapax (% of types) | 71.32 | 76.11 ✓ | 66.01 ✓ |
+| 28 | [R2.1] Words fitting the slot grammar (%) | 97.70 | 94.65 ✓ | 99.89 ✓ |
+| 29 | [R2.2] Words with 2+ gallows (%) | 1.80 | 5.34 ✗ | 1.78 ✓ |
+| 30 | [R2.6] Mean word length (glyphs) | 4.80 | 4.78 ✓ | 4.75 ✓ |
 | 31 | [R2.6] SD of word length | 1.71 | 2.20 ✗ | 1.75 ✓ |
-| 32 | [R13.7] e and i in the same word / expected | 0.244 | 0.413 ✗ | 0.225 ✓ |
+| 32 | [R13.7] e and i in the same word / expected | 0.244 | 0.413 ✗ | 0.237 ✓ |
 | 33 | [R3.3] H(prefix), marginal | 1.54 | 1.52 ✓ | 1.52 ✓ |
-| 34 | [R3.3] H(prefix \| previous glyph, core) | 0.918 | 0.959 ✓ | 0.935 ✓ |
-| 35 | [R3.3] q- before o- after -y (%) | 57.26 | 53.65 ✓ | 57.87 ✓ |
-| 36 | [R3.4] q- on first word of paragraph (%) | 4.19 | 13.22 ✗ | 4.73 ✓ |
-| 37 | [R3.4] q- on first word of line (%) | 14.87 | 13.03 ✓ | 17.14 ✓ |
-| 38 | [R3.4] q- inside the line (%) | 17.94 | 16.21 ✓ | 18.73 ✓ |
-| 39 | [R4.2] a- at line start (%) | 0.354 | 0.260 ✗ | 0.260 ✗ |
-| 40 | [R4.2] d-/s-/y- at line start (%) | 47.98 | 39.49 ✓ | 48.34 ✓ |
-| 41 | [R14.1] Bare gallows at line start (%) | 8.97 | 22.21 ✗ | 8.60 ✓ |
-| 42 | [R4.3] Closed last word, non-final lines (%) | 27.11 | 11.51 ✗ | 30.44 ✓ |
-| 43 | [R4.3] Closed forms inside the line (%) | 2.34 | 5.06 ✗ | 2.40 ✓ |
-| 44 | [R14.2] Closed last word of paragraph (%) | 17.31 | 8.41 ✗ | 17.83 ✓ |
-| 45 | [R14.3] Length of 2nd word / 1st word | 0.877 | 0.965 ✓ | 0.916 ✓ |
-| 46 | [R5.1] Gallows on first word of paragraph (%) | 93.24 | 53.92 ✗ | 92.73 ✓ |
-| 47 | [R1.3] p/f among gallows, first line of paragraph (%) | 31.03 | 9.47 ✗ | 28.73 ✓ |
-| 48 | [R1.3] p/f among gallows, other lines (%) | 2.73 | 10.19 ✗ | 2.86 ✓ |
-| 49 | [R1.3] Plain p/f followed by e (%) | 0.310 | 0.929 ✗ | 0.335 ✓ |
-| 50 | [R1.3] Plain p/f followed by ch/sh (%) | 59.17 | 56.76 ✓ | 58.65 ✓ |
+| 34 | [R3.3] H(prefix \| previous glyph, core) | 0.918 | 0.959 ✓ | 0.929 ✓ |
+| 35 | [R3.3] q- before o- after -y (%) | 57.26 | 53.65 ✓ | 56.94 ✓ |
+| 36 | [R3.4] q- on first word of paragraph (%) | 4.19 | 13.22 ✗ | 5.08 ✓ |
+| 37 | [R3.4] q- on first word of line (%) | 14.87 | 13.03 ✓ | 15.80 ✓ |
+| 38 | [R3.4] q- inside the line (%) | 17.94 | 16.21 ✓ | 18.19 ✓ |
+| 39 | [R4.2] a- at line start (%) | 0.354 | 0.260 ✗ | 0.295 ✓ |
+| 40 | [R4.2] d-/s-/y- at line start (%) | 47.98 | 39.49 ✓ | 49.18 ✓ |
+| 41 | [R14.1] Bare gallows at line start (%) | 8.97 | 22.21 ✗ | 8.70 ✓ |
+| 42 | [R4.3] Closed last word, non-final lines (%) | 27.11 | 11.51 ✗ | 29.41 ✓ |
+| 43 | [R4.3] Closed forms inside the line (%) | 2.34 | 5.06 ✗ | 2.31 ✓ |
+| 44 | [R14.2] Closed last word of paragraph (%) | 17.31 | 8.41 ✗ | 18.85 ✓ |
+| 45 | [R14.3] Length of 2nd word / 1st word | 0.877 | 0.965 ✓ | 0.910 ✓ |
+| 46 | [R5.1] Gallows on first word of paragraph (%) | 93.24 | 53.92 ✗ | 93.54 ✓ |
+| 47 | [R1.3] p/f among gallows, first line of paragraph (%) | 31.03 | 9.47 ✗ | 29.93 ✓ |
+| 48 | [R1.3] p/f among gallows, other lines (%) | 2.73 | 10.19 ✗ | 2.98 ✓ |
+| 49 | [R1.3] Plain p/f followed by e (%) | 0.310 | 0.929 ✗ | 0.452 ✗ |
+| 50 | [R1.3] Plain p/f followed by ch/sh (%) | 59.17 | 56.76 ✓ | 58.46 ✓ |
 | 51 | [R5.2] Word length, first line / rest | 1.08 | 0.989 ✓ | 1.01 ✓ |
-| 52 | [R6.1] Closed word before a drawing gap (%) | 10.16 | 5.00 ✗ | 10.33 ✓ |
-| 53 | [R6.1] d-/s-/y- after a drawing gap (%) | 41.33 | 13.55 ✗ | 42.92 ✓ |
-| 54 | [R6.1] q- after a drawing gap (%) | 3.57 | 16.14 ✗ | 4.67 ✗ |
-| 55 | [H8] Same first glyph after a gallows-initial line / null | 0.612 | 0.691 ✓ | 0.479 ✓ |
-| 56 | [A1] Words with an edit-distance-1 twin earlier on the page (%) | 64.47 | 61.19 ✓ | 65.49 ✓ |
+| 52 | [R6.1] Closed word before a drawing gap (%) | 10.16 | 5.00 ✗ | 10.85 ✓ |
+| 53 | [R6.1] d-/s-/y- after a drawing gap (%) | 41.33 | 13.55 ✗ | 41.65 ✓ |
+| 54 | [R6.1] q- after a drawing gap (%) | 3.57 | 16.14 ✗ | 4.34 ✓ |
+| 55 | [H8] Same first glyph after a gallows-initial line / null | 0.612 | 0.691 ✓ | 0.585 ✓ |
+| 56 | [A1] Words with an edit-distance-1 twin earlier on the page (%) | 64.47 | 61.19 ✓ | 65.68 ✓ |
 | 57 | [A1] Lines back to the nearest twin (median) | 2.00 | 2.00 ✓ | 2.00 ✓ |
-| 58 | [H2] Page overdispersion of q- (after -y) | 6.32 | 1.30 ✗ | 5.39 ✓ |
+| 58 | [H2] Page overdispersion of q- (after -y) | 6.32 | 1.30 ✗ | 4.56 ✗ |
 | 59 | [G6] Vocabulary cosine: same sheet / neighbouring pages of other sheets | 1.30 | 0.988 ✓ | 1.20 ✓ |
-| 60 | [eye] Strange words (rare trigram in the real text) (%) | 4.59 | 13.74 ✗ | 3.71 ✓ |
-| 61 | [eye] Strange words per line | 0.359 | 1.07 ✗ | 0.290 ✓ |
-| 62 | [page] Page overdispersion of e-words | 24.57 | 1.65 ✗ | 16.62 ✗ |
-| 63 | [section] e-words: biological / herbal | 2.04 | 0.996 ✗ | 1.73 ✓ |
-| 64 | [section] -edy words in biological (%) | 27.48 | 10.90 ✗ | 26.18 ✓ |
-| 65 | [page] Share of the page's most frequent word (median, %) | 4.71 | 3.21 ✗ | 4.60 ✓ |
-| 66 | [eye] Words of 8+ glyphs (%) | 5.25 | 9.92 ✗ | 5.94 ✓ |
+| 60 | [eye] Strange words (rare trigram in the real text) (%) | 4.59 | 13.74 ✗ | 3.65 ✓ |
+| 61 | [eye] Strange words per line | 0.359 | 1.07 ✗ | 0.285 ✓ |
+| 62 | [page] Page overdispersion of e-words | 24.57 | 1.65 ✗ | 16.97 ✗ |
+| 63 | [section] e-words: biological / herbal | 2.04 | 0.996 ✗ | 1.71 ✓ |
+| 64 | [section] -edy words in biological (%) | 27.48 | 10.90 ✗ | 25.51 ✓ |
+| 65 | [page] Share of the page's most frequent word (median, %) | 4.71 | 3.21 ✗ | 4.59 ✓ |
+| 66 | [eye] Words of 8+ glyphs (%) | 5.25 | 9.92 ✗ | 5.84 ✓ |
 | 67 | [text] Character entropy h1 | 3.91 | 3.90 ✓ | 3.90 ✓ |
 | 68 | [text] Conditional entropy h2 | 2.14 | 2.28 ✓ | 2.11 ✓ |
 | 69 | [text] Conditional entropy h3 | 1.86 | 2.02 ✓ | 1.83 ✓ |
-| 70 | [text] Zipf slope (first 1,000 types) | 1.00 | 0.993 ✓ | 0.984 ✓ |
-| 71 | [length] Words of 2-3 glyphs (%) | 21.61 | 28.49 ✗ | 22.72 ✓ |
-| 72 | [length] Words of 5-6 glyphs (%) | 41.00 | 32.12 ✓ | 39.27 ✓ |
-| 73 | [range] Shared vocabulary, neighbouring pages (cosine) | 0.330 | 0.241 ✗ | 0.286 ✓ |
-| 74 | [range] Shared vocabulary, 10 pages apart | 0.253 | 0.232 ✓ | 0.229 ✓ |
+| 70 | [text] Zipf slope (first 1,000 types) | 1.00 | 0.993 ✓ | 0.987 ✓ |
+| 71 | [length] Words of 2-3 glyphs (%) | 21.61 | 28.49 ✗ | 23.39 ✓ |
+| 72 | [length] Words of 5-6 glyphs (%) | 41.00 | 32.12 ✓ | 38.79 ✓ |
+| 73 | [range] Shared vocabulary, neighbouring pages (cosine) | 0.330 | 0.241 ✗ | 0.289 ✓ |
+| 74 | [range] Shared vocabulary, 10 pages apart | 0.253 | 0.232 ✓ | 0.230 ✓ |
 | 75 | [range] Shared vocabulary, 100 pages apart | 0.155 | 0.224 ✗ | 0.156 ✓ |
-| 76 | [range] Neighbouring / 100 pages apart | 2.13 | 1.08 ✗ | 1.83 ✓ |
-| 77 | [range] Bursts of the 50 most frequent words (CV of gaps) | 1.75 | 1.03 ✗ | 1.58 ✓ |
+| 76 | [range] Neighbouring / 100 pages apart | 2.13 | 1.08 ✗ | 1.85 ✓ |
+| 77 | [range] Bursts of the 50 most frequent words (CV of gaps) | 1.75 | 1.03 ✗ | 1.55 ✓ |
 | 78 | [range] Page overdispersion of the 50 most frequent words | 2.06 | 1.08 ✗ | 1.70 ✓ |
-| 79 | [gallows] Words starting with a gallows, not line-initial (%) | 5.05 | 4.58 ✓ | 5.07 ✓ |
-| 80 | [gallows] Gallows-initial word after another / chance (in line) | 1.45 | 1.26 ✓ | 1.56 ✓ |
-| 81 | [first line] sh share (sh/ch), first line / other lines | 1.34 | 1.04 ✓ | 1.31 ✓ |
-| 82 | [first line] t share (t/k), first line / other lines | 1.23 | 0.999 ✓ | 1.14 ✓ |
-| 83 | [first line] frequent words, first line / other lines | 0.664 | 1.17 ✗ | 0.675 ✓ |
-| 84 | [first line] words with ee, first line / other lines | 0.870 | 0.995 ✓ | 0.884 ✓ |
-| | **Reproduced (±25%)** | | **45/84** | **77/84** |
+| 79 | [gallows] Words starting with a gallows, not line-initial (%) | 5.05 | 4.58 ✓ | 5.03 ✓ |
+| 80 | [gallows] Gallows-initial word after another / chance (in line) | 1.45 | 1.26 ✓ | 1.40 ✓ |
+| 81 | [first line] sh share (sh/ch), first line / other lines | 1.34 | 1.04 ✓ | 1.29 ✓ |
+| 82 | [first line] t share (t/k), first line / other lines | 1.23 | 0.999 ✓ | 1.29 ✓ |
+| 83 | [first line] frequent words, first line / other lines | 0.664 | 1.17 ✗ | 0.668 ✓ |
+| 84 | [first line] words with ee, first line / other lines | 0.870 | 0.995 ✓ | 0.863 ✓ |
+| 85 | [R4.3] Line-final -m written -am, not -im (%) | 94.47 | 94.54 ✓ | 96.57 ✓ |
+| 86 | [R1.3] Plain p among plain p+f, first line (%) | 75.39 | 76.10 ✓ | 79.52 ✓ |
+| 87 | [last line] q- after -y before o, last line / other lines | 0.813 | 0.985 ✓ | 0.826 ✓ |
+| 88 | [last line] ch- words, last line / other lines | 1.25 | 1.04 ✓ | 1.20 ✓ |
+| | **Reproduced (±25%)** | | **49/88** | **81/88** |
 <!-- /TABLE -->

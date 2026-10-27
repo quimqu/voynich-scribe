@@ -1,0 +1,19 @@
+real: groups {'h1 herbal': 20, 'h2 herbal': 5, 'h3 stars': 7, 'h2 biological': 5}
+scribe_seed1: groups {'h1 herbal': 20, 'h2 herbal': 5, 'h3 stars': 7, 'h2 biological': 5}
+scribe_seed2: groups {'h1 herbal': 20, 'h2 herbal': 5, 'h3 stars': 7, 'h2 biological': 5}
+scribe_seed3: groups {'h1 herbal': 20, 'h2 herbal': 5, 'h3 stars': 7, 'h2 biological': 5}
+scribe_seed4: groups {'h1 herbal': 20, 'h2 herbal': 5, 'h3 stars': 7, 'h2 biological': 5}
+scribe_seed5: groups {'h1 herbal': 20, 'h2 herbal': 5, 'h3 stars': 7, 'h2 biological': 5}
+
+text           P1 r VOC-GLY       p r HAB-VOC r HAB-GLY herbal h1   P3 nb-other      p  n nb/oth   1-D share
+real                  0.778  0.0002     0.479     0.595     0.761        +0.587  0.024   19/23         0.576
+scribe_seed1          0.290  0.0002     0.186     0.592      0.17        -0.162  0.648   19/23         0.453
+scribe_seed2          0.356  0.0002     0.233     0.534     0.331        -0.233  0.944   19/23         0.514
+scribe_seed3          0.334  0.0002     0.233     0.570     0.313        -0.105  0.736   19/23         0.449
+scribe_seed4          0.270  0.0004     0.126     0.538     0.165        +0.184  0.248   19/23         0.434
+scribe_seed5          0.364  0.0002     0.234     0.619     0.211        +0.268  0.156   19/23         0.424
+
+P1 coherence (real p < 0.05, Holm over 3): p = 0.0002
+P2 real r 0.778 above every skribe seed (0.290, 0.356, 0.334, 0.270, 0.364): True
+P3 neighbours in the nesting: real diff +0.587, p 0.024; skribe diffs -0.162, -0.233, -0.105, +0.184, +0.268; real above all: True
+Holm-adjusted: P1 0.001, P2 0.049, P3 0.049

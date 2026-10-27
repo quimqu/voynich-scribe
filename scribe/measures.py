@@ -281,6 +281,17 @@ def evaluate(LINES,seed=0):
     R['[first line] t share (t/k), first line / other lines']=rt(tkr)
     R['[first line] frequent words, first line / other lines']=rt(frq)
     R['[first line] words with ee, first line / other lines']=rt(eer)
+    # ===== part 8 (27/10): what the glyph-pair scan found (scribe/pairs/): line-end closure forms, p against f, the last line =====
+    lw=[l['ws'][-1] for l in LINES if len(l['ws'])>1]; am=sum(w.endswith('am') for w in lw); im=sum(w.endswith('im') for w in lw)
+    R['[R4.3] Line-final -m written -am, not -im (%)']=100*am/(am+im) if am+im else np.nan
+    pfp=sum(w.count('p')-w.count('cph') for w in flw); pff=sum(w.count('f')-w.count('cfh') for w in flw)
+    R['[R1.3] Plain p among plain p+f, first line (%)']=100*pfp/(pfp+pff) if pfp+pff else np.nan
+    llw=[(a,b) for l in LINES if l['pe'] and not l['ps'] for a,b in zip(l['ws'],l['ws'][1:])]
+    olw_=[(a,b) for l in LINES if not l['pe'] and not l['ps'] for a,b in zip(l['ws'],l['ws'][1:])]
+    qyo=lambda P: (lambda s: sum(b.startswith('q') for a,b in s)/len(s) if s else np.nan)([(a,b) for a,b in P if a.endswith('y') and b[:1] in ('q','o')])
+    chs=lambda P: np.mean([b.startswith('ch') for a,b in P]) if P else np.nan
+    R['[last line] q- after -y before o, last line / other lines']=qyo(llw)/qyo(olw_) if llw and olw_ else np.nan
+    R['[last line] ch- words, last line / other lines']=chs(llw)/chs(olw_) if llw and olw_ else np.nan
     return R
 _TRI=None
 _SEC=None

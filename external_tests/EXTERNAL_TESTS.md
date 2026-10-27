@@ -239,6 +239,16 @@ The fact underneath, from the same thread: a plain `p`/`f` is never followed by 
 
 ---
 
+## 12 · Do two text-based orders of the bifolia agree? (27/10/2026)
+
+**Question** (Mauro, voynich.ninja): npcompl33t's seriation is said to agree with the Layfield–Davis order of quires 13 and 20, odds 1/720 and 1/120 at face value. If both read the same signal, they would agree even on a text with no order. `npcompl33t/order_agreement.py`: in quires 1–7, 13 and 20, the order of the bifolia rebuilt as Layfield and Davis do (LSA, the permutation with the most similar pages at the junctions) and with npcompl33t's measure (the same search with his Jensen-Shannon of glyph transitions; and the order along his MDS1).
+
+**Result.** The two orders do not agree: real text, mean Kendall tau −0.06 (p 0.65), 0 exact matches in 9 quires (0.4 expected by chance); skribe, −0.54 to +0.15, 0 to 3 exact matches. With these reconstructions the two methods behave as independent, so the reported match cannot be explained by a shared signal, and it cannot be reproduced either: npcompl33t's exact procedure and the Layfield–Davis sequences are needed.
+
+## 13 · Can the sheets be put in a chain? (pre-registered, 27/10/2026)
+
+`sheet_chain/` (`SHEET_CHAIN_PREREG.md`, `sheet_chain.py`). Sheets grouped by hand × section; three affinities between sheets (vocabulary, glyph transitions, the five free habits); pairwise residuals after removing what is typical of each sheet. **All three primary tests met**: vocabulary and glyphs agree on which sheets resemble each other (r 0.78, p 0.0002), far more than in the skribe (0.27–0.36), and sheets that are neighbours in the current nesting are a little closer (p 0.024). **But it is not a chain** (exploratory): almost all of it is herbal hand 1, it is one scale, the word family (share of words with *e*, rho −0.78), on which the real herbal sheets spread much more than the skribe's (SD 0.109 against 0.055–0.083), and that scale does not follow the order of the quires. Each herbal sheet takes a clear side, with or without *e*, more decidedly than the skribe's sheet habit makes it; a scale sorts the sheets but does not order them. The neighbouring-sheet effect is a small lead (9 neighbour pairs).
+
 ## How to repeat it
 
 ```bash

@@ -14,14 +14,16 @@ For each word the skribe either copies a word already written nearby on the page
 
 ## Results
 
-The fake text is compared with the real one on 84 measures (repetition at several distances, twins on the same page, line start and end forms, paragraph forms, page and sheet habits, entropies, Zipf, word lengths, long-range similarity between pages, bursts, words that start with a gallows, the register of the first line, what follows p and f). A measure counts as reproduced when the skribe's value is within 25% of the real one, averaged over five runs.
+The fake text is compared with the real one on 88 measures (repetition at several distances, twins on the same page, line start and end forms, paragraph forms, page and sheet habits, entropies, Zipf, word lengths, long-range similarity between pages, bursts, words that start with a gallows, the register of the first and of the last line, what follows p and f, the form of the line-end closure). A measure counts as reproduced when the skribe's value is within 25% of the real one, averaged over five runs.
 
 | comparison | reproduced | median error |
 |---|---|---|
-| a simple three-rule generator (baseline) vs the real text | 45 / 84 | 0.25 |
-| **the skribe vs the real text** | **77 / 84** | **0.047** |
-| the skribe learned from the odd folios only, writing the even folios, vs the real even folios | 72 / 84 | 0.080 |
-| the real odd folios vs the real even folios (the ceiling) | 74 / 84 | 0.049 |
+| a simple three-rule generator (baseline) vs the real text | 49 / 88 | 0.25 |
+| **the skribe vs the real text** | **81 / 88** | **0.046** |
+| the skribe learned from the odd folios only, writing the even folios, vs the real even folios | 75 / 88 | 0.070 |
+| the real odd folios vs the real even folios (the ceiling) | 78 / 88 | 0.047 |
+
+*28 October 2026: a scan of every glyph pair, against the skribe, by place in the line, line type, hand, section and language (`scribe/pairs/`, pre-registered), found no new forbidden pair and four things to fix: the line-end closure turned -aiin into -aim (the real text writes -am) and -y into -g after d, k, t (the real text almost never does); t became f too often on the first line (the real text writes p 79% of the time); and the last line of the paragraph has a register of its own, less q and more ch- words, in every hand (new rule R14.8). With the four fixes, calibrated on the odd folios only: 81 / 88 (0.046) on the whole text and 75 / 88 (0.070) on the even folios, against 79 / 88 (0.048) and 75 / 88 (0.076) without them (`scribe/SCRIBE.md` §13).*
 
 *27 October 2026: plain p and f are never followed by e (5 pe/fe in the whole text against about 5,000 ke/te); where k and t take e, p and f take ch (rule R1.3, amended, after thread 6231 on voynich.ninja). The skribe used to turn k into p at random on the first line and wrote 24% pe/fe there; now 0.3%, like the real text. Two measures added. With the rule the whole text improves (0.058 → 0.047 median error) and the even folios gain measures (69 → 72) but not median error (0.071 → 0.080); the counts move by ±2 between runs (`scribe/SCRIBE.md` §12).*
 
@@ -47,7 +49,7 @@ You need Python 3.11 or later with numpy, pandas and scipy (`pip install -r requ
 
 ```bash
 cd scribe
-python3 measures.py        # the 84 measures of the real text -> measures_real.json (about 1 min)
+python3 measures.py        # the 88 measures of the real text -> measures_real.json (about 1 min)
 python3 compare.py        # real text, three-rule baseline and the skribe, five seeds -> results.json and a table (about 10 min)
 python3 holdout.py        # learn from the odd folios, write the even ones (about 10 min)
 python3 manuscript.py 1 2 3 4 5   # write the whole manuscript five times -> manuscript_out/ (8 s per seed)
@@ -71,7 +73,7 @@ The dataset `df_lines_ZL3b_strokes.csv` is built from the ZL3b transliteration b
 | path | content |
 |---|---|
 | `scribe/scribe.py` | the skribe |
-| `scribe/measures.py` | the battery of 84 measures and the loader of the real text |
+| `scribe/measures.py` | the battery of 88 measures and the loader of the real text |
 | `scribe/compare.py`, `holdout.py` | comparison with the real text, ablations, odd/even hold-out |
 | `scribe/manuscript.py`, `quire.py` | write the whole manuscript, or one quire, in an IVTFF-like format with the ZL3b line identifiers |
 | `scribe/standard_measures.py`, `boundary_per_hand.py`, `controls/` | standard entropy and Zipf measures; the boundary coupling per hand; the control with a real language (Latin, Cusanus) |

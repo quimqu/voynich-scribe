@@ -149,6 +149,18 @@ def closure_probs(words_close,words_mid):
     return out
 mid=[w for l in L_REAL for w in l['ws'][1:-1] if True]
 CL_LINE=closure_probs([l['ws'][-1] for l in L_REAL if l['pe']==0 and len(l['ws'])>1],mid)
+def _yg_mult(words,a=20.0):
+    # -y -> -g depends on the glyph before the y (27/10): after o 65%, e 12%, l 8%, ch 9%, but after d 1%, k 1% and never after t or a
+    # benched gallows. Multiplier of the closure probability per glyph before y, smoothed towards the overall rate
+    c,o=Counter(),Counter()
+    for w in words:
+        g=gl(w)
+        if len(g)<2: continue
+        if g[-1]=='g': c[g[-2]]+=1
+        elif g[-1]=='y': o[g[-2]]+=1
+    R=sum(c.values())/max(1,sum(c.values())+sum(o.values()))
+    return {x:((c[x]+a*R)/(c[x]+o[x]+a))/R for x in set(c)|set(o)} if R>0 else {}
+YG_MULT=_yg_mult([l['ws'][-1] for l in L_REAL if l['pe']==0 and len(l['ws'])>1])
 NW_BINS=[(1,3),(4,5),(6,7),(8,9),(10,11),(12,99)]
 def nw_bin(n): return next((b for b in NW_BINS if b[0]<=n<=b[1]),None)
 CL_HAND_NW={}
@@ -243,11 +255,11 @@ def avoid_table():
 AVOID=avoid_table()
 for g_ in ('k','f','cth','ckh','cph','cfh'): AVOID.setdefault(g_,AVOID.get('t',0.5))   # gallows with little data: like t
 # ================= the scribe =================
-DEFAULT=dict(r_copy=0.22,r_mod=0.45,tau=4.0,vert_bonus=2.0,first_copy=0.1,p_pf=0.33,sigma_style=0.3,sigma_line=0.25,rho_line=0.6,
+DEFAULT=dict(r_copy=0.22,r_mod=0.45,tau=4.0,vert_bonus=2.0,first_copy=0.1,p_pf=0.42,sigma_style=0.3,sigma_line=0.25,rho_line=0.6,
              sigma_len=0.6,len_cands=5,rej_2gall=0.35,rej_ei=0.25,use_word_rules=True,first_norep=0.0,gap_scale=0.75,declose_p=0.55,gap_noq=0.9,use_famrep=True,adj_boost=0.5,avoid_scale=1.2,closure_by_nwords=True,closure_by_hand=True,use_reprefix=True,use_end_table=True,pf_back=0.75,
              use_lang=True,use_slots=True,use_contexts=True,use_style=True,use_copy=True,use_first_line=True,use_closure=True,
              use_dissim=True,use_len_mode=True,use_boundary=True,
-             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35,use_fl_style=True,use_pf_noe=True,pf_a=0.5,fl_t=0.3,fl_sh=0.6,fl_rare=0.7,fl_rare_min=0.003,fl_e=-0.2)   # 26/10: first-line register calibrated on the odd folios only (t 0.3, sh 0.6, rare 0.7, e -0.6) — with it, first_norep (0.4 before) is no longer needed: the first line repeats less because its words are rarer   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
+             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35,use_fl_style=True,use_pf_noe=True,pf_a=0.5,fl_t=0.3,fl_sh=0.6,fl_rare=0.7,fl_rare_min=0.003,fl_e=-0.2,close_once=True,pf_f=0.4,use_ll_style=True,ll_q=-0.5,ll_ch=0.3)   # 26/10: first-line register calibrated on the odd folios only (t 0.3, sh 0.6, rare 0.7, e -0.6) — with it, first_norep (0.4 before) is no longer needed: the first line repeats less because its words are rarer   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
 STYLE_DIMS=['t','sh','q','dy']
 # 'e' habit (14/10): word block with e (-y/-dy) or without (-aiin/-ar/-ol), R2.4, per sheet, page, line and section; its own random generator
 NUC={'ch','sh','k','t','p','f','cth','ckh','cph','cfh'}
@@ -284,6 +296,7 @@ class Escriba:
                 elif k=='d' and g and g[-1]=='e': ws[i]*=math.exp(style['dy'])
                 elif k=='e' and g and g[-1] in NUC and 'e' in style: ws[i]*=math.exp(style['e'])
                 elif k in ('t','k','p','f') and len(g)==0 and style.get('g0'): ws[i]*=math.exp(style['g0'])
+                elif k=='ch' and len(g)==0 and style.get('ll_ch'): ws[i]*=math.exp(style['ll_ch'])
         return self.rng.choices(ks,weights=ws.tolist())[0]
     def gen_word(self,tab,A,style):
         for _ in range(15):
@@ -327,8 +340,20 @@ class Escriba:
             if nb: return self.rng.choices(nb,weights=[LEX[x]**self.p['lex_alpha'] for x in nb])[0]
         return w
     def close(self,w,probs):
+        if not self.p['close_once']:
+            for (o,c_),p in probs.items():
+                if w.endswith(o) and not w.endswith(c_) and self.rng.random()<p: return w[:-len(o)]+c_
+            return w
+        # 27/10: one chance per word, with the most specific ending (before, an -aiin that missed -iin -> -m got a second chance as
+        # -in -> -m and became -aim: 164 -im against 29 in the real line ends); and -y -> -g weighted by the glyph before the y
         for (o,c_),p in probs.items():
-            if w.endswith(o) and not w.endswith(c_) and self.rng.random()<p: return w[:-len(o)]+c_
+            if w.endswith(o) and not w.endswith(c_):
+                if (o,c_)==('y','g'):
+                    g=gl(w); p=min(1.0,p*YG_MULT.get(g[-2],1.0)) if len(g)>1 else p
+                elif (o,c_)==('iin','m'):
+                    # the two chances of before, in one: same closure rate (the probabilities were estimated with both), the right form
+                    p=1-(1-p)*(1-probs.get(('in','m'),0.0))
+                return w[:-len(o)]+c_ if self.rng.random()<p else w
         return w
     def write(self,seed=0,layout=None):
         p=self.p; self.rng=random.Random(seed); np_rng=np.random.default_rng(seed)
@@ -366,6 +391,10 @@ class Escriba:
                 # (sh 50% against 31% in the other lines, t 43% against 35%), on top of p/f (R1.3)
                 style['t']+=p['fl_t']; style['sh']+=p['fl_sh']
                 if 'e' in style: style['e']+=p['fl_e']   # and fewer words with e after the core (ee: 11.5% against 13.3%)
+            if style is not None and p['use_ll_style'] and l['pe']==1 and l['ps']==0:
+                # last-line register (27/10): the last line of the paragraph puts q- less often after -y (0.49 against 0.61 in the
+                # other lines, in every hand) and writes more ch- words (0.239 against 0.190)
+                style['q']+=p['ll_q']; style['ll_ch']=p['ll_ch']
             ws=[]; li=len(lines_on_page)
             for i in range(len(l['ws'])):
                 A=start_tag(l,i,ws[i-1] if i else None) if p['use_contexts'] else ('<'+gl(ws[i-1])[-1] if i else '^')
@@ -444,7 +473,7 @@ class Escriba:
                 if first_line and i>0 and self.rng.random()<p['p_pf']:
                     if 'ckh' in w or 'cth' in w: w=w.replace('ckh','cph').replace('cth','cfh')
                     elif not p['use_pf_noe']: w=w.replace('k','p',1) if 'k' in w else w.replace('t','f',1)
-                    elif 'k' in w or 't' in w:
+                    elif ('k' in w or 't' in w) and ('k' in w or self.rng.random()<p['pf_f']):   # 27/10: t -> f less often (real p 79% of plain p+f on the first line)
                         # a plain p/f is never followed by e (5 pe/fe in the manuscript against ~5,000 ke/te): where k/t take e, p/f take ch
                         # (ke->pch, keedy->pchedy, key->pchy), and before a it is less used (13% of p/f against 24-37% of k/t)
                         j=w.index('k') if 'k' in w else w.index('t'); nx=w[j+1:]

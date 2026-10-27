@@ -472,3 +472,57 @@ No rule broke: every rule that cost measures before still costs them, or (gallow
 ### 12.3 · And npcompl33t's arrows?
 
 His test rebuilt (`external_tests/npcompl33t/pf_vectors.py`, `EXTERNAL_TESTS.md` §11): the skribe, with no chronology, draws the same "`p`/`f` behind `k`/`t`" arrows as the real text, with the rule and without it. So the arrows are not evidence of an archaic `p`/`f`, but the rule about `e` does not explain them either.
+
+## 13 · What the glyph-pair scan found (27/10/2026)
+
+**The scan** (`scribe/pairs/`). Pass 1 (`forbidden_pairs.py`): every glyph pair inside a word that is written at most 20% of what the frequencies of the two glyphs give. 216 such pairs; all are covered by a rule (R1.4, R1.5, R2.2, R13.x) or follow from the word template, and the current skribe respects all of them (the skribe of 26/10 broke exactly one: `pe`, 200 against 3). Pass 2 (`context_pairs.py`, pre-registered in `CONTEXT_PAIRS_PREREG.md`): the pairs whose rate changes with the place of the word (place in the line, line type, hand, section, language) differently in the real text and in the skribe, replicated on odd and even folios. The positive control works (the skribe of 26/10 is flagged for `p` → `e` on the first line, z −14.9). With the skribe of 27/10, four things:
+
+| | real | skribe before |
+|---|---|---|
+| line-final `-m` written `-am` (not `-im`) | 495 against 29 | 561 against 164 (`daim`) |
+| line-final `-y` → `-g` after `d`, `k`, `t` | 1%, 1%, 0% | `-dg`, `qokg`: the most common `-g` |
+| plain `p` among plain `p`+`f`, first line | 79% | 71% |
+| last line of the paragraph: `q-` after `-y` before `o` / other lines | 0.49 / 0.61 (every hand) | 0.57 / 0.61 |
+| last line of the paragraph: `ch-` words / other lines | 23.9% / 19.0% | 19.9% / 20.0% |
+
+The first two are R4.3 made in the wrong form: an `-aiin` that missed the `-iin` → `-m` closure got a second chance as `-in` → `-m` and became `-aim`; and `-y` → `-g` was applied after any glyph, while in the real text it follows `o` (65%), `e` (12%), `ch` (9%), `l` (8%). The third is R1.3 with the wrong balance. The last is new: rule R14.8, the last line of the paragraph has a register of its own (less `q`, the glyph of going on, more bench words), as the first line does (R5.2).
+
+### 13.1 · What was changed
+
+`scribe.py`: `close_once` (one closure per word, by its most specific ending; for `-iin` the probability is the one the two chances gave together, so the closure rate stays and only the form changes; `-y` → `-g` weighted by the glyph before the `y`, `YG_MULT`, smoothed towards the overall rate); `pf_f` 0.4 (a `t` becomes `f` at 0.4 times the rate of `k` → `p`) with `p_pf` 0.33 → 0.42 to keep the share of `p`/`f` among the gallows of the first line; `use_ll_style` with `ll_q` −0.5 (the `q` style offset on the last line) and `ll_ch` 0.3 (the weight of `ch` as the first glyph of a new word on the last line). `pf_f`, `p_pf`, `ll_q` and `ll_ch` calibrated **on the odd folios only** (skribe trained on and writing the odd folios, 3 seeds; real odd: `p` 77.0%, `p`/`f` among gallows 29.4%, last line `q` ×0.79, `ch-` ×1.23; skribe 79.0%, 30.0%, ×0.80, ×1.19). Four measures added (`measures.py`, part 8): `-am` among line-final `-am`+`-im`, plain `p` among plain `p`+`f` on the first line, and the two last-line ratios. The battery has 88 measures. In `compare.py` the ablations also remove `use_ll_style` and `close_once`.
+
+### 13.2 · Result (5 seeds, 88 measures)
+
+| | without the changes | **with them** |
+|---|---|---|
+| line-final `-am` / (`-am`+`-im`) (real 94.5%) | 75.0% | **96.6%** |
+| plain `p` among `p`+`f`, first line (real 75.4%) | 62.6% | **79.5%** |
+| last line: `q-` ×, `ch-` × (real ×0.81, ×1.25) | ×0.98, ×0.97 | **×0.83, ×1.20** |
+| whole text: reproduced / median error | 79/88 · 0.048 | **81/88 · 0.046** |
+| learned from the odd folios, on the even ones (real halves 78/88 · 0.047) | 75/88 · 0.076 | **75/88 · 0.070** |
+
+Three-rule baseline: 49/88 (0.245). A first run without the combined `-iin` probability closed too little on the last line of the paragraph on the even folios (12.5% against 17.5%) and gave 70/88; with it, 16.3%. Still missed on the whole text: near twins, which frequent words repeat (>3× and <0.3× chance), `-m` by line length, the page overdispersion of `q-` and of `e`-words, and plain `p`/`f` followed by `e` (0.45% against 0.31%: about six cases per seed against five in the whole manuscript, mostly `pesh-` inside the line). Note that the new measures are loose at ±25%: the skribe without the changes already passes all four (75.0% against 94.5% is inside the band); what tells the versions apart is the values, in the table above. Files: `results_table.txt`, `results_holdout_table.txt`.
+
+### 13.3 · All the rules again (ablations, 5 seeds, 88 measures)
+
+`results_ablations_table.txt` (full skribe 81/88 · 0.046). Measures lost when each rule is removed, and the median error without it:
+
+| rule removed | measures | median error |
+|---|---|---|
+| boundary rule | −9 | 0.058 |
+| first line | −8 | 0.074 |
+| copying | −6 | 0.063 |
+| first-line register | −6 | 0.052 |
+| word rules | −5 | 0.040 |
+| length mode | −5 | 0.058 |
+| sheet style | −3 | 0.068 |
+| closure | −3 | 0.048 |
+| *e* after *p*/*f* becomes *ch* | −3 | 0.051 |
+| start contexts, dissimilation | −2 | 0.057, 0.054 |
+| slot template, form memory, *e* habit | −1 | 0.046, 0.041, 0.052 |
+| one closure per word (new) | 0 | 0.053 |
+| reprefix, end table, closure by word count, section dy | 0 | 0.044 to 0.053 |
+| language tables, word family, last-line register (new) | +1 | 0.042, 0.046, 0.046 |
+| gallows-initial line habit | +3 | 0.049 |
+
+No rule broke. The two new pieces do not show in the count: the one-closure rule fixes a form that no measure at ±25% separates (75% `-am` already passes against 94.5%) and lowers the median error from 0.053 to 0.046; the last-line register costs one noisy measure and leaves the error as it is, while its own two ratios pass loosely without it (×0.98 and ×0.97 against ×0.81 and ×1.25 are inside the band): the values, not the count, show it (§13.2). Removing the gallows-initial line habit gains three noisy measures and raises the error a little, as on 26/10. Word rules and form memory again lower the error when removed (0.040, 0.041): they fix their own measures at the cost of the general fit.

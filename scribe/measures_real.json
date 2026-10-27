@@ -68,7 +68,7 @@
  "[text] Character entropy h1": 3.9070939489987038,
  "[text] Conditional entropy h2": 2.1374599311301474,
  "[text] Conditional entropy h3": 1.8603733083079357,
- "[text] Zipf slope (first 1,000 types)": 1.0048369052950148,
+ "[text] Zipf slope (first 1,000 types)": 1.004836905295016,
  "[length] Words of 2-3 glyphs (%)": 21.611324495105936,
  "[length] Words of 5-6 glyphs (%)": 41.00483211497956,
  "[range] Shared vocabulary, neighbouring pages (cosine)": 0.3295946769791683,
@@ -82,5 +82,9 @@
  "[first line] sh share (sh/ch), first line / other lines": 1.3356200344012055,
  "[first line] t share (t/k), first line / other lines": 1.2305031462582365,
  "[first line] frequent words, first line / other lines": 0.6644041179321688,
- "[first line] words with ee, first line / other lines": 0.8696516754104365
+ "[first line] words with ee, first line / other lines": 0.8696516754104365,
+ "[R4.3] Line-final -m written -am, not -im (%)": 94.46564885496183,
+ "[R1.3] Plain p among plain p+f, first line (%)": 75.38619979402678,
+ "[last line] q- after -y before o, last line / other lines": 0.812813021702838,
+ "[last line] ch- words, last line / other lines": 1.2524707660309884
 }
