@@ -18,7 +18,7 @@ CONFIGS=[('base',{}),
 if len(sys.argv)>1 and '=' in sys.argv[-1]:
     kw={}
     for a in sys.argv[1:]:
-        if '=' in a: k,v=a.split('='); kw[k]=(v=='True') if v in ('True','False') else (float(v) if v.replace('.','',1).isdigit() else v)
+        if '=' in a: k,v=a.split('='); kw[k]=(v=='True') if v in ('True','False') else (float(v) if v.lstrip('-').replace('.','',1).isdigit() else v)
     CONFIGS=[('trial',kw)]
 print(f"{'':36}{'reprod.':>9}{'(of 57)':>8}{'err':>7}"+''.join(f'{s:>9}' for s in SH)); print(f"{'REAL':36}{'':24}"+''.join(f'{Rr[k]:9.2f}' for k in KS))
 res={}

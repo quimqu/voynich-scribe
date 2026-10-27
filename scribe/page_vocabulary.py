@@ -15,7 +15,7 @@ CONFIGS=[('base',{}),
 if len(sys.argv)>1 and any('=' in a for a in sys.argv[1:]):
     kw={}
     for a in sys.argv[1:]:
-        if '=' in a: k,v=a.split('='); kw[k]=(v=='True') if v in ('True','False') else (float(v) if v.replace('.','',1).isdigit() else v)
+        if '=' in a: k,v=a.split('='); kw[k]=(v=='True') if v in ('True','False') else (float(v) if v.lstrip('-').replace('.','',1).isdigit() else v)
     for k in ('len_cands',):
         if k in kw: kw[k]=int(kw[k])
     CONFIGS=[('trial',kw)]

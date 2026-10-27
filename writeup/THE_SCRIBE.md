@@ -5,6 +5,8 @@
 
 *26 October 2026: the skribe has two more habits (words that start with a gallows come in lines, rule R14.7; the first line of the paragraph has a register of its own, rule R5.2) and the battery six more measures. The figures are those of the skribe of 26 October on 82 measures, except where a section says it reports an earlier run (some ablations in §4 and §7, and the external tests in §8.2–8.3 where they say so). The standard measures and the Latin control were rerun on 27 October. Details in `scribe/SCRIBE.md` §10–11.*
 
+*27 October 2026: plain p and f are never followed by e in the real text (5 cases against about 5,000 ke/te); where k and t take e, p and f take ch. The skribe now does the same (rule R1.3, amended) and the battery has two more measures (84). On 84 measures the skribe reproduces 77/84 (median error 0.047) and, learnt from the odd folios, 72/84 on the even ones (0.080). The figures below are still those of 26 October on 82 measures. Details in `scribe/SCRIBE.md` §12.*
+
 ---
 
 ## Summary

@@ -1,6 +1,6 @@
 # The skribe (name as Stolfi suggested): a meaningless procedure that writes a Voynich-like text
 
-This repository contains "the skribe", a small program that writes a complete fake Voynich manuscript on the real manuscript's layout: same pages, same sheets, same paragraphs, same number of lines and words per line, same gaps for the drawings, Currier A and B, the five Davis hands. There is no meaning anywhere in it. It only follows writing rules that were first measured on the real text, and it is scored against the real text with a battery of 82 statistics.
+This repository contains "the skribe", a small program that writes a complete fake Voynich manuscript on the real manuscript's layout: same pages, same sheets, same paragraphs, same number of lines and words per line, same gaps for the drawings, Currier A and B, the five Davis hands. There is no meaning anywhere in it. It only follows writing rules that were first measured on the real text, and it is scored against the real text with a battery of 84 statistics.
 
 It also contains the battery, the rulebook the skribe implements, the generated text, and two tests designed by other people (Parisel 2026; Layfield and Davis 2026) run on the skribe's output.
 
@@ -14,20 +14,22 @@ For each word the skribe either copies a word already written nearby on the page
 
 ## Results
 
-The fake text is compared with the real one on 82 measures (repetition at several distances, twins on the same page, line start and end forms, paragraph forms, page and sheet habits, entropies, Zipf, word lengths, long-range similarity between pages, bursts, words that start with a gallows, the register of the first line). A measure counts as reproduced when the skribe's value is within 25% of the real one, averaged over five runs.
+The fake text is compared with the real one on 84 measures (repetition at several distances, twins on the same page, line start and end forms, paragraph forms, page and sheet habits, entropies, Zipf, word lengths, long-range similarity between pages, bursts, words that start with a gallows, the register of the first line, what follows p and f). A measure counts as reproduced when the skribe's value is within 25% of the real one, averaged over five runs.
 
 | comparison | reproduced | median error |
 |---|---|---|
-| a simple three-rule generator (baseline) vs the real text | 44 / 82 | 0.25 |
-| **the skribe vs the real text** | **78 / 82** | **0.060** |
-| the skribe learned from the odd folios only, writing the even folios, vs the real even folios | 69 / 82 | 0.068 |
-| the real odd folios vs the real even folios (the ceiling) | 73 / 82 | 0.049 |
+| a simple three-rule generator (baseline) vs the real text | 45 / 84 | 0.25 |
+| **the skribe vs the real text** | **77 / 84** | **0.047** |
+| the skribe learned from the odd folios only, writing the even folios, vs the real even folios | 72 / 84 | 0.080 |
+| the real odd folios vs the real even folios (the ceiling) | 74 / 84 | 0.049 |
 
-*26 October 2026, two additions, both calibrated on the odd folios only. (1) A line habit for words that start with a gallows (rule R14.7), after remarks by dashstofsk and nablator on voynich.ninja: it reproduces the clustering of these words by line and changes no other rule, but does not improve the score as a whole (`scribe/SCRIBE.md` §10). (2) The register of the first line of the paragraph (rule R5.2, amended): sh rather than ch, t rather than k, rarer words, fewer ee. This one does improve the skribe, above all where it was not fitted: on the even folios from 65 / 82 (0.089) to 69 / 82 (0.068), and it makes the old rule against repeating on the first line unnecessary (`scribe/SCRIBE.md` §11). Before both, the skribe scored 69 / 76 (0.067) and 61 / 76 on the even folios.*
+*27 October 2026: plain p and f are never followed by e (5 pe/fe in the whole text against about 5,000 ke/te); where k and t take e, p and f take ch (rule R1.3, amended, after thread 6231 on voynich.ninja). The skribe used to turn k into p at random on the first line and wrote 24% pe/fe there; now 0.3%, like the real text. Two measures added. With the rule the whole text improves (0.058 → 0.047 median error) and the even folios gain measures (69 → 72) but not median error (0.071 → 0.080); the counts move by ±2 between runs (`scribe/SCRIBE.md` §12).*
+
+*26 October 2026 (on 82 measures), two additions, both calibrated on the odd folios only. (1) A line habit for words that start with a gallows (rule R14.7), after remarks by dashstofsk and nablator on voynich.ninja: it reproduces the clustering of these words by line and changes no other rule, but does not improve the score as a whole (`scribe/SCRIBE.md` §10). (2) The register of the first line of the paragraph (rule R5.2, amended): sh rather than ch, t rather than k, rarer words, fewer ee. This one does improve the skribe, above all where it was not fitted: on the even folios from 65 / 82 (0.089) to 69 / 82 (0.068), and it makes the old rule against repeating on the first line unnecessary (`scribe/SCRIBE.md` §11). Before both, the skribe scored 69 / 76 (0.067) and 61 / 76 on the even folios.*
 
 The three-rule generator is the first generator of the project (`night_generator/generator3.py`): new words glyph by glyph with one two-glyph table for the whole manuscript, copying of nearby words (same line and the two lines above, mostly changed by one glyph), and a memory that is emptied at each page and paragraph, plus a crude line-start avoidance and *-iin* → *-m* at line end. It has no hands, sections, sheet habits or rules of place beyond those; it shows how much of the score the rest of the rulebook earns. Details in [writeup/THE_SCRIBE.md](writeup/THE_SCRIBE.md) §3.
 
-Removing any single rule costs measures, except two switches that are no longer in use (the A/B tables, replaced by the per-hand and per-section ones, and the section dy, off since 19 October) (`scribe/results_ablations_table.txt`; the same ablations without the first-line register in `results_ablations_without_fl_table.txt`, and without the gallows habit, on 78 measures, in `results_ablations_without_g0_table.txt`). What it still gets wrong: which frequent words avoid repeating, the m at the end of long lines, the q- on the first word of a paragraph (at the threshold), the page overdispersion of words with e, and the clustering of words that start with a bench gallows (cth-, ckh-) in herbal A. Some measures (neighbours one glyph apart, H8, a- at line start, the repeats on the first line) pass or fail depending on the seed. Details in `scribe/SCRIBE.md` (the lab notebook of the skribe) and `writeup/THE_SCRIBE.md` (English).
+Removing the main rules costs 3 to 8 measures each (boundary, first line, first-line register, copying, length, closure, start contexts); a few small ones (word family, e habit, gallows habit, reprefix, and the p/f rule of 27 October, which loses its own two measures) move the count only within the run-to-run noise of ±2, and two switches are no longer in use (the A/B tables, replaced by the per-hand and per-section ones, and the section dy, off since 19 October) (`scribe/results_ablations_table.txt`, `scribe/SCRIBE.md` §12; the same ablations without the first-line register in `results_ablations_without_fl_table.txt`, and without the gallows habit, on 78 measures, in `results_ablations_without_g0_table.txt`). What it still gets wrong: which frequent words avoid repeating, the m at the end of long lines, the q- on the first word of a paragraph (at the threshold), the page overdispersion of words with e, and the clustering of words that start with a bench gallows (cth-, ckh-) in herbal A. Some measures (neighbours one glyph apart, H8, a- at line start, the repeats on the first line) pass or fail depending on the seed. Details in `scribe/SCRIBE.md` (the lab notebook of the skribe) and `writeup/THE_SCRIBE.md` (English).
 
 **External tests** (25 October 2026, run on the skribe of 19 October, [external_tests/EXTERNAL_TESTS.md](external_tests/EXTERNAL_TESTS.md)):
 
@@ -45,7 +47,7 @@ You need Python 3.11 or later with numpy, pandas and scipy (`pip install -r requ
 
 ```bash
 cd scribe
-python3 measures.py        # the 82 measures of the real text -> measures_real.json (about 1 min)
+python3 measures.py        # the 84 measures of the real text -> measures_real.json (about 1 min)
 python3 compare.py        # real text, three-rule baseline and the skribe, five seeds -> results.json and a table (about 10 min)
 python3 holdout.py        # learn from the odd folios, write the even ones (about 10 min)
 python3 manuscript.py 1 2 3 4 5   # write the whole manuscript five times -> manuscript_out/ (8 s per seed)
@@ -69,7 +71,7 @@ The dataset `df_lines_ZL3b_strokes.csv` is built from the ZL3b transliteration b
 | path | content |
 |---|---|
 | `scribe/scribe.py` | the skribe |
-| `scribe/measures.py` | the battery of 82 measures and the loader of the real text |
+| `scribe/measures.py` | the battery of 84 measures and the loader of the real text |
 | `scribe/compare.py`, `holdout.py` | comparison with the real text, ablations, odd/even hold-out |
 | `scribe/manuscript.py`, `quire.py` | write the whole manuscript, or one quire, in an IVTFF-like format with the ZL3b line identifiers |
 | `scribe/standard_measures.py`, `boundary_per_hand.py`, `controls/` | standard entropy and Zipf measures; the boundary coupling per hand; the control with a real language (Latin, Cusanus) |

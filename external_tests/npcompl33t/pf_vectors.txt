@@ -1,0 +1,38 @@
+Arrow PF -> KT per sheet against the direction of the gradient (sheets with >= 120 glyphs of p/f words)
+text                                      n  mean cos   KT ahead  gap PF-KT r(gap,grad)
+
+-- p/f words against k/t words --
+real                                     26      0.16        92%       0.38       +0.51
+skribe, no-e rule (27/10) s1             16      0.11        75%       0.36       -0.12
+skribe, no-e rule (27/10) s2             20      0.10        80%       0.37       -0.25
+skribe, no-e rule (27/10) s3             19      0.08        68%       0.37       -0.18
+skribe, random k->p swap s1              19      0.31        89%       0.28       -0.19
+skribe, random k->p swap s2              19      0.31       100%       0.28       -0.28
+skribe, random k->p swap s3              19      0.38        89%       0.29       -0.39
+skribe, random swap, no 1st-line s s1    18     -0.03        56%       0.29       -0.00
+skribe, random swap, no 1st-line s s2    26      0.31        92%       0.29       -0.11
+skribe, random swap, no 1st-line s s3    19      0.25        95%       0.28       -0.41
+
+-- the same, both pools from head lines only --
+real                                     13     -0.05        31%       0.40       +0.01
+skribe, no-e rule (27/10) s1              8      0.07        62%       0.34       +0.71
+skribe, no-e rule (27/10) s2             10     -0.41         0%       0.36       +0.48
+skribe, no-e rule (27/10) s3              8      0.13        75%       0.34       +0.58
+skribe, random k->p swap s1              11     -0.20        27%       0.27       -0.47
+skribe, random k->p swap s2              10      0.01        50%       0.26       -0.90
+skribe, random k->p swap s3              12      0.11        50%       0.27       +0.10
+skribe, random swap, no 1st-line s s1    11     -0.24        36%       0.25       -0.14
+skribe, random swap, no 1st-line s s2    11     -0.15        36%       0.25       -0.27
+skribe, random swap, no 1st-line s s3    12     -0.11        42%       0.25       +0.14
+
+-- control without p/f: k/t words of head lines against k/t words of other lines --
+real                                     20      0.00        50%       0.24       -0.46
+skribe, no-e rule (27/10) s1             24     -0.08        42%       0.23       -0.59
+skribe, no-e rule (27/10) s2             24     -0.26        29%       0.23       -0.59
+skribe, no-e rule (27/10) s3             26     -0.09        54%       0.24       -0.66
+skribe, random k->p swap s1              20     -0.01        50%       0.23       -0.53
+skribe, random k->p swap s2              24     -0.18        42%       0.24       -0.60
+skribe, random k->p swap s3              23      0.06        57%       0.24       -0.47
+skribe, random swap, no 1st-line s s1    21     -0.16        33%       0.22       -0.57
+skribe, random swap, no 1st-line s s2    22     -0.01        50%       0.23       -0.30
+skribe, random swap, no 1st-line s s3    19     -0.33        37%       0.22       -0.52

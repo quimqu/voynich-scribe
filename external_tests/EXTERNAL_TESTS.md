@@ -220,6 +220,25 @@ The slope by writing distance is negative only with the LSA (p 0.048) and the TF
 
 ---
 
+## 11 · npcompl33t's p/f arrows: is p/f an archaic k/t? (27/10/2026)
+
+**Question** (voynich.ninja thread 6231). npcompl33t keeps only the words with a gallows, writes every gallows as G, pools per bifolium the words whose gallows are `p`/`f` and those whose gallows are `k`/`t`, and places both pools on his MDS of glyph transitions. In nearly every bifolium the arrow from the `p`/`f` pool to the `k`/`t` pool points the way his gradient runs, and the distance grows along the gradient. He reads this as `p`/`f` following older word construction than `k`/`t`, from a phase before the manuscript. Rebuilt from his description (`npcompl33t/pf_vectors.py`): the gradient is MDS1 of all the words of each sheet (B to the right); one MDS of every `p`/`f` and `k`/`t` pool; for each sheet with at least 120 glyphs of `p`/`f` words, the cosine between the arrow `p`/`f` → `k`/`t` and the direction in which the pools move with the gradient. Three skribes, 3 seeds each: the skribe of 27/10 (a first-line `p`/`f` never followed by `e`, `scribe/SCRIBE.md` §12), the same with the old random `k`→`p` swap, and that one without the first-line register.
+
+| | sheets | mean cos | `k`/`t` ahead | gap grows with the gradient, r |
+|---|---|---|---|---|
+| real | 26 | 0.16 | 92% | +0.51 |
+| skribe 27/10 | 16–20 | 0.08 to 0.11 | 68–80% | −0.25 to −0.12 |
+| skribe, random swap | 19 | 0.31 to 0.38 | 89–100% | −0.39 to −0.19 |
+| skribe, random swap, no first-line register | 18–26 | −0.03 to 0.31 | 56–95% | −0.41 to 0.00 |
+| real, both pools from head lines only | 13 | −0.05 | 31% | +0.01 |
+| real, control: `k`/`t` words of head lines against those of other lines | 20 | 0.00 | 50% | −0.46 |
+
+**Reading.** The arrows point "forward" in the skribe as well, which has no chronology: hand and section habits, one taste per sheet, `p`/`f` made from `k`/`t` on the head line. So the direction of the arrows is not evidence of an archaic `p`/`f`. Nor does the rule about `e` explain them: the random swap gives them just as well. What the skribe does not reproduce is the gap growing along the gradient (real r +0.51, skribe negative in all nine runs). In the real text that growth, and the arrows themselves, vanish when both pools are taken from head lines only (31% ahead, r +0.01), but only 13 sheets are left, so this is a lead, not a result. Position alone does not make `k`/`t` lag (control, 50%).
+
+The fact underneath, from the same thread: a plain `p`/`f` is never followed by `e` (5 cases against about 5,000 `ke`/`te`), in every section and on every line; where `k`/`t` take `e`, `p`/`f` take `ch`. That rules out a puff being a `k`/`t` swapped at random (a third would be followed by `e`) and also a plain `p` = `ke` (then `pe` = `kee`, which is common). Rule R1.3, amended; `scribe/SCRIBE.md` §12.
+
+---
+
 ## How to repeat it
 
 ```bash
@@ -241,6 +260,7 @@ PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/lda_pairs.py         
 PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/lsa_whitening.py         # lsa_whitening.txt (pre-registered: what the LSA measures, ~20 min)
 PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/shared_excess.py > external_tests/davis_layfield/shared_excess.txt   # exploratory follow-up
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/figures.py              # seriation.txt, fig_horseshoe.png, fig_herbalA.png (~5 min)
+PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/pf_vectors.py           # pf_vectors.txt (p/f arrows, real and 3 skribes x 3 seeds, ~8 min)
 ```
 
 Known differences from the originals: Parisel calibrates on RF1b-e and we score normalised text from ZL3b (the real text passes all the same, 4/4). Layfield and Davis use ZL 2a with uncertain readings removed and separate the radial and circular text; here only paragraph text, which is the only text the skribe writes. Their stop-word heuristic is not described in enough detail to repeat it; without removing any, or removing the 20 most frequent, the result does not change.

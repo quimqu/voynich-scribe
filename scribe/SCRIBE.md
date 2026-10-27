@@ -418,3 +418,57 @@ Measures lost when each rule is removed, with the register (`results_ablations_t
 | word family, language tables, section dy | 0 to −2 | 0 |
 
 **No rule broke.** As before, several rules cost specific measures but lower the median error when removed (closure −0.014, closure by word count −0.013, e habit −0.010, end table −0.008, form memory −0.008): they fix their own measures at the cost of the general fit. (In the first run with the register, with `first_norep` still at 0.4, some of these had turned positive; with the final configuration they did not.) The repetition by word family (`use_famrep`) now costs nothing (0 measures, error −0.010 without it): a candidate for removal, not removed yet.
+
+## 12 · What follows p and f (27/10/2026)
+
+**Question** (voynich.ninja thread 6231). npcompl33t finds that words with `p`/`f` "lag" words with `k`/`t` along his chronological gradient and reads `p`/`f` as an archaic `k`/`t`; Stolfi answers that the puffs are `k`/`t` written fancy on the head line, at random. The skribe did what Stolfi says: on the first line it turned a `k` into `p` (or a `t` into `f`) at random (`p_pf` 0.30).
+
+**What the real text does.** A plain `p`/`f` is never followed by `e`: 5 `pe`/`fe` in the whole text against 3,589 `ke` and 1,431 `te` (benched `cph`/`cfh` do take `e`: 69 `cphe` against 238 `ckhe`). It holds in every section and on every line; it is not a first-line effect, because `k`/`t` on the first line take `e` as often as elsewhere (35% against 34%). Glyph after the gallows, paragraph text:
+
+| | `e` | `ch`/`sh` | `o` | `a` | `y` | n |
+|---|---|---|---|---|---|---|
+| `k`/`t`, first line | 35% | 18% | 10% | 24% | 10% | 2,512 |
+| `p`/`f`, first line | 5% (benched) | 55% | 12% | 13% | 9% | 1,130 |
+| `k`/`t`, other lines | 34% | 13% | 9% | 29% | 13% | 13,130 |
+| `p`/`f`, other lines | 8% (benched) | 42% | 16% | 19% | 8% | 368 |
+
+`e` + `ch` comes to about the same share after both (52% and 60%): **where `k`/`t` take `e`, `p`/`f` take `ch`**. What follows `pch` matches what follows `ke` if that `e` becomes `ch` (`ke`+`edy` → `pchdy`, `keedy` → `pchedy`, `key` → `pchy`; after `p`+`ch`: `chedy` 23%, `chdy` 11%, `chy` 11%, `chey` 10%). And `p`/`f` go less before `a` (13% against 24%). The skribe wrote 24% `pe`/`fe` on the first line.
+
+### 12.1 · What was changed
+
+`scribe.py`, `use_pf_noe`: when a first-line gallows becomes `p`/`f`, an `e` right after it becomes `ch`, and before `a` the change is made only half the time (`pf_a` 0.5). The share of the change was raised to compensate (`p_pf` 0.30 → 0.33), and the `e` offset of the first-line register lowered (`fl_e` −0.6 → −0.2), because turning `ke` into `pch` already takes `e` away from the first line (with −0.6 the ratio of words with `ee` fell to 0.77 against 0.86). Both values calibrated on the odd folios (targets 29.4% `p`/`f` on the first line and ×0.876 `ee`; skribe 29.9% and ×0.854). Two measures added (`measures.py`, after R1.3): plain `p`/`f` followed by `e` (real 0.31%) and followed by `ch`/`sh` (real 59.2%). The battery has 84 measures. `compare.py`, `holdout.py` and the other scripts now read negative values in `key=value` (before, `fl_e=-0.4` arrived as text).
+
+### 12.2 · Result (5 seeds, 84 measures)
+
+| | without the rule | **with the rule** |
+|---|---|---|
+| plain `p`/`f` followed by `e` (real 0.31%) | 18.5% | **0.34%** |
+| whole text: reproduced / median error | 79/84 · 0.058 | **77/84 · 0.047** |
+| learned from the odd folios, on the even ones (real halves 74/84 · 0.049) | 69/84 · 0.071 | **72/84 · 0.080** |
+
+Honest reading: the rule fixes a categorical feature that no measure was looking at, and the whole text fits better; on the even folios it gains measures but the median error rises by 0.009, about the run-to-run noise (four runs with the rule and different `p_pf`/`fl_e` gave 0.079–0.088, two without 0.071–0.073). The counts move by ±2 between runs on the noisy measures (neighbours one glyph apart, frequent words repeated, H8, repeats on the first line). Three-rule baseline: 45/84 (0.254). Files: `results_table.txt`, `results_holdout_table.txt`, `results_ablations_table.txt` (column "without pf_noe").
+
+Ablations (`results_ablations_table.txt`, 5 seeds; full skribe 77/84 · 0.047). Measures lost and median error when each rule is removed:
+
+| rule removed | measures | median error |
+|---|---|---|
+| boundary rule | −8 | 0.075 |
+| first line | −7 | 0.071 |
+| first-line register | −7 | 0.065 |
+| copying | −7 | 0.062 |
+| length mode | −7 | 0.060 |
+| closure | −5 | 0.047 |
+| start contexts | −4 | 0.062 |
+| sheet style, slot template, word rules, form memory | −3 | 0.054 to 0.065 |
+| dissimilation | −2 | 0.063 |
+| end table | −1 | 0.050 |
+| language tables, closure by word count, section dy | 0 | 0.047 to 0.052 |
+| gallows-initial line habit, reprefix | +1 | 0.048, 0.053 |
+| **p/f followed by ch (new)** | **+2** | **0.058** |
+| word family, e habit | +2 | 0.052, 0.044 |
+
+No rule broke: every rule that cost measures before still costs them, or (gallows habit, reprefix) moves by one, inside the noise. Removing the new rule loses its own two measures (`p`/`f` + `e` 18.5%, + `ch` 34.6%) and gains four noisy ones, so the count goes up by two while the median error rises from 0.047 to 0.058. The e habit again costs nothing and lowers the error when removed (0.044); the word family costs nothing and raises it a little (0.052). Both remain candidates for removal, not removed yet.
+
+### 12.3 · And npcompl33t's arrows?
+
+His test rebuilt (`external_tests/npcompl33t/pf_vectors.py`, `EXTERNAL_TESTS.md` §11): the skribe, with no chronology, draws the same "`p`/`f` behind `k`/`t`" arrows as the real text, with the rule and without it. So the arrows are not evidence of an archaic `p`/`f`, but the rule about `e` does not explain them either.

@@ -143,6 +143,9 @@ def evaluate(LINES,seed=0):
     def pfsh(ws_):
         g=[x for w in ws_ for x in gl(w) if x in GALL]; return 100*sum(x in PF for x in g)/max(1,len(g))
     R['[R1.3] p/f among gallows, first line of paragraph (%)']=pfsh([w for l in LINES if l['ps']==1 for w in l['ws'][1:]]); R['[R1.3] p/f among gallows, other lines (%)']=pfsh([w for l in LINES if l['ps']==0 for w in l['ws']])
+    # thread 6231 (27/10): plain p/f (not benched) are almost never followed by e (5 pe/fe against ~5,000 ke/te); where k/t take e, p/f take ch
+    nxt=[w[m.end():] for l in LINES for w in l['ws'] for m in re.finditer(r'(?<!c)[pf](?!h)',w)]
+    R['[R1.3] Plain p/f followed by e (%)']=100*np.mean([x[:1]=='e' for x in nxt]); R['[R1.3] Plain p/f followed by ch/sh (%)']=100*np.mean([x[:2] in ('ch','sh') for x in nxt])
     fl=[w for l in LINES if l['ps']==1 for w in l['ws'][1:]]; ol=[w for l in LINES if l['ps']==0 for w in l['ws']]
     R['[R5.2] Word length, first line / rest']=np.mean([len(gl(w)) for w in fl])/np.mean([len(gl(w)) for w in ol])
     # drawing (R6.1, R6.2)

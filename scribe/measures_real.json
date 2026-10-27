@@ -47,6 +47,8 @@
  "[R5.1] Gallows on first word of paragraph (%)": 93.24324324324324,
  "[R1.3] p/f among gallows, first line of paragraph (%)": 31.026908292147173,
  "[R1.3] p/f among gallows, other lines (%)": 2.726329826640984,
+ "[R1.3] Plain p/f followed by e (%)": 0.30978934324659235,
+ "[R1.3] Plain p/f followed by ch/sh (%)": 59.16976456009914,
  "[R5.2] Word length, first line / rest": 1.0762393716198222,
  "[R6.1] Closed word before a drawing gap (%)": 10.164835164835164,
  "[R6.1] d-/s-/y- after a drawing gap (%)": 41.3290113452188,

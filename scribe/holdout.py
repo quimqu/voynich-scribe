@@ -9,7 +9,7 @@ print(f'odd: {len(odd)} lines; even: {len(even)} lines')
 R_even=M.evaluate(even,seed=1); R_odd=M.evaluate(odd,seed=1)
 kw={}
 for a in sys.argv[1:]:                     # key=value: the scribe with changed parameters (as in compare.py)
-    k,v=a.split('='); kw[k]=(v=='True') if v in ('True','False') else (float(v) if v.replace('.','',1).isdigit() else v)
+    k,v=a.split('='); kw[k]=(v=='True') if v in ('True','False') else (float(v) if v.lstrip('-').replace('.','',1).isdigit() else v)
 rs=[M.evaluate(Escriba(**kw).write(seed=s,layout=even),seed=s) for s in (1,2,3,4,5)]
 G={k:float(np.mean([r[k] for r in rs])) for k in rs[0]}
 keys=list(R_even)

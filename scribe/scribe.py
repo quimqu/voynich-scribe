@@ -243,11 +243,11 @@ def avoid_table():
 AVOID=avoid_table()
 for g_ in ('k','f','cth','ckh','cph','cfh'): AVOID.setdefault(g_,AVOID.get('t',0.5))   # gallows with little data: like t
 # ================= the scribe =================
-DEFAULT=dict(r_copy=0.22,r_mod=0.45,tau=4.0,vert_bonus=2.0,first_copy=0.1,p_pf=0.30,sigma_style=0.3,sigma_line=0.25,rho_line=0.6,
+DEFAULT=dict(r_copy=0.22,r_mod=0.45,tau=4.0,vert_bonus=2.0,first_copy=0.1,p_pf=0.33,sigma_style=0.3,sigma_line=0.25,rho_line=0.6,
              sigma_len=0.6,len_cands=5,rej_2gall=0.35,rej_ei=0.25,use_word_rules=True,first_norep=0.0,gap_scale=0.75,declose_p=0.55,gap_noq=0.9,use_famrep=True,adj_boost=0.5,avoid_scale=1.2,closure_by_nwords=True,closure_by_hand=True,use_reprefix=True,use_end_table=True,pf_back=0.75,
              use_lang=True,use_slots=True,use_contexts=True,use_style=True,use_copy=True,use_first_line=True,use_closure=True,
              use_dissim=True,use_len_mode=True,use_boundary=True,
-             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35,use_fl_style=True,fl_t=0.3,fl_sh=0.6,fl_rare=0.7,fl_rare_min=0.003,fl_e=-0.6)   # 26/10: first-line register calibrated on the odd folios only (t 0.3, sh 0.6, rare 0.7, e -0.6) — with it, first_norep (0.4 before) is no longer needed: the first line repeats less because its words are rarer   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
+             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35,use_fl_style=True,use_pf_noe=True,pf_a=0.5,fl_t=0.3,fl_sh=0.6,fl_rare=0.7,fl_rare_min=0.003,fl_e=-0.2)   # 26/10: first-line register calibrated on the odd folios only (t 0.3, sh 0.6, rare 0.7, e -0.6) — with it, first_norep (0.4 before) is no longer needed: the first line repeats less because its words are rarer   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
 STYLE_DIMS=['t','sh','q','dy']
 # 'e' habit (14/10): word block with e (-y/-dy) or without (-aiin/-ar/-ol), R2.4, per sheet, page, line and section; its own random generator
 NUC={'ch','sh','k','t','p','f','cth','ckh','cph','cfh'}
@@ -442,7 +442,13 @@ class Escriba:
                         w2=self.gen_word(tab,A,style)
                         if w2!=ws[-1]: w=w2; break
                 if first_line and i>0 and self.rng.random()<p['p_pf']:
-                    w=w.replace('ckh','cph').replace('cth','cfh') if ('ckh' in w or 'cth' in w) else w.replace('k','p',1) if 'k' in w else w.replace('t','f',1)
+                    if 'ckh' in w or 'cth' in w: w=w.replace('ckh','cph').replace('cth','cfh')
+                    elif not p['use_pf_noe']: w=w.replace('k','p',1) if 'k' in w else w.replace('t','f',1)
+                    elif 'k' in w or 't' in w:
+                        # a plain p/f is never followed by e (5 pe/fe in the manuscript against ~5,000 ke/te): where k/t take e, p/f take ch
+                        # (ke->pch, keedy->pchedy, key->pchy), and before a it is less used (13% of p/f against 24-37% of k/t)
+                        j=w.index('k') if 'k' in w else w.index('t'); nx=w[j+1:]
+                        if not (nx[:1]=='a' and self.rng.random()>p['pf_a']): w=w[:j]+('p' if w[j]=='k' else 'f')+('ch'+nx[1:] if nx[:1]=='e' else nx)
                 ws.append(w); page_words.append((w,li,i))          # the word enters the visible field as it is written
             if p['use_closure']:
                 if l['pe']==1: cp=CL_PAR_HAND.get(l['hand'],CL_PAR) if p['par_by_hand'] else CL_PAR; cp={k:v*p['par_scale'] for k,v in cp.items()}

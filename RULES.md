@@ -24,7 +24,7 @@
 
 **R1.2 · Allographs: pairs that are the same sign in different places.** `ch~sh`, `k~t`, `p~f` (and `ckh~cth`) merge without loss (percentile ~0 of the null). The choice between them is dictated by place, with only 0.009 bits of context. System. [A7, V3, U1]
 
-**R1.3 · `p` and `f` are the first-line gallows.** In the first line of a paragraph, 35% of the gallows are `p`/`f`; in interior lines, 3%. System (30-54% in all hands). **And they depend on the free space above**: in the rest of the first line (without the first word), 42% if it is the first line of the page, 34% if the paragraph has space above it, 22% if it is pressed against the previous one (difference +12 points, CI +7 to +17, in all sections and hands). The first word carries them just the same (51-56%), the number of gallows does not change, and interior lines with space above do not do it. [V5, G4, night1, H9]
+**R1.3 · `p` and `f` are the first-line gallows.** In the first line of a paragraph, 35% of the gallows are `p`/`f`; in interior lines, 3%. System (30-54% in all hands). **And they depend on the free space above**: in the rest of the first line (without the first word), 42% if it is the first line of the page, 34% if the paragraph has space above it, 22% if it is pressed against the previous one (difference +12 points, CI +7 to +17, in all sections and hands). The first word carries them just the same (51-56%), the number of gallows does not change, and interior lines with space above do not do it. [V5, G4, night1, H9] **Amended on 27/10/2026:** a plain `p`/`f` is never followed by `e`: 5 `pe`/`fe` in the whole text against 3,589 `ke` and 1,431 `te`, in every section and in every line (benched `cph`/`cfh` do take `e`). Where `k`/`t` take `e`, `p`/`f` take `ch`/`sh`: after `k`/`t` of the first line `e` 35% and `ch`/`sh` 18%, after `p`/`f` 0% and 55%, so `e` + `ch` is about the same share after both; `p`/`f` also go less before `a` (13% against 24%). So `p`/`f` are not `k`/`t` written fancy at random (that would leave a third of them before `e`): the `e` that follows becomes `ch` (`ke`→`pch`, `keedy`→`pchedy`, `key`→`pchy`). System. [thread 6231 on voynich.ninja; `scribe/SCRIBE.md` §12]
 
 **R1.4 · `q` is always followed by `o` and is always initial.** 97.8% and 98.5%. System. [regles_compliment]
 
@@ -169,7 +169,7 @@ And within the core `o-` after `-y`: `ok-` takes `q-` 72% of the time, `ot-` 48%
 
 ## 11 · How to write a page following the rulebook (the recipe)
 
-1. Start the paragraph with a word that has a gallows, by preference `p` or `f`, never with `q-`; if there is free space above, use `p`/`f` in the rest of the first line too (R5.1, R1.3).
+1. Start the paragraph with a word that has a gallows, by preference `p` or `f`, never with `q-`; if there is free space above, use `p`/`f` in the rest of the first line too, and write the `e` after a `p`/`f` as `ch` (R5.1, R1.3).
 2. In the first line, choose longer and rarer words, prefer `sh` to `ch` and `t` to `k`, use fewer `ee`, and do not repeat its words in the second line (R5.2).
 3. Each word: prefix + core + `e` + suffix, one gallows at most, 4-6 glyphs, and decide the block: with `e` → `-y`/`-dy`; without → `-aiin`/`-ar`/`-ol` (R2.1-R2.6).
 4. If the previous word ends in `-y` and the next one starts with `o`, put `q-` (at this page's rate); if it ends in `-r` or `-s`, put nothing; if the next one starts with `a`, put `d-` (R3.3).
