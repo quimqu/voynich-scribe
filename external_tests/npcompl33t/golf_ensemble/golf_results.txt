@@ -1,0 +1,36 @@
+npcompl33t's chronology ensemble (path-v2 default consensus) on our real text and on the skribe. 50 resampling replicates,
+both penalties, Zattera units, the published Golf 2.1 labels, masks and anchor orders. Bifolio pools (50).
+
+Agreement of the 50 bifolio scores with his published order (Spearman):
+  real       +1.00
+  skribe_s1  +0.96
+  skribe_s2  +0.97
+  skribe_s3  +0.97
+
+Share of fits with 3a before 3b and 4a before 4c (pool cohort, converged fits):
+  real       3a<3b 0.55   4a<4c 0.47
+  skribe_s1  3a<3b 0.57   4a<4c 0.46
+  skribe_s2  3a<3b 0.46   4a<4c 0.42
+  skribe_s3  3a<3b 0.57   4a<4c 0.37
+
+-- Q13: order of the bifolia (earliest first), Golf label in brackets --
+  published  79-80[4a] 76-83[4a] 78-81[4a] 75-84[4a] 77-82[4a]
+  real       79-80[4a] 76-83[4a] 78-81[4a] 75-84[4a] 77-82[4a]   tau vs published +1.00   decisiveness 0.08
+  skribe_s1  76-83[4a] 75-84[4a] 79-80[4a] 77-82[4a] 78-81[4a]   tau vs published +0.20   decisiveness 0.39
+  skribe_s2  76-83[4a] 79-80[4a] 77-82[4a] 78-81[4a] 75-84[4a]   tau vs published +0.40   decisiveness 0.34
+  skribe_s3  76-83[4a] 79-80[4a] 78-81[4a] 75-84[4a] 77-82[4a]   tau vs published +0.80   decisiveness 0.36
+  skribe_s1 vs skribe_s2: tau +0.40
+  skribe_s1 vs skribe_s3: tau +0.40
+  skribe_s2 vs skribe_s3: tau +0.60
+
+-- Q20: order of the bifolia (earliest first), Golf label in brackets --
+  published  105-114[3c] 104-115[3c] 106-113[3c] 107-112[3c] 108-111[4c] 103-116[4c]
+  real       105-114[3c] 104-115[3c] 106-113[3c] 107-112[3c] 108-111[4c] 103-116[4c]   tau vs published +1.00   decisiveness 0.89
+  skribe_s1  108-111[4c] 105-114[3c] 106-113[3c] 103-116[4c] 104-115[3c] 107-112[3c]   tau vs published +0.07   decisiveness 0.27
+  skribe_s2  103-116[4c] 105-114[3c] 104-115[3c] 107-112[3c] 106-113[3c] 108-111[4c]   tau vs published +0.20   decisiveness 0.08
+  skribe_s3  104-115[3c] 103-116[4c] 108-111[4c] 105-114[3c] 107-112[3c] 106-113[3c]   tau vs published -0.20   decisiveness 0.25
+  skribe_s1 vs skribe_s2: tau -0.20
+  skribe_s1 vs skribe_s3: tau -0.07
+  skribe_s2 vs skribe_s3: tau +0.33
+
+Decisiveness: mean |2p - 1| over the pairs of bifolia in the quire, p = share of selected fits putting one after the other (1 = always the same order).

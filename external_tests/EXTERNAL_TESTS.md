@@ -310,6 +310,26 @@ npcompl33t (thread 6231), against §11: P/F words change differently from K/T ev
 
 kch/tch do fall, but ch + e after k/t stays roughly flat and near pch/fch: the *e* takes the place of *ch* after k/t, and p/f, which cannot take *e*, keep the *ch*. The skribe, with no chronology and only rule R1.3, gives the same picture. This example is the *e* rule, not P/F lagging. What §11 found the skribe does not reproduce remains: the PF–KT distance growing along the gradient (real r +0.51, skribe negative).
 
+## 17 · npcompl33t's own chronology ensemble, run on the skribe (28/10/2026)
+
+Rather than rebuilding his method from his posts (§10–§14), we ran his code: `eo777/voynich-clusters`, `chronology-stability/replication` (16/10/2026), the way his own RF1b study swaps the transcription. Same 207 paragraph pages, same 50 bifolio pools, same Golf 2.1 labels, masks, penalties and the eight anchor orders through the group centres; his counting (Zattera units, word and joined-line transitions), his weighted Jensen-Shannon, MDS, ElPiGraph growth and refinement, imported unchanged. Only the text changes. Consensus as his path-v2 default (1a before 1b, best fit per replicate, pairwise frequencies). 50 resampling replicates per text instead of his 100 (2,400 fits each). `npcompl33t/golf_ensemble/`.
+
+Checks: his first saved fit replays to 2·10⁻¹⁶; our real text (ZL3b, as the skribe learns it) gives his published bifolio order exactly (Spearman 1.00; Q13 and Q20 identical).
+
+| | real | skribe s1 | s2 | s3 |
+|---|---|---|---|---|
+| agreement of the 50 bifolio scores with his published order (Spearman) | 1.00 | 0.96 | 0.97 | 0.97 |
+| Q13: order against his published one (Kendall tau) | +1.00 | +0.20 | +0.40 | +0.80 |
+| Q13: decisiveness (1 = every fit gives the same order, 0 = coin flips) | **0.08** | 0.39 | 0.34 | 0.36 |
+| Q20: order against his published one (Kendall tau) | +1.00 | +0.07 | +0.20 | −0.20 |
+| Q20: decisiveness | **0.89** | 0.27 | 0.08 | 0.25 |
+| fits with 3a before 3b / 4a before 4c | 0.55 / 0.47 | 0.57 / 0.46 | 0.46 / 0.42 | 0.57 / 0.37 |
+
+- **The order of the manuscript as a whole** comes out almost the same from a text with no order between sheets (0.96–0.97). It is the hands and sections, plus the anchor order of the Golf groups the curve is started through.
+- **Q13**: his own ensemble barely decides the order of its five bifolia (0.08: near coin flips for every pair); the skribe's Q13, whose sheets differ at random, is more decided than the real one. A match of Q13 with another reconstruction rests on an order his method does not establish.
+- **Q20** is the exception, as in §14: the real text gives one order almost every time (0.89: 105, 104, 106, 107, 108, 103, the two last labelled 4c), the skribe gives weak orders that change with the seed. Something in the real Q20 varies from sheet to sheet in a consistent direction, and a text written the same way on every sheet does not do it. Whether it is time is not shown by this, but it is real.
+- The B-group contrasts (3a/3b, 4a/4c) are near 50/50 in the real text too, which is why his page offers four paths.
+
 ---
 
 ## How to repeat it
@@ -337,6 +357,13 @@ PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/pf_vectors.py           #
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/within_hand.py          # within_hand.txt (the gradient inside each hand x section, ~1 min)
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/q13_mattr_holdout.py    # q13_mattr_holdout.txt (Q13 MATTR, skribe not shown Q13, ~5 min)
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/pf_next_glyph.py        # pf_next_glyph.txt (glyph after k/t and p/f, ~1 min)
+# §17, his own code: clone eo777/voynich-clusters, copy chronology-stability/replication to NPC_WORK, make a Python venv with his
+# requirements.txt plus pandas, and install elpigraph-python==0.3.4 with --no-deps --target into golf_stability_20261016/_deps and
+# golf_published_stability_20261016/_deps of that copy. Then, in external_tests/npcompl33t/golf_ensemble:
+PYTHONIOENCODING=utf-8 py -3 export_texts.py                       # texts.json (real text and skribe seeds 1-3)
+<venv>/python run_golf.py replay                                   # his first saved fit, replayed (checks the environment)
+<venv>/python run_golf.py run real 50 7                            # and skribe_s1, skribe_s2, skribe_s3 (~10 min each, 7 workers)
+<venv>/python analyse_golf.py                                      # golf_results.txt (NPC_CLONE = his clone, for path-v2/bifolia.csv)
 ```
 
 Known differences from the originals: Parisel calibrates on RF1b-e and we score normalised text from ZL3b (the real text passes all the same, 4/4). Layfield and Davis use ZL 2a with uncertain readings removed and separate the radial and circular text; here only paragraph text, which is the only text the skribe writes. Their stop-word heuristic is not described in enough detail to repeat it; without removing any, or removing the 20 most frequent, the result does not change.
