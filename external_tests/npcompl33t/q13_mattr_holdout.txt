@@ -1,0 +1,9 @@
+## odd: learned from the odd folios, even folios written
+real text                            Q13 0.736 | other quires 0.831 | Q13 rank 1/5 (1 = poorest)
+skribe (5 seeds)                     Q13 0.734 | other quires 0.811 | Q13 rank 1/5 (1 = poorest)
+skribe, no copying (5 seeds)         Q13 0.751 | other quires 0.851 | Q13 rank 1/5 (1 = poorest)
+
+## without_M: learned without Q13, all folios written
+real text                            Q13 0.736 | other quires 0.828 | Q13 rank 1/11 (1 = poorest)
+skribe (5 seeds)                     Q13 0.805 | other quires 0.808 | Q13 rank 4/11 (1 = poorest)
+skribe, no copying (5 seeds)         Q13 0.840 | other quires 0.841 | Q13 rank 6/11 (1 = poorest)

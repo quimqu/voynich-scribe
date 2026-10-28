@@ -276,6 +276,42 @@ Inside the cells (≥ 12 pages):
 
 ---
 
+## 15 · Q13's low MATTR when the skribe has not seen Q13 (28/10/2026)
+
+npcompl33t (thread 6244): the skribe makes Q13 the poorest quire in MATTR (0.74 in both texts, thread 6244 post #15) only because it was trained on the pages it writes. `npcompl33t/q13_mattr_holdout.py`, five seeds:
+
+| | Q13 | other quires | Q13's place (1 = poorest) |
+|---|---|---|---|
+| **learned from the odd folios, even folios written** | | | |
+| real even folios | 0.736 | 0.831 | 1 of 5 |
+| skribe | 0.734 | 0.811 | 1 of 5 |
+| skribe, no copying | 0.751 | 0.851 | 1 of 5 |
+| **learned without Q13** | | | |
+| real | 0.736 | 0.828 | 1 of 11 |
+| skribe | 0.805 | 0.808 | 4 of 11 |
+| skribe, no copying | 0.840 | 0.841 | 6 of 11 |
+
+- On pages it has not seen, the skribe still makes Q13 the poorest: the low MATTR is not memorised from those pages.
+- Without any Q13 in the learning, hand 2's habits from its other sections do not make Q13 poor. The low MATTR comes from how the words are built in the biological section itself; it needs neither copying nor an order. So MATTR is not independent of section, but the skribe cannot predict it without having seen that section.
+- Not reproduced: the page-to-page decline inside Bio that Koen and npcompl33t describe; in the real text the folio MATTR goes by sheet (the two halves of a bifolio are alike), which the skribe does not do.
+
+## 16 · "kch/tch drop while pch does not" (28/10/2026)
+
+npcompl33t (thread 6231), against §11: P/F words change differently from K/T even without *e*, e.g. kch and tch drop while pch does not. `npcompl33t/pf_next_glyph.py`: share of plain k/t and plain p/f followed by each glyph.
+
+| | kch/tch | pch/fch | ke/te | ch + e after k/t |
+|---|---|---|---|---|
+| Herbal A | 33% | 56% | 14% | 48% |
+| Pharma A | 6% | 33% | 56% | 62% |
+| Herbal B | 11% | 51% | 34% | 45% |
+| Bio B | 5% | 55% | 43% | 48% |
+| Stars B | 10% | 59% | 43% | 53% |
+| skribe (3 seeds), range over the groups | 5–13% (33% in Herbal A) | 44–65% | | |
+
+kch/tch do fall, but ch + e after k/t stays roughly flat and near pch/fch: the *e* takes the place of *ch* after k/t, and p/f, which cannot take *e*, keep the *ch*. The skribe, with no chronology and only rule R1.3, gives the same picture. This example is the *e* rule, not P/F lagging. What §11 found the skribe does not reproduce remains: the PF–KT distance growing along the gradient (real r +0.51, skribe negative).
+
+---
+
 ## How to repeat it
 
 ```bash
@@ -299,6 +335,8 @@ PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/shared_excess.py > ex
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/figures.py              # seriation.txt, fig_horseshoe.png, fig_herbalA.png (~5 min)
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/pf_vectors.py           # pf_vectors.txt (p/f arrows, real and 3 skribes x 3 seeds, ~8 min)
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/within_hand.py          # within_hand.txt (the gradient inside each hand x section, ~1 min)
+PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/q13_mattr_holdout.py    # q13_mattr_holdout.txt (Q13 MATTR, skribe not shown Q13, ~5 min)
+PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/pf_next_glyph.py        # pf_next_glyph.txt (glyph after k/t and p/f, ~1 min)
 ```
 
 Known differences from the originals: Parisel calibrates on RF1b-e and we score normalised text from ZL3b (the real text passes all the same, 4/4). Layfield and Davis use ZL 2a with uncertain readings removed and separate the radial and circular text; here only paragraph text, which is the only text the skribe writes. Their stop-word heuristic is not described in enough detail to repeat it; without removing any, or removing the 20 most frequent, the result does not change.
