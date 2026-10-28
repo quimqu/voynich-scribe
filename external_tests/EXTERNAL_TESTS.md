@@ -249,6 +249,33 @@ The fact underneath, from the same thread: a plain `p`/`f` is never followed by 
 
 `sheet_chain/` (`SHEET_CHAIN_PREREG.md`, `sheet_chain.py`). Sheets grouped by hand × section; three affinities between sheets (vocabulary, glyph transitions, the five free habits); pairwise residuals after removing what is typical of each sheet. **All three primary tests met**: vocabulary and glyphs agree on which sheets resemble each other (r 0.78, p 0.0002), far more than in the skribe (0.27–0.36), and sheets that are neighbours in the current nesting are a little closer (p 0.024). **But it is not a chain** (exploratory): almost all of it is herbal hand 1, it is one scale, the word family (share of words with *e*, rho −0.78), on which the real herbal sheets spread much more than the skribe's (SD 0.109 against 0.055–0.083), and that scale does not follow the order of the quires. Each herbal sheet takes a clear side, with or without *e*, more decidedly than the skribe's sheet habit makes it; a scale sorts the sheets but does not order them. The neighbouring-sheet effect is a small lead (9 neighbour pairs).
 
+---
+
+## 14 · Does the gradient run inside a hand? (28/10/2026)
+
+npcompl33t's answer to §10 and §12: the skribe makes the horseshoe only because it is given the hands, and the hands sit at fixed points of his gradient, so the skribe "is receiving time". That assumes what is to be shown (that the hands are ordered in time). The part that can be tested: if the gradient is time, it should also run inside one hand and section, and follow the order of the folios there. Inside a hand × section the skribe has no order by construction. `npcompl33t/within_hand.py`, real text against five seeds of the skribe with R14.8.
+
+| | real | skribe (5 seeds) |
+|---|---|---|
+| share of the gradient explained by the hand × section means | 0.94 | 0.97 [0.97, 0.98] |
+
+Inside the cells (≥ 12 pages):
+
+| hand, section | pages | horseshoe inside (R²) real / skribe | own axis vs gradient \|r\| real / skribe | Spearman gradient–folio real (p) / skribe |
+|---|---|---|---|---|
+| 1, herbal | 62 | 0.06 / 0.02 [0.00, 0.03] | 0.62 / 0.65 | +0.39 (0.002) / −0.06 [−0.21, 0.06] |
+| 3, stars (Q20) | 24 | **0.45** / 0.04 [0.00, 0.14] | **0.95** / 0.80 | +0.23 (0.29) / −0.15 |
+| 2, herbal | 20 | 0.12 / 0.09 | 0.52 / 0.44 | −0.29 (0.21) / 0.00 |
+| 2, biological (Q13) | 19 | 0.21 / 0.07 | 0.04 / 0.52 | −0.39 (0.10) / +0.07 |
+| 1, pharmaceutical | 16 | 0.01 / 0.01 | 0.18 / 0.35 | +0.11 (0.70) / −0.17 |
+
+- The global gradient is the hands and sections: 94% of it in the real text, 97% in the skribe. With that much carried by the hands, the gradient alone cannot tell hands from time.
+- Hand 1 herbal drifts with the folio number (+0.39), but mostly because its herbal pages in the late quires O and Q sit nearer the B side; in quires A–G alone the drift is +0.23 (p 0.10).
+- Q13 (all hand 2): its pages' main axis has nothing to do with the gradient (|r| 0.04). Whatever orders Q13, it is not the gradient.
+- Q20 (hand 3 stars) is the one place with structure the skribe lacks: a horseshoe inside the hand, on the same axis as the manuscript's gradient. It does not follow the folio order (p 0.29). Something varies continuously inside hand 3; the skribe does not do it.
+
+---
+
 ## How to repeat it
 
 ```bash
@@ -271,6 +298,7 @@ PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/lsa_whitening.py     
 PYTHONIOENCODING=utf-8 py -3 external_tests/davis_layfield/shared_excess.py > external_tests/davis_layfield/shared_excess.txt   # exploratory follow-up
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/figures.py              # seriation.txt, fig_horseshoe.png, fig_herbalA.png (~5 min)
 PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/pf_vectors.py           # pf_vectors.txt (p/f arrows, real and 3 skribes x 3 seeds, ~8 min)
+PYTHONIOENCODING=utf-8 py -3 external_tests/npcompl33t/within_hand.py          # within_hand.txt (the gradient inside each hand x section, ~1 min)
 ```
 
 Known differences from the originals: Parisel calibrates on RF1b-e and we score normalised text from ZL3b (the real text passes all the same, 4/4). Layfield and Davis use ZL 2a with uncertain readings removed and separate the radial and circular text; here only paragraph text, which is the only text the skribe writes. Their stop-word heuristic is not described in enough detail to repeat it; without removing any, or removing the 20 most frequent, the result does not change.

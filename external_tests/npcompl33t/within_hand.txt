@@ -1,0 +1,39 @@
+Does the gradient run inside a hand and section? Real text against the skribe (no order inside a hand x section), 5 seeds.
+Pages with >= 300 glyphs; cells with >= 12 pages. Skribe columns: mean and range over the seeds.
+
+Share of the gradient explained by the hand x section means (eta2): real 0.94, skribe  0.97 [ 0.97, 0.98]
+
+-- share of the first axis inside the cell --
+hand, section               n    real   skribe
+1, herbal                  62   +0.10    0.07 [ 0.06, 0.07]
+3, stars                   24   +0.22    0.14 [ 0.10, 0.18]
+2, herbal                  20   +0.19    0.12 [ 0.11, 0.12]
+2, biological              19   +0.17    0.15 [ 0.13, 0.18]
+1, pharmaceutical          16   +0.15    0.13 [ 0.12, 0.19]
+
+-- horseshoe inside the cell (R^2 of MDS2 ~ MDS1^2) --
+hand, section               n    real   skribe
+1, herbal                  62   +0.06    0.02 [ 0.00, 0.03]
+3, stars                   24   +0.45    0.04 [ 0.00, 0.14]
+2, herbal                  20   +0.12    0.09 [ 0.02, 0.28]
+2, biological              19   +0.21    0.07 [ 0.01, 0.14]
+1, pharmaceutical          16   +0.01    0.01 [ 0.00, 0.03]
+
+-- |r| of the cell's own MDS1 with the global gradient --
+hand, section               n    real   skribe
+1, herbal                  62   +0.62    0.65 [ 0.58, 0.79]
+3, stars                   24   +0.95    0.80 [ 0.68, 0.96]
+2, herbal                  20   +0.52    0.44 [ 0.04, 0.77]
+2, biological              19   +0.04    0.52 [ 0.01, 0.92]
+1, pharmaceutical          16   +0.18    0.35 [ 0.04, 0.88]
+
+-- Spearman of the gradient with the folio number --
+hand, section               n    real   skribe
+1, herbal                  62   +0.39   -0.06 [-0.21, 0.06]   real p 0.002
+3, stars                   24   +0.23   -0.15 [-0.39, 0.16]   real p 0.288
+2, herbal                  20   -0.29    0.00 [-0.48, 0.41]   real p 0.210
+2, biological              19   -0.39    0.07 [-0.21, 0.24]   real p 0.101
+1, pharmaceutical          16   +0.11   -0.17 [-0.74, 0.23]   real p 0.696
+
+Hand 1 herbal spans quires A-G and O, Q; its herbal pages in the late quires sit nearer the B side. Without them (quires A-G
+only) the real Spearman drops to +0.23 (p 0.10, 55 pages). Hand 2 biological is quire M (Q13); hand 3 stars is quires H and T (Q20).
