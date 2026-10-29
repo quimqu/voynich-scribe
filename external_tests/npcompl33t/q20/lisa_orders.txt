@@ -1,0 +1,15 @@
+Published orders ranked among all bifolio permutations, in our LSA rebuild (k=75, mean facing similarity, singulion reading).
+Q20 = T (720 orders), Q13 = M (120). Earliest bifolium first, named by its first folio.
+
+real          M: best 79 75 76 77 78           within 5% of the best:   4 orders | Layfield-Davis best rank 21 | Layfield-Davis 2nd rank 2 | npcompl33t rank 118
+real          T: best 108 103 104 106 107 105  within 5% of the best:   9 orders | Layfield-Davis best rank 17 | npcompl33t rank 17
+scribe_seed1  M: best 75 79 78 76 77           within 5% of the best:  19 orders | Layfield-Davis best rank 115 | Layfield-Davis 2nd rank 18 | npcompl33t rank 88
+scribe_seed1  T: best 108 103 106 107 104 105  within 5% of the best:   5 orders | Layfield-Davis best rank 125 | npcompl33t rank 125
+scribe_seed2  M: best 76 77 79 75 78           within 5% of the best:   4 orders | Layfield-Davis best rank 97 | Layfield-Davis 2nd rank 1 | npcompl33t rank 36
+scribe_seed2  T: best 103 107 106 105 104 108  within 5% of the best:  12 orders | Layfield-Davis best rank 184 | npcompl33t rank 184
+scribe_seed3  M: best 77 75 79 78 76           within 5% of the best:   9 orders | Layfield-Davis best rank 57 | Layfield-Davis 2nd rank 22 | npcompl33t rank 111
+scribe_seed3  T: best 104 106 103 107 108 105  within 5% of the best:  32 orders | Layfield-Davis best rank 102 | npcompl33t rank 102
+scribe_seed4  M: best 76 77 78 79 75           within 5% of the best:   3 orders | Layfield-Davis best rank 101 | Layfield-Davis 2nd rank 7 | npcompl33t rank 120
+scribe_seed4  T: best 108 107 106 103 105 104  within 5% of the best:  18 orders | Layfield-Davis best rank 105 | npcompl33t rank 105
+scribe_seed5  M: best 76 78 75 79 77           within 5% of the best:   7 orders | Layfield-Davis best rank 17 | Layfield-Davis 2nd rank 46 | npcompl33t rank 19
+scribe_seed5  T: best 107 106 103 104 108 105  within 5% of the best:  25 orders | Layfield-Davis best rank 295 | npcompl33t rank 295

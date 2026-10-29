@@ -330,6 +330,22 @@ Checks: his first saved fit replays to 2·10⁻¹⁶; our real text (ZL3b, as th
 - **Q20** is the exception, as in §14: the real text gives one order almost every time (0.89: 105, 104, 106, 107, 108, 103, the two last labelled 4c), the skribe gives weak orders that change with the seed. Something in the real Q20 varies from sheet to sheet in a consistent direction, and a text written the same way on every sheet does not do it. Whether it is time is not shown by this, but it is real.
 - The B-group contrasts (3a/3b, 4a/4c) are near 50/50 in the real text too, which is why his page offers four paths.
 
+## 18 · What the Q20 order follows (29/10/2026)
+
+§17 left one real result: npcompl33t's ensemble orders the six Q20 bifolia the same way almost every time (105, 104, 106, 107, 108, 103), and the skribe's Q20 does not. Layfield and Davis's best LSA order for Q20 is the same sequence (their "Bifolia reordering experiments"), so two methods agree on it. What do they follow? `npcompl33t/q20/`, real text, page scores from the §17 fits.
+
+- **It is a property of the sheet, not of the page.** Both halves of each bifolium get almost the same score (f103/f116 0.89, f105/f114 0.81). Against the physical nesting (outer 103-116 to inner 108-111) the sheet scores go down and up again (0.89, 0.84, 0.81, 0.84, 0.86, 0.88), so it is not a simple writing sequence through the quire.
+- **The sheets choose between two word families.** 105-114 has daiin, aiin, otaiin, qotaiin, dair, ar, al in excess; the two last sheets (103-116 and 108-111, the two labelled 4c) share qokeey, qokeedy, okeey, chey, shedy, qokain, okain, otedy… and repeat themselves more (MATTR 0.89 → 0.78, top-20 coverage 18 → 30%, hapax 45 → 32%). These features vary between sheets 3 to 6 times more than in the skribe (`sheet_features.txt`, `excess_words.txt`).
+- **The two families are the two registers of language B.** Scored with word models trained without any Q20 line, the page scores follow the likeness to Q13 (biological) against the rest of B, Spearman +0.93 on 23 pages (+0.94 on the 6 sheets), and the likeness to herbal B, −0.91 (−1.00). The Q20 sheets go from herbal-B vocabulary to biological vocabulary (`hidden_variable.txt`).
+- **Not position, not copying drift.** The axis is the same with line-medial words only, with the first line of the paragraphs or the others, in the first half of the page or the second: each page is in one register from top to bottom. Hand and transcription marks that are not vocabulary (uncertain spaces 0.00, alternative readings +0.20) and the physical position (nesting +0.16) do not follow it.
+- **Not page length.** The late pages are longer (351–568 words, +0.62), but with every page cut to 351 consecutive words the vocabulary axis stays (+0.93 likeness to Q13, +0.94 Q20 axis) and the repetition measures stay (MATTR −0.81) (`equal_length.txt`).
+- **The same sheets are written more tightly** (Beinecke scans, `facsimile.txt`). Same page size and same glyph width, but the lines are closer (pitch 34.6 px on 108-111 and 36 on 103-116 against 37.5–38.5 on the 3c sheets; page rho −0.55) and the text starts higher on the page (sheet rho −0.83), hence 50–52 lines instead of 40–48. This is a second variable, not taken from the words, that moves with the first. It looks like two groups (the two 4c sheets against the four 3c) more than a line: 107-112, in the middle of the order, has the spacing of the 3c sheets.
+- **Layfield and Davis's orders in our LSA rebuild** (`lisa_orders.txt`): their best Q20 order ranks 17th of 720 on the real text and 102nd–295th on the five skribe seeds; their best Q13 order ranks 21st of 120 (their second best, 2nd). The top of the list is flat (9 Q20 orders within 5% of the best), so the winner depends on transcription and preprocessing. npcompl33t's Q13 order ranks 118th of 120.
+
+Reading: the Q20 order is the passage from one register of language B to the other, sheet by sheet, and both methods see it because both measure the composition of the text. The tighter writing on the same sheets points to two working batches. It does not show which batch came first (the direction of npcompl33t's axis comes from his anchor order), whether there is any order inside a batch, or why the register changes (time, subject or exemplar).
+
+Decisiveness of the order in every quire (`decisiveness.txt`): Q20 0.89 against 0.08–0.27 in the skribe is the clearest case; herbal quires B (0.75 against 0.40–0.67) and D (0.90 against 0.55–0.61) are also more decided than the skribe; Q13 (0.08) is not.
+
 ---
 
 ## How to repeat it
@@ -364,6 +380,15 @@ PYTHONIOENCODING=utf-8 py -3 export_texts.py                       # texts.json 
 <venv>/python run_golf.py replay                                   # his first saved fit, replayed (checks the environment)
 <venv>/python run_golf.py run real 50 7                            # and skribe_s1, skribe_s2, skribe_s3 (~10 min each, 7 workers)
 <venv>/python analyse_golf.py                                      # golf_results.txt (NPC_CLONE = his clone, for path-v2/bifolia.csv)
+# §18, in external_tests/npcompl33t/q20 (page_scores.json is committed: only page_scores.py and decisiveness.py need the §17 fits)
+PYTHONIOENCODING=utf-8 py -3 page_scores.py > page_scores.txt      # page scores of the §17 consensus -> page_scores.json
+PYTHONIOENCODING=utf-8 py -3 decisiveness.py > decisiveness.txt    # how decided the order is in every quire
+PYTHONIOENCODING=utf-8 py -3 sheet_features.py > sheet_features.txt   # features along the Q20 axis, real and skribe (~1 min)
+PYTHONIOENCODING=utf-8 py -3 excess_words.py > excess_words.txt
+PYTHONIOENCODING=utf-8 py -3 hidden_variable.py > hidden_variable.txt
+PYTHONIOENCODING=utf-8 py -3 equal_length.py > equal_length.txt
+PYTHONIOENCODING=utf-8 py -3 facsimile.py > facsimile.txt          # downloads 23 Beinecke scans into VMS_IMG once (~21 MB)
+PYTHONIOENCODING=utf-8 py -3 lisa_orders.py > lisa_orders.txt      # needs scribe/manuscript_out (manuscript.py 1 2 3 4 5)
 ```
 
 Known differences from the originals: Parisel calibrates on RF1b-e and we score normalised text from ZL3b (the real text passes all the same, 4/4). Layfield and Davis use ZL 2a with uncertain readings removed and separate the radial and circular text; here only paragraph text, which is the only text the skribe writes. Their stop-word heuristic is not described in enough detail to repeat it; without removing any, or removing the 20 most frequent, the result does not change.

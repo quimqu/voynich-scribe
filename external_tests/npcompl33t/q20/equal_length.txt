@@ -1,0 +1,9 @@
+words per page: 351 to 568; Spearman of page length with the page score +0.62
+
+All pages cut to 351 consecutive words (200 random cuts). Spearman with the page score, median [5% .. 95%]:
+  Bio (Q13)-ness   +0.93  [+0.92 .. +0.94]
+  Herbal B-ness    -0.88  [-0.91 .. -0.86]
+  Q20 axis (LOSO)  +0.94  [+0.93 .. +0.95]
+  MATTR            -0.81  [-0.83 .. -0.78]
+  top-20 %         +0.79  [+0.77 .. +0.81]
+  hapax %          -0.81  [-0.83 .. -0.78]

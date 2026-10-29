@@ -1,0 +1,39 @@
+Q20, 23 paragraph pages. Spearman with the page score, and with the sheet means (n = 6).
+Vocabulary models are trained without any Q20 line; "axis" = Q20 words of the later half of the OTHER five sheets against the earlier half.
+
+  lines                              page rho +0.72 (p 0.000)   sheet rho +0.89   range 37 – 54
+  words                              page rho +0.62 (p 0.002)   sheet rho +0.77   range 351 – 568
+  paragraphs                         page rho -0.10 (p 0.653)   sheet rho -0.03   range 6 – 18
+  lines/paragraph                    page rho +0.30 (p 0.158)   sheet rho +0.71   range 3 – 9
+  words/line                         page rho +0.12 (p 0.599)   sheet rho +0.43   range 8 – 10.5
+  glyphs/word                        page rho -0.47 (p 0.023)   sheet rho -0.71   range 4.93 – 6.03
+  uncertain spaces /100w             page rho -0.00 (p 0.996)   sheet rho -0.03   range 6.23 – 10.9
+  alt readings /100w                 page rho +0.20 (p 0.361)   sheet rho -0.03   range 0.483 – 2.81
+  weirdoes /1000g                    page rho -0.54 (p 0.008)   sheet rho -0.88   range 0 – 1.19
+  ligatures /100w                    page rho -0.03 (p 0.886)   sheet rho +0.26   range 0 – 1.56
+  gaps /100w                         page rho +0.32 (p 0.142)   sheet rho +0.37   range 0 – 3.68
+  nesting (0=outer)                  page rho +0.16 (p 0.457)   sheet rho +0.09   range 0 – 5
+  verso                              page rho -0.04 (p 0.858)   sheet rho -0.65   range 0 – 1
+  second half of quire               page rho +0.07 (p 0.766)   sheet rho -0.65   range 0 – 1
+  Currier A-ness (vs B)              page rho -0.77 (p 0.000)   sheet rho -0.71   range -1.8 – -0.467
+  Bio (Q13)-ness (vs other B)        page rho +0.93 (p 0.000)   sheet rho +0.94   range -0.551 – 0.658
+  Herbal B-ness (vs other B)         page rho -0.91 (p 0.000)   sheet rho -1.00   range -0.769 – 0.0475
+  axis: all words                    page rho +0.95 (p 0.000)   sheet rho +1.00   range -0.226 – 0.701
+  axis: line-medial only             page rho +0.94 (p 0.000)   sheet rho +1.00   range -0.245 – 0.734
+  axis: line-first only              page rho +0.75 (p 0.000)   sheet rho +0.83   range -0.657 – 0.498
+  axis: line-last only               page rho +0.72 (p 0.000)   sheet rho +0.94   range -0.307 – 0.58
+  axis: par line 1                   page rho +0.91 (p 0.000)   sheet rho +1.00   range -0.43 – 0.722
+  axis: par lines 2+                 page rho +0.94 (p 0.000)   sheet rho +1.00   range -0.176 – 0.689
+  axis: first half of page           page rho +0.90 (p 0.000)   sheet rho +0.94   range -0.256 – 0.718
+  axis: second half of page          page rho +0.93 (p 0.000)   sheet rho +1.00   range -0.287 – 0.716
+  repeat within 20 words %           page rho +0.83 (p 0.000)   sheet rho +0.94   range 2.39 – 14.9
+  repeat further back %              page rho +0.84 (p 0.000)   sheet rho +1.00   range 16.7 – 36.9
+
+Per sheet (axis order):
+           score  lines    words  words/line  uncertain spaces /100w  Herbal B-ness (vs other B)  Bio (Q13)-ness (vs other B)  axis: first half of page  axis: second half of page  repeat within 20 words %
+T:105-114  0.808  40.25  371.000       9.236                   7.563                      -0.034                       -0.433                    -0.137                     -0.175                     5.745
+T:104-115  0.836  44.75  413.500       9.244                   7.860                      -0.218                       -0.159                    -0.147                      0.003                     5.878
+T:106-113  0.838  48.50  435.000       8.954                   9.036                      -0.241                       -0.175                    -0.018                      0.143                     6.520
+T:107-112  0.862  48.00  408.000       8.485                   8.038                      -0.296                        0.004                     0.236                      0.315                     9.519
+T:108-111  0.882  52.00  520.250       9.992                   8.068                      -0.498                        0.409                     0.487                      0.485                    13.014
+T:103-116  0.892  50.00  472.333       9.448                   7.101                      -0.748                        0.628                     0.590                      0.655                    12.076

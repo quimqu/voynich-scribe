@@ -1,0 +1,11 @@
+Over-represented words per Q20 sheet (count in the sheet), sheets in the order of npcompl33t's axis:
+  105-114  daiin(32) dair(11) otair(8) otaiin(22) aiin(27) chedaiin(8) qotaiin(12) chedy(22) qotar(8) al(14) okaiin(15) or(9)
+  104-115  qotchedy(10) qokchedy(13) cheody(12) cheey(17) cheedy(9) qotain(11) ar(21) chedy(26) chol(13) aiin(21) chody(8) qokaiin(18)
+  106-113  okaiin(27) qokaiin(30) otaiin(22) al(20) ar(23) otar(14) aiin(23) okain(16) lkaiin(11) qokain(16) shedy(16) okal(9)
+  107-112  okaiin(26) qokaiin(29) chol(17) okal(14) olkeedy(8) aiin(25) otaiin(19) qokeey(28) lkaiin(12) chey(22) oteey(15) otal(12)
+  108-111  qokeedy(58) qokeey(60) okedy(21) lkeedy(20) qokedy(29) chedy(56) cheal(10) okeey(36) lkeey(17) lkedy(11) chey(33) otedy(22)
+  103-116  shey(36) shckhy(15) shedy(39) qokeey(45) lshey(8) rain(8) qokain(30) otey(9) okey(9) okeey(25) dain(15) ain(13)
+
+shared by the two late sheets 103-116 and 108-111: chckhy chedy chey dain lchedy okain okeey otain otedy oteey qokain qokeedy qokeey qokey shedy
+shared by 103-116 and the earliest 105-114: ar chedy ol
+shared by 108-111 and 105-114: chedy daiin qokedy
