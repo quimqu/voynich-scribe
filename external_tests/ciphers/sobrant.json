@@ -1,0 +1,40 @@
+{
+ "real": {
+  "caracters": 12.348615959430987,
+  "unigrama": 12.759878832576975,
+  "context": 13.361496339994188,
+  "mots_nous": 21.644234267006183,
+  "tipus": 4850
+ },
+ "skribe 1": {
+  "caracters": 12.052316624756815,
+  "unigrama": 12.58359924883944,
+  "context": 12.955725242258673,
+  "mots_nous": 22.129259124530133,
+  "tipus": 4678
+ },
+ "skribe 2": {
+  "caracters": 11.96250014366436,
+  "unigrama": 12.422731029520564,
+  "context": 12.741225615884181,
+  "mots_nous": 21.09858130229174,
+  "tipus": 4555
+ },
+ "skribe 3": {
+  "caracters": 12.061715738621801,
+  "unigrama": 12.550085114574964,
+  "context": 12.905462794291779,
+  "mots_nous": 21.86249545289196,
+  "tipus": 4654
+ },
+ "skribe après dels senars": {
+  "caracters": 11.82683143849563,
+  "unigrama": 12.273964714522487,
+  "context": 12.550855336794452,
+  "mots_nous": 20.728749848429732,
+  "tipus": 4433
+ },
+ "creuat: model de l'skribe sobre el real": 13.75330172499089,
+ "creuat: model de l'skribe sobre un altre skribe": 12.77349036230157,
+ "creuat: model del real sobre l'skribe": 12.88763767971741
+}

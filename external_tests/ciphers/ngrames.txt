@@ -1,0 +1,109 @@
+Seqüències de mots seguits a la mateixa línia, Voynich real (ZL3b, text de paràgraf, 32284 mots).
+
+Quantes seqüències diferents surten 2 cops o més (i 3 o més), a la mateixa línia:
+text                                      2 mots        3 mots        4 mots        5 mots
+Voynich real                          1748 (634)        94 (7)         1 (0)         0 (0)
+llatí (De docta, mateixa maqueta)    3173 (1371)     745 (189)      131 (11)        20 (0)
+skribe, llavor 1                      1633 (523)        21 (0)         0 (0)         0 (0)
+skribe, llavor 2                      1685 (583)        37 (3)         1 (0)         0 (0)
+skribe, llavor 3                      1609 (578)        51 (4)         1 (0)         0 (0)
+skribe + hàbit de parelles (§8)       1643 (599)      100 (15)         4 (0)         0 (0)
+
+Esperat = mitjana de 300 barreges dins de cada línia. x = observat / esperat.
+Parelles: descoberta als folis senars (p <= 0,01), confirmació als parells (p <= 0,05). Trios i quatriots: text sencer, p <= 0,01.
+«cadena» = observat / el que donarien les parelles soles (> 1: la seqüència és més que dues parelles encadenades).
+skribe = observat / esperat a l'skribe (3 llavors juntes), que no té memòria de mot a mot.
+
+== PARELLES: 100 candidates (4 cops o més als senars), 34 per sobre de l'atzar als senars, 15 confirmades als parells (3 amb mots iguals o a un glif seguits) ==
+  s aiin                              25 cops (esperat 3.42, x7) · parells 12 (esp 1.9) · skribe x2.4 (8) · 24 pàg · mà 2 herbal 6/25
+  or aiin                             26 cops (esperat 4.38, x6) · parells 11 (esp 1.6) · skribe x3.0 (28) · 20 pàg · mà 2 herbal 7/26
+  r aiin                               9 cops (esperat 1.09, x8) · parells 4 (esp 0.5) · skribe x4.3 (7) · 8 pàg · mà 2 biological 3/9
+  qokain chckhy                        9 cops (esperat 2.01, x4) · parells 3 (esp 0.7) · skribe x2.9 (10) · 7 pàg · mà 2 biological 6/9
+  qol chedy                           14 cops (esperat 3.95, x4) · parells 8 (esp 2.1) · skribe x1.9 (14) · 10 pàg · mà 2 biological 11/14
+  chedy qokeey                        19 cops (esperat 6.33, x3) · parells 8 (esp 3.0) · skribe x1.7 (24) · 12 pàg · mà 3 stars 15/19
+  sheedy qokeedy                       8 cops (esperat 1.96, x4) · parells 4 (esp 0.8) · skribe x2.0 (5) · 7 pàg · mà 2 biological 6/8
+  aiin okal                            6 cops (esperat 1.34, x4) · parells 2 (esp 0.3) · skribe x1.0 (1) · 6 pàg · mà 2 herbal 3/6
+  otar ar                              7 cops (esperat 1.77, x4) · parells 3 (esp 0.7) · skribe x2.1 (5) · 6 pàg · mà 3 stars 3/7
+  daiin dam                            8 cops (esperat 2.20, x4) · parells 4 (esp 1.4) · skribe x0.8 (8) · 8 pàg · mà 1 herbal 5/8
+  shedy qokaiin                       17 cops (esperat 6.43, x3) · parells 8 (esp 3.1) · skribe x1.2 (19) · 12 pàg · mà 2 biological 11/17
+  chedy qokain                        16 cops (esperat 7.42, x2) · parells 8 (esp 4.0) · skribe x1.4 (24) · 13 pàg · mà 2 biological 12/16
+  (còpia) ar al                               10 cops (esperat 2.68, x4) · parells 4 (esp 1.3) · skribe x2.0 (15) · 10 pàg · mà 3 stars 5/10
+  (còpia) okaiin otaiin                        7 cops (esperat 1.64, x4) · parells 3 (esp 0.8) · skribe x1.4 (6) · 7 pàg · mà 3 stars 5/7
+  (còpia) chol chol                           23 cops (esperat 11.88, x2) · parells 11 (esp 6.1) · skribe x1.0 (20) · 17 pàg · mà 1 herbal 20/23
+
+== TRIOS: 94 es repeteixen (2 cops o més), 71 per sobre de l'atzar, 35 a totes dues meitats; 18 amb mots iguals o a un glif seguits ==
+  or aiin cheol                        3 cops (esperat 0.04, x82) · totes dues meitats  cadena 6.6 · skribe x0.0 (0) · 3 pàg · mà 1 pharmaceutical 2/3
+  ol s aiin                            3 cops (esperat 0.08, x39) · totes dues meitats  cadena 3.5 · skribe x3.8 (1) · 3 pàg · mà 2 herbal 1/3
+  chey qol chedy                       3 cops (esperat 0.08, x39) · totes dues meitats  cadena 3.9 · skribe x7.1 (1) · 3 pàg · mà 3 stars 2/3
+  ol shedy qokedy                      3 cops (esperat 0.09, x32) · totes dues meitats  cadena 3.9 · skribe x4.0 (1) · 3 pàg · mà 2 biological 3/3
+  okal dal olchedy                     2 cops (esperat 0.02, x120) · totes dues meitats  cadena 42.8 · skribe x— (0) · 2 pàg · mà 2 biological 2/2
+  qokedy lkedy chdy                    2 cops (esperat 0.02, x100) · una meitat  cadena 7.0 · skribe x— (0) · 2 pàg · mà 2 text_only 1/2
+  sheey qokol cheol                    2 cops (esperat 0.02, x86) · totes dues meitats  cadena 14.8 · skribe x— (0) · 2 pàg · mà 2 text_only 1/2
+  or aiin chody                        2 cops (esperat 0.03, x75) · totes dues meitats  cadena 11.0 · skribe x0.0 (0) · 2 pàg · mà 2 herbal 1/2
+  dar shey cthar                       2 cops (esperat 0.03, x67) · totes dues meitats  cadena 46.0 · skribe x— (0) · 2 pàg · mà 1 text_only 1/2
+  qol shedy ol                         2 cops (esperat 0.03, x67) · una meitat  cadena 18.6 · skribe x8.3 (1) · 2 pàg · mà 2 text_only 1/2
+  qokeedy qokar ol                     2 cops (esperat 0.03, x67) · totes dues meitats  cadena 9.8 · skribe x0.0 (0) · 2 pàg · mà 2 biological 2/2
+  qotchdy qotar shedy                  2 cops (esperat 0.03, x67) · una meitat  cadena 10.2 · skribe x— (0) · 1 pàg · mà 3 stars 2/2
+  qoky dar al                          2 cops (esperat 0.03, x60) · una meitat  cadena 32.8 · skribe x0.0 (0) · 2 pàg · mà 3 stars 2/2
+  okeol ockhey chol                    2 cops (esperat 0.03, x60) · totes dues meitats  cadena 4.0 · skribe x— (0) · 2 pàg · mà 1 pharmaceutical 1/2
+  chol daiin chkaiin                   2 cops (esperat 0.04, x55) · totes dues meitats  cadena 18.8 · skribe x— (0) · 2 pàg · mà 1 herbal 2/2
+  shedy qotain oteedy                  2 cops (esperat 0.04, x55) · totes dues meitats  cadena 9.8 · skribe x— (0) · 2 pàg · mà 2 biological 1/2
+  qoteedy qokaiin shedy                2 cops (esperat 0.04, x50) · una meitat  cadena 29.2 · skribe x0.0 (0) · 1 pàg · mà 2 biological 2/2
+  chedy okain chey                     2 cops (esperat 0.04, x50) · totes dues meitats  cadena 19.0 · skribe x0.0 (0) · 2 pàg · mà 2 biological 1/2
+  chedy qokaiin otaiin                 2 cops (esperat 0.04, x50) · una meitat  cadena 14.6 · skribe x5.0 (1) · 1 pàg · mà 3 stars 2/2
+  oteedy okedy chedy                   2 cops (esperat 0.04, x50) · una meitat  cadena 18.0 · skribe x0.0 (0) · 1 pàg · mà 3 stars 2/2
+  qoky shedy qokaiin                   2 cops (esperat 0.04, x46) · totes dues meitats  cadena 14.6 · skribe x0.0 (0) · 2 pàg · mà 2 biological 1/2
+  ol shedy qokeey                      2 cops (esperat 0.05, x43) · una meitat  cadena 3.9 · skribe x0.0 (0) · 2 pàg · mà 2 text_only 1/2
+  dar okal dal                         2 cops (esperat 0.05, x40) · totes dues meitats  cadena 29.5 · skribe x— (0) · 2 pàg · mà 2 biological 1/2
+  chedy chol chedy                     2 cops (esperat 0.05, x38) · una meitat  cadena 71.3 · skribe x0.0 (0) · 2 pàg · mà @ stars 1/2
+  chy daiin chey                       2 cops (esperat 0.06, x35) · totes dues meitats  cadena 18.1 · skribe x0.0 (0) · 2 pàg · mà 1 herbal 2/2
+  dor chol chy                         2 cops (esperat 0.06, x32) · una meitat  cadena 26.8 · skribe x0.0 (0) · 2 pàg · mà 1 herbal 1/2
+  qokar shedy qokain                   2 cops (esperat 0.06, x32) · totes dues meitats  cadena 6.8 · skribe x0.0 (0) · 2 pàg · mà 2 text_only 1/2
+  daiin chey lchedy                    2 cops (esperat 0.06, x32) · totes dues meitats  cadena 11.8 · skribe x0.0 (0) · 2 pàg · mà 2 text_only 1/2
+  qotor chol daiin                     2 cops (esperat 0.07, x30) · una meitat  cadena 11.9 · skribe x— (0) · 2 pàg · mà 1 herbal 2/2
+  qokal chcthy qokain                  2 cops (esperat 0.07, x30) · una meitat  cadena 12.7 · skribe x0.0 (0) · 1 pàg · mà 2 biological 2/2
+  qol chedy qokeey                     2 cops (esperat 0.07, x29) · totes dues meitats  cadena 3.3 · skribe x0.0 (0) · 2 pàg · mà 2 biological 2/2
+  qokain olshey qokain                 2 cops (esperat 0.07, x27) · totes dues meitats  cadena 5.3 · skribe x0.0 (0) · 2 pàg · mà 2 biological 2/2
+  okaiin chedy qokeedy                 2 cops (esperat 0.07, x27) · totes dues meitats  cadena 17.5 · skribe x5.0 (1) · 2 pàg · mà 2 biological 1/2
+  chedy qokain checthy                 2 cops (esperat 0.08, x26) · totes dues meitats  cadena 8.7 · skribe x0.0 (0) · 2 pàg · mà 2 biological 2/2
+  chol chy chaiin                      2 cops (esperat 0.08, x24) · totes dues meitats  cadena 12.9 · skribe x0.0 (0) · 2 pàg · mà 1 herbal 2/2
+  shy qokal chdy                       2 cops (esperat 0.08, x24) · una meitat  cadena 60.7 · skribe x— (0) · 2 pàg · mà 2 herbal 1/2
+  qokar qokain chedy                   2 cops (esperat 0.08, x24) · una meitat  cadena 14.3 · skribe x0.0 (0) · 2 pàg · mà 2 biological 2/2
+  cheey daiin shey                     2 cops (esperat 0.08, x24) · una meitat  cadena 21.8 · skribe x0.0 (0) · 2 pàg · mà 2 biological 2/2
+  shedy qokedy qokain                  2 cops (esperat 0.09, x21) · una meitat  cadena 5.0 · skribe x5.0 (1) · 1 pàg · mà 2 biological 2/2
+  otedy shedy qokeedy                  2 cops (esperat 0.10, x21) · una meitat  cadena 14.3 · skribe x0.0 (0) · 2 pàg · mà 2 biological 2/2
+  ol cheey daiin                       2 cops (esperat 0.10, x21) · una meitat  cadena 4.6 · skribe x0.0 (0) · 2 pàg · mà 2 biological 2/2
+  shedy qokeedy qotedy                 2 cops (esperat 0.10, x20) · una meitat  cadena 7.8 · skribe x0.0 (0) · 1 pàg · mà 2 biological 2/2
+  qokedy lchedy qokedy                 2 cops (esperat 0.10, x19) · totes dues meitats  cadena 24.4 · skribe x0.0 (0) · 2 pàg · mà 2 biological 1/2
+  ol chedy qol                         2 cops (esperat 0.11, x18) · totes dues meitats  cadena 6.1 · skribe x2.8 (1) · 2 pàg · mà 2 biological 2/2
+  sheedy qokedy chedy                  2 cops (esperat 0.11, x18) · una meitat  cadena 12.3 · skribe x0.0 (0) · 2 pàg · mà 2 text_only 1/2
+  shedy qokaiin chedy                  2 cops (esperat 0.11, x18) · una meitat  cadena 3.9 · skribe x3.2 (1) · 2 pàg · mà 3 stars 2/2
+  ol aiin chedy                        2 cops (esperat 0.11, x18) · una meitat  cadena 38.0 · skribe x0.0 (0) · 2 pàg · mà 2 biological 1/2
+  cho s chol                           2 cops (esperat 0.12, x17) · totes dues meitats  cadena 34.8 · skribe x0.0 (0) · 2 pàg · mà 1 herbal 2/2
+  qokaiin chedy qokeedy                2 cops (esperat 0.12, x17) · una meitat  cadena 10.9 · skribe x0.0 (0) · 2 pàg · mà 2 biological 1/2
+  shey qokain chedy                    2 cops (esperat 0.14, x14) · totes dues meitats  cadena 3.1 · skribe x0.0 (0) · 2 pàg · mà 2 biological 1/2
+  daiin cthor chol                     2 cops (esperat 0.17, x12) · una meitat  cadena 4.0 · skribe x0.0 (0) · 2 pàg · mà 1 herbal 2/2
+  daiin qotchy qotor                   2 cops (esperat 0.23, x9) · una meitat  cadena 31.0 · skribe x— (0) · 2 pàg · mà 1 herbal 2/2
+  shedy qol shedy                      2 cops (esperat 0.25, x8) · una meitat  cadena 3.9 · skribe x5.6 (1) · 2 pàg · mà 2 biological 2/2
+  (còpia) shedy qokedy qokeedy                 3 cops (esperat 0.25, x12) · totes dues meitats  cadena 3.0 · skribe x0.0 (0) · 2 pàg · mà 2 biological 3/3
+  (còpia) chedy qokeey qokeey                  3 cops (esperat 0.29, x10) · totes dues meitats  cadena 3.9 · skribe x4.3 (2) · 3 pàg · mà 3 stars 3/3
+  (còpia) r or ol                              2 cops (esperat 0.01, x300) · totes dues meitats  cadena 22.9 · skribe x6.7 (1) · 2 pàg · mà 2 biological 1/2
+  (còpia) o l r                                2 cops (esperat 0.01, x200) · una meitat  cadena 7.8 · skribe x100.0 (1) · 2 pàg · mà 3 stars 2/2
+  (còpia) aiin okal otal                       2 cops (esperat 0.02, x120) · totes dues meitats  cadena 19.7 · skribe x— (0) · 2 pàg · mà 2 herbal 1/2
+  (còpia) qokeey dol ol                        2 cops (esperat 0.02, x120) · una meitat  cadena 28.7 · skribe x0.0 (0) · 2 pàg · mà 1 pharmaceutical 2/2
+  (còpia) l s aiin                             2 cops (esperat 0.02, x86) · totes dues meitats  cadena 7.0 · skribe x0.0 (0) · 2 pàg · mà 2 biological 1/2
+  (còpia) chol chol kor                        2 cops (esperat 0.03, x67) · una meitat  cadena 14.0 · skribe x— (0) · 2 pàg · mà 1 text_only 1/2
+  (còpia) dar ar al                            2 cops (esperat 0.03, x60) · una meitat  cadena 7.7 · skribe x0.0 (0) · 2 pàg · mà 2 herbal 1/2
+  (còpia) sheey or ar                          2 cops (esperat 0.03, x60) · una meitat  cadena 21.0 · skribe x0.0 (0) · 2 pàg · mà 2 text_only 1/2
+  (còpia) qol cheey chey                       2 cops (esperat 0.05, x38) · una meitat  cadena 32.2 · skribe x0.0 (0) · 2 pàg · mà 2 biological 1/2
+  (còpia) cheey chey qokeey                    2 cops (esperat 0.05, x38) · totes dues meitats  cadena 27.0 · skribe x0.0 (0) · 2 pàg · mà 3 stars 2/2
+  (còpia) chey qokeey okeey                    2 cops (esperat 0.08, x26) · totes dues meitats  cadena 14.2 · skribe x0.0 (0) · 2 pàg · mà 3 stars 2/2
+  (còpia) qokal otal otam                      2 cops (esperat 0.09, x23) · totes dues meitats  cadena 54.0 · skribe x— (0) · 2 pàg · mà 3 stars 2/2
+  (còpia) sheckhy qokedy qokedy                2 cops (esperat 0.09, x22) · una meitat  cadena 11.3 · skribe x0.0 (0) · 1 pàg · mà 2 biological 2/2
+  (còpia) qokeey qokeey lchedy                 2 cops (esperat 0.10, x19) · una meitat  cadena 16.6 · skribe x0.0 (0) · 2 pàg · mà 3 stars 2/2
+  (còpia) cthor chol chor                      2 cops (esperat 0.12, x16) · una meitat  cadena 30.6 · skribe x0.0 (0) · 2 pàg · mà 1 herbal 2/2
+  (còpia) qokar shedy shedy                    2 cops (esperat 0.14, x15) · una meitat  cadena 10.6 · skribe x0.0 (0) · 1 pàg · mà 2 text_only 2/2
+
+== QUATRIOTS: 1 es repeteixen (2 cops o més), 1 per sobre de l'atzar, 1 a totes dues meitats; 1 amb mots iguals o a un glif seguits ==
+  (còpia) ol shedy qokedy qokeedy              2 cops (esperat 0.00, x600) · totes dues meitats  cadena 4.0 · skribe x— (0) · 2 pàg · mà 2 biological 2/2
+

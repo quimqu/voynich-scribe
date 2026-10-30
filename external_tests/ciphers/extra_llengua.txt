@@ -1,0 +1,7 @@
+llengua llatí 75 / 88 ordre 0.08932791705359906
+llengua vietnamita 77 / 88 ordre 0.16749120880708304
+C:\dev\voynich-scribe\scribe\measures.py:111: RuntimeWarning: invalid value encountered in scalar divide
+  R['Adjacent repeats: first line of paragraph / rest']=np.mean(aa1)/np.mean(aa0)
+llengua xinès (pinyin) 74 / 88 ordre 0.3116865592715789
+llengua lletres a l'atzar (freq. del llatí) 77 / 88 ordre 0.020901299371242927
+llengua lletres a l'atzar (uniformes) 74 / 88 ordre 0.01731711484970751

@@ -1,0 +1,37 @@
+{
+ "lam": 0.0,
+ "seed": 2,
+ "taula": "estreta",
+ "segons": 30.419046878814697,
+ "mots": 32284,
+ "parelles_apreses": 162,
+ "segueix": 0.0,
+ "encerta": 0.0,
+ "ordre_tot": 0.03446854545273825,
+ "ordre_senars": 0.027524029690145113,
+ "ordre_parells": 0.02963718351440059,
+ "tipus": 7415,
+ "bateria": 75,
+ "falla": [
+  "Same word at distance 2 / shuffled",
+  "Frequent words repeated >3x chance (%)",
+  "Frequent words repeated <0.3x chance (%)",
+  "Lift -y | a-",
+  "Spearman correlation of neighbour word lengths",
+  "[R4.2] a- at line start (%)",
+  "[R1.3] Plain p/f followed by e (%)",
+  "[R6.1] q- after a drawing gap (%)",
+  "[H8] Same first glyph after a gallows-initial line / null",
+  "[H2] Page overdispersion of q- (after -y)",
+  "[eye] Strange words (rare trigram in the real text) (%)",
+  "[eye] Strange words per line",
+  "[page] Page overdispersion of e-words"
+ ],
+ "classes": {
+  "2": 0.0021234264318098174,
+  "4": 0.006697766305553741,
+  "8": 0.009235453313143578,
+  "16": 0.012405812591142956,
+  "32": 0.028337690783332536
+ }
+}

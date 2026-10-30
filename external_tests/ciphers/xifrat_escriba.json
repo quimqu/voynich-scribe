@@ -1,0 +1,369 @@
+{
+ "sostre_senars": 78,
+ "tots | skribe (sense missatge)": {
+  "score": 81,
+  "n": 88,
+  "llavors": 3,
+  "info": {
+   "ordre": 0.03185253446122741,
+   "intents": 1.0,
+   "reserva": 0.0,
+   "unitats": 0.0,
+   "segons": 35.43385442097982,
+   "bits_per_mot": 0.0,
+   "lletres_per_mot": 0.0,
+   "mots": 32284.0,
+   "desxifrat_ok": null,
+   "mots_llatins": 0.0
+  },
+  "perd": [],
+  "guanya": [],
+  "valors": {}
+ },
+ "tots | xifrat: 1 lletra per mot": {
+  "score": 74,
+  "n": 88,
+  "llavors": 3,
+  "info": {
+   "ordre": 0.08541984297272136,
+   "intents": 24.505585842316112,
+   "reserva": 161.0,
+   "unitats": 32284.0,
+   "segons": 432.71790599823,
+   "bits_per_mot": 3.964403185704358,
+   "lletres_per_mot": 1.0,
+   "mots": 32284.0,
+   "desxifrat_ok": 1.0,
+   "mots_llatins": 4816.4092024761685
+  },
+  "perd": [
+   "Adjacent identical words (%)",
+   "Adjacent identical words / chance",
+   "Consecutive words at edit distance 1 / shuffled",
+   "Adjacent repeats: first line of paragraph / rest",
+   "[R3.4] q- on first word of paragraph (%)",
+   "[R4.2] a- at line start (%)",
+   "[range] Page overdispersion of the 50 most frequent words"
+  ],
+  "guanya": [],
+  "valors": {
+   "Adjacent identical words (%)": [
+    0.9021488190374712,
+    0.1539099035103297
+   ],
+   "Adjacent identical words / chance": [
+    3.0872494920452125,
+    0.6003915301409716
+   ],
+   "Consecutive words at edit distance 1 / shuffled": [
+    1.9674796747967478,
+    1.3557537345523212
+   ],
+   "Adjacent repeats: first line of paragraph / rest": [
+    0.3845889499136228,
+    0.13518884299994013
+   ],
+   "[R3.4] q- on first word of paragraph (%)": [
+    4.1891891891891895,
+    7.972972972972973
+   ],
+   "[R4.2] a- at line start (%)": [
+    0.35408675125405725,
+    0.48195141142913345
+   ],
+   "[range] Page overdispersion of the 50 most frequent words": [
+    2.0630322494587334,
+    1.5202244069030186
+   ]
+  }
+ },
+ "tots | xifrat: 1-2 lletres per mot": {
+  "score": 65,
+  "n": 88,
+  "llavors": 3,
+  "info": {
+   "ordre": 0.10028730743550103,
+   "intents": 315.8292652707223,
+   "reserva": 827.6666666666666,
+   "unitats": 32284.0,
+   "segons": 3416.1960221131644,
+   "bits_per_mot": 6.592642417289631,
+   "lletres_per_mot": 1.500699309130807,
+   "mots": 32284.0,
+   "desxifrat_ok": 1.0,
+   "mots_llatins": 7227.981962647248
+  },
+  "perd": [
+   "Adjacent identical words (%)",
+   "Adjacent identical words / chance",
+   "Consecutive words at edit distance 1 / shuffled",
+   "Boundary MI, distance 1 (last glyph to next first glyph)",
+   "Lift -r | a-",
+   "Lift -y | a-",
+   "Lift -n | q-",
+   "First word of line starts ch/sh (%)",
+   "Adjacent repeats: first line of paragraph / rest",
+   "Spearman correlation of neighbour word lengths",
+   "[R3.4] q- on first word of paragraph (%)",
+   "[R1.3] p/f among gallows, other lines (%)",
+   "[H8] Same first glyph after a gallows-initial line / null",
+   "[H2] Page overdispersion of q- (after -y)",
+   "[section] -edy words in biological (%)",
+   "[range] Neighbouring / 100 pages apart",
+   "[range] Page overdispersion of the 50 most frequent words"
+  ],
+  "guanya": [
+   "[R1.3] Plain p/f followed by e (%)"
+  ],
+  "valors": {
+   "Adjacent identical words (%)": [
+    0.9021488190374712,
+    0.08997809743680814
+   ],
+   "Adjacent identical words / chance": [
+    3.0872494920452125,
+    0.3601060230357756
+   ],
+   "Consecutive words at edit distance 1 / shuffled": [
+    1.9674796747967478,
+    1.2685047875359297
+   ],
+   "Boundary MI, distance 1 (last glyph to next first glyph)": [
+    0.1537153988956608,
+    0.08392341048042139
+   ],
+   "Lift -r | a-": [
+    3.1161313937637263,
+    2.2387522573619343
+   ],
+   "Lift -y | a-": [
+    0.1939491728344066,
+    0.3858005964178653
+   ],
+   "Lift -n | q-": [
+    0.4717623646710589,
+    0.6400824448058948
+   ],
+   "First word of line starts ch/sh (%)": [
+    8.14621409921671,
+    11.575282854656223
+   ],
+   "Adjacent repeats: first line of paragraph / rest": [
+    0.3845889499136228,
+    0.5593683286446799
+   ],
+   "Spearman correlation of neighbour word lengths": [
+    0.1597767446880405,
+    0.09879363668896406
+   ],
+   "[R3.4] q- on first word of paragraph (%)": [
+    4.1891891891891895,
+    12.972972972972974
+   ],
+   "[R1.3] p/f among gallows, other lines (%)": [
+    2.726329826640984,
+    3.628520495184276
+   ],
+   "[H8] Same first glyph after a gallows-initial line / null": [
+    0.629637683695742,
+    0.804773618317192
+   ],
+   "[H2] Page overdispersion of q- (after -y)": [
+    6.315412535533587,
+    4.649783431934826
+   ],
+   "[section] -edy words in biological (%)": [
+    27.48447204968944,
+    20.571658615136876
+   ],
+   "[range] Neighbouring / 100 pages apart": [
+    2.128528354317682,
+    1.5409571122566332
+   ],
+   "[range] Page overdispersion of the 50 most frequent words": [
+    2.0630322494587334,
+    1.4710524817722899
+   ]
+  }
+ },
+ "senars | skribe (sense missatge)": {
+  "score": 75,
+  "n": 88,
+  "llavors": 3,
+  "info": {
+   "ordre": 0.035496017033354144,
+   "intents": 1.0,
+   "reserva": 0.0,
+   "unitats": 0.0,
+   "segons": 28.96234130859375,
+   "bits_per_mot": 0.0,
+   "lletres_per_mot": 0.0,
+   "mots": 16494.0,
+   "desxifrat_ok": null,
+   "mots_llatins": 0.0
+  },
+  "perd": [],
+  "guanya": [],
+  "valors": {}
+ },
+ "senars | xifrat: 1 lletra per mot": {
+  "score": 70,
+  "n": 88,
+  "llavors": 3,
+  "info": {
+   "ordre": 0.0669429650279046,
+   "intents": 24.989167778181965,
+   "reserva": 86.33333333333333,
+   "unitats": 16494.0,
+   "segons": 268.00222516059875,
+   "bits_per_mot": 3.964403185704358,
+   "lletres_per_mot": 1.0,
+   "mots": 16494.0,
+   "desxifrat_ok": null,
+   "mots_llatins": 2460.719036849273
+  },
+  "perd": [
+   "Adjacent identical words (%)",
+   "Adjacent identical words / chance",
+   "Same word at distance 5 / shuffled",
+   "Frequent words repeated >3x chance (%)",
+   "Adjacent repeats: first line of paragraph / rest",
+   "[R6.1] q- after a drawing gap (%)",
+   "[H8] Same first glyph after a gallows-initial line / null",
+   "[range] Page overdispersion of the 50 most frequent words"
+  ],
+  "guanya": [
+   "[R14.1] Bare gallows at line start (%)",
+   "[R1.3] Plain p/f followed by e (%)",
+   "[G6] Vocabulary cosine: same sheet / neighbouring pages of other sheets"
+  ],
+  "valors": {
+   "Adjacent identical words (%)": [
+    0.9034679268885953,
+    0.13667848124724905
+   ],
+   "Adjacent identical words / chance": [
+    3.1539071109523884,
+    0.5222588176311894
+   ],
+   "Same word at distance 5 / shuffled": [
+    2.8,
+    4.472222222222222
+   ],
+   "Frequent words repeated >3x chance (%)": [
+    35.0,
+    1.7543859649122806
+   ],
+   "Adjacent repeats: first line of paragraph / rest": [
+    0.36559341070760015,
+    0.7942696060078842
+   ],
+   "[R6.1] q- after a drawing gap (%)": [
+    2.5806451612903225,
+    4.946236559139785
+   ],
+   "[H8] Same first glyph after a gallows-initial line / null": [
+    0.5149256666983167,
+    0.8424155879698292
+   ],
+   "[range] Page overdispersion of the 50 most frequent words": [
+    2.058181277415104,
+    1.4914746153328384
+   ]
+  }
+ },
+ "senars | xifrat: 1-2 lletres per mot": {
+  "score": 62,
+  "n": 88,
+  "llavors": 3,
+  "info": {
+   "ordre": 0.07606855635285197,
+   "intents": 330.7412190291419,
+   "reserva": 468.3333333333333,
+   "unitats": 16494.0,
+   "segons": 2181.3046687444053,
+   "bits_per_mot": 6.592642417289631,
+   "lletres_per_mot": 1.500699309130807,
+   "mots": 16494.0,
+   "desxifrat_ok": null,
+   "mots_llatins": 3692.7993585647287
+  },
+  "perd": [
+   "Adjacent identical words (%)",
+   "Adjacent identical words / chance",
+   "Same word at distance 3 / shuffled",
+   "Frequent words repeated >3x chance (%)",
+   "Boundary MI, distance 1 (last glyph to next first glyph)",
+   "Lift -r | a-",
+   "Spearman correlation of neighbour word lengths",
+   "[R3.4] q- on first word of line (%)",
+   "[R1.3] p/f among gallows, other lines (%)",
+   "[R6.1] q- after a drawing gap (%)",
+   "[H8] Same first glyph after a gallows-initial line / null",
+   "[H2] Page overdispersion of q- (after -y)",
+   "[range] Page overdispersion of the 50 most frequent words",
+   "[first line] frequent words, first line / other lines"
+  ],
+  "guanya": [
+   "[R4.3] Closed forms inside the line (%)"
+  ],
+  "valors": {
+   "Adjacent identical words (%)": [
+    0.9034679268885953,
+    0.07876387054926216
+   ],
+   "Adjacent identical words / chance": [
+    3.1539071109523884,
+    0.3105891439172092
+   ],
+   "Same word at distance 3 / shuffled": [
+    3.7647058823529416,
+    2.6111111111111107
+   ],
+   "Frequent words repeated >3x chance (%)": [
+    35.0,
+    0.0
+   ],
+   "Boundary MI, distance 1 (last glyph to next first glyph)": [
+    0.1508012099824863,
+    0.08812604321829791
+   ],
+   "Lift -r | a-": [
+    3.091261808692587,
+    2.2225950471034976
+   ],
+   "Spearman correlation of neighbour word lengths": [
+    0.16497763260819454,
+    0.09264270425232007
+   ],
+   "[R3.4] q- on first word of line (%)": [
+    14.187643020594965,
+    20.251716247139587
+   ],
+   "[R1.3] p/f among gallows, other lines (%)": [
+    2.658975801913337,
+    3.600404237741643
+   ],
+   "[R6.1] q- after a drawing gap (%)": [
+    2.5806451612903225,
+    6.774193548387096
+   ],
+   "[H8] Same first glyph after a gallows-initial line / null": [
+    0.5149256666983167,
+    1.0438772233781541
+   ],
+   "[H2] Page overdispersion of q- (after -y)": [
+    5.705357499797345,
+    4.16896699845855
+   ],
+   "[range] Page overdispersion of the 50 most frequent words": [
+    2.058181277415104,
+    1.4610834525013454
+   ],
+   "[first line] frequent words, first line / other lines": [
+    0.6531935604642456,
+    0.8245349612179488
+   ]
+  }
+ }
+}

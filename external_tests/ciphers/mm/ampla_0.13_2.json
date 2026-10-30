@@ -1,0 +1,35 @@
+{
+ "lam": 0.13,
+ "seed": 2,
+ "taula": "ampla",
+ "segons": 67.60684847831726,
+ "mots": 32284,
+ "parelles_apreses": 627,
+ "segueix": 0.052502787758642054,
+ "encerta": 0.9380530973451328,
+ "ordre_tot": 0.08745914275432831,
+ "ordre_senars": 0.07357420892968902,
+ "ordre_parells": 0.07050835948368284,
+ "tipus": 7304,
+ "bateria": 77,
+ "falla": [
+  "Consecutive words at edit distance 1 / shuffled",
+  "Same word at distance 2 / shuffled",
+  "Same word at distance 5 / shuffled",
+  "Frequent words repeated >3x chance (%)",
+  "Frequent words repeated <0.3x chance (%)",
+  "Line-end -m: lines of 10+ words / 1-4 words",
+  "[R4.2] a- at line start (%)",
+  "[R1.3] Plain p/f followed by e (%)",
+  "[R6.1] q- after a drawing gap (%)",
+  "[H2] Page overdispersion of q- (after -y)",
+  "[page] Page overdispersion of e-words"
+ ],
+ "classes": {
+  "2": 0.010097412750533493,
+  "4": 0.012905411996092776,
+  "8": 0.023616929290515953,
+  "16": 0.0352945788381619,
+  "32": 0.05517774199385836
+ }
+}

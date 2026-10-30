@@ -1,0 +1,19 @@
+Sense articles a la llengua: llatí (Apicius, De docta), finès, polonès.  «sense els 100 mots més freqüents»: es treuen del text i es
+compten els trios dels mots que queden, seguits dins de la línia (una aproximació a «només mots de contingut»).
+
+text                                             tipus |     3 mots     4 mots     5 mots | sense els 100 freqüents: 3 · 4
+Voynich real                                      7915 |         94          1          0 |               0        0
+Apicius, receptari llatí [27767 mots]             4943 |       1162        509        204 |             153       43
+Forme of Cury, receptari anglès c.1390 [32284     4795 |       1800        712        215 |              82        9
+Culpeper, herbari anglès 1652 [32284 mots]        3248 |       1806        647        221 |              71        7
+Quixot (castellà) [32284 mots]                    5508 |        988        183         33 |              13        1
+Promessi sposi (italià) [32284 mots]              7790 |        424         58         15 |              31        4
+Divina Commedia (italià, vers) [32284 mots]       6329 |        541         56          7 |               0        0
+De docta ignorantia (llatí), maqueta              5972 |        745        131         20 |              26        1
+skribe sol                                        7525 |         21          0          0 |               1        0
+Seitsemän veljestä (finès, novel·la) [32284 mo   11036 |        309         88         30 |              77       26
+Kalevala (finès, vers) [32284 mots]              11908 |       1144        585        287 |             645      286
+Pan Tadeusz (polonès, vers) [31151 mots]         11312 |        192         73         37 |              55       21
+Seitsemän veljestä (finès, nov | trios: jussi pussi jukolan (7), ei taida kieltää (5), niin kauan kuin (5), istu ja pala (5), mitä minä huolin (5), pussi jukolan jussi (5)
+Kalevala (finès, vers) [32284  | trios: tuon sanoiksi virkki (71), virkkoi noin nimesi (56), sanan virkkoi noin (54), vaka vanha väinämöinen (38), itse tuon sanoiksi (36), sanoi vanha väinämöinen (17)
+Pan Tadeusz (polonès, vers) [3 | trios: z wieku mu (4), należy idąc kłaniał (4), goście weszli w (3), porządku i stanęli (3), i stanęli kołem (3), brał miejsce za (3)

@@ -1,0 +1,11 @@
+Voynich real                                     trios  24055 | amb un bessó quasi igual en una altra línia:  4582 (19.0%) | dels quals no exactes:  4387
+Apicius, receptari llatí [27767 mots]            trios  20523 | amb un bessó quasi igual en una altra línia:  5138 (25.0%) | dels quals no exactes:  1650
+Culpeper, herbari anglès 1652 [32284 mots]       trios  24055 | amb un bessó quasi igual en una altra línia:  6702 (27.9%) | dels quals no exactes:  1071
+Promessi sposi (italià) [32284 mots]             trios  24055 | amb un bessó quasi igual en una altra línia:  2232 (9.3%) | dels quals no exactes:  1284
+Divina Commedia (italià, vers) [32284 mots]      trios  24055 | amb un bessó quasi igual en una altra línia:  3981 (16.5%) | dels quals no exactes:  2595
+De docta ignorantia (llatí), maqueta             trios  25415 | amb un bessó quasi igual en una altra línia:  2678 (10.5%) | dels quals no exactes:   833
+xifrat: Nomenclàtor + homòfons + contacte        trios  24055 | amb un bessó quasi igual en una altra línia:  4056 (16.9%) | dels quals no exactes:  2730
+xifrat: Tipus Naibbe 1-2 lletres-mot             trios  24055 | amb un bessó quasi igual en una altra línia:  1962 (8.2%) | dels quals no exactes:  1891
+skribe sol                                       trios  24055 | amb un bessó quasi igual en una altra línia:  3696 (15.4%) | dels quals no exactes:  3654
+skribe + hàbit de parelles, llavor 1             trios  24055 | amb un bessó quasi igual en una altra línia:  5051 (21.0%)
+skribe + hàbit de parelles, llavor 2             trios  24055 | amb un bessó quasi igual en una altra línia:  4837 (20.1%)

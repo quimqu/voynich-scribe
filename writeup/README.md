@@ -10,6 +10,8 @@ English material about the skribe, written for the Voynich community.
 | `post_reply_schwartz.txt` | Reply in the thread on Schwartz (2026): the edge-glyph coupling is a habit of the hand, and the skribe reproduces it. |
 | `post_reply_mauro_long_range.txt` | Reply on long-range similarity between pages: it is hand and section vocabulary, not drift. |
 | `post_external_tests.txt` | Forum post on the two external tests (Parisel 2026; Layfield and Davis 2026), 25 October 2026. |
+| `CIPHERS.md` | Could a cipher turn Latin into Voynichese? The entropy bump, word-by-word ciphers, a cipher hidden inside the skribe, the real text against the skribe, the order of words and the word-pair habit, and repeated phrases against herbals, recipe books and other languages (30 October 2026). Code in `external_tests/ciphers/`. |
+| `post_ciphers.txt` | Forum post on `CIPHERS.md` (draft, 30 October 2026). |
 | `table_measures.py` | Regenerates the appendix table of `THE_SCRIBE.md` from `scribe/measures_real.json` and `scribe/results.json` (run from the repository root). |
 
 The posts are deliberately written in plain, informal English.

@@ -1,0 +1,46 @@
+corba word reset (notebook), n=1..8
+  Voynich (ZL3b, escriba)             3.86  2.08  1.86  1.74  1.46  1.12  0.65  0.29
+  Llatí (De docta)                    3.94  3.09  2.25  1.34  0.82  0.60  0.54  0.50
+  PM-Cipher (notebook)                3.41  2.18  1.75  1.41  1.09  0.69  0.54  0.44
+  Lletra+dígit (juny 2025)            3.76  2.61  2.34  2.24  1.86  1.64  1.07  0.75
+  Tipus Naibbe (1-2 lletres/mot)      3.87  2.08  1.86  1.72  1.41  1.03  0.56  0.23
+  Nomenclàtor (rang)                  3.85  1.96  1.72  1.59  1.28  0.97  0.51  0.19
+  Nomenclàtor + homòfons              3.86  2.09  1.86  1.73  1.44  1.09  0.62  0.27
+  Nomenclàtor + homòfons + contacte   3.84  2.07  1.85  1.70  1.40  1.00  0.55  0.22
+corba amb espais, pàgines no vistes (WB), k=1..8
+  Voynich (ZL3b, escriba)             3.97  2.19  1.93  1.93  1.98  2.08  2.21  2.35
+  Llatí (De docta)                    4.05  3.34  2.60  2.08  1.92  1.96  2.06  2.18
+  PM-Cipher (notebook)                3.59  2.46  2.08  1.89  1.78  1.75  1.80  1.90
+  Lletra+dígit (juny 2025)            3.91  2.86  2.54  2.46  2.22  2.28  2.36  2.55
+  Tipus Naibbe (1-2 lletres/mot)      3.97  2.21  1.99  1.99  2.03  2.12  2.25  2.41
+  Nomenclàtor (rang)                  3.95  2.10  1.87  1.87  1.92  2.02  2.13  2.25
+  Nomenclàtor + homòfons              3.97  2.21  2.00  2.00  2.07  2.17  2.30  2.44
+  Nomenclàtor + homòfons + contacte   3.95  2.15  1.93  1.92  1.95  2.03  2.13  2.25
+informació
+  Voynich (ZL3b, escriba)            bits/mot (car.)  13.24  mot-unigrama  12.66  nota lateral  0.00
+  Llatí (De docta)                   bits/mot (car.)  13.20  mot-unigrama  11.88  nota lateral  0.00
+  PM-Cipher (notebook)               bits/mot (car.)  11.80  mot-unigrama  10.55  nota lateral 10.23
+  Lletra+dígit (juny 2025)           bits/mot (car.)  28.46  mot-unigrama  27.27  nota lateral  0.00
+  Tipus Naibbe (1-2 lletres/mot)     bits/mot (car.)  13.46  mot-unigrama  11.97  nota lateral  0.00
+  Nomenclàtor (rang)                 bits/mot (car.)  12.46  mot-unigrama  11.34  nota lateral  0.00
+  Nomenclàtor + homòfons             bits/mot (car.)  13.82  mot-unigrama  12.55  nota lateral  0.00
+  Nomenclàtor + homòfons + contacte  bits/mot (car.)  12.85  mot-unigrama  11.74  nota lateral  0.00
+bateria de 76 mesures (|gen/real-1|<0,25)
+  Voynich (ZL3b, escriba)            76/76
+  Llatí (De docta)                   18/76
+  PM-Cipher (notebook)               20/76
+  Lletra+dígit (juny 2025)           11/76
+  Tipus Naibbe (1-2 lletres/mot)     28/76
+  Nomenclàtor (rang)                 27/76
+  Nomenclàtor + homòfons             34/76
+  Nomenclàtor + homòfons + contacte  36/76
+PM-Cipher (notebook): flux conjunt glif+residu  5.37  3.42  1.99  1.00  0.63  0.52  0.49  0.47
+info
+  Voynich (ZL3b, escriba)            {}
+  Llatí (De docta)                   {}
+  PM-Cipher (notebook)               {'C': 2, 'H': [3.411417348253106, 2.180396862634139, 1.7487300077651289, 1.4067523561601565, 1.0856504544133092], 'jsd': np.float64(0.24486184247796958), 'bits_glyph': 1.7906556880332876}
+  Lletra+dígit (juny 2025)           {}
+  Tipus Naibbe (1-2 lletres/mot)     {'letters_per_word': 1.501208028744889, 'n_units': 344, 'missing': 0, 'latin_words_used': 8480}
+  Nomenclàtor (rang)                 {'latin_types': 5291, 'voynich_types': 7915}
+  Nomenclàtor + homòfons             {'latin_types': 5291, 'with_homophones': 2082, 'synthetic': 0}
+  Nomenclàtor + homòfons + contacte  {'latin_types': 5291, 'with_homophones': 2082, 'synthetic': 0}

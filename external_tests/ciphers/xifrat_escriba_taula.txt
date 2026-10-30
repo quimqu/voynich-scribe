@@ -1,0 +1,53 @@
+tots    skribe (sense missatge)        81/88  (3 llavors)  ordre 0.032  intents 1  reserva 0  bits/mot 0.00  mots llatins 0  desxifrat None
+tots    xifrat: 1 lletra per mot       74/88  (3 llavors)  ordre 0.085  intents 25  reserva 161  bits/mot 3.96  mots llatins 4816  desxifrat 1.0
+          perd: Adjacent identical words (%)  real 0.902  xifrat 0.154
+          perd: Adjacent identical words / chance  real 3.087  xifrat 0.600
+          perd: Consecutive words at edit distance 1 / shuffled  real 1.967  xifrat 1.356
+          perd: Adjacent repeats: first line of paragraph / rest  real 0.385  xifrat 0.135
+          perd: [R3.4] q- on first word of paragraph (%)  real 4.189  xifrat 7.973
+          perd: [R4.2] a- at line start (%)  real 0.354  xifrat 0.482
+          perd: [range] Page overdispersion of the 50 most frequent words  real 2.063  xifrat 1.520
+tots    xifrat: 1-2 lletres per mot    65/88  (3 llavors)  ordre 0.100  intents 316  reserva 828  bits/mot 6.59  mots llatins 7228  desxifrat 1.0
+          perd: Adjacent identical words (%)  real 0.902  xifrat 0.090
+          perd: Adjacent identical words / chance  real 3.087  xifrat 0.360
+          perd: Consecutive words at edit distance 1 / shuffled  real 1.967  xifrat 1.269
+          perd: Boundary MI, distance 1 (last glyph to next first glyph)  real 0.154  xifrat 0.084
+          perd: Lift -r | a-  real 3.116  xifrat 2.239
+          perd: Lift -y | a-  real 0.194  xifrat 0.386
+          perd: Lift -n | q-  real 0.472  xifrat 0.640
+          perd: First word of line starts ch/sh (%)  real 8.146  xifrat 11.575
+          perd: Adjacent repeats: first line of paragraph / rest  real 0.385  xifrat 0.559
+          perd: Spearman correlation of neighbour word lengths  real 0.160  xifrat 0.099
+          perd: [R3.4] q- on first word of paragraph (%)  real 4.189  xifrat 12.973
+          perd: [R1.3] p/f among gallows, other lines (%)  real 2.726  xifrat 3.629
+          perd: [H8] Same first glyph after a gallows-initial line / null  real 0.630  xifrat 0.805
+          perd: [H2] Page overdispersion of q- (after -y)  real 6.315  xifrat 4.650
+          perd: [section] -edy words in biological (%)  real 27.484  xifrat 20.572
+          perd: [range] Neighbouring / 100 pages apart  real 2.129  xifrat 1.541
+          perd: [range] Page overdispersion of the 50 most frequent words  real 2.063  xifrat 1.471
+senars  skribe (sense missatge)        75/88  (3 llavors)  ordre 0.035  intents 1  reserva 0  bits/mot 0.00  mots llatins 0  desxifrat None
+senars  xifrat: 1 lletra per mot       70/88  (3 llavors)  ordre 0.067  intents 25  reserva 86  bits/mot 3.96  mots llatins 2461  desxifrat None
+          perd: Adjacent identical words (%)  real 0.903  xifrat 0.137
+          perd: Adjacent identical words / chance  real 3.154  xifrat 0.522
+          perd: Same word at distance 5 / shuffled  real 2.800  xifrat 4.472
+          perd: Frequent words repeated >3x chance (%)  real 35.000  xifrat 1.754
+          perd: Adjacent repeats: first line of paragraph / rest  real 0.366  xifrat 0.794
+          perd: [R6.1] q- after a drawing gap (%)  real 2.581  xifrat 4.946
+          perd: [H8] Same first glyph after a gallows-initial line / null  real 0.515  xifrat 0.842
+          perd: [range] Page overdispersion of the 50 most frequent words  real 2.058  xifrat 1.491
+senars  xifrat: 1-2 lletres per mot    62/88  (3 llavors)  ordre 0.076  intents 331  reserva 468  bits/mot 6.59  mots llatins 3693  desxifrat None
+          perd: Adjacent identical words (%)  real 0.903  xifrat 0.079
+          perd: Adjacent identical words / chance  real 3.154  xifrat 0.311
+          perd: Same word at distance 3 / shuffled  real 3.765  xifrat 2.611
+          perd: Frequent words repeated >3x chance (%)  real 35.000  xifrat 0.000
+          perd: Boundary MI, distance 1 (last glyph to next first glyph)  real 0.151  xifrat 0.088
+          perd: Lift -r | a-  real 3.091  xifrat 2.223
+          perd: Spearman correlation of neighbour word lengths  real 0.165  xifrat 0.093
+          perd: [R3.4] q- on first word of line (%)  real 14.188  xifrat 20.252
+          perd: [R1.3] p/f among gallows, other lines (%)  real 2.659  xifrat 3.600
+          perd: [R6.1] q- after a drawing gap (%)  real 2.581  xifrat 6.774
+          perd: [H8] Same first glyph after a gallows-initial line / null  real 0.515  xifrat 1.044
+          perd: [H2] Page overdispersion of q- (after -y)  real 5.705  xifrat 4.169
+          perd: [range] Page overdispersion of the 50 most frequent words  real 2.058  xifrat 1.461
+          perd: [first line] frequent words, first line / other lines  real 0.653  xifrat 0.825
+sostre (senars reals contra parells reals): 78/88

@@ -1,0 +1,59 @@
+Last year I posted here the PM-Cipher (thread 4921), a positional cipher that turned Latin into something with Voynich-like entropy. Nablator told me then that if the output really looked like Voynichese, the residuals would carry as much information as the text. He was right, and now I can put a number on it. I went back to it with the scribe, and this ended up being a much biger question: could any cipher turn a natural language into Voynichese, and what would it cost? Here is what I found. Long post, sorry.
+
+[b]The short version[/b]
+
+A cipher can hide inside the way the Voynich is written. I built one and it decodes exactly. But it has to be a very particular kind of cipher, it can only carry a short text, and the one thing in the real text that the scribe didn't explain turns out to be a small writing habit, not a message.
+
+[b]The entropy bump[/b]
+
+The famous low h2 and the flat part of the entropy curve (n=2 to n=5) is the shape of the words. Inside a word the Voynich has a two glyph memory: once you know the previous glyph, knowing more hardly helps. In Latin it does, because the start of a word tells you the rest of it.
+
+Any scheme that writes real Voynich words gets the curve right for free. So the curve can't tell a cipher from a meaningless text. My old PM-Cipher matched h2 only because it moved about 10 bits per word into the residual note. Put the residuals back and you get the Latin curve again. (Also, the parser I used then had bugs: it turned some comments into glyphs and glued words across the drawing gaps. With clean ZL3b data the Voynich h2 is 2.08, not 1.75.)
+
+[b]Ciphers that write the plain text word by word[/b]
+
+Nomenclators, homophones, Naibbe-like schemes: they all get the word shapes right and fail the same things. They don't repeat words like the Voynich does (the same word right after itself, 3 times more than chance), they don't follow the line rules (how a line starts, how it ends, the first line of the paragraph), and a nomenclator keeps the syntax of the plain text in the order of the words. About a third to a half of the measures, not more.
+
+[b]A cipher hidden inside the scribe[/b]
+
+So I did the obvious thing. The scribe writes as usual, and every word is only accepted if it falls in the "class" of the next letter of the message. The class is read from the word with the scribal layer removed (dam = daiin, choly = chol, p = k, no q). If it doesn't fit, the scribe chooses again.
+
+It decodes exactly over the whole manuscript. With one letter per word it reproduces 74 of 88 measures (the scribe alone, 81). On pages it never saw, 70 against 75. If repetitions are nulls, 78. So yes, a cipher like this is invisible to the statistics we have.
+
+The price is space. Depending on the variant, the whole manuscript holds 2,700 to 7,200 Latin words. A short treatise, not a book.
+
+[b]Where the real text is different from the scribe[/b]
+
+The real text costs a little more to predict than the scribe's, about 3% per word. That extra is vocabulary: some mid frequency words the scribe doesn't use enough. It follows the hand, not the subject. Two pages by the same hand in different sections share twice as many keywords as two pages of the same section by different hands. And the labels next to the drawings don't appear in the text of their own page more than in any other page of the section.
+
+The biggest gap was the order of words. The real text has about three times more information between consecutive words than the scribe. And here is the funny part: the cipher with a Latin message fills that gap exactly (0.085 bits against 0.088). For a moment that looked like a message.
+
+It isn't, or at least not that kind of message. In the cipher, splitting the words into just two groups already recovers that information: it's the vowel and consonant rhythm of Latin comming through. In the real text two groups recover almost nothing, it only shows up with 16 groups or more. And a scribe with a small habit, chaining a few dozen word pairs it learnt from the odd folios, in about 4% of the words, fills the gap with exactly the real shape, without any message, and keeps the other measures.
+
+[b]No phrases[/b]
+
+The Voynich repeats nothing longer than two words. In 32,284 words there are 94 three word sequences that appear twice or more, one four word sequence (ol shedy qokedy qokeedy), and no five word sequence at all. A recipe book of the same size repeats hundreds of trigrams and over 200 five word sequences ("and serue it forth"). A herbal too. A novel too. Finnish and Polish, without articles, still repeat dozens of five word sequences. A word by word cipher repeats them as well. The scribe with the pair habit gives 100, 4 and 0.
+
+[b]So what?[/b]
+
+Everything I could measure is explained by a writing procedure plus one small habit. If there is a message, it has to sit in the free choices of the scribe, it has to be written with many symbols (syllables or letter pairs, not one letter per word and not whole words), and it is short. I can't rule it out with statistics. Only a key would show it.
+
+One test is still running: a syllable code, preregistered before running anything, with four criteria fixed in advance. I'll post the result when it's done, whatever it says.
+
+[b]The technical part[/b]
+
+Everything is in the repo, with the code:
+https://github.com/quimqu/voynich-scribe/blob/main/writeup/CIPHERS.md
+https://github.com/quimqu/voynich-scribe/tree/main/external_tests/ciphers
+
+Some details for those who want them:
+
+- Data: ZL3b paragraph text, uncertain spaces joined, 32,284 words. Plain text: De docta ignorantia cut to the same size and poured into the real layout.
+- Battery: the 88 measures of the scribe (76 for the first round). "Unseen pages" means learnt from odd folios, writes the even ones, compared with the real even ones. The two real halves agree on 78/88.
+- Word order: mutual information between consecutive words of a line (top 200 words), minus the same text shuffled inside each line.
+- Shape test: exchange clustering of words into K classes, learnt on odd folios, measured on even folios. Real 0.012 at K=2 and 0.054 at K=32. Latin cipher 0.072 and 0.13. Scribe with pair habit 0.001-0.010 and 0.041-0.055.
+- Plain language and word order through the cipher: Latin 0.089, Vietnamese 0.167, pinyin 0.312, random letters 0.02. The battery doesn't see the language at all (74 to 77 for all of them).
+- Real against scribe, bits per word on held out pages: characters 12.35 vs 11.96-12.06, word unigram 12.76 vs 12.42-12.58, context model 13.36 vs 12.74-12.96.
+- Any generator can be a cipher: build a Huffman tree over the model's probabilities for the next word and let the bits of the message pick the path. Whoever has the model reads the bits back. The output is as good as the model, and the capacity is what the model leaves free.
+
+Comments and attacks welcome, as always. Specially if someone sees a way the pair habit could itself be a message, because that's the one door I can't close.
