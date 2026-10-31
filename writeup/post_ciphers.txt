@@ -34,11 +34,15 @@ It isn't, or at least not that kind of message. In the cipher, splitting the wor
 
 The Voynich repeats nothing longer than two words. In 32,284 words there are 94 three word sequences that appear twice or more, one four word sequence (ol shedy qokedy qokeedy), and no five word sequence at all. A recipe book of the same size repeats hundreds of trigrams and over 200 five word sequences ("and serue it forth"). A herbal too. A novel too. Finnish and Polish, without articles, still repeat dozens of five word sequences. A word by word cipher repeats them as well. The scribe with the pair habit gives 100, 4 and 0.
 
+[b]Syllables don't work either[/b]
+
+If letters leave a rhythm, the obvious next candidate is a code with many symbols: syllables. I wrote the test and four pass/fail criteria down before running anything (battery, total word order, the two-class shape, and phrase counts), and ran it with Latin and Italian (Pinocchio), three seeds each, full text and unseen pages. It decodes exactly and carries more than the alphabet (11,000 to 13,000 plain-text words).
+
+It fails all four criteria, in both languages. The word order goes to 0.19-0.30 bits (real 0.088), because the syllables of one word stick together. Two classes already recover 0.06-0.07 (real 0.012): the word boundary of the plain text does what the vowel-consonant rhythm did for letters. It repeats 256-437 trigrams and 5-7 five word sequences (real 94 and 0). And the battery drops to 59-62 of 88, because with ~320 classes the message overrides the page habits.
+
 [b]So what?[/b]
 
-Everything I could measure is explained by a writing procedure plus one small habit. If there is a message, it has to sit in the free choices of the scribe, it has to be written with many symbols (syllables or letter pairs, not one letter per word and not whole words), and it is short. I can't rule it out with statistics. Only a key would show it.
-
-One test is still running: a syllable code, preregistered before running anything, with four criteria fixed in advance. I'll post the result when it's done, whatever it says.
+Letter, syllable or whole word: a natural language written in order, unit by unit, leaves its structure in the order of the words, and the Voynich has none of it. Everything I could measure is explained by a writing procedure plus one small habit. If there is a message, it sits in the free choices of the scribe, after some step that wipes out the order of the plain text (tables that change with the position or a key, units cut at random, a compressed text), and it is short. I can't rule that out with statistics. Only a key would show it.
 
 [b]The technical part[/b]
 

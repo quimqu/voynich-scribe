@@ -1,6 +1,6 @@
 # external_tests/ciphers/
 
-Code, results and notes for `writeup/CIPHERS.md` (29–30 October 2026): could a cipher turn Latin into Voynichese? The code comments and the long notes (`XIFRATS.md`) are in Catalan; the English write-up is `writeup/CIPHERS.md`.
+Code, results and notes for `writeup/CIPHERS.md` (29–31 October 2026): could a cipher turn Latin into Voynichese? The code comments and the long notes (`XIFRATS.md`) are in Catalan; the English write-up is `writeup/CIPHERS.md`.
 
 | file | what it does | CIPHERS.md |
 |---|---|---|
@@ -12,6 +12,7 @@ Code, results and notes for `writeup/CIPHERS.md` (29–30 October 2026): could a
 | `xifrat_escriba.py`, `agrega.py`, `xifrat_extra.py` | the cipher hidden inside the skribe (rewrites `Escriba.write` in memory with a retry loop), seeds in `xe/`, nulls, plain language, decoding check | §5 |
 | `ordre.py`, `classes.py`, `memoria_mots.py` (`mm/`) | word order, its shape (exchange clustering), the skribe with a word-pair habit | §6 |
 | `ngrames.py`, `frases_controls.py`, `frases_quasi.py`, `frases_sense_articles.py` | repeated pairs, trigrams and longer sequences, against Gutenberg texts | §7 |
+| `sil/` (`sillabes.py`, `SILLABES_PREREG.md`, `sillabes.txt`, `out/`) | the preregistered syllable code: criteria written before running, Latin and Italian (*Pinocchio*, Gutenberg 52484, included), 3 seeds full text and 3 on unseen pages; `py -3 sil/sillabes.py corre <tots\|senars> <la\|it> <seed>`, then `py -3 sil/sillabes.py agrega` | §8 |
 | `XIFRATS.md` | the notes in Catalan, section by section, with every number | all |
 
 The skribe is imported from `../../scribe/` (set `SCRIBE` to override). `_data/` holds small auxiliary files from my private notes: the 76-measure battery in Catalan and its slot table, the Latin control layout and *De docta ignorantia*. The Vietnamese and pinyin texts of the language test (`xifrat_extra.py llengua`) are not included. `frases_controls.py` downloads its Gutenberg texts to `_corpus/`.

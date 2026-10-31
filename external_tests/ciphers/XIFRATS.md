@@ -385,3 +385,32 @@ Les dues famílies de §3 que tenen més símbols queden a banda i banda. El **n
 - **Límit:** un codi mot a mot amb molts homòfons per mot (desenes) o una ortografia molt variable també trencaria les repeticions exactes. Aquesta prova no ho descarta.
 
 **Què en traiem.** El Voynich té un hàbit de parelles de mots: poques desenes de parelles, pròpies de cada mà i secció, sobretot a la llengua B. Més enllà de dos mots no hi ha res: ni fórmules, ni frases fetes, ni seqüències que tornin. Els herbaris i els receptaris que s'hi podrien assemblar pel contingut en tenen centenars, i els xifrats mot a mot també. El que encaixa amb les dades és un escrivà que encadena mots de dos en dos, o un xifrat que no escriu els mots del text pla un per un (§7). Una llengua escrita mot a mot només hi encaixaria amb una clau de molts homòfons per mot o una ortografia que mai no repeteix la mateixa frase igual.
+
+---
+
+## 10 · Una llengua amagada síl·laba a síl·laba (`sil/sillabes.py`, preregistre `sil/SILLABES_PREREG.md`, sortida `sil/sillabes.txt`)
+
+*30–31/10/2026, preregistrada abans de córrer res. És la prova que quedava oberta a §7 (punt 3): si el Voynich porta un missatge, hauria de ser un codi de molts símbols. La candidata natural és la síl·laba.*
+
+**Com està fet.** El mateix xifrat de dues capes de §7, amb síl·labes com a unitats en lloc de lletres. Síl·labes per regla fixa (V-CV, VC-CV, muta cum liquida junta, `qu` consonant, `ae au oe` un sol nucli), amb la final de mot marcada (`ta` ≠ `ta#`) perquè el lector recuperi els límits de mot. Les 300 síl·labes més freqüents són unitats pròpies i la resta va lletra a lletra: 319 classes. 3.000 intents per mot. Text pla: llatí (*De docta ignorantia*) i italià (*Pinocchio*, sense accents). 3 llavors al text sencer i 3 a pàgines no vistes. El desxifrat torna les unitats exactes a totes 12. (Les passades del text sencer van petar dues vegades al final per imports que faltaven; la segona vegada el text ja s'havia desat i es va mesurar amb `sillabes.py acaba`, sense tornar-lo a escriure. Per això no hi ha intents ni mots de reserva del text sencer; a pàgines no vistes, ~445 intents per mot i un 4% de reserva.)
+
+| | bateria (sencer · no vistes) | ordre | K=2 | K=32 | trios · 5 mots repetits | mots del text pla |
+|---|---|---|---|---|---|---|
+| criteri | ≥ 74 · ≥ 70 | 0,06–0,12 | ≤ 0,025 | 0,03–0,08 | ≤ 190 · ≤ 2 | |
+| Voynich real | — | 0,088 | 0,012 | 0,054 | 94 · 0 | |
+| skribe sol | 81 · 75 | 0,03 | 0,002 | 0,007–0,028 | 21–51 · 0 | 0 |
+| skribe + hàbit de parelles (§8) | 77–79 · 74–77 | 0,08 | 0,001–0,010 | 0,041–0,055 | 100 · 0 | 0 |
+| xifrat d'1 lletra per mot (§7) | 74 · 70 | 0,085 | 0,072 | 0,13 | — | 4.800 |
+| **síl·labes, llatí** | **62 · 55** | **0,30** | **0,059** | **0,45** | **437 · 7** | 11.200 |
+| **síl·labes, italià** | **59 · 55** | **0,19** | **0,072** | **0,31** | **256 · 5** | 12.800 |
+
+**Criteris: C1, C2, C3 i C4 fallen tots quatre, amb totes dues llengües.** Segons la lectura acordada (falla C2 o C4), **el codi de síl·labes deixa un rastre que el Voynich no té, i perd.** No és qüestió de la llengua: el llatí i l'italià fallen igual.
+
+- **L'ordre dels mots, el triple o el doble del real.** Cada mot és ara una síl·laba, i les síl·labes d'un mateix mot del text pla estan molt lligades entre elles. A més, amb 2 classes ja se'n recupera gairebé tant com amb l'alfabet (0,06–0,07): la frontera de mot del text pla (`#`) fa el paper de l'alternança vocal–consonant.
+- **Frases repetides.** Les síl·labes del text pla tornen en el mateix ordre (`-tur`, `-que`, `in-`, `con-`...), i el xifrat ho copia: 437 trios i 7 seqüències de cinc mots repetides, contra 94 i 0 al real.
+- **La bateria baixa molt més que amb l'alfabet** (62 i 59 contra 74). Amb 319 classes, cada mot ha de caure en una classe petita, i el missatge mana la tria per sobre de l'hàbit de pàgina: cauen les repeticions (mots iguals seguits 0,06–0,26% contra 0,9%), el vocabulari compartit entre pàgines veïnes, la sobredispersió dels mots freqüents per pàgina i les diferències de secció.
+- **La capacitat és la que esperàvem**: 7,4 bits per mot, 11.000–13.000 mots del text pla a tot el manuscrit, més que qualsevol variant de §7. És precisament el que es paga.
+
+**Què en traiem.** Amb §7 i §9, el patró és el mateix per a tres mides d'unitat (lletra, síl·laba, mot sencer): **una llengua natural escrita en ordre, unitat a unitat, passa a l'ordre dels mots del xifrat una estructura que el Voynich no té**, i amb unitats grosses també les seves frases. El Voynich gairebé no porta informació a l'ordre dels mots més enllà d'unes desenes de parelles, i això ho fa l'hàbit de parelles de §8 sense cap missatge.
+
+**Què no descarta.** Un sistema que «blanquegi» la seqüència del text pla abans de convertir-la en mots: taules que canvien amb la posició o amb una clau, unitats tallades a l'atzar que no coincideixen amb síl·labes ni amb mots (el tipus Naibbe de §3 fa 35 trios repetits i el K=2 més baix de les famílies amb missatge, 0,027), o un missatge comprimit o sense estructura. Si el Voynich porta una llengua, ha d'estar amagada amb un d'aquests sistemes, i a dins de cada mot, no a la seqüència. La pregunta ja no és «quin alfabet» sinó «quin procediment del segle XV esborra l'ordre del text pla», i l'explicació sense missatge no necessita cap procediment.

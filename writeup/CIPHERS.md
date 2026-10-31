@@ -1,6 +1,6 @@
 # Could a cipher turn Latin into Voynichese? Ciphers tested against the skribe
 
-*What a cipher would have to do to produce the Voynich text from a natural language, what it would cost, and where the real text differs from a meaningless procedure. Written on 30 October 2026. Code, data and results: `external_tests/ciphers/` (comments in Catalan; the long Catalan notes are `external_tests/ciphers/XIFRATS.md`).*
+*What a cipher would have to do to produce the Voynich text from a natural language, what it would cost, and where the real text differs from a meaningless procedure. Written on 30–31 October 2026. Code, data and results: `external_tests/ciphers/` (comments in Catalan; the long Catalan notes are `external_tests/ciphers/XIFRATS.md`).*
 
 ---
 
@@ -11,9 +11,10 @@
 - **A cipher can be hidden inside the skribe.** Let the skribe write as usual, and accept each word only if its form (with the scribal layer undone: line-end closure, *p*/*f*, *q-*) falls in the class of the next plain-text letter. It decodes exactly (checked on the whole manuscript), and with one letter per word it reproduces **74/88** (the skribe alone 81/88; on unseen pages 70 against 75). With repetitions as nulls, 78/88. The price is space: **2,700 to 7,200 Latin words** in the whole manuscript, depending on the variant. So the statistics we have cannot exclude a small hidden text.
 - **The real text costs a little more than the skribe's**: 0.3–0.45 bits per word (3%). The excess is lexical: mid-frequency words the skribe does not choose often enough. It follows the hand, not the subject: two pages of the same hand and different section share twice as many keywords as two pages of the same section and different hand. Labels do not occur in the text of their own page more than in any other page of the section.
 - **The biggest gap of the skribe was the order of words** (real 0.088 bits, skribe 0.03). A Latin message one letter per word fills it exactly (0.085), but with the wrong shape: in the cipher, two word classes already recover it (0.07, it is the vowel and consonant rhythm of Latin); in the real text two classes recover almost nothing (0.012), and it only appears from 16 classes on. **A small habit fills it with the right shape and no message**: chaining a few dozen learnt word pairs in about 4% of the words (0.08; 0.001–0.010 with two classes; battery 74–79/88).
+- **A syllable code fails, in Latin and in Italian.** Preregistered before running: about 320 syllable classes hidden in the skribe the same way. It decodes exactly and carries more (11,000–13,000 plain-text words), but it fails all four criteria fixed in advance: battery 59–62/88, word order 0.19–0.30 bits (real 0.088), two classes already recover 0.06–0.07 (real 0.012), and it repeats 256–437 trigrams and 5–7 five-word sequences (real 94 and 0).
 - **The Voynich repeats nothing longer than two words.** In 32,284 words: 94 three-word sequences seen twice or more, one four-word sequence, no five-word sequence. Herbals, recipe books, novels and word-by-word ciphers of the same size repeat hundreds of trigrams and dozens of five-word sequences, even in languages without articles (Finnish: 309, 88, 30). The skribe with the pair habit makes 100, 4 and 0.
 
-**Reading.** A concrete writing procedure, with one more small habit (word pairs), accounts for everything measured here. If there is a message, it has to sit in the free choices of the scribe, written with many symbols (syllables or letter pairs, not one letter per word, not whole words), and it is short. This does not prove that there is no message; it says what kind, and how big, a message could still be.
+**Reading.** A concrete writing procedure, with one more small habit (word pairs), accounts for everything measured here. A natural language written in order, unit by unit, leaves its structure in the order of the words, whether the unit is a letter, a syllable or a whole word; the Voynich has none of it. If there is a message, it has to sit in the free choices of the scribe, after a step that wipes out the order of the plain text (tables that change with position or a key, units cut at random, a compressed message), and it is short. This does not prove that there is no message; it says what kind, and how big, a message could still be.
 
 ---
 
@@ -143,14 +144,37 @@ The only repeated four-word sequence is `ol shedy qokedy qokeedy` (twice, both b
 
 Formulas are exactly what a recipe book or herbal has and the Voynich has not: *ut ferveat cum ferbuerit* (18 times in Apicius), *and serue it forth* (29 in the *Forme of Cury*). A word-by-word cipher repeats them too, even with homophones. Only schemes that do not write plain-text words one by one, such as Naibbe-type schemes or the skribe, repeat as little as the Voynich. A code with dozens of homophones per word, or a spelling that never repeats a phrase the same way, would also break exact repetition; this test does not exclude them.
 
-## 8. What it adds up to
+## 8. A syllable code (preregistered)
+
+The open question of §6 was whether a code with many symbols per unit would pass where the alphabet failed. The natural candidate is the syllable. The test and its four criteria were written down on 30 October before running anything (`external_tests/ciphers/sil/SILLABES_PREREG.md`, in Catalan), with the reading agreed in advance: if C2 or C4 fails, the syllable code leaves a trace the Voynich does not have.
+
+**How.** The same two-layer cipher as §5, with syllables instead of letters. Syllables by a fixed rule (V-CV, VC-CV, muta cum liquida kept together, *qu* as one consonant, *ae au oe* one nucleus), with the last syllable of each word marked (`ta` ≠ `ta#`) so that the reader also recovers the word boundaries. The 300 most frequent syllables are units of their own and the rest go letter by letter: 319 classes, 3,000 tries per word. Plain text: Latin (*De docta ignorantia*) and Italian (*Pinocchio*, Gutenberg 52484, accents removed). Three seeds on the full text and three on unseen pages; decoding returns the exact units in all twelve runs.
+
+| | battery (full · unseen) | word order | K=2 | K=32 | trigrams · 5-word seqs repeated | plain-text words |
+|---|---|---|---|---|---|---|
+| criterion | ≥ 74 · ≥ 70 | 0.06–0.12 | ≤ 0.025 | 0.03–0.08 | ≤ 190 · ≤ 2 | |
+| Voynich | | 0.088 | 0.012 | 0.054 | 94 · 0 | |
+| skribe alone | 81 · 75 | 0.03 | 0.002 | 0.007–0.028 | 21–51 · 0 | 0 |
+| skribe + pair habit (§6) | 77–79 · 74–77 | 0.08 | 0.001–0.010 | 0.041–0.055 | 100 · 0 | 0 |
+| one letter per word (§5) | 74 · 70 | 0.085 | 0.072 | 0.13 | | 4,800 |
+| **syllables, Latin** | **62 · 55** | **0.30** | **0.059** | **0.45** | **437 · 7** | 11,200 |
+| **syllables, Italian** | **59 · 55** | **0.19** | **0.072** | **0.31** | **256 · 5** | 12,800 |
+
+**All four criteria fail, in both languages.**
+
+- **Word order: two to three times the real value.** Each word now carries a syllable, and the syllables of one plain-text word are tightly bound to each other. Two classes already recover almost as much as with the alphabet: the word boundary of the plain text (`#`) plays the role that the vowel–consonant rhythm played for letters.
+- **Phrases.** Syllables come back in the same order (*-tur*, *-que*, *in-*, *con-*), and the cipher copies it: 437 repeated trigrams and 7 five-word sequences, against 94 and 0.
+- **The battery drops further than with the alphabet** (59–62 against 74). With 319 classes each word must fall in a small class, and the message overrides the page habits: immediate repetition falls (0.06–0.26% against 0.9%), and so do the vocabulary shared by neighbouring pages, the page overdispersion of frequent words and the section differences.
+- **Capacity** is what was expected, 7.4 bits per word, more than any variant of §5. That is exactly what is paid for.
+
+**What it does not exclude.** A system that whitens the plain-text sequence before turning it into words: tables that change with position or with a key, units cut at random that match neither syllables nor words (the Naibbe-type scheme of §3 repeats 35 trigrams and has the lowest K=2 of the families with a message, 0.027), or a compressed or structureless message. The question is no longer "which alphabet" but "which fifteenth-century procedure erases the order of the plain text"; the explanation without a message needs no such procedure.
+
+## 9. What it adds up to
 
 1. **The entropy bump, the line rules, the repetition and the absence of phrases are properties of how the text is written**, and a meaningless procedure reproduces them.
 2. **A cipher could still hide inside that procedure**: it decodes exactly and costs only a few measures. It cannot be ruled out with these statistics; it can only be found with its key.
-3. **But it would have to be of a particular kind**: many symbols per unit (syllables or letter pairs, not single letters and not whole words), written into the free choices of the scribe, and short (a few thousand Latin words in the whole book). An alphabet written one letter per word leaves a few-class rhythm in the word order that the Voynich does not have; a word-by-word code leaves the syntax and the phrases.
+3. **But it would have to be of a particular kind**: written into the free choices of the scribe, after a step that erases the order of the plain text, and short (a few thousand Latin words in the whole book). An alphabet written one letter per word leaves a few-class rhythm in the word order that the Voynich does not have; a syllable code leaves even more order and the phrases (§8, preregistered); a word-by-word code leaves the syntax and the phrases.
 4. **Nothing measured here needs a message.** The only part of the real text the skribe did not explain, the order of words, is explained by a small habit of word pairs.
-
-**Still running** (preregistered on 30 October before any result, `XIFRATS.md` and `sil/SILLABES_PREREG.md` in the private notes): a code of about 330 Latin and Italian syllables hidden in the skribe, with four criteria fixed in advance (battery, the shape of the word order, the total word order, and the phrase counts). If it passes all four, a syllable code is as compatible with the Voynich as the pair habit without a message, and only capacity separates them.
 
 ## How to reproduce
 
@@ -165,6 +189,7 @@ py -3 xifrat_escriba.py corre <tots|senars> <skribe|1|12> <seed> ; py -3 agrega.
 py -3 xifrat_extra.py <nulles|nulles2|llengua|sobrant|desxifrat> [senars]
 py -3 ordre.py ; py -3 classes.py ; py -3 memoria_mots.py  # §6
 py -3 ngrames.py ; py -3 frases_controls.py ; py -3 frases_quasi.py ; py -3 frases_sense_articles.py   # §7
+py -3 sil/sillabes.py corre <tots|senars> <la|it> <seed> ; py -3 sil/sillabes.py agrega              # §8 (hours per run)
 ```
 
 `tots` = full text, `senars` = learnt from odd folios. The Vietnamese and pinyin texts of the language test are not included (they came from Jorge Stolfi's samples); the Gutenberg texts are downloaded by `frases_controls.py`.

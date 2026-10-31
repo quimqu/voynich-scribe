@@ -1,0 +1,17 @@
+Voynich real: ordre 0.088, K=2 0.012, K=32 0.054, repetits 2/3/4/5 mots {2: 1748, 3: 94, 4: 1, 5: 0}
+
+== llatí (3 llavors al text sencer, 3 a pàgines no vistes)
+  bateria: text sencer 62/88, pàgines no vistes 55/88
+  falla (text sencer): Adjacent identical words (%); Adjacent identical words / chance; Same word at distance 2 / shuffled; Same word at distance 5 / shuffled; Frequent words repeated >3x chance (%); Frequent words repeated <0.3x chance (%); Boundary MI, distance 1 (last glyph to next first glyph); Lift -r | a-; Lift -y | a-; First word of line starts ch/sh (%); Adjacent repeats: first line of paragraph / rest; Spearman correlation of neighbour word lengths; [R2.2] Words with 2+ gallows (%); [R3.4] q- on first word of paragraph (%); [R1.3] p/f among gallows, other lines (%); [H8] Same first glyph after a gallows-initial line / null; [A1] Lines back to the nearest twin (median); [H2] Page overdispersion of q- (after -y); [page] Page overdispersion of e-words; [section] e-words: biological / herbal; [section] -edy words in biological (%); [page] Share of the page's most frequent word (median, %); [eye] Words of 8+ glyphs (%); [range] Shared vocabulary, neighbouring pages (cosine); [range] Shared vocabulary, 10 pages apart; [range] Page overdispersion of the 50 most frequent words
+  ordre 0.296; classes K=2:0.059 K=4:0.097 K=8:0.213 K=16:0.330 K=32:0.449
+  repetits (seqüències diferents >= 2 cops) 2/3/4/5 mots: 2292 / 437 / 46 / 7
+  capacitat 7.44 bits/mot, 11159 mots del text pla; classes 319; intents/mot nan; reserva nan; desxifrat True; tipus 8527 (real 7.915); repetició immediata 0.0006 (real 0,0090)
+  criteris: C1 bateria NO; C2 forma de l'ordre NO; C3 ordre total NO; C4 frases NO
+
+== italià (3 llavors al text sencer, 3 a pàgines no vistes)
+  bateria: text sencer 59/88, pàgines no vistes 55/88
+  falla (text sencer): Adjacent identical words (%); Adjacent identical words / chance; Consecutive words at edit distance 1 / shuffled; Same word at distance 2 / shuffled; Same word at distance 5 / shuffled; Frequent words repeated >3x chance (%); Frequent words repeated <0.3x chance (%); Boundary MI, distance 1 (last glyph to next first glyph); Lift -r | a-; Lift -y | a-; Lift -n | q-; Line-end -m: lines of 10+ words / 1-4 words; Spearman correlation of neighbour word lengths; [R2.2] Words with 2+ gallows (%); [R3.4] q- on first word of paragraph (%); [R1.3] p/f among gallows, other lines (%); [R1.3] Plain p/f followed by e (%); [A1] Lines back to the nearest twin (median); [H2] Page overdispersion of q- (after -y); [page] Page overdispersion of e-words; [section] e-words: biological / herbal; [section] -edy words in biological (%); [page] Share of the page's most frequent word (median, %); [eye] Words of 8+ glyphs (%); [range] Shared vocabulary, neighbouring pages (cosine); [range] Shared vocabulary, 10 pages apart; [range] Neighbouring / 100 pages apart; [range] Bursts of the 50 most frequent words (CV of gaps); [range] Page overdispersion of the 50 most frequent words
+  ordre 0.194; classes K=2:0.072 K=4:0.123 K=8:0.176 K=16:0.239 K=32:0.306
+  repetits (seqüències diferents >= 2 cops) 2/3/4/5 mots: 1949 / 256 / 34 / 5
+  capacitat 7.37 bits/mot, 12780 mots del text pla; classes 319; intents/mot nan; reserva nan; desxifrat True; tipus 8756 (real 7.915); repetició immediata 0.0026 (real 0,0090)
+  criteris: C1 bateria NO; C2 forma de l'ordre NO; C3 ordre total NO; C4 frases NO
