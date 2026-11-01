@@ -560,3 +560,22 @@ On the whole text it gains `p`/`f` followed by `e` and the page overdispersion o
 A first version also pushed the words beside a drawing gap. It overshot `d-`/`s-`/`y-` after a gap (48.6% against 38.7%) and lost four measures on the even folios. Leaving those words out fixed it.
 
 Files: `scribe.py`, `calibrate_line_drift.py`, `results_table.txt`, `results_holdout_table.txt`.
+
+## 15 · The sheet habit, stronger (01/11/2026)
+
+**Why.** npcompl33t's horseshoe test (private notes `ferradura/FERRADURA.md`) showed that the real sheets hang together more than the skribe's. Inside Herbal A, the spread of the sheets along the first MDS axis, against a null that shuffles pages between sheets, is 0.18 in the real text and was 0.72 in the skribe. The real sheet is a strong unit; the skribe's sheet was weak, because each page added its own style draw as large as the sheet's.
+
+**The change** (`sheet_k`, `page_k`, `g0_by_sheet`). The session state (the style dimensions and the `e` tendency) is drawn once per sheet and doubled (`sheet_k` 2.0); the page adds nothing (`page_k` 0.0). The gallows-initial habit (§10), drawn per page before, is drawn per sheet (`g0_by_sheet`). The random draws are the same as before, so `sheet_k=1, page_k=1, g0_by_sheet=False` reproduces the earlier skribe word for word (checked on seed 1). The setting is the variant H3 of `ferradura/full_fort.py`. It was chosen after looking at two weaker variants on the whole text, so it is an existence result (a random sheet state can do it), not a measured strength of the real habit.
+
+**Result:**
+
+| | before | **sheet habit** |
+|---|---|---|
+| sheet spread inside Herbal A (real 0.18) | 0.72 | **0.22** (0.20–0.24, 3 seeds) |
+| sheet spread, whole text (real 0.45) | — | 0.65 |
+| whole text: reproduced / median error | 82/88 · 0.050 | **83/88 · 0.045** |
+| learned from the odd folios, on the even ones | 74/88 · 0.068 | **73/88 · 0.074** |
+
+On the whole text it gains the page overdispersion of `e`-words and the frequent words repeated more than 3× chance, and loses the same first glyph after a gallows-initial line (§10). On the even folios it gains three measures (same word at distance 2 and 5, page overdispersion of `e`-words) and loses four, one of them by a hair (`q-` on the first word of the line, 17.8% against a cut at 17.7%). The skribe still has no time: the sheets are drawn independently, in no order.
+
+Files: `scribe.py`, `results_table.txt`, `results_holdout_table.txt`.
