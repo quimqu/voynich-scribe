@@ -40,9 +40,17 @@ If letters leave a rhythm, the obvious next candidate is a code with many symbol
 
 It fails all four criteria, in both languages. The word order goes to 0.19-0.30 bits (real 0.088), because the syllables of one word stick together. Two classes already recover 0.06-0.07 (real 0.012): the word boundary of the plain text does what the vowel-consonant rhythm did for letters. It repeats 256-437 trigrams and 5-7 five word sequences (real 94 and 0). And the battery drops to 59-62 of 88, because with ~320 classes the message overrides the page habits.
 
+[b]A whitened message: bounded, not excluded[/b]
+
+That left one door open: a message that goes through some step that wipes out its order before it becomes words (a table that changes with a key, a wheel, a compressed text). Again I wrote the test and the same four criteria down before running. The Latin goes through a key as long as the text, then into the scribe, one symbol per word, and decodes exactly.
+
+By the letter, the preregistered versions fail three of the four criteria, but the wrong way round: too little word order, not a plain-text trace. With the pair habit a bit stronger (exploratory, not preregistered), it passes word order (0.099), the two-class shape (0.001) and phrases (60 trigrams, no five word sequence). Only the battery fails, 70 of 88. So word order and phrases can't see this kind of message.
+
+What gives it away is repetition. A message forces the scribe to change word when it would rather repeat: adjacent identical words fall to 0.34-0.56% (real 0.9%), and the page vocabulary weakens. Over every variant I've run, the battery loses about 3 measures per bit per word. To stay within 3 measures of the scribe, a message can carry at most about 2 bits per word, some 2,700 Latin words in the whole book. That is a bound of my scribe, not of the manuscript: a real scribe better at repeating would have more room.
+
 [b]So what?[/b]
 
-Letter, syllable or whole word: a natural language written in order, unit by unit, leaves its structure in the order of the words, and the Voynich has none of it. Everything I could measure is explained by a writing procedure plus one small habit. If there is a message, it sits in the free choices of the scribe, after some step that wipes out the order of the plain text (tables that change with the position or a key, units cut at random, a compressed text), and it is short. I can't rule that out with statistics. Only a key would show it.
+Letter, syllable or whole word: a natural language written in order, unit by unit, leaves its structure in the order of the words, and the Voynich has none of it. Everything I could measure is explained by a writing procedure plus one small habit. If there is a message, it sits in the free choices of the scribe, after some step that wipes out the order of the plain text (tables that change with the position or a key, units cut at random, a compressed text), and it is short, a couple of thousand Latin words at most. I can't rule that out with statistics. Only a key would show it.
 
 [b]The technical part[/b]
 

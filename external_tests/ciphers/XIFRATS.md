@@ -414,3 +414,60 @@ Les dues famílies de §3 que tenen més símbols queden a banda i banda. El **n
 **Què en traiem.** Amb §7 i §9, el patró és el mateix per a tres mides d'unitat (lletra, síl·laba, mot sencer): **una llengua natural escrita en ordre, unitat a unitat, passa a l'ordre dels mots del xifrat una estructura que el Voynich no té**, i amb unitats grosses també les seves frases. El Voynich gairebé no porta informació a l'ordre dels mots més enllà d'unes desenes de parelles, i això ho fa l'hàbit de parelles de §8 sense cap missatge.
 
 **Què no descarta.** Un sistema que «blanquegi» la seqüència del text pla abans de convertir-la en mots: taules que canvien amb la posició o amb una clau, unitats tallades a l'atzar que no coincideixen amb síl·labes ni amb mots (el tipus Naibbe de §3 fa 35 trios repetits i el K=2 més baix de les famílies amb missatge, 0,027), o un missatge comprimit o sense estructura. Si el Voynich porta una llengua, ha d'estar amagada amb un d'aquests sistemes, i a dins de cada mot, no a la seqüència. La pregunta ja no és «quin alfabet» sinó «quin procediment del segle XV esborra l'ordre del text pla», i l'explicació sense missatge no necessita cap procediment.
+
+
+---
+
+## 11 · Un missatge blanquejat (`blanc/blanc.py`, preregistre `blanc/BLANC_PREREG.md`, sortida `blanc/blanc.txt`)
+
+*31/10/2026, preregistrat abans de córrer res (commit ff37ce4). És la porta que deixa oberta §10: un missatge que, abans de fer-se mots, passa per un pas que n'esborra l'ordre. Pot ser una taula amb clau, una roda que gira o un text comprimit; estadísticament fan el mateix.*
+
+**Com està fet.** El llatí de §7, en lletres i espai (27 símbols), passa per una clau tan llarga com el text, `u → (u + k_i) mod 27`. El resultat és una seqüència gairebé uniforme i independent. Després, el xifrat de dues capes de §7 tal qual. Hi ha dues variants preregistrades:
+- **B1**: el missatge sol.
+- **B2**: el missatge amb l'hàbit de parelles de §8 (taula estreta, λ = 0,13). Un mot que fa parella apresa amb l'anterior és **nul**, i el lector se'l salta.
+
+Fets els resultats, n'he afegit dues d'**exploratòries**, que no són al preregistre: **B3** (λ = 0,30) i **B4** (λ = 0,20). A B2 l'hàbit només actua en un 2,7% dels mots, perquè els mots de missatge no poden fer parella. Cada variant té 3 llavors al text sencer i 3 a pàgines no vistes. El desxifrat torna el llatí exacte a les 24 passades.
+
+*Esmena durant la prova.* La primera tirada de B2 no es desxifrava exacte. L'skribe tanca el mot d'abans d'un buit de dibuix quan la línia ja és escrita (`chol` → `choly`), i el lector veia una parella diferent de la que havia vist l'escrivà. Ara la regla de les nul·les mira les formes normalitzades (`X.norm`), i B2 s'ha tornat a escriure sencera. La tirada vella és a `blanc/out/b2_vell/`; donava el mateix (70/88, ordre 0,049).
+
+| | bateria (sencer · no vistes) | ordre | K=2 | K=32 | trios · 5 mots | bits/mot | mots llatins |
+|---|---|---|---|---|---|---|---|
+| criteri | ≥ 74 · ≥ 70 | 0,06–0,12 | ≤ 0,025 | 0,03–0,08 | ≤ 190 · ≤ 2 | | |
+| Voynich real | — | 0,088 | 0,012 | 0,054 | 94 · 0 | | |
+| skribe sol | 81 · 75 | 0,03 | 0,002 | 0,007–0,028 | 21–51 · 0 | 0 | 0 |
+| skribe + hàbit (§8) | 77–79 · 74–77 | 0,08 | 0,001–0,010 | 0,041–0,055 | 100 · 0 | 0 | 0 |
+| **B1** blanquejat sol | **71 · 70** | 0,019 | 0,000 | 0,006 | 9 · 0 | 4,75 | 4.800 |
+| **B2** + hàbit λ 0,13 | **70 · 70** | 0,053 | 0,001 | 0,011 | 22 · 0 | 4,63 | 4.700 |
+| *B3* + hàbit λ 0,30 | *72 · 67* | *0,171* | *0,008* | *0,086* | *143 · 0* | *4,42* | *4.500* |
+| *B4* + hàbit λ 0,20 | *70 · 71* | ***0,099*** | ***0,001*** | ***0,035*** | ***60 · 0*** | *4,54* | *4.600* |
+
+**Criteris preregistrats.** B1 i B2 fallen C1, C2 i C3 i passen C4.
+
+**Però la lletra del preregistre enganya, i ho dic.** La lectura acordada deia que, si fallava C2, el missatge deixava un rastre. Aquí C2 falla **pel costat contrari**: hi ha massa poc ordre (K=32 de 0,006–0,011), no l'estructura d'un text pla (K=2 és ~0). El missatge blanquejat no deixa cap rastre a l'ordre dels mots. Simplement no n'hi posa, igual que l'skribe sol. Amb B2, l'hàbit de parelles era massa feble per omplir-lo.
+
+**Les exploratòries ho aclareixen.**
+- **B4 passa C2, C3 i C4**: ordre 0,099, K=2 0,001, K=32 0,035, 60 trios, cap seqüència de 5 mots.
+- **Només falla C1**: 70/88 al text sencer (no vistes 71, que passa).
+- A l'ordre dels mots, a la seva forma i a les frases, **un missatge blanquejat amb l'hàbit de parelles no es distingeix del Voynich**.
+
+**On es nota el missatge.** A la bateria, i sempre a les mateixes mesures:
+- la repetició (mots iguals seguits 0,34–0,56% contra 0,9% al real; el mateix mot a 2 i a 5 mots; mots freqüents repetits més del que tocaria);
+- el vocabulari de pàgina (sobredispersió dels mots freqüents i dels mots amb `e`, vocabulari compartit entre pàgines veïnes);
+- alguna regla de posició (`q-` al primer mot del paràgraf i després d'un buit, `-m` final segons la llargada de línia).
+
+Un missatge de 4,5–4,75 bits per mot obliga l'escrivà a canviar de mot quan l'hàbit li demanaria repetir-lo o quedar-se amb el vocabulari de la pàgina.
+
+**El preu del missatge és gairebé lineal en bits.** Bateria del text sencer contra bits per mot, amb totes les variants fetes:
+
+| bits/mot | 0 | 2,2 | 3,96 | 4,5–4,75 | 6,59 | 7,4 |
+|---|---|---|---|---|---|---|
+| bateria | 81 | 78 | 74 | 70–72 | 65 | 59–62 |
+| variant | skribe | §7 nul·les racionades | §7 1 lletra | §11 B1–B4 | §7 1–2 lletres | §10 síl·labes |
+
+Surten unes **3 mesures perdudes per cada bit per mot**, sigui quin sigui el codi. L'ordre del text pla (lletra, síl·laba) deixa un rastre a part, a l'ordre dels mots. El blanqueig l'esborra, però el cost de la bateria no se'n va.
+
+**Què en traiem.**
+1. **La porta del xifrat no es tanca amb l'ordre dels mots ni amb les frases.** Un missatge blanquejat, posat a les tries d'un escrivà que té l'hàbit de parelles, és invisible en totes dues coses.
+2. **Es pot fitar amb la repetició i el vocabulari de pàgina.** Com més bits per mot, menys repeteix l'escrivà i menys s'agafa al vocabulari de la pàgina. Per quedar a 3 mesures de l'skribe (78/88), el missatge no pot passar d'uns 2 bits per mot: **com a molt ~2.700 mots llatins a tot el manuscrit**. Amb 4,5 bits ja se'n perden 10.
+3. **Límit honest.** «Mesures perdudes» vol dir respecte de l'skribe, que al seu torn fa 81/88 i no 88. Un escrivà real més bo que l'skribe en repetició podria pagar el missatge amb el marge que l'skribe no té. Per tant, la xifra de ~2.700 mots és una cota d'aquest model, no del manuscrit.
+4. **Un procediment del segle XV que blanquegi** (taula que canvia amb la posició o amb una clau, roda, graella) encaixaria amb l'ordre i les frases. El que el delataria és la repetició: el Voynich repeteix mots seguits el doble del que permet un missatge de ~4,5 bits per mot. Ni ho confirma ni ho exclou; ho fita.

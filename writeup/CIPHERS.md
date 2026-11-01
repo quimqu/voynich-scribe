@@ -12,9 +12,10 @@
 - **The real text costs a little more than the skribe's**: 0.3–0.45 bits per word (3%). The excess is lexical: mid-frequency words the skribe does not choose often enough. It follows the hand, not the subject: two pages of the same hand and different section share twice as many keywords as two pages of the same section and different hand. Labels do not occur in the text of their own page more than in any other page of the section.
 - **The biggest gap of the skribe was the order of words** (real 0.088 bits, skribe 0.03). A Latin message one letter per word fills it exactly (0.085), but with the wrong shape: in the cipher, two word classes already recover it (0.07, it is the vowel and consonant rhythm of Latin); in the real text two classes recover almost nothing (0.012), and it only appears from 16 classes on. **A small habit fills it with the right shape and no message**: chaining a few dozen learnt word pairs in about 4% of the words (0.08; 0.001–0.010 with two classes; battery 74–79/88).
 - **A syllable code fails, in Latin and in Italian.** Preregistered before running: about 320 syllable classes hidden in the skribe the same way. It decodes exactly and carries more (11,000–13,000 plain-text words), but it fails all four criteria fixed in advance: battery 59–62/88, word order 0.19–0.30 bits (real 0.088), two classes already recover 0.06–0.07 (real 0.012), and it repeats 256–437 trigrams and 5–7 five-word sequences (real 94 and 0).
+- **A whitened message is bounded, not excluded.** Also preregistered: the Latin first goes through a key as long as the text, which erases its order, then into the skribe. With the pair habit (exploratory strength), it passes word order (0.099), its shape (0.001 at K=2) and phrases (60 trigrams, no five-word sequence), and fails only the battery (70/88). The message shows as lost repetition (adjacent repeats 0.34–0.56% against 0.9%) and lost page vocabulary. Over all variants the battery loses about 3 measures per bit per word; within 3 measures of the skribe, a message carries at most about 2 bits per word, some 2,700 Latin words (a bound of this model).
 - **The Voynich repeats nothing longer than two words.** In 32,284 words: 94 three-word sequences seen twice or more, one four-word sequence, no five-word sequence. Herbals, recipe books, novels and word-by-word ciphers of the same size repeat hundreds of trigrams and dozens of five-word sequences, even in languages without articles (Finnish: 309, 88, 30). The skribe with the pair habit makes 100, 4 and 0.
 
-**Reading.** A concrete writing procedure, with one more small habit (word pairs), accounts for everything measured here. A natural language written in order, unit by unit, leaves its structure in the order of the words, whether the unit is a letter, a syllable or a whole word; the Voynich has none of it. If there is a message, it has to sit in the free choices of the scribe, after a step that wipes out the order of the plain text (tables that change with position or a key, units cut at random, a compressed message), and it is short. This does not prove that there is no message; it says what kind, and how big, a message could still be.
+**Reading.** A concrete writing procedure, with one more small habit (word pairs), accounts for everything measured here. A natural language written in order, unit by unit, leaves its structure in the order of the words, whether the unit is a letter, a syllable or a whole word; the Voynich has none of it. If there is a message, it has to sit in the free choices of the scribe, after a step that wipes out the order of the plain text (tables that change with position or a key, units cut at random, a compressed message), and it is short: such a message passes word order and phrases, but it costs repetition, and that bounds it at about 2 bits per word. This does not prove that there is no message; it says what kind, and how big, a message could still be.
 
 ---
 
@@ -169,11 +170,65 @@ The open question of §6 was whether a code with many symbols per unit would pas
 
 **What it does not exclude.** A system that whitens the plain-text sequence before turning it into words: tables that change with position or with a key, units cut at random that match neither syllables nor words (the Naibbe-type scheme of §3 repeats 35 trigrams and has the lowest K=2 of the families with a message, 0.027), or a compressed or structureless message. The question is no longer "which alphabet" but "which fifteenth-century procedure erases the order of the plain text"; the explanation without a message needs no such procedure.
 
-## 9. What it adds up to
+## 9. A whitened message (preregistered)
+
+§8 left one door open: a message that goes through a step that erases its order before it becomes words. A table that changes with the position or with a key, a turning wheel and a compressed text all do the same thing statistically, so one model stands for all of them. The test, its criteria (the same C1–C4 as §8) and the reading were written down on 31 October before running anything (`external_tests/ciphers/blanc/BLANC_PREREG.md`, in Catalan).
+
+**How.** The Latin of §5, as letters and space (27 symbols), goes through a key as long as the text, `u → (u + k_i) mod 27`. The result is an almost uniform, independent sequence. Then the two-layer cipher of §5, unchanged, one symbol per word. Two preregistered variants:
+
+- **B1**: the whitened message alone.
+- **B2**: the whitened message with the pair habit of §6 (λ = 0.13). A word that makes a learnt pair with the previous one is a **null**, and the reader skips it.
+
+After seeing the results I added two **exploratory** variants that are not in the preregistration: **B3** (λ = 0.30) and **B4** (λ = 0.20). In B2 the habit only acts on 2.7% of the words, because message words are not allowed to make pairs. Three seeds on the full text and three on unseen pages each; decoding returns the exact Latin in all 24 runs.
+
+*Fixed during the test.* The first B2 run did not decode exactly. The skribe closes the word before a drawing gap after the line is written (`chol` → `choly`), so the reader saw a different pair from the one the scribe saw. The null rule now looks at the normalised forms, and B2 was written again from scratch. The old run gave the same numbers (70/88, word order 0.049).
+
+| | battery (full · unseen) | word order | K=2 | K=32 | trigrams · 5-word seqs repeated | bits/word | plain-text words |
+|---|---|---|---|---|---|---|---|
+| criterion | ≥ 74 · ≥ 70 | 0.06–0.12 | ≤ 0.025 | 0.03–0.08 | ≤ 190 · ≤ 2 | | |
+| Voynich | | 0.088 | 0.012 | 0.054 | 94 · 0 | | |
+| skribe alone | 81 · 75 | 0.03 | 0.002 | 0.007–0.028 | 21–51 · 0 | 0 | 0 |
+| skribe + pair habit (§6) | 77–79 · 74–77 | 0.08 | 0.001–0.010 | 0.041–0.055 | 100 · 0 | 0 | 0 |
+| **B1** whitened alone | **71 · 70** | 0.019 | 0.000 | 0.006 | 9 · 0 | 4.75 | 4,800 |
+| **B2** + habit λ 0.13 | **70 · 70** | 0.053 | 0.001 | 0.011 | 22 · 0 | 4.63 | 4,700 |
+| *B3* + habit λ 0.30 | *72 · 67* | *0.171* | *0.008* | *0.086* | *143 · 0* | *4.42* | *4,500* |
+| *B4* + habit λ 0.20 | *70 · 71* | ***0.099*** | ***0.001*** | ***0.035*** | ***60 · 0*** | *4.54* | *4,600* |
+
+**By the preregistered criteria, B1 and B2 fail** C1, C2 and C3, and pass C4.
+
+**But the letter of the preregistration misleads here, and I say so.** The agreed reading was that a C2 failure means the message leaves a trace. Here C2 fails **the other way**: there is too little order (K=32 of 0.006–0.011), not the structure of a plain text (K=2 is about 0). The whitened message leaves no trace in the order of words; it just adds none, like the skribe alone. In B2 the pair habit was too weak to fill it.
+
+**The exploratory variants settle it.** B4 passes C2, C3 and C4 (word order 0.099, K=2 0.001, K=32 0.035, 60 trigrams, no five-word sequence) and fails only C1 (70/88 on the full text; 71 on unseen pages, which passes). In the order of words, its shape and the phrases, **a whitened message written with the pair habit cannot be told from the Voynich**.
+
+**Where the message shows.** In the battery, and always in the same measures:
+
+- repetition: identical adjacent words 0.34–0.56% against 0.9% in the real text, the same word at distance 2 and 5, frequent words repeated more than chance;
+- page vocabulary: page overdispersion of frequent words and of *e*-words, vocabulary shared by neighbouring pages;
+- a few position rules (*q-* on the first word of a paragraph and after a drawing gap, line-end *-m*).
+
+A message of 4.5 bits per word forces the scribe to change word when the habit would repeat it or stay with the vocabulary of the page.
+
+**The price is almost linear in bits.** Full-text battery against bits per word, for every variant run so far:
+
+| bits/word | 0 | 2.2 | 3.96 | 4.5–4.75 | 6.59 | 7.4 |
+|---|---|---|---|---|---|---|
+| battery | 81 | 78 | 74 | 70–72 | 65 | 59–62 |
+| variant | skribe | §5 rationed nulls | §5 one letter | §9 B1–B4 | §5 1–2 letters | §8 syllables |
+
+That is about **3 measures lost per bit per word**, whatever the code. The order of the plain text (letter, syllable) leaves a separate trace in the word order; whitening erases it, but the cost in the battery does not go away.
+
+**What it means.**
+
+1. **The cipher door is not closed by word order or phrases.** A whitened message in the free choices of a scribe with the pair habit is invisible in both.
+2. **It is bounded by repetition and page vocabulary.** The more bits per word, the less the scribe repeats and the less it sticks to the page vocabulary. To stay within 3 measures of the skribe (78/88), the message cannot carry more than about 2 bits per word: **at most ~2,700 Latin words in the whole manuscript**. At 4.5 bits, 10 measures are already lost.
+3. **The honest limit.** "Measures lost" is relative to the skribe, which itself scores 81/88, not 88. A real scribe better than the skribe at repeating could pay for a message with margin the skribe does not have. So ~2,700 words is a bound of this model, not of the manuscript.
+4. A fifteenth-century procedure that whitens (a table that changes with position or a key, a wheel, a grille) would fit the word order and the phrases. What would give it away is repetition: the Voynich repeats adjacent words about twice as often as a message of ~4.5 bits per word allows. This neither confirms nor excludes such a procedure; it bounds it.
+
+## 10. What it adds up to
 
 1. **The entropy bump, the line rules, the repetition and the absence of phrases are properties of how the text is written**, and a meaningless procedure reproduces them.
 2. **A cipher could still hide inside that procedure**: it decodes exactly and costs only a few measures. It cannot be ruled out with these statistics; it can only be found with its key.
-3. **But it would have to be of a particular kind**: written into the free choices of the scribe, after a step that erases the order of the plain text, and short (a few thousand Latin words in the whole book). An alphabet written one letter per word leaves a few-class rhythm in the word order that the Voynich does not have; a syllable code leaves even more order and the phrases (§8, preregistered); a word-by-word code leaves the syntax and the phrases.
+3. **But it would have to be of a particular kind**: written into the free choices of the scribe, after a step that erases the order of the plain text, and short (a few thousand Latin words in the whole book). An alphabet written one letter per word leaves a few-class rhythm in the word order that the Voynich does not have; a syllable code leaves even more order and the phrases (§8, preregistered); a word-by-word code leaves the syntax and the phrases. A whitened message leaves nothing in the word order or the phrases (§9, preregistered), but it pays in repetition, about 3 of 88 measures per bit per word, which bounds it at about 2 bits per word, some 2,700 Latin words.
 4. **Nothing measured here needs a message.** The only part of the real text the skribe did not explain, the order of words, is explained by a small habit of word pairs.
 
 ## How to reproduce
@@ -190,6 +245,7 @@ py -3 xifrat_extra.py <nulles|nulles2|llengua|sobrant|desxifrat> [senars]
 py -3 ordre.py ; py -3 classes.py ; py -3 memoria_mots.py  # §6
 py -3 ngrames.py ; py -3 frases_controls.py ; py -3 frases_quasi.py ; py -3 frases_sense_articles.py   # §7
 py -3 sil/sillabes.py corre <tots|senars> <la|it> <seed> ; py -3 sil/sillabes.py agrega              # §8 (hours per run)
+py -3 blanc/blanc.py corre <tots|senars> <b1|b2|b3|b4> <seed> ; py -3 blanc/blanc.py agrega        # §9 (hours per run)
 ```
 
 `tots` = full text, `senars` = learnt from odd folios. The Vietnamese and pinyin texts of the language test are not included (they came from Jorge Stolfi's samples); the Gutenberg texts are downloaded by `frases_controls.py`.
