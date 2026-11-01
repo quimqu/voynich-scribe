@@ -259,7 +259,7 @@ DEFAULT=dict(r_copy=0.22,r_mod=0.45,tau=4.0,vert_bonus=2.0,first_copy=0.1,p_pf=0
              sigma_len=0.6,len_cands=5,rej_2gall=0.35,rej_ei=0.25,use_word_rules=True,first_norep=0.0,gap_scale=0.75,declose_p=0.55,gap_noq=0.9,use_famrep=True,adj_boost=0.5,avoid_scale=1.2,closure_by_nwords=True,closure_by_hand=True,use_reprefix=True,use_end_table=True,pf_back=0.75,
              use_lang=True,use_slots=True,use_contexts=True,use_style=True,use_copy=True,use_first_line=True,use_closure=True,
              use_dissim=True,use_len_mode=True,use_boundary=True,
-             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35,use_fl_style=True,use_pf_noe=True,pf_a=0.5,fl_t=0.3,fl_sh=0.6,fl_rare=0.7,fl_rare_min=0.003,fl_e=-0.2,close_once=True,pf_f=0.4,use_ll_style=True,ll_q=-0.5,ll_ch=0.3)   # 26/10: first-line register calibrated on the odd folios only (t 0.3, sh 0.6, rare 0.7, e -0.6) — with it, first_norep (0.4 before) is no longer needed: the first line repeats less because its words are rarer   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
+             mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35,use_fl_style=True,use_pf_noe=True,pf_a=0.5,fl_t=0.3,fl_sh=0.6,fl_rare=0.7,fl_rare_min=0.003,fl_e=-0.2,close_once=True,pf_f=0.4,use_ll_style=True,ll_q=-0.5,ll_ch=0.3,use_line_drift=True,ld_bench=0.4,ld_e=0.37,ld_o=0.25,ld_d=1.05)   # 01/11: drift along the line (R14.9), calibrated on the odd folios only (calibrate_line_drift.py)   # 26/10: first-line register calibrated on the odd folios only (t 0.3, sh 0.6, rare 0.7, e -0.6) — with it, first_norep (0.4 before) is no longer needed: the first line repeats less because its words are rarer   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
 STYLE_DIMS=['t','sh','q','dy']
 # 'e' habit (14/10): word block with e (-y/-dy) or without (-aiin/-ar/-ol), R2.4, per sheet, page, line and section; its own random generator
 NUC={'ch','sh','k','t','p','f','cth','ckh','cph','cfh'}
@@ -297,6 +297,14 @@ class Escriba:
                 elif k=='e' and g and g[-1] in NUC and 'e' in style: ws[i]*=math.exp(style['e'])
                 elif k in ('t','k','p','f') and len(g)==0 and style.get('g0'): ws[i]*=math.exp(style['g0'])
                 elif k=='ch' and len(g)==0 and style.get('ll_ch'): ws[i]*=math.exp(style['ll_ch'])
+            c_=style.get('ld_c',0.0)
+            if c_:
+                # drift along the line (R14.9, 01/11): interior words lean to bench-initial and e words early in the line, o- and d- late
+                for i,k in enumerate(ks):
+                    if len(g)==0 and k in ('ch','sh'): ws[i]*=math.exp(-self.p['ld_bench']*c_)
+                    elif len(g)==0 and k=='o': ws[i]*=math.exp(self.p['ld_o']*c_)
+                    elif len(g)==0 and k=='d': ws[i]*=math.exp(self.p['ld_d']*c_)
+                    elif k=='e' and g and g[-1] in NUC: ws[i]*=math.exp(-self.p['ld_e']*c_)
         return self.rng.choices(ks,weights=ws.tolist())[0]
     def gen_word(self,tab,A,style):
         for _ in range(15):
@@ -399,6 +407,10 @@ class Escriba:
             for i in range(len(l['ws'])):
                 A=start_tag(l,i,ws[i-1] if i else None) if p['use_contexts'] else ('<'+gl(ws[i-1])[-1] if i else '^')
                 if style is not None and p['use_g0']: style['g0']=g0_line if i>0 else 0.0
+                if style is not None and p['use_line_drift']:
+                    n_=len(l['ws']); gb_=l.get('gb') or [False]*n_
+                    near_gap=gb_[i] or (i+1<n_ and gb_[i+1])   # the words beside a drawing gap keep their own rule (R6.1)
+                    style['ld_c']=(i/(n_-1)-0.5) if (n_>=3 and 0<i<n_-1 and not near_gap) else 0.0
                 rc=p['r_copy']*(p['first_copy'] if first_line else 1.0)
                 w=None
                 if p['use_copy'] and i>0 and page_words and self.rng.random()<rc:

@@ -526,3 +526,37 @@ Three-rule baseline: 49/88 (0.245). A first run without the combined `-iin` prob
 | gallows-initial line habit | +3 | 0.049 |
 
 No rule broke. The two new pieces do not show in the count: the one-closure rule fixes a form that no measure at ±25% separates (75% `-am` already passes against 94.5%) and lowers the median error from 0.053 to 0.046; the last-line register costs one noisy measure and leaves the error as it is, while its own two ratios pass loosely without it (×0.98 and ×0.97 against ×0.81 and ×1.25 are inside the band): the values, not the count, show it (§13.2). Removing the gallows-initial line habit gains three noisy measures and raises the error a little, as on 26/10. Word rules and form memory again lower the error when removed (0.040, 0.041): they fix their own measures at the cost of the general fit.
+
+## 14 · The drift along the line (01/11/2026)
+
+**The finding** (R14.9, preregistered and confirmed with the Takahashi transcription; private notes `posicions/POSICIONS.md`, `posicions/LINIA_PREREG.md`). The line is not just a first and a last word with a homogeneous interior. From the third word to the last but one (lines of 6 words or more), going from the first half of that stretch to the second, Takahashi gives:
+
+| | first half | second half | z |
+|---|---|---|---|
+| words starting with `ch`/`sh` | 0.283 | 0.248 | −5.5 |
+| words with `e` | 0.418 | 0.377 | −6.9 |
+| words starting with `o` | 0.213 | 0.236 | +4.0 |
+| words starting with `d` | 0.068 | 0.090 | +6.2 |
+
+The null shuffles the interior words within each line (10,000 shuffles); the joint z is +22.6. It holds in hands 1, 2 and 3 and on the odd and even folios separately. The skribe was flat (joint z −0.4 to +4.7, with a little `d-` from its length weights).
+
+**The rule** (`use_line_drift`). Each interior word of a line gets a position c = i/(n−1) − 0.5, from −0.5 at the start to +0.5 at the end. The words beside a drawing gap keep their own rule (R6.1) and get c = 0. While the word is written anew:
+- a bench (`ch`, `sh`) as first glyph is weighted by exp(−`ld_bench`·c);
+- `o` as first glyph by exp(`ld_o`·c), and `d` as first glyph by exp(`ld_d`·c);
+- an `e` after the core by exp(−`ld_e`·c).
+
+Copied words are left as they are. The strengths were calibrated on the odd folios only (`calibrate_line_drift.py`): `ld_bench` 0.4, `ld_e` 0.37, `ld_o` 0.25, `ld_d` 1.05.
+
+**Result** (5 seeds, 88 measures):
+
+| | before | **with the drift** |
+|---|---|---|
+| drift test (joint z; real 19.7 in ZL) | −0.4 to +4.7 | **+19.1 to +21.9**, 4/4 features in every seed |
+| whole text: reproduced / median error | 81/88 · 0.046 | **82/88 · 0.050** |
+| learned from the odd folios, on the even ones | 75/88 · 0.070 | **74/88 · 0.068** |
+
+On the whole text it gains `p`/`f` followed by `e` and the page overdispersion of `q-`, and loses `q-` on the first word of the paragraph. On the even folios it gains two measures and loses three (bare gallows at line start, the same word at distance 5, `q-` after a drawing gap). These are measures that move by more than that between runs; §11 noted that the median error moves by about ±0.008 between runs.
+
+A first version also pushed the words beside a drawing gap. It overshot `d-`/`s-`/`y-` after a gap (48.6% against 38.7%) and lost four measures on the even folios. Leaving those words out fixed it.
+
+Files: `scribe.py`, `calibrate_line_drift.py`, `results_table.txt`, `results_holdout_table.txt`.
