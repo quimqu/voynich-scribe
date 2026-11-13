@@ -579,3 +579,31 @@ Files: `scribe.py`, `calibrate_line_drift.py`, `results_table.txt`, `results_hol
 On the whole text it gains the page overdispersion of `e`-words and the frequent words repeated more than 3× chance, and loses the same first glyph after a gallows-initial line (§10). On the even folios it gains three measures (same word at distance 2 and 5, page overdispersion of `e`-words) and loses four, one of them by a hair (`q-` on the first word of the line, 17.8% against a cut at 17.7%). The skribe still has no time: the sheets are drawn independently, in no order.
 
 Files: `scribe.py`, `results_table.txt`, `results_holdout_table.txt`.
+
+## 16 · Sheet temperature and the shared-out boundary link (13/11/2026)
+
+Two changes, both on how the new word is chosen. The skribe writes `n_tau` (3) candidate words glyph by glyph and picks one.
+
+**Sheet temperature** (`sigma_tau` 0.25). This is the "mood" of the forum post #81 (thread "Writing a fake Voynich by rules", notebook O12). Each sheet gets one random value; on a hot sheet the commoner candidates are preferred, on a cold one the rarer. The weight is exp(τ·z), with z the standardised −log frequency of the word. It makes the four pages of a bifolio share their mix of common and rare words (page-to-page correlation 0.36 against 0.39 real; the generator without it, ~0.05). Until now it lived only in the private notebook (`EscribaT`).
+
+**Shared-out boundary link** (`ff_beta` 0.25, `ff_gamma` 0.25; notebook E16b, O23, O23b). The last glyph of a word conditions the first glyph of the next (boundary MI 0.155). In the real text, how strongly a word follows that rule depends on how frequent it is. The 20 most frequent words fit the glyph before much better, already the first time they appear on a page. The rest fit a little worse than the skribe made them. The total does not change:
+
+| fit to the glyph before, first time on the page | top 20 | 20–100 | 100–500 | rest | boundary MI |
+|---|---|---|---|---|---|
+| real | 0.275 | 0.142 | 0.138 | 0.154 | 0.155 |
+| skribe before | 0.214 | 0.184 | 0.160 | 0.168 | 0.153 |
+| **skribe now** | **0.286** | **0.152** | **0.144** | **0.155** | **0.153** |
+
+(fit = log2 P(first glyph | last glyph before) / P(first glyph), interior of the line.) The candidate weight is exp(β·s·e), with s = +1 for the 20 most frequent words, −γ for the others, and e the fit of the candidate. β and γ were chosen on the odd folios only, on a 3×3 grid, against the fit profile and the boundary MI.
+
+Two things this settled on the way (notebook E16b):
+- Words that come back on a page fit the glyph before better than new ones (1.45× real). It is not a choice made when copying: the same word fits equally well the first time and when it returns (+0.009, chance). It is which words come back: the frequent ones. Now the skribe gives 1.28× (before 1.11×).
+- Blind copying (copying a word of the page without looking at its neighbour) leaves a clear mark: the same word fits worse when it returns (−0.04 to −0.08, p ≤ 0.004). The real text has no such mark.
+
+A first try only added link to the frequent words (O23, β 0.5). The boundary MI rose to 0.208 and the battery fell (86 → 82 of 89). The real text shares the link out; it does not add it.
+
+**Result** (88 measures + the bifolio test, seeds 11–15): on the mean of 5 texts, 86 → 85 of 89; per text, 80.8 → 81.4 (the seeds range 78–84). One measure changes: consecutive words at edit distance 1 (real 2.21; 1.76 before, just inside; 1.61 now, just outside). The odd/even holdout was not rerun.
+
+With `sigma_tau=0, ff_beta=0` the skribe is the one of §15, draw for draw.
+
+Files: `scribe.py`.

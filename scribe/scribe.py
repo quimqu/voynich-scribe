@@ -260,6 +260,21 @@ DEFAULT=dict(r_copy=0.22,r_mod=0.45,tau=4.0,vert_bonus=2.0,first_copy=0.1,p_pf=0
              use_lang=True,use_slots=True,use_contexts=True,use_style=True,use_copy=True,use_first_line=True,use_closure=True,
              use_dissim=True,use_len_mode=True,use_boundary=True,
              mod_lex=0.0,lex_alpha=1.0,new_known=0.0,use_wordrep=False,wordrep_pow=1.0,mod_contact=3,mod_tries=30,mod_fallback='keep',par_by_hand=False,use_ehabit=True,sigma_e=0.45,use_sec_e=False,use_sec_dy=False,r_prev=0.0,h_prev=3.0,n_prev=12,r_sheet=0.0,r_stock=0.0,h_stock=3.0,use_hand_tab=True,use_sec_tab=True,use_len_w=True,len_w=None,par_scale=0.75,use_g0=True,sigma_g0_pg=0.4,sigma_g0_line=0.7,g0_mu=0.35,use_fl_style=True,use_pf_noe=True,pf_a=0.5,fl_t=0.3,fl_sh=0.6,fl_rare=0.7,fl_rare_min=0.003,fl_e=-0.2,close_once=True,pf_f=0.4,use_ll_style=True,ll_q=-0.5,ll_ch=0.3,use_line_drift=True,ld_bench=0.4,ld_e=0.37,ld_o=0.25,ld_d=1.05,sheet_k=2.0,page_k=0.0,g0_by_sheet=True)   # 01/11: sheet habit (H3; sheet_k=1, page_k=1, g0_by_sheet=False is the scribe before): the session state is drawn per sheet and twice as strong, the page adds nothing, the gallows-initial habit is per sheet (ferradura/full_fort, SCRIBE.md §15)   # 01/11: drift along the line (R14.9), calibrated on the odd folios only (calibrate_line_drift.py)   # 26/10: first-line register calibrated on the odd folios only (t 0.3, sh 0.6, rare 0.7, e -0.6) — with it, first_norep (0.4 before) is no longer needed: the first line repeats less because its words are rarer   # 26/10: gallows-initial habit calibrated on the odd folios only (pg 0.4, line 0.7, mu 0.35)   # 19/10: tables per hand and section, length by position; strengths readjusted (before: r_copy 0.35, sigma_style 0.45, rej_2gall 0.55, rej_ei 0.45, adj_boost 0.8, gap_scale 1.0)   # e habit and section dy: on by default since 14/10 (page_vocabulary.py)   # mod_contact=3: form memory on modified copies (14/10; before 0 and 6 tries)
+DEFAULT.update(sigma_tau=0.25,n_tau=3,ff_beta=0.25,ff_gamma=0.25)   # 13/11: sheet temperature and shared-out boundary link (§16); ff_* calibrated on the odd folios only
+# sheet temperature (§16): z of a word = its -log frequency, standardised over the tokens of the training text
+_TLF=np.array([-math.log(LEX[w]+1) for l in L_REAL for w in l['ws']]); _TMU,_TSD=float(_TLF.mean()),float(_TLF.std())
+# shared-out boundary link (§16): the 20 most frequent words, and the boundary table of the interior of the real lines
+FF_TOP={w for w,_ in LEX.most_common(20)}
+_BP=Counter(); _BA=Counter(); _BB=Counter()
+for l in L_REAL:
+    _n=len(l['ws']); _gb=l['gb']
+    for _i in range(2,_n-1):
+        if l['ps']==0 and not _gb[_i] and not _gb[_i+1] and not _gb[_i-1]:
+            _a,_b=gl(l['ws'][_i-1])[-1],gl(l['ws'][_i])[0]; _BP[(_a,_b)]+=1; _BA[_a]+=1; _BB[_b]+=1
+_BN=sum(_BB.values())
+def _enc(a,b):
+    if _BP[(a,b)]==0: return -3.0
+    return math.log2((_BP[(a,b)]/_BA[a])/(_BB[b]/_BN))
 STYLE_DIMS=['t','sh','q','dy']
 # 'e' habit (14/10): word block with e (-y/-dy) or without (-aiin/-ar/-ol), R2.4, per sheet, page, line and section; its own random generator
 NUC={'ch','sh','k','t','p','f','cth','ckh','cph','cfh'}
@@ -307,6 +322,21 @@ class Escriba:
                     elif k=='e' and g and g[-1] in NUC: ws[i]*=math.exp(-self.p['ld_e']*c_)
         return self.rng.choices(ks,weights=ws.tolist())[0]
     def gen_word(self,tab,A,style):
+        # the new word is chosen among n_tau candidates (13/11/2026, SCRIBE.md §16):
+        # - sheet temperature (O12 of the notebook, the 'mood' of the forum post #81): each sheet leans to commoner or rarer words,
+        #   weight exp(tau_sheet * z), z = standardised -log frequency of the word;
+        # - shared-out boundary link (O23b): the 20 most frequent words follow the last glyph of the word before more strongly, the rest
+        #   less, weight exp(ff_beta * s * e), s = +1 for the top words and -ff_gamma for the others, e = log2 P(first | last)/P(first)
+        #   in the interior of the real lines. The total boundary link does not move; how it is shared out between words does.
+        # With sigma_tau=0 and ff_beta=0 this is one draw, as before
+        p=self.p
+        if p['sigma_tau']<=0 and p['ff_beta']<=0: return self._gen_word1(tab,A,style)
+        c=[self._gen_word1(tab,A,style) for _ in range(int(p['n_tau']))]
+        wt=[math.exp(self.cur_tau*((-math.log(LEX[w]+1)-_TMU)/_TSD)) for w in c]
+        if p['ff_beta']>0 and isinstance(A,str) and A.startswith('<') and len(A)>1:
+            last=A[1:]; wt=[x*math.exp(p['ff_beta']*(1.0 if w in FF_TOP else -p['ff_gamma'])*_enc(last,gl(w)[0])) for x,w in zip(wt,c)]
+        return self.rng.choices(c,weights=wt)[0]
+    def _gen_word1(self,tab,A,style):
         for _ in range(15):
             g=[]
             for j in range(13):
@@ -368,7 +398,11 @@ class Escriba:
         e_rng=np.random.default_rng(seed+7919); sheet_e={}; e_page=None; e_page_line=None; e_pg=0.0; e_line=0.0; g0_page=None; g0_pg=0.0; g0_line=0.0; g0_sheet={}
         sheet_style=defaultdict(lambda: {d:float(np_rng.normal(0,p['sigma_style'])) for d in STYLE_DIMS})
         out=[]; page=None; prev_pages=[]; sheet_words=defaultdict(list); cur_sheet=None   # memory across pages (19/10): the last pages of the book (prev_pages) and the pages already written on the same sheet (sheet_words)
+        tau_rng=np.random.default_rng(seed+4242); tau_sheet={}; self.cur_tau=0.0   # sheet temperature (§16): one value per sheet, drawn when the sheet first appears
         for l in (layout if layout is not None else L_ALL):
+            if p['sigma_tau']>0:
+                if l['sheet'] not in tau_sheet: tau_sheet[l['sheet']]=float(tau_rng.normal(0,p['sigma_tau']))
+                self.cur_tau=tau_sheet[l['sheet']]
             if l['page']!=page:
                 if page is not None and (p['r_prev']>0 or p['r_stock']>0) and page_words: prev_pages=([[w for w,_,_ in page_words]]+prev_pages)[:int(p['n_prev'])]
                 if page is not None and page_words: sheet_words[cur_sheet].extend(w for w,_,_ in page_words)
